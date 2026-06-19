@@ -14,7 +14,7 @@ export function PageTitle({ title, titleCn, sub, subCn }: PageTitleProps) {
 
   return (
     <section className="page-title">
-      <h1 className="page-title-text">
+      <h1 className={`page-title-text${lang === "zh" ? " page-title-text--zh" : ""}`}>
         {lang === "zh" ? titleCn : title}
       </h1>
       <p className="page-title-sub">

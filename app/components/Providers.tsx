@@ -3,6 +3,18 @@
 import { LanguageProvider } from "./LanguageContext";
 import type { ReactNode } from "react";
 
-export function Providers({ children }: { children: ReactNode }) {
-  return <LanguageProvider>{children}</LanguageProvider>;
+type Lang = "en" | "zh";
+
+export function Providers({
+  children,
+  initialLang = "en",
+}: {
+  children: ReactNode;
+  initialLang?: Lang;
+}) {
+  return (
+    <LanguageProvider initialLang={initialLang}>
+      {children}
+    </LanguageProvider>
+  );
 }

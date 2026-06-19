@@ -16,6 +16,8 @@
   --accent-red: #a05a5a;
   --accent-amber: #b88a5a;
   --accent-teal: #5a8f8f;
+  --accent-purple: #8b6fa3;
+  --accent-rose: #b07070;
   --canvas-max: 1600px;
   --canvas-pad: 32px;
   --gap-x: 24px;
@@ -29,6 +31,7 @@
 html {
   min-width: 320px;
   background: var(--page);
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -53,7 +56,20 @@ button {
 
 .page-shell {
   width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--page);
+}
+
+.page-shell .canvas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-shell .canvas > :last-child {
+  margin-top: auto;
 }
 
 .canvas {
@@ -71,6 +87,10 @@ button {
   min-height: 70px;
   gap: 24px;
   margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--page);
 }
 
 .social-links {
@@ -183,20 +203,20 @@ button {
 
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--gap-y) var(--gap-x);
 }
 
 .intro-card {
   grid-column: span 3;
-  min-height: 500px;
+  min-height: 580px;
   padding: 24px 0 40px;
   background: #ffffff;
   overflow: hidden;
 }
 
 .intro-card p {
-  max-width: 45ch;
+  max-width: 700px;
   margin: 0 0 36px;
   font-family: "Merriweather", Georgia, "Times New Roman", serif;
   font-size: clamp(28px, 2.75vw, 34px);
@@ -238,16 +258,29 @@ button {
   text-decoration-color: var(--accent-teal);
 }
 
+.intro-link--blue:hover {
+  text-decoration-color: var(--accent-blue);
+}
+
+.intro-link--purple:hover {
+  text-decoration-color: var(--accent-purple);
+}
+
+.intro-link--rose:hover {
+  text-decoration-color: var(--accent-rose);
+}
+
 .intro-card p:last-child {
   margin-bottom: 0;
 }
 
 .content-zone {
   min-height: 300px;
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
+  background: #FDFBF7;
+  border: 1px solid #e8e4de;
   border-radius: 12px;
   padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,
@@ -270,34 +303,51 @@ button {
 }
 
 .content-zone-arrow {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid #e8e4de;
+  border-radius: 999px;
   color: #a3a3a3;
   font-size: 12px;
-  transition: color 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
 .content-zone:hover {
-  border-color: #d0d0d0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border-color: #d8d4ce;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transform: translateY(-2px);
 }
 
 .content-zone:hover .content-zone-arrow {
   color: #666666;
+  border-color: #d0ccc6;
+  transform: translate(2px, -2px);
 }
 
 .content-zone--side {
+  grid-column: span 2;
   min-height: 500px;
 }
 
-.content-zone--wide-left,
+.content-zone--wide-left {
+  grid-column: span 3;
+  min-height: 540px;
+}
+
 .content-zone--wide-right {
   grid-column: span 2;
   min-height: 540px;
 }
 
-.content-zone--tall-left,
-.content-zone--tall-right {
+.content-zone--tall-left {
   grid-column: span 2;
+  min-height: 620px;
+}
+
+.content-zone--tall-right {
+  grid-column: span 3;
   min-height: 620px;
 }
 
@@ -320,6 +370,10 @@ button {
   color: #171717;
 }
 
+.page-title-text--zh {
+  font-weight: 400;
+}
+
 .page-title-sub {
   margin: 12px 0 0;
   color: #999999;
@@ -334,26 +388,30 @@ button {
 }
 
 .book-card {
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
+  background: #FDFBF7;
+  border: 1px solid #e8e4de;
   border-radius: 12px;
   padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   cursor: pointer;
 }
 
 .book-card-cover {
-  margin: 20px -24px;
-  padding: 32px 24px;
+  margin: 20px 0 0;
+  padding: 0 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f9f9f9;
+  aspect-ratio: 2 / 3;
+  background: #f7f4ef;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .book-card-cover img {
   display: block;
   max-width: 100%;
-  max-height: 280px;
+  max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -491,6 +549,10 @@ button {
   .books-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .book-card-cover {
+    padding: 0 24px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -570,6 +632,15 @@ button {
 
   .books-grid {
     grid-template-columns: 1fr;
+  }
+
+  .book-card {
+    padding: 16px;
+  }
+
+  .book-card-cover {
+    margin: 16px 0 0;
+    padding: 0 20px;
   }
 
   .page-title-text {

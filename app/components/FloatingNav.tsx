@@ -2,7 +2,13 @@
 
 import { useLang } from "./LanguageContext";
 
-const navItems = ["Home", "Project", "Blogs", "Books"];
+const navItems = [
+  { en: "Home", cn: "首页", href: "/" },
+  { en: "Hobbies", cn: "爱好", href: "/hobbies" },
+  { en: "Project", cn: "项目", href: "/project" },
+  { en: "Blogs", cn: "博客", href: "/blogs" },
+  { en: "Books", cn: "书单", href: "/books" },
+];
 
 type FloatingNavProps = {
   activeItem?: string;
@@ -15,11 +21,13 @@ export function FloatingNav({ activeItem = "Home" }: FloatingNavProps) {
     <nav className="floating-nav" aria-label="Site sections">
       {navItems.map((item) => (
         <a
-          className={item === activeItem ? "nav-item is-active" : "nav-item"}
-          href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-          key={item}
+          className={
+            item.en === activeItem ? "nav-item is-active" : "nav-item"
+          }
+          href={item.href}
+          key={item.en}
         >
-          {item}
+          {lang === "zh" ? item.cn : item.en}
         </a>
       ))}
       <button
