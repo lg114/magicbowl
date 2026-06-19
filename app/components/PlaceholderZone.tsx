@@ -17,18 +17,25 @@ const labels: Record<PlaceholderZoneVariant, string> = {
 
 type PlaceholderZoneProps = {
   variant: PlaceholderZoneVariant;
+  image?: string;
+  label?: string;
 };
 
-export function PlaceholderZone({ variant }: PlaceholderZoneProps) {
+export function PlaceholderZone({ variant, image, label }: PlaceholderZoneProps) {
   return (
     <section
       className={`content-zone content-zone--${variant}`}
       aria-label="Future content area"
     >
       <div className="content-zone-header">
-        <span className="content-zone-label">{labels[variant]}</span>
+        <span className="content-zone-label">{label || labels[variant]}</span>
         <span className="content-zone-arrow">↗</span>
       </div>
+      {image && (
+        <div className="content-zone-cover">
+          <img src={image} alt="" />
+        </div>
+      )}
     </section>
   );
 }

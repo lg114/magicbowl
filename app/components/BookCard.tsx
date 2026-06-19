@@ -51,6 +51,7 @@ export function BookCard({ book }: BookCardProps) {
             href={href}
             target="_blank"
             rel="noreferrer"
+            data-source={lang === "zh" ? "去豆瓣读书看看" : "View on Goodreads"}
           >
             ↗
           </a>
