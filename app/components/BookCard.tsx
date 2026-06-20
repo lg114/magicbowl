@@ -53,10 +53,16 @@ export function BookCard({ book }: BookCardProps) {
             rel="noreferrer"
             data-source={lang === "zh" ? "去豆瓣读书看看" : "View on Goodreads"}
           >
-            ↗
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
           </a>
         ) : (
-          <span className="book-card-arrow">↗</span>
+          <span className="book-card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </span>
         )}
       </div>
 

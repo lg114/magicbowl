@@ -318,10 +318,29 @@ button {
   margin-bottom: 16px;
 }
 
+.content-zone-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .content-zone-label {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.content-zone-dot {
+  color: var(--text-label);
+  font-size: 12px;
+}
+
+.content-zone-sub {
+  color: var(--text-label);
+  font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -335,9 +354,14 @@ button {
   border: none;
   border-radius: 999px;
   color: var(--text-label);
-  font-size: 12px;
   text-decoration: none;
   transition: color 180ms ease, background 200ms ease, transform 180ms ease;
+}
+
+.content-zone-arrow svg,
+.book-card-arrow svg {
+  width: 14px;
+  height: 14px;
 }
 
 .content-zone-arrow[data-source]::before {
@@ -563,7 +587,6 @@ button {
   border: none;
   border-radius: 999px;
   color: var(--text-label);
-  font-size: 12px;
   text-decoration: none;
   transition: color 180ms ease, background 200ms ease, transform 180ms ease;
 }

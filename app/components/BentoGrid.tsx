@@ -11,6 +11,8 @@ const zones: {
   image?: string;
   label?: string;
   labelCn?: string;
+  sub?: string;
+  subCn?: string;
   link?: string;
   tooltip?: string;
   tooltipCn?: string;
@@ -18,8 +20,10 @@ const zones: {
   {
     variant: "side",
     image: "/projects/ragmate.png",
-    label: "Project · RagMate",
-    labelCn: "项目 · RagMate",
+    label: "Project",
+    labelCn: "项目",
+    sub: "RagMate",
+    subCn: "RagMate",
     link: "https://github.com/lg114/RagMate",
     tooltip: "View on GitHub",
     tooltipCn: "去 GitHub 看看",
@@ -42,6 +46,8 @@ export function BentoGrid() {
           image={zone.image}
           label={zone.label}
           labelCn={zone.labelCn}
+          sub={zone.sub}
+          subCn={zone.subCn}
           link={zone.link}
           tooltip={zone.tooltip}
           tooltipCn={zone.tooltipCn}
