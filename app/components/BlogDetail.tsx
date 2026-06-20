@@ -29,9 +29,15 @@ export function BlogDetail({ post }: BlogDetailProps) {
       </header>
 
       <div className="blog-detail-body">
-        {paragraphs.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
+        {paragraphs.map((block, i) =>
+          block.type === "blockquote" ? (
+            <blockquote key={i}>
+              <p>{block.text}</p>
+            </blockquote>
+          ) : (
+            <p key={i}>{block.text}</p>
+          )
+        )}
       </div>
     </article>
   );
