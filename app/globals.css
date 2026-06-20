@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat:wght@400;500;600&display=swap");
-
 :root {
   --page: #ffffff;
   --text: #232323;
@@ -9,6 +7,18 @@
   --placeholder-hover: #d1d1d1;
   --nav-active: #e9e9e9;
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --text-primary: #171717;
+  --text-secondary: #595959;
+  --text-tertiary: #6b7280;
+  --text-label: #5c6370;
+  --text-muted: #737373;
+  --surface: #f7f7f7;
+  --surface-hover: #f0f0f0;
+  --surface-alt: #f5f5f5;
+  --surface-active: #ebebeb;
+  --status-reading: #8fbc8f;
+  --status-finished: #87bcde;
+  --status-wishlist: #d4a76a;
   --accent: #b8a88a;
   --accent-gold: #b8a88a;
   --accent-green: #6b8f71;
@@ -39,9 +49,9 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--text);
-  font-family: Montserrat, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: var(--font-montserrat), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0;
 }
 
@@ -83,9 +93,8 @@ button {
 .site-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   min-height: 70px;
-  gap: 24px;
   margin-bottom: 16px;
   position: sticky;
   top: 0;
@@ -93,41 +102,7 @@ button {
   background: var(--page);
 }
 
-.social-links {
-  display: flex;
-  align-items: center;
-  gap: 54px;
-  min-height: 46px;
-  padding: 0;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.social-links a {
-  position: relative;
-  color: #6e7280;
-}
-
-.social-links a:hover {
-  color: var(--text);
-}
-
-.social-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 1px;
-  background: var(--text);
-  transition: width 220ms ease;
-}
-
-.social-links a:hover::after {
-  width: 100%;
-}
-
-.social-links a,
+.nav-icon,
 .nav-item,
 .language-toggle {
   border-radius: 8px;
@@ -138,10 +113,10 @@ button {
     transform 180ms ease;
 }
 
-.social-links a:focus-visible,
+.nav-icon:focus-visible,
 .nav-item:focus-visible,
 .language-toggle:focus-visible {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--border);
+  box-shadow: 0 0 0 2px var(--page), 0 0 0 4px var(--border);
 }
 
 .floating-nav {
@@ -155,15 +130,51 @@ button {
   box-shadow: var(--shadow);
 }
 
+.nav-icon {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.nav-icon:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--text);
+}
+
+.nav-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nav-icon:first-of-type {
+  border-left: 1px solid var(--muted-border);
+  margin-left: 4px;
+  padding-left: 10px;
+}
+
 .nav-item {
+  position: relative;
   min-width: 60px;
   padding: 8px 14px;
   background: transparent;
-  color: #737373;
+  color: var(--text-muted);
   font-size: 13px;
   font-weight: 500;
   line-height: 1;
   text-align: center;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100%, 44px);
+  height: max(100%, 44px);
 }
 
 .nav-item:hover {
@@ -182,13 +193,14 @@ button {
 }
 
 .language-toggle {
+  position: relative;
   display: grid;
   width: 34px;
   height: 34px;
   place-items: center;
   border: 0;
   border-radius: 999px;
-  background: #f2f2f2;
+  background: var(--surface-hover);
   color: var(--text);
   cursor: pointer;
   font-size: 13px;
@@ -196,8 +208,18 @@ button {
   line-height: 1;
 }
 
+.language-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+}
+
 .language-toggle:hover {
-  background: #e5e5e5;
+  background: var(--muted-border);
   color: var(--text);
 }
 
@@ -212,22 +234,22 @@ button {
   grid-column: 1 / 4;
   grid-row: 1;
   padding: 24px 0 40px;
-  background: #ffffff;
+  background: var(--page);
   overflow: hidden;
 }
 
 .intro-card p {
   max-width: 700px;
   margin: 0 0 36px;
-  font-family: "Merriweather", Georgia, "Times New Roman", serif;
+  font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
   font-size: clamp(28px, 2.75vw, 34px);
   font-weight: 300;
-  line-height: 1.12;
-  color: #999999;
+  line-height: 1.4;
+  color: var(--text-secondary);
 }
 
 .intro-keyword {
-  color: #171717;
+  color: var(--text-primary);
 }
 
 .intro-link {
@@ -277,7 +299,7 @@ button {
 
 .content-zone {
   min-height: 300px;
-  background: #f7f7f7;
+  background: var(--surface);
   opacity: 1;
   border: none;
   border-radius: 12px;
@@ -286,7 +308,7 @@ button {
 }
 
 .content-zone:hover {
-  background: #f0f0f0;
+  background: var(--surface-hover);
 }
 
 .content-zone-header {
@@ -297,7 +319,7 @@ button {
 }
 
 .content-zone-label {
-  color: #a3a3a3;
+  color: var(--text-label);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -312,7 +334,7 @@ button {
   place-items: center;
   border: none;
   border-radius: 999px;
-  color: #a3a3a3;
+  color: var(--text-label);
   font-size: 12px;
   text-decoration: none;
   transition: color 180ms ease, background 200ms ease, transform 180ms ease;
@@ -327,8 +349,8 @@ button {
   white-space: nowrap;
   padding: 4px 10px;
   border-radius: 6px;
-  background: #232323;
-  color: #ffffff;
+  background: var(--text);
+  color: var(--page);
   font-size: 11px;
   font-weight: 500;
   opacity: 0;
@@ -340,13 +362,23 @@ button {
   opacity: 1;
 }
 
+.content-zone-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+}
+
 .content-zone:hover .content-zone-cover {
-  background: #f5f5f5;
+  background: var(--surface-alt);
 }
 
 .content-zone:hover .content-zone-arrow {
-  color: #666666;
-  background: #ebebeb;
+  color: var(--text-tertiary);
+  background: var(--surface-active);
   transform: translate(2px, -2px);
 }
 
@@ -354,7 +386,7 @@ button {
   margin-top: 16px;
   padding: 12px;
   border-radius: 8px;
-  background: #f0f0f0;
+  background: var(--surface-hover);
   transition: background 200ms ease;
 }
 
@@ -372,9 +404,6 @@ button {
 
 .content-zone:hover .content-zone-cover img {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.content-zone:hover .content-zone-cover img {
   animation: breathe 2s ease-in-out infinite;
   filter: brightness(1.03);
 }
@@ -426,11 +455,11 @@ button {
 
 .page-title-text {
   margin: 0;
-  font-family: "Merriweather", Georgia, "Times New Roman", serif;
+  font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
   font-size: clamp(28px, 2.75vw, 34px);
   font-weight: 300;
-  line-height: 1.12;
-  color: #171717;
+  line-height: 1.4;
+  color: var(--text-primary);
 }
 
 .page-title-text--zh {
@@ -439,7 +468,7 @@ button {
 
 .page-title-sub {
   margin: 12px 0 0;
-  color: #999999;
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 400;
 }
@@ -451,7 +480,7 @@ button {
 }
 
 .book-card {
-  background: #f7f7f7;
+  background: var(--surface);
   opacity: 1;
   border: none;
   border-radius: 12px;
@@ -461,7 +490,7 @@ button {
 }
 
 .book-card:hover {
-  background: #f0f0f0;
+  background: var(--surface-hover);
 }
 
 .book-card-cover {
@@ -471,7 +500,7 @@ button {
   justify-content: center;
   align-items: center;
   aspect-ratio: 2 / 3;
-  background: #f0f0f0;
+  background: var(--surface-hover);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -506,7 +535,7 @@ button {
 }
 
 .book-card-label {
-  color: #a3a3a3;
+  color: var(--text-label);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -514,7 +543,7 @@ button {
 }
 
 .book-card-dot {
-  color: #a3a3a3;
+  color: var(--text-label);
   font-size: 12px;
 }
 
@@ -533,7 +562,7 @@ button {
   place-items: center;
   border: none;
   border-radius: 999px;
-  color: #a3a3a3;
+  color: var(--text-label);
   font-size: 12px;
   text-decoration: none;
   transition: color 180ms ease, background 200ms ease, transform 180ms ease;
@@ -548,8 +577,8 @@ button {
   white-space: nowrap;
   padding: 4px 10px;
   border-radius: 6px;
-  background: #232323;
-  color: #ffffff;
+  background: var(--text);
+  color: var(--page);
   font-size: 11px;
   font-weight: 500;
   opacity: 0;
@@ -561,9 +590,19 @@ button {
   opacity: 1;
 }
 
+.book-card-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+}
+
 .book-card:hover .book-card-arrow {
-  color: #666666;
-  background: #ebebeb;
+  color: var(--text-tertiary);
+  background: var(--surface-active);
   transform: translate(2px, -2px);
 }
 
@@ -573,23 +612,23 @@ button {
 
 .book-card-title {
   margin: 0;
-  font-family: "Merriweather", Georgia, "Times New Roman", serif;
+  font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.35;
-  color: #171717;
+  color: var(--text-primary);
 }
 
 .book-card-author {
   margin: 6px 0 0;
-  color: #999999;
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 500;
 }
 
 .book-card-note {
   margin: 10px 0 0;
-  color: #999999;
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
@@ -600,7 +639,7 @@ button {
   align-items: center;
   justify-content: center;
   padding: 48px 0 24px;
-  color: #999999;
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 400;
 }
@@ -661,20 +700,31 @@ button {
     gap: 0;
   }
 
-  .social-links {
-    display: none;
-  }
-
   .floating-nav {
     gap: 4px;
     padding: 5px;
     border-radius: 10px;
   }
 
+  .nav-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .nav-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
   .nav-item {
     min-width: auto;
     padding: 4px 8px;
     font-size: 12px;
+  }
+
+  .nav-icon:first-of-type {
+    margin-left: 2px;
+    padding-left: 6px;
   }
 
   .language-toggle {
@@ -698,7 +748,7 @@ button {
     margin-bottom: 18px;
     font-size: 15px;
     font-weight: 300;
-    line-height: 1.18;
+    line-height: 1.4;
   }
 
   .content-zone,

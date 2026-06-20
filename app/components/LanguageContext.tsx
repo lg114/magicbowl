@@ -38,6 +38,7 @@ export function LanguageProvider({
     setLang((prev) => {
       const next = prev === "en" ? "zh" : "en";
       setCookie("lang", next);
+      document.documentElement.lang = next;
       return next;
     });
 

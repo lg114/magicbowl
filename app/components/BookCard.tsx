@@ -20,9 +20,9 @@ type BookCardProps = {
 };
 
 const statusColors: Record<BookStatus, string> = {
-  Reading: "#8fbc8f",
-  Finished: "#87bcde",
-  Wishlist: "#d4a76a",
+  Reading: "var(--status-reading)",
+  Finished: "var(--status-finished)",
+  Wishlist: "var(--status-wishlist)",
 };
 
 export function BookCard({ book }: BookCardProps) {

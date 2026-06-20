@@ -1,7 +1,32 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./components/Providers";
+
+const montserrat = localFont({
+  src: [
+    { path: "../fonts/montserrat-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/montserrat-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/montserrat-600.woff2", weight: "600", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-montserrat",
+});
+
+const merriweather = localFont({
+  src: [
+    { path: "../fonts/merriweather-300.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/merriweather-700.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-merriweather",
+});
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "magicbowl",
@@ -28,7 +53,7 @@ export default async function RootLayout({
     cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} className={`${montserrat.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body>
         <Providers initialLang={lang}>{children}</Providers>
       </body>
