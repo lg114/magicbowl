@@ -243,9 +243,9 @@ button {
   margin: 0 0 36px;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
   font-size: clamp(28px, 2.75vw, 34px);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.4;
-  color: var(--text-secondary);
+  color: #999999;
 }
 
 .intro-keyword {
@@ -327,7 +327,7 @@ button {
 .content-zone-label {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -340,7 +340,7 @@ button {
 .content-zone-sub {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -626,7 +626,7 @@ button {
 .book-card-label {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -638,7 +638,7 @@ button {
 
 .book-card-status {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -711,7 +711,7 @@ button {
   margin: 6px 0 0;
   color: var(--text-secondary);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .book-card-note {
@@ -757,7 +757,7 @@ button {
 .project-card-label {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -770,7 +770,7 @@ button {
 .project-card-sub {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -915,7 +915,7 @@ button {
 .blog-card-label {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -928,7 +928,7 @@ button {
 .blog-card-sub {
   color: var(--text-label);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -1203,7 +1203,7 @@ button {
     max-width: 100%;
     margin-bottom: 18px;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.4;
   }
 
