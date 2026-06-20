@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { IntroCard } from "./IntroCard";
 import {
   PlaceholderZone,
@@ -28,31 +29,90 @@ const zones: {
     tooltip: "View on GitHub",
     tooltipCn: "去 GitHub 看看",
   },
-  { variant: "wide-left" },
+  {
+    variant: "wide-left",
+    label: "Blog",
+    labelCn: "博客",
+    sub: "2 posts",
+    subCn: "2 篇",
+    link: "/blogs",
+    tooltip: "Read more",
+    tooltipCn: "阅读全文",
+  },
   { variant: "wide-right" },
   { variant: "tall-left" },
   { variant: "tall-right" },
   { variant: "full" },
 ];
 
+const books = [
+  {
+    title: "Siddhartha",
+    titleCn: "悉达多",
+    image: "/covers/s29396368.jpg",
+    slug: "siddhartha",
+  },
+  {
+    title: "Life and Death",
+    titleCn: "生死疲劳",
+    image: "/covers/s35289336.jpg",
+    slug: "life-and-death",
+  },
+];
+
 export function BentoGrid() {
   return (
     <div className="bento-grid">
       <IntroCard />
-      {zones.map((zone) => (
-        <PlaceholderZone
-          key={zone.variant}
-          variant={zone.variant}
-          image={zone.image}
-          label={zone.label}
-          labelCn={zone.labelCn}
-          sub={zone.sub}
-          subCn={zone.subCn}
-          link={zone.link}
-          tooltip={zone.tooltip}
-          tooltipCn={zone.tooltipCn}
-        />
-      ))}
+      {zones.map((zone) =>
+        zone.variant === "side" ? (
+          <div className="side-stack" key="side-stack">
+            <PlaceholderZone
+              variant={zone.variant}
+              image={zone.image}
+              label={zone.label}
+              labelCn={zone.labelCn}
+              sub={zone.sub}
+              subCn={zone.subCn}
+              link={zone.link}
+              tooltip={zone.tooltip}
+              tooltipCn={zone.tooltipCn}
+            />
+            <div className="mini-books-row">
+              {books.map((book) => (
+                <Link href="/books" className="mini-books-card" key={book.slug}>
+                  <div className="content-zone-header">
+                    <div className="content-zone-meta">
+                      <span className="content-zone-label">Books</span>
+                    </div>
+                    <span className="content-zone-arrow">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M7 17L17 7M17 7H7M17 7v10" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="mini-book-cover">
+                    <img src={book.image} alt={book.title} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <PlaceholderZone
+            key={zone.variant}
+            variant={zone.variant}
+            image={zone.image}
+            label={zone.label}
+            labelCn={zone.labelCn}
+            sub={zone.sub}
+            subCn={zone.subCn}
+            link={zone.link}
+            tooltip={zone.tooltip}
+            tooltipCn={zone.tooltipCn}
+          />
+        )
+      )}
     </div>
   );
 }

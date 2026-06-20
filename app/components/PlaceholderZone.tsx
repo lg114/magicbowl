@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useLang } from "./LanguageContext";
 
 export type PlaceholderZoneVariant =
@@ -29,9 +30,10 @@ type PlaceholderZoneProps = {
   link?: string;
   tooltip?: string;
   tooltipCn?: string;
+  children?: ReactNode;
 };
 
-export function PlaceholderZone({ variant, image, label, labelCn, sub, subCn, link, tooltip, tooltipCn }: PlaceholderZoneProps) {
+export function PlaceholderZone({ variant, image, label, labelCn, sub, subCn, link, tooltip, tooltipCn, children }: PlaceholderZoneProps) {
   const { lang } = useLang();
 
   return (
@@ -80,6 +82,7 @@ export function PlaceholderZone({ variant, image, label, labelCn, sub, subCn, li
           <img src={image} alt="" />
         </div>
       )}
+      {children}
     </section>
   );
 }
