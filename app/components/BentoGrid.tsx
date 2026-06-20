@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useLang } from "./LanguageContext";
 import { IntroCard } from "./IntroCard";
 import {
   PlaceholderZone,
   type PlaceholderZoneVariant,
 } from "./PlaceholderZone";
+import { posts } from "../lib/posts";
 
 const zones: {
   variant: PlaceholderZoneVariant;
@@ -29,17 +31,6 @@ const zones: {
     tooltip: "View on GitHub",
     tooltipCn: "去 GitHub 看看",
   },
-  {
-    variant: "wide-left",
-    label: "Blog",
-    labelCn: "博客",
-    sub: "2 posts",
-    subCn: "2 篇",
-    link: "/blogs",
-    tooltip: "Read more",
-    tooltipCn: "阅读全文",
-  },
-  { variant: "wide-right" },
   { variant: "tall-left" },
   { variant: "tall-right" },
   { variant: "full" },
@@ -61,6 +52,8 @@ const books = [
 ];
 
 export function BentoGrid() {
+  const { lang } = useLang();
+
   return (
     <div className="bento-grid">
       <IntroCard />
@@ -113,6 +106,28 @@ export function BentoGrid() {
           />
         )
       )}
+      <div className="mini-blogs-row">
+        {posts.map((post) => (
+          <Link href={`/blogs/${post.slug}`} className="mini-blog-card" key={post.slug}>
+            <div className="content-zone-header">
+              <div className="content-zone-meta">
+                <span className="content-zone-label">Blog</span>
+              </div>
+              <span className="content-zone-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </span>
+            </div>
+            <h3 className="mini-blog-title">
+              {lang === "zh" ? post.titleCn : post.title}
+            </h3>
+            <p className="mini-blog-excerpt">
+              {lang === "zh" ? post.excerptCn : post.excerpt}
+            </p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
