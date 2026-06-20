@@ -15,10 +15,15 @@ const projects: Project[] = [
   },
 ];
 
-export const metadata = {
-  title: "Project — magicbowl",
-  description: "Things Gc has built.",
-};
+export async function generateMetadata() {
+  const { cookies } = await import("next/headers");
+  const cookieStore = await cookies();
+  const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  return {
+    title: lang === "zh" ? "项目 — magicbowl" : "Project — magicbowl",
+    description: lang === "zh" ? "Gc 做过的东西。" : "Things Gc has built.",
+  };
+}
 
 export default function ProjectPage() {
   return (

@@ -31,10 +31,15 @@ const books: Book[] = [
   },
 ];
 
-export const metadata = {
-  title: "Books — magicbowl",
-  description: "Gc's reading list and book notes.",
-};
+export async function generateMetadata() {
+  const { cookies } = await import("next/headers");
+  const cookieStore = await cookies();
+  const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  return {
+    title: lang === "zh" ? "书单 — magicbowl" : "Books — magicbowl",
+    description: lang === "zh" ? "Gc 的阅读清单和读书笔记。" : "Gc's reading list and book notes.",
+  };
+}
 
 export default function BooksPage() {
   return (

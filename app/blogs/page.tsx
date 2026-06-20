@@ -1,13 +1,18 @@
+import { cookies } from "next/headers";
 import { BlogPost } from "../components/BlogPost";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
 import { posts } from "../lib/posts";
 
-export const metadata = {
-  title: "Blogs — magicbowl",
-  description: "Gc's thoughts and writings.",
-};
+export async function generateMetadata() {
+  const cookieStore = await cookies();
+  const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  return {
+    title: lang === "zh" ? "博客 — magicbowl" : "Blogs — magicbowl",
+    description: lang === "zh" ? "Gc 的想法和文字。" : "Gc's thoughts and writings.",
+  };
+}
 
 export default function BlogsPage() {
   return (

@@ -2,10 +2,15 @@ import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
 
-export const metadata = {
-  title: "Hobbies — magicbowl",
-  description: "What Gc enjoys off the screen.",
-};
+export async function generateMetadata() {
+  const { cookies } = await import("next/headers");
+  const cookieStore = await cookies();
+  const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  return {
+    title: lang === "zh" ? "爱好 — magicbowl" : "Hobbies — magicbowl",
+    description: lang === "zh" ? "Gc 空闲时喜欢做的事。" : "What Gc enjoys off the screen.",
+  };
+}
 
 export default function HobbiesPage() {
   return (
