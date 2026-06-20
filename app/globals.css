@@ -305,6 +305,7 @@ button {
 }
 
 .content-zone-arrow {
+  position: relative;
   display: grid;
   width: 28px;
   height: 28px;
@@ -313,7 +314,30 @@ button {
   border-radius: 999px;
   color: #a3a3a3;
   font-size: 12px;
+  text-decoration: none;
   transition: color 180ms ease, background 200ms ease, transform 180ms ease;
+}
+
+.content-zone-arrow[data-source]::before {
+  content: attr(data-source);
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #232323;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.content-zone-arrow[data-source]:hover::before {
+  opacity: 1;
 }
 
 .content-zone:hover .content-zone-cover {
@@ -596,6 +620,7 @@ button {
 
   .intro-card {
     grid-column: 1 / -1;
+    grid-row: auto;
     min-height: auto;
   }
 
@@ -603,8 +628,10 @@ button {
   .content-zone--wide-left,
   .content-zone--wide-right,
   .content-zone--tall-left,
-  .content-zone--tall-right {
+  .content-zone--tall-right,
+  .content-zone--full {
     grid-column: span 1;
+    grid-row: auto;
     min-height: 360px;
   }
 
@@ -662,6 +689,7 @@ button {
 
   .intro-card {
     grid-column: 1;
+    grid-row: auto;
     padding: 14px 0 24px;
   }
 
@@ -681,6 +709,7 @@ button {
   .content-zone--tall-right,
   .content-zone--full {
     grid-column: 1;
+    grid-row: auto;
     min-height: 260px;
   }
 

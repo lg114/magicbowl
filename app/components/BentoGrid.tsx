@@ -1,11 +1,29 @@
+"use client";
+
 import { IntroCard } from "./IntroCard";
 import {
   PlaceholderZone,
   type PlaceholderZoneVariant,
 } from "./PlaceholderZone";
 
-const zones: { variant: PlaceholderZoneVariant; image?: string; label?: string }[] = [
-  { variant: "side", image: "/projects/ragmate.png", label: "Project · RagMate" },
+const zones: {
+  variant: PlaceholderZoneVariant;
+  image?: string;
+  label?: string;
+  labelCn?: string;
+  link?: string;
+  tooltip?: string;
+  tooltipCn?: string;
+}[] = [
+  {
+    variant: "side",
+    image: "/projects/ragmate.png",
+    label: "Project · RagMate",
+    labelCn: "项目 · RagMate",
+    link: "https://github.com/lg114/RagMate",
+    tooltip: "View on GitHub",
+    tooltipCn: "去 GitHub 看看",
+  },
   { variant: "wide-left" },
   { variant: "wide-right" },
   { variant: "tall-left" },
@@ -23,6 +41,10 @@ export function BentoGrid() {
           variant={zone.variant}
           image={zone.image}
           label={zone.label}
+          labelCn={zone.labelCn}
+          link={zone.link}
+          tooltip={zone.tooltip}
+          tooltipCn={zone.tooltipCn}
         />
       ))}
     </div>

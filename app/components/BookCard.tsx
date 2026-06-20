@@ -36,7 +36,7 @@ export function BookCard({ book }: BookCardProps) {
     <article className="book-card">
       <div className="book-card-header">
         <div className="book-card-meta">
-          <span className="book-card-label">Books</span>
+          <span className="book-card-label">{lang === "zh" ? "书单" : "Books"}</span>
           <span className="book-card-dot">·</span>
           <span
             className="book-card-status"
