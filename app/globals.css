@@ -268,6 +268,7 @@ button {
   font-size: var(--text-base);
   font-weight: var(--weight-bold);
   line-height: var(--leading-none);
+  transition: transform 0.3s ease, background var(--duration-normal) ease;
 }
 
 .language-toggle::after {
@@ -283,6 +284,10 @@ button {
 .language-toggle:hover {
   background: var(--muted-border);
   color: var(--text);
+}
+
+.language-toggle:active {
+  transform: rotate(180deg);
 }
 
 .bento-grid {
