@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./components/Providers";
+import RouteChangeAnimator from "./components/RouteChangeAnimator";
 
 const montserrat = localFont({
   src: [
@@ -56,7 +57,9 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={`${montserrat.variable} ${merriweather.variable}`} suppressHydrationWarning>
       <body>
-        <Providers initialLang={lang}>{children}</Providers>
+        <Providers initialLang={lang}>
+          <RouteChangeAnimator>{children}</RouteChangeAnimator>
+        </Providers>
       </body>
     </html>
   );

@@ -1531,3 +1531,43 @@ button {
     justify-content: center;
   }
 }
+
+/* ──────────────────────────────────────────────
+   Page transitions
+   ────────────────────────────────────────────── */
+
+.page-transition-wrapper {
+  will-change: transform, opacity, filter;
+}
+
+.page-enter {
+  animation: pageEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-exit {
+  animation: pageExit 0.5s cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes pageExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}

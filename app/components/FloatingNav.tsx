@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLang } from "./LanguageContext";
 
 const navItems = [
@@ -41,7 +42,7 @@ export function FloatingNav({ activeItem = "Home" }: FloatingNavProps) {
   return (
     <nav className="floating-nav" aria-label="Site sections">
       {navItems.map((item) => (
-        <a
+        <Link
           className={
             item.en === activeItem ? "nav-item is-active" : "nav-item"
           }
@@ -49,7 +50,7 @@ export function FloatingNav({ activeItem = "Home" }: FloatingNavProps) {
           key={item.en}
         >
           {lang === "zh" ? item.cn : item.en}
-        </a>
+        </Link>
       ))}
       {socialIcons.map((icon) => (
         <a
