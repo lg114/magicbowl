@@ -31,9 +31,6 @@ const zones: {
     tooltip: "View on GitHub",
     tooltipCn: "去 GitHub 看看",
   },
-  { variant: "tall-left" },
-  { variant: "tall-right" },
-  { variant: "full" },
 ];
 
 const books = [
@@ -48,6 +45,33 @@ const books = [
     titleCn: "生死疲劳",
     image: "/covers/s35289336.jpg",
     slug: "life-and-death",
+  },
+];
+
+const hobbies = [
+  {
+    title: "Gym",
+    titleCn: "健身",
+    description:
+      "Training for less than a year. I love back workouts.",
+    descriptionCn:
+      "健身不到一年，喜欢做背部训练。",
+  },
+  {
+    title: "Snooker",
+    titleCn: "斯诺克",
+    description:
+      "I enjoy the feeling when the ball drops into the pocket.",
+    descriptionCn:
+      "我享受球进袋时的感觉，这让我十分满足。",
+  },
+  {
+    title: "Reading",
+    titleCn: "阅读",
+    description:
+      "Philosophy, history, and self-improvement.",
+    descriptionCn:
+      "主要读哲学、历史和自我提升类书籍。",
   },
 ];
 
@@ -106,6 +130,30 @@ export function BentoGrid() {
           />
         )
       )}
+      <div className="mini-hobbies-row">
+        {hobbies.map((hobby) => (
+          <Link href="/hobbies" className="mini-hobby-card" key={hobby.title}>
+            <div className="content-zone-header">
+              <div className="content-zone-meta">
+                <span className="content-zone-label">
+                  {lang === "zh" ? "爱好" : "Hobby"}
+                </span>
+              </div>
+              <span className="content-zone-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </span>
+            </div>
+            <h3 className="mini-hobby-title">
+              {lang === "zh" ? hobby.titleCn : hobby.title}
+            </h3>
+            <p className="mini-hobby-description">
+              {lang === "zh" ? hobby.descriptionCn : hobby.description}
+            </p>
+          </Link>
+        ))}
+      </div>
       <div className="mini-blogs-row">
         {posts.map((post) => (
           <Link href={`/blogs/${post.slug}`} className="mini-blog-card" key={post.slug}>

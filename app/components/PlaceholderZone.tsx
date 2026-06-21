@@ -6,18 +6,12 @@ import { useLang } from "./LanguageContext";
 export type PlaceholderZoneVariant =
   | "side"
   | "wide-left"
-  | "wide-right"
-  | "tall-left"
-  | "tall-right"
-  | "full";
+  | "wide-right";
 
 const labels: Record<PlaceholderZoneVariant, { en: string; cn: string }> = {
   side: { en: "Projects", cn: "项目" },
   "wide-left": { en: "Blog", cn: "博客" },
   "wide-right": { en: "Books", cn: "书单" },
-  "tall-left": { en: "Experiments", cn: "实验" },
-  "tall-right": { en: "Notes", cn: "笔记" },
-  full: { en: "More", cn: "更多" },
 };
 
 type PlaceholderZoneProps = {
