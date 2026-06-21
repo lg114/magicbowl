@@ -102,6 +102,7 @@
 
 html {
   min-width: 320px;
+  overflow-x: hidden;
   background: var(--page);
   scrollbar-gutter: stable;
 }
@@ -148,7 +149,7 @@ button {
   max-width: var(--canvas-max);
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-6) var(--canvas-pad) 30px;
+  padding: 0 var(--canvas-pad) 30px;
   background: var(--page);
 }
 
@@ -157,6 +158,7 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 70px;
+  padding-top: var(--space-6);
   margin-bottom: var(--space-4);
   position: sticky;
   top: 0;
@@ -1320,7 +1322,7 @@ button {
 }
 
 @media (max-width: 1024px) {
-  .canvas {
+  .site-header {
     padding-top: var(--space-7);
   }
 
@@ -1332,6 +1334,12 @@ button {
     grid-column: 1 / -1;
     grid-row: auto;
     min-height: auto;
+    padding-bottom: var(--space-6);
+  }
+
+  .intro-card p {
+    max-width: 640px;
+    margin-bottom: var(--space-6);
   }
 
   .side-stack {
@@ -1379,25 +1387,25 @@ button {
 
   .canvas {
     width: min(100%, 390px);
-    padding-top: var(--space-6);
     padding-bottom: 18px;
   }
 
   .site-header {
-    min-height: 54px;
+    min-height: 48px;
+    padding-top: var(--space-6);
     justify-content: center;
     gap: 0;
   }
 
   .floating-nav {
     gap: var(--space-1);
-    padding: 5px;
+    padding: 4px;
     border-radius: var(--radius-xl);
   }
 
   .nav-icon {
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 36px;
+    min-height: 36px;
   }
 
   .nav-icon svg {
@@ -1407,18 +1415,18 @@ button {
 
   .nav-item {
     min-width: auto;
-    padding: var(--space-1) var(--space-2);
+    padding: var(--space-1) 6px;
     font-size: var(--text-sm);
   }
 
   .nav-icon:first-of-type {
     margin-left: 2px;
-    padding-left: 6px;
+    padding-left: 4px;
   }
 
   .language-toggle {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     font-size: var(--text-xs);
   }
 
@@ -1429,15 +1437,15 @@ button {
   .intro-card {
     grid-column: 1;
     grid-row: auto;
-    padding: 14px 0 var(--space-6);
+    padding: var(--space-3) 0 var(--space-4);
   }
 
   .intro-card p {
     max-width: 100%;
-    margin-bottom: 18px;
+    margin-bottom: var(--space-4);
     font-size: 15px;
     font-weight: var(--weight-regular);
-    line-height: var(--leading-normal);
+    line-height: var(--leading-snug);
   }
 
   .side-stack {
@@ -1529,6 +1537,19 @@ button {
   .floating-nav {
     width: 100%;
     justify-content: center;
+    gap: 2px;
+    padding: 4px;
+    flex-wrap: wrap;
+  }
+
+  .nav-item {
+    padding: var(--space-1) 6px;
+    font-size: var(--text-xs);
+  }
+
+  .nav-icon {
+    min-width: 36px;
+    min-height: 36px;
   }
 }
 
@@ -1538,6 +1559,8 @@ button {
 
 .page-transition-wrapper {
   will-change: transform, opacity, filter;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .page-enter {
