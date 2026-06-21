@@ -21,6 +21,7 @@
   --status-wishlist: #d4a76a;
   --accent: #b8a88a;
   --accent-gold: #b8a88a;
+  --accent-gold-bright: #d4a850;
   --accent-green: #6b8f71;
   --accent-blue: #5b7fa5;
   --accent-red: #a05a5a;
@@ -32,6 +33,67 @@
   --canvas-pad: 32px;
   --gap-x: 24px;
   --gap-y: 24px;
+
+  /* Type scale */
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 17px;
+  --text-2xl: 18px;
+  --text-3xl: 24px;
+  --text-display: clamp(28px, 2.75vw, 34px);
+  --text-display-lg: clamp(28px, 3vw, 40px);
+
+  /* Line height */
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.4;
+  --leading-relaxed: 1.5;
+  --leading-loose: 1.6;
+  --leading-body: 1.9;
+
+  /* Font weight */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Border radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
+  --radius-full: 999px;
+
+  /* Overlay */
+  --overlay-light: rgba(0, 0, 0, 0.04);
+  --overlay-subtle: rgba(0, 0, 0, 0.05);
+  --overlay-hover: rgba(0, 0, 0, 0.08);
+  --overlay-nav: rgba(255, 255, 255, 0.96);
+
+  /* Duration */
+  --duration-fast: 180ms;
+  --duration-normal: 200ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
 }
 
 * {
@@ -51,7 +113,7 @@ body {
   color: var(--text);
   font-family: var(--font-montserrat), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  font-size: 16px;
+  font-size: var(--text-lg);
   letter-spacing: 0;
 }
 
@@ -86,7 +148,7 @@ button {
   max-width: var(--canvas-max);
   width: 100%;
   margin: 0 auto;
-  padding: 24px var(--canvas-pad) 30px;
+  padding: var(--space-6) var(--canvas-pad) 30px;
   background: var(--page);
 }
 
@@ -95,7 +157,7 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 70px;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -105,12 +167,12 @@ button {
 .nav-icon,
 .nav-item,
 .language-toggle {
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   outline: none;
   transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
+    background-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
 }
 
 .nav-icon:focus-visible,
@@ -122,11 +184,11 @@ button {
 .floating-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   padding: 10px;
   border: 1px solid var(--muted-border);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.96);
+  border-radius: var(--radius-2xl);
+  background: var(--overlay-nav);
   box-shadow: var(--shadow);
 }
 
@@ -140,30 +202,30 @@ button {
 }
 
 .nav-icon:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--overlay-hover);
   color: var(--text);
 }
 
 .nav-icon svg {
-  width: 16px;
-  height: 16px;
+  width: var(--space-4);
+  height: var(--space-4);
 }
 
 .nav-icon:first-of-type {
   border-left: 1px solid var(--muted-border);
-  margin-left: 4px;
+  margin-left: var(--space-1);
   padding-left: 10px;
 }
 
 .nav-item {
   position: relative;
   min-width: 60px;
-  padding: 8px 14px;
+  padding: var(--space-2) 14px;
   background: transparent;
   color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-none);
   text-align: center;
 }
 
@@ -178,18 +240,18 @@ button {
 }
 
 .nav-item:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--overlay-hover);
   color: var(--text);
 }
 
 .nav-item.is-active {
   background: transparent;
-  color: #000000;
-  font-weight: 600;
+  color: var(--text-primary);
+  font-weight: var(--weight-semibold);
 }
 
 .nav-item.is-active:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--overlay-hover);
 }
 
 .language-toggle {
@@ -199,13 +261,13 @@ button {
   height: 34px;
   place-items: center;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   background: var(--surface-hover);
   color: var(--text);
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1;
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-none);
 }
 
 .language-toggle::after {
@@ -233,7 +295,7 @@ button {
 .intro-card {
   grid-column: 1 / 4;
   grid-row: 1;
-  padding: 24px 0 40px;
+  padding: var(--space-6) 0 var(--space-10);
   background: var(--page);
   overflow: hidden;
 }
@@ -242,10 +304,10 @@ button {
   max-width: 700px;
   margin: 0 0 36px;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: clamp(28px, 2.75vw, 34px);
-  font-weight: 400;
-  line-height: 1.4;
-  color: #999999;
+  font-size: var(--text-display);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
 }
 
 .intro-keyword {
@@ -255,14 +317,18 @@ button {
 .intro-link {
   text-decoration: none;
   cursor: pointer;
-  transition: text-decoration 220ms ease;
+  transition: text-decoration var(--duration-normal) ease;
 }
 
 .intro-link:hover {
   text-decoration: underline;
   text-decoration-color: var(--accent);
-  text-underline-offset: 12px;
+  text-underline-offset: var(--space-3);
   text-decoration-thickness: 3.5px;
+}
+
+.intro-link--gold:hover {
+  text-decoration-color: var(--accent-gold-bright);
 }
 
 .intro-link--green:hover {
@@ -302,9 +368,9 @@ button {
   background: var(--surface);
   opacity: 1;
   border: none;
-  border-radius: 12px;
-  padding: 24px;
-  transition: background 200ms ease;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  transition: background var(--duration-normal) ease;
 }
 
 .content-zone:hover {
@@ -315,7 +381,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .content-zone-meta {
@@ -326,21 +392,21 @@ button {
 
 .content-zone-label {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .content-zone-dot {
   color: var(--text-label);
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 
 .content-zone-sub {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -352,10 +418,10 @@ button {
   height: 28px;
   place-items: center;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   color: var(--text-label);
   text-decoration: none;
-  transition: color 180ms ease, background 200ms ease, transform 180ms ease;
+  transition: color var(--duration-fast) ease, background var(--duration-normal) ease, transform var(--duration-fast) ease;
 }
 
 .content-zone-arrow svg,
@@ -367,19 +433,19 @@ button {
 .content-zone-arrow[data-source]::before {
   content: attr(data-source);
   position: absolute;
-  right: calc(100% + 8px);
+  right: calc(100% + var(--space-2));
   top: 50%;
   transform: translateY(-50%);
   white-space: nowrap;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: var(--space-1) 10px;
+  border-radius: var(--radius-md);
   background: var(--text);
   color: var(--page);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 180ms ease;
+  transition: opacity var(--duration-fast) ease;
 }
 
 .content-zone-arrow[data-source]:hover::before {
@@ -421,7 +487,7 @@ button {
 
 .mini-books-row {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .mini-books-card {
@@ -429,10 +495,10 @@ button {
   flex: 1;
   min-width: 0;
   background: var(--surface);
-  border-radius: 10px;
+  border-radius: var(--radius-xl);
   padding: 14px;
   cursor: pointer;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .mini-books-card:hover {
@@ -447,9 +513,9 @@ button {
 
 .mini-book-cover {
   margin-top: 10px;
-  padding: 8px;
+  padding: var(--space-2);
   aspect-ratio: 2 / 3;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--surface-hover);
   display: flex;
@@ -463,8 +529,8 @@ button {
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 2px;
-  transition: transform 400ms ease;
+  border-radius: var(--radius-xs);
+  transition: transform var(--duration-slow) ease;
 }
 
 .mini-books-card:hover .mini-book-cover img {
@@ -482,10 +548,10 @@ button {
   flex: 1;
   min-width: 0;
   background: var(--surface);
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
   cursor: pointer;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .mini-hobby-card:hover {
@@ -499,19 +565,19 @@ button {
 }
 
 .mini-hobby-title {
-  margin: 12px 0 0;
+  margin: var(--space-3) 0 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
   color: var(--text-primary);
 }
 
 .mini-hobby-description {
-  margin: 8px 0 0;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.6;
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
   color: var(--text-secondary);
 }
 
@@ -526,10 +592,10 @@ button {
   flex: 1;
   min-width: 0;
   background: var(--surface);
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
   cursor: pointer;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .mini-blog-card:hover {
@@ -543,19 +609,19 @@ button {
 }
 
 .mini-blog-title {
-  margin: 12px 0 0;
+  margin: var(--space-3) 0 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
   color: var(--text-primary);
 }
 
 .mini-blog-excerpt {
-  margin: 8px 0 0;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.6;
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
   color: var(--text-secondary);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -564,11 +630,11 @@ button {
 }
 
 .content-zone-cover {
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 8px;
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
   background: var(--surface-hover);
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .content-zone-cover img {
@@ -576,15 +642,15 @@ button {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    filter 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 400ms ease;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 4px var(--overlay-light);
+  transition: transform var(--duration-slower) cubic-bezier(0.4, 0, 0.2, 1),
+    filter var(--duration-slower) cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow var(--duration-slow) ease;
 }
 
 .content-zone:hover .content-zone-cover img {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--overlay-hover);
   animation: breathe 2s ease-in-out infinite;
   filter: brightness(1.03);
 }
@@ -616,27 +682,27 @@ button {
 
 /* Books page */
 .page-title {
-  padding: 8px 0 32px;
+  padding: var(--space-2) 0 var(--space-8);
 }
 
 .page-title-text {
   margin: 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: clamp(28px, 2.75vw, 34px);
-  font-weight: 300;
-  line-height: 1.4;
+  font-size: var(--text-display);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-normal);
   color: var(--text-primary);
 }
 
 .page-title-text--zh {
-  font-weight: 400;
+  font-weight: var(--weight-regular);
 }
 
 .page-title-sub {
-  margin: 12px 0 0;
+  margin: var(--space-3) 0 0;
   color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
 }
 
 .books-grid {
@@ -649,10 +715,10 @@ button {
   background: var(--surface);
   opacity: 1;
   border: none;
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
   cursor: pointer;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .book-card:hover {
@@ -660,14 +726,14 @@ button {
 }
 
 .book-card-cover {
-  margin: 20px 0 0;
-  padding: 0 32px;
+  margin: var(--space-5) 0 0;
+  padding: 0 var(--space-8);
   display: flex;
   justify-content: center;
   align-items: center;
   aspect-ratio: 2 / 3;
   background: var(--surface-hover);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
@@ -678,9 +744,9 @@ button {
   width: auto;
   height: auto;
   object-fit: contain;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 400ms ease;
+  border: 1px solid var(--overlay-subtle);
+  box-shadow: 2px 2px var(--space-3) var(--overlay-hover);
+  transition: transform var(--duration-slow) ease;
 }
 
 .book-card:hover .book-card-cover img {
@@ -691,7 +757,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .book-card-meta {
@@ -702,20 +768,20 @@ button {
 
 .book-card-label {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .book-card-dot {
   color: var(--text-label);
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 
 .book-card-status {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -727,28 +793,28 @@ button {
   height: 28px;
   place-items: center;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   color: var(--text-label);
   text-decoration: none;
-  transition: color 180ms ease, background 200ms ease, transform 180ms ease;
+  transition: color var(--duration-fast) ease, background var(--duration-normal) ease, transform var(--duration-fast) ease;
 }
 
 .book-card-arrow[data-source]::before {
   content: attr(data-source);
   position: absolute;
-  right: calc(100% + 8px);
+  right: calc(100% + var(--space-2));
   top: 50%;
   transform: translateY(-50%);
   white-space: nowrap;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: var(--space-1) 10px;
+  border-radius: var(--radius-md);
   background: var(--text);
   color: var(--page);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 180ms ease;
+  transition: opacity var(--duration-fast) ease;
 }
 
 .book-card-arrow[data-source]:hover::before {
@@ -772,31 +838,31 @@ button {
 }
 
 .book-card-info {
-  margin-top: 16px;
+  margin-top: var(--space-4);
 }
 
 .book-card-title {
   margin: 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
   color: var(--text-primary);
 }
 
 .book-card-author {
   margin: 6px 0 0;
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
 }
 
 .book-card-note {
   margin: 10px 0 0;
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
 }
 
 /* Project page */
@@ -809,9 +875,9 @@ button {
 .project-card {
   background: var(--surface);
   border: none;
-  border-radius: 12px;
-  padding: 24px;
-  transition: background 200ms ease;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  transition: background var(--duration-normal) ease;
 }
 
 .project-card:hover {
@@ -822,7 +888,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .project-card-meta {
@@ -833,21 +899,21 @@ button {
 
 .project-card-label {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .project-card-dot {
   color: var(--text-label);
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 
 .project-card-sub {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -859,10 +925,10 @@ button {
   height: 28px;
   place-items: center;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   color: var(--text-label);
   text-decoration: none;
-  transition: color 180ms ease, background 200ms ease, transform 180ms ease;
+  transition: color var(--duration-fast) ease, background var(--duration-normal) ease, transform var(--duration-fast) ease;
 }
 
 .project-card-arrow svg {
@@ -873,19 +939,19 @@ button {
 .project-card-arrow[data-source]::before {
   content: attr(data-source);
   position: absolute;
-  right: calc(100% + 8px);
+  right: calc(100% + var(--space-2));
   top: 50%;
   transform: translateY(-50%);
   white-space: nowrap;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: var(--space-1) 10px;
+  border-radius: var(--radius-md);
   background: var(--text);
   color: var(--page);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 180ms ease;
+  transition: opacity var(--duration-fast) ease;
 }
 
 .project-card-arrow[data-source]:hover::before {
@@ -909,12 +975,12 @@ button {
 }
 
 .project-card-cover {
-  margin: 0 0 16px;
-  padding: 12px;
-  border-radius: 8px;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
   background: var(--surface-hover);
   overflow: hidden;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .project-card:hover .project-card-cover {
@@ -926,8 +992,8 @@ button {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 4px;
-  transition: transform 400ms ease;
+  border-radius: var(--radius-sm);
+  transition: transform var(--duration-slow) ease;
 }
 
 .project-card:hover .project-card-cover img {
@@ -941,18 +1007,18 @@ button {
 .project-card-title {
   margin: 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
   color: var(--text-primary);
 }
 
 .project-card-note {
-  margin: 8px 0 0;
+  margin: var(--space-2) 0 0;
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
 }
 
 /* Hobbies page */
@@ -965,9 +1031,9 @@ button {
 .hobby-card {
   background: var(--surface);
   border: none;
-  border-radius: 12px;
-  padding: 24px;
-  transition: background 200ms ease;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  transition: background var(--duration-normal) ease;
 }
 
 .hobby-card:hover {
@@ -975,24 +1041,24 @@ button {
 }
 
 .hobby-card-header {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .hobby-card-label {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .hobby-card-cover {
-  margin: 0 0 16px;
-  padding: 12px;
-  border-radius: 8px;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
   background: var(--surface-hover);
   overflow: hidden;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .hobby-card:hover .hobby-card-cover {
@@ -1004,8 +1070,8 @@ button {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 4px;
-  transition: transform 400ms ease;
+  border-radius: var(--radius-sm);
+  transition: transform var(--duration-slow) ease;
 }
 
 .hobby-card:hover .hobby-card-cover img {
@@ -1019,18 +1085,18 @@ button {
 .hobby-card-title {
   margin: 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
   color: var(--text-primary);
 }
 
 .hobby-card-description {
-  margin: 8px 0 0;
+  margin: var(--space-2) 0 0;
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
 }
 
 /* Blog page */
@@ -1044,10 +1110,10 @@ button {
   display: block;
   background: var(--surface);
   border: none;
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
   cursor: pointer;
-  transition: background 200ms ease;
+  transition: background var(--duration-normal) ease;
 }
 
 .blog-card:hover {
@@ -1058,7 +1124,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .blog-card-meta {
@@ -1069,21 +1135,21 @@ button {
 
 .blog-card-label {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .blog-card-dot {
   color: var(--text-label);
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 
 .blog-card-sub {
   color: var(--text-label);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -1095,7 +1161,7 @@ button {
   height: 28px;
   place-items: center;
   color: var(--text-label);
-  transition: color 180ms ease, background 200ms ease, transform 180ms ease;
+  transition: color var(--duration-fast) ease, background var(--duration-normal) ease, transform var(--duration-fast) ease;
 }
 
 .blog-card-arrow svg {
@@ -1122,16 +1188,16 @@ button {
 .blog-card-title {
   margin: 0 0 10px;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
   color: var(--text-primary);
 }
 
 .blog-card-excerpt {
   margin: 0;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
   line-height: 1.65;
   color: var(--text-secondary);
   display: -webkit-box;
@@ -1141,15 +1207,15 @@ button {
 }
 
 .blog-card-footer {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
   border-top: 1px solid var(--muted-border);
 }
 
 .blog-card-date {
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
 }
 
 @media (max-width: 767px) {
@@ -1158,7 +1224,7 @@ button {
   }
 
   .blog-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 }
 
@@ -1172,11 +1238,11 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 40px;
+  margin-bottom: var(--space-10);
   color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 500;
-  transition: color 180ms ease;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  transition: color var(--duration-fast) ease;
 }
 
 .blog-detail-back:hover {
@@ -1184,41 +1250,41 @@ button {
 }
 
 .blog-detail-back svg {
-  width: 16px;
-  height: 16px;
+  width: var(--space-4);
+  height: var(--space-4);
 }
 
 .blog-detail-header {
-  margin-bottom: 48px;
-  padding-bottom: 32px;
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-8);
   border-bottom: 1px solid var(--muted-border);
 }
 
 .blog-detail-title {
   margin: 0;
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: clamp(28px, 3vw, 40px);
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: var(--text-display-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
   color: var(--text-primary);
   letter-spacing: -0.02em;
 }
 
 .blog-detail-date {
   display: block;
-  margin-top: 16px;
+  margin-top: var(--space-4);
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
   letter-spacing: 0.5px;
 }
 
 .blog-detail-body p {
-  margin: 0 0 28px;
+  margin: 0 0 var(--space-7);
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.9;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-body);
   color: var(--text);
 }
 
@@ -1227,12 +1293,12 @@ button {
 }
 
 .blog-detail-body blockquote {
-  margin: 40px 0;
-  padding: 24px 0 24px 24px;
+  margin: var(--space-10) 0;
+  padding: var(--space-6) 0 var(--space-6) var(--space-6);
   border-left: 3px solid var(--text-primary);
   font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
-  font-size: 17px;
-  font-weight: 300;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-light);
   font-style: italic;
   line-height: 1.8;
   color: var(--text-primary);
@@ -1249,8 +1315,8 @@ button {
   }
 
   .blog-detail-body blockquote {
-    margin: 32px 0;
-    padding: 20px 0 20px 20px;
+    margin: var(--space-8) 0;
+    padding: var(--space-5) 0 var(--space-5) var(--space-5);
     font-size: 15px;
   }
 }
@@ -1259,10 +1325,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 0 24px;
+  padding: var(--space-12) 0 var(--space-6);
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
 }
 
 .footer-brand {
@@ -1271,7 +1337,7 @@ button {
 
 @media (max-width: 1024px) {
   .canvas {
-    padding-top: 28px;
+    padding-top: var(--space-7);
   }
 
   .bento-grid {
@@ -1310,7 +1376,7 @@ button {
   }
 
   .book-card-cover {
-    padding: 0 24px;
+    padding: 0 var(--space-6);
   }
 
   .projects-grid {
@@ -1324,12 +1390,12 @@ button {
 
 @media (max-width: 767px) {
   :root {
-    --canvas-pad: 12px;
+    --canvas-pad: var(--space-3);
   }
 
   .canvas {
     width: min(100%, 390px);
-    padding-top: 24px;
+    padding-top: var(--space-6);
     padding-bottom: 18px;
   }
 
@@ -1340,9 +1406,9 @@ button {
   }
 
   .floating-nav {
-    gap: 4px;
+    gap: var(--space-1);
     padding: 5px;
-    border-radius: 10px;
+    border-radius: var(--radius-xl);
   }
 
   .nav-icon {
@@ -1357,8 +1423,8 @@ button {
 
   .nav-item {
     min-width: auto;
-    padding: 4px 8px;
-    font-size: 12px;
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-sm);
   }
 
   .nav-icon:first-of-type {
@@ -1369,7 +1435,7 @@ button {
   .language-toggle {
     width: 25px;
     height: 25px;
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
 
   .bento-grid {
@@ -1379,20 +1445,20 @@ button {
   .intro-card {
     grid-column: 1;
     grid-row: auto;
-    padding: 14px 0 24px;
+    padding: 14px 0 var(--space-6);
   }
 
   .intro-card p {
     max-width: 100%;
     margin-bottom: 18px;
     font-size: 15px;
-    font-weight: 400;
-    line-height: 1.4;
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-normal);
   }
 
   .side-stack {
     grid-column: 1;
-    gap: 12px;
+    gap: var(--space-3);
   }
 
   .side-stack .content-zone--side {
@@ -1405,7 +1471,7 @@ button {
 
   .mini-books-card {
     padding: 10px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
   }
 
   .mini-book-cover {
@@ -1417,7 +1483,7 @@ button {
   }
 
   .mini-blog-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 
   .mini-hobbies-row {
@@ -1425,7 +1491,7 @@ button {
   }
 
   .mini-hobby-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 
   .content-zone,
@@ -1442,7 +1508,7 @@ button {
   }
 
   .project-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 
   .hobbies-grid {
@@ -1450,11 +1516,11 @@ button {
   }
 
   .hobby-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 
   .project-card-cover {
-    padding: 8px;
+    padding: var(--space-2);
   }
 
   .books-grid {
@@ -1462,16 +1528,16 @@ button {
   }
 
   .book-card {
-    padding: 16px;
+    padding: var(--space-4);
   }
 
   .book-card-cover {
-    margin: 16px 0 0;
-    padding: 0 20px;
+    margin: var(--space-4) 0 0;
+    padding: 0 var(--space-5);
   }
 
   .page-title-text {
-    font-size: 24px;
+    font-size: var(--text-3xl);
   }
 }
 

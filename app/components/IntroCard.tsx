@@ -10,7 +10,11 @@ export function IntroCard() {
       <section className="intro-card" aria-label="Introduction">
         <p>
           你好，我是 <strong className="intro-keyword">Gc</strong> 👋
-          欢迎来到我的 <strong className="intro-keyword">magic bowl</strong> 🔮！
+          欢迎来到我的{" "}
+          <span className="intro-link intro-link--gold">
+            <strong className="intro-keyword">magic bowl</strong>
+          </span>{" "}
+          🔮！
         </p>
 
         <p>
@@ -57,7 +61,11 @@ export function IntroCard() {
     <section className="intro-card" aria-label="Introduction">
       <p>
         Hey there, I&apos;m <strong className="intro-keyword">Gc</strong> 👋
-        Welcome to my <strong className="intro-keyword">magic bowl</strong> 🔮!
+        Welcome to my{" "}
+        <span className="intro-link intro-link--gold">
+          <strong className="intro-keyword">magic bowl</strong>
+        </span>{" "}
+        🔮!
       </p>
 
       <p>
