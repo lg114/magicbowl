@@ -317,47 +317,26 @@ button {
 .intro-link {
   text-decoration: none;
   cursor: pointer;
-  transition: text-decoration var(--duration-normal) ease;
+  background-image: linear-gradient(var(--underline-color, var(--accent)), var(--underline-color, var(--accent)));
+  background-size: 0% 3.5px;
+  background-position: left calc(100% - 0px);
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+  padding-bottom: var(--space-3);
 }
 
 .intro-link:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-underline-offset: var(--space-3);
-  text-decoration-thickness: 3.5px;
+  background-size: 100% 3.5px;
 }
 
-.intro-link--gold:hover {
-  text-decoration-color: var(--accent-gold-bright);
-}
-
-.intro-link--green:hover {
-  text-decoration-color: var(--accent-green);
-}
-
-.intro-link--red:hover {
-  text-decoration-color: var(--accent-red);
-}
-
-.intro-link--amber:hover {
-  text-decoration-color: var(--accent-amber);
-}
-
-.intro-link--teal:hover {
-  text-decoration-color: var(--accent-teal);
-}
-
-.intro-link--blue:hover {
-  text-decoration-color: var(--accent-blue);
-}
-
-.intro-link--purple:hover {
-  text-decoration-color: var(--accent-purple);
-}
-
-.intro-link--rose:hover {
-  text-decoration-color: var(--accent-rose);
-}
+.intro-link--gold { --underline-color: var(--accent-gold-bright); }
+.intro-link--green { --underline-color: var(--accent-green); }
+.intro-link--red { --underline-color: var(--accent-red); }
+.intro-link--amber { --underline-color: var(--accent-amber); }
+.intro-link--teal { --underline-color: var(--accent-teal); }
+.intro-link--blue { --underline-color: var(--accent-blue); }
+.intro-link--purple { --underline-color: var(--accent-purple); }
+.intro-link--rose { --underline-color: var(--accent-rose); }
 
 .intro-card p:last-child {
   margin-bottom: 0;
