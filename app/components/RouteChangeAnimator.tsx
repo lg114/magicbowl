@@ -44,12 +44,16 @@ export default function RouteChangeAnimator({
     prevPath.current = pathname;
     prevLang.current = lang;
 
-    // Remove stale classes, then force reflow before re-adding
+    // Remove stale classes, then restart animation via double rAF
+    // (avoids the synchronous reflow of void el.offsetWidth)
     cleanup();
-    void el.offsetWidth;
 
-    el.classList.add("page-enter");
-    el.addEventListener("animationend", cleanup, { once: true });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.classList.add("page-enter");
+        el.addEventListener("animationend", cleanup, { once: true });
+      });
+    });
 
     return cleanup;
   }, [pathname, lang, cleanup]);
