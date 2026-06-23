@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useLang } from "./LanguageContext";
 import { IntroCard } from "./IntroCard";
@@ -109,7 +110,7 @@ export function BentoGrid() {
                     </span>
                   </div>
                   <div className="mini-book-cover">
-                    <img src={book.image} alt={book.title} />
+                    <Image src={book.image} alt={book.title} width={200} height={300} sizes="120px" className="mini-book-cover-img" />
                   </div>
                 </Link>
               ))}

@@ -8,9 +8,12 @@ import { posts } from "../lib/posts";
 export async function generateMetadata() {
   const cookieStore = await cookies();
   const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  const title = lang === "zh" ? "博客" : "Blogs";
+  const description = lang === "zh" ? "Gc 的想法和文字。" : "Gc's thoughts and writings.";
   return {
-    title: lang === "zh" ? "博客 — magicbowl" : "Blogs — magicbowl",
-    description: lang === "zh" ? "Gc 的想法和文字。" : "Gc's thoughts and writings.",
+    title,
+    description,
+    openGraph: { title, description },
   };
 }
 

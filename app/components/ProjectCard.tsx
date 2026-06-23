@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "./LanguageContext";
 
 export type Project = {
@@ -60,7 +61,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
       {project.image && (
         <div className="project-card-cover">
-          <img src={project.image} alt={`${title} cover`} />
+          <Image src={project.image} alt={`${title} cover`} width={1280} height={720} sizes="(max-width: 767px) 100vw, 50vw" className="project-card-cover-img" />
         </div>
       )}
 

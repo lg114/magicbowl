@@ -35,9 +35,12 @@ export async function generateMetadata() {
   const { cookies } = await import("next/headers");
   const cookieStore = await cookies();
   const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  const title = lang === "zh" ? "爱好" : "Hobbies";
+  const description = lang === "zh" ? "Gc 空闲时喜欢做的事。" : "What Gc enjoys off the screen.";
   return {
-    title: lang === "zh" ? "爱好 — magicbowl" : "Hobbies — magicbowl",
-    description: lang === "zh" ? "Gc 空闲时喜欢做的事。" : "What Gc enjoys off the screen.",
+    title,
+    description,
+    openGraph: { title, description },
   };
 }
 

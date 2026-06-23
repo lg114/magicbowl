@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { useLang } from "./LanguageContext";
 
 export type BookStatus = "Reading" | "Finished" | "Wishlist";
@@ -5,6 +8,7 @@ export type BookStatus = "Reading" | "Finished" | "Wishlist";
 export type Book = {
   title: string;
   titleCn?: string;
+  slug?: string;
   author: string;
   authorCn?: string;
   status: BookStatus;
@@ -68,7 +72,7 @@ export function BookCard({ book }: BookCardProps) {
 
       {book.image && (
         <div className="book-card-cover">
-          <img src={book.image} alt={`${title} cover`} />
+          <Image src={book.image} alt={`${title} cover`} width={400} height={600} sizes="200px" className="book-card-cover-img" />
         </div>
       )}
 

@@ -1,5 +1,3 @@
-"use client";
-
 import { HobbyCard, type Hobby } from "./HobbyCard";
 
 type HobbyListProps = {

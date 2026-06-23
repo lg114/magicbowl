@@ -1,5 +1,3 @@
-"use client";
-
 import { BookCard, type Book } from "./BookCard";
 
 type BookListProps = {

@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { useLang } from "./LanguageContext";
 
 export type Hobby = {
@@ -28,7 +31,7 @@ export function HobbyCard({ hobby }: HobbyCardProps) {
 
       {hobby.image && (
         <div className="hobby-card-cover">
-          <img src={hobby.image} alt={`${title}`} />
+          <Image src={hobby.image} alt={`${title}`} width={800} height={600} sizes="(max-width: 767px) 100vw, 50vw" className="hobby-card-cover-img" />
         </div>
       )}
 

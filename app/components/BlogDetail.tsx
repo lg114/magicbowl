@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useLang } from "./LanguageContext";
 import type { BlogEntry } from "../lib/posts";
@@ -36,7 +37,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
             </blockquote>
           ) : block.type === "image" ? (
             <figure key={i} className="blog-detail-figure">
-              <img src={block.text} alt={block.alt || ""} />
+              <Image src={block.text} alt={block.alt || ""} width={800} height={450} sizes="(max-width: 767px) 100vw, 700px" className="blog-detail-figure-img" />
             </figure>
           ) : (
             <p key={i}>{block.text}</p>

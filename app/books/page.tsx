@@ -1,43 +1,19 @@
-import { type Book } from "../components/BookCard";
 import { BookList } from "../components/BookList";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
-
-const books: Book[] = [
-  {
-    title: "Siddhartha",
-    titleCn: "悉达多",
-    author: "Hermann Hesse",
-    authorCn: "赫尔曼·黑塞",
-    status: "Finished",
-    image: "/covers/s29396368.jpg",
-    note: "A spiritual journey of self-discovery through the life of a young man in ancient India.",
-    noteCn: "一个年轻人在古印度的自我发现与精神之旅。",
-    link: "https://www.goodreads.com/book/show/52036.Siddhartha",
-    linkCn: "https://book.douban.com/subject/26980487/",
-  },
-  {
-    title: "Life and Death Are Wearing Me Out",
-    titleCn: "生死疲劳",
-    author: "Mo Yan",
-    authorCn: "莫言",
-    status: "Finished",
-    image: "/covers/s35289336.jpg",
-    note: "A landowner's six reincarnations witness half a century of rural China through the eyes of animals.",
-    noteCn: "一个地主经历六道轮回，以动物视角见证中国农村半个世纪的变迁。",
-    link: "https://www.goodreads.com/book/show/19172190",
-    linkCn: "https://book.douban.com/subject/35587028/",
-  },
-];
+import { books } from "../lib/books";
 
 export async function generateMetadata() {
   const { cookies } = await import("next/headers");
   const cookieStore = await cookies();
   const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
+  const title = lang === "zh" ? "书单" : "Books";
+  const description = lang === "zh" ? "Gc 的阅读清单和读书笔记。" : "Gc's reading list and book notes.";
   return {
-    title: lang === "zh" ? "书单 — magicbowl" : "Books — magicbowl",
-    description: lang === "zh" ? "Gc 的阅读清单和读书笔记。" : "Gc's reading list and book notes.",
+    title,
+    description,
+    openGraph: { title, description },
   };
 }
 

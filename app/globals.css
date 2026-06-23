@@ -509,7 +509,7 @@ button {
   align-items: center;
 }
 
-.mini-book-cover img {
+.mini-book-cover-img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -519,7 +519,7 @@ button {
   transition: transform var(--duration-slow) ease;
 }
 
-.mini-books-card:hover .mini-book-cover img {
+.mini-books-card:hover .mini-book-cover-img {
   transform: scale(1.03);
 }
 
@@ -623,7 +623,7 @@ button {
   transition: background var(--duration-normal) ease;
 }
 
-.content-zone-cover img {
+.content-zone-cover-img {
   display: block;
   width: 100%;
   height: auto;
@@ -635,7 +635,7 @@ button {
     box-shadow var(--duration-slow) ease;
 }
 
-.content-zone:hover .content-zone-cover img {
+.content-zone:hover .content-zone-cover-img {
   box-shadow: 0 2px 8px var(--overlay-hover);
   animation: breathe 2s ease-in-out infinite;
   filter: brightness(1.03);
@@ -723,8 +723,7 @@ button {
   overflow: hidden;
 }
 
-.book-card-cover img {
-  display: block;
+.book-card-cover-img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -735,7 +734,7 @@ button {
   transition: transform var(--duration-slow) ease;
 }
 
-.book-card:hover .book-card-cover img {
+.book-card:hover .book-card-cover-img {
   transform: scale(1.03);
 }
 
@@ -973,7 +972,7 @@ button {
   background: var(--surface-alt);
 }
 
-.project-card-cover img {
+.project-card-cover-img {
   display: block;
   width: 100%;
   height: auto;
@@ -982,7 +981,7 @@ button {
   transition: transform var(--duration-slow) ease;
 }
 
-.project-card:hover .project-card-cover img {
+.project-card:hover .project-card-cover-img {
   transform: scale(1.03);
 }
 
@@ -1051,7 +1050,7 @@ button {
   background: var(--surface-alt);
 }
 
-.hobby-card-cover img {
+.hobby-card-cover-img {
   display: block;
   width: 100%;
   height: auto;
@@ -1060,7 +1059,7 @@ button {
   transition: transform var(--duration-slow) ease;
 }
 
-.hobby-card:hover .hobby-card-cover img {
+.hobby-card:hover .hobby-card-cover-img {
   transform: scale(1.03);
 }
 
@@ -1299,8 +1298,9 @@ button {
   padding: 0;
 }
 
-.blog-detail-figure img {
+.blog-detail-figure-img {
   width: 100%;
+  height: auto;
   border-radius: var(--radius-lg);
   object-fit: cover;
 }

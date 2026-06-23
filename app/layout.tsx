@@ -31,8 +31,23 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "magicbowl",
+  metadataBase: new URL("https://magicbowl.vercel.app"),
+  title: {
+    default: "magicbowl",
+    template: "%s — magicbowl",
+  },
   description: "Gc's personal homepage and digital garden.",
+  openGraph: {
+    siteName: "magicbowl",
+    type: "website",
+    title: "magicbowl",
+    description: "Gc's personal homepage and digital garden.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "magicbowl",
+    description: "Gc's personal homepage and digital garden.",
+  },
   icons: {
     icon: [
       { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },

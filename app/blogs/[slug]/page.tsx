@@ -20,10 +20,11 @@ export async function generateMetadata({ params }: Props) {
   const cookieStore = await cookies();
   const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
   const title = lang === "zh" ? post.titleCn : post.title;
-  const desc = lang === "zh" ? post.excerptCn : post.excerpt;
+  const description = lang === "zh" ? post.excerptCn : post.excerpt;
   return {
-    title: `${title} — magicbowl`,
-    description: desc,
+    title,
+    description,
+    openGraph: { title, description },
   };
 }
 
