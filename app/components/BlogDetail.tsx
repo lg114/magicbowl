@@ -34,6 +34,10 @@ export function BlogDetail({ post }: BlogDetailProps) {
             <blockquote key={i}>
               <p>{block.text}</p>
             </blockquote>
+          ) : block.type === "image" ? (
+            <figure key={i} className="blog-detail-figure">
+              <img src={block.text} alt={block.alt || ""} />
+            </figure>
           ) : (
             <p key={i}>{block.text}</p>
           )
