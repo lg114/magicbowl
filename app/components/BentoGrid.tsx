@@ -8,6 +8,8 @@ import {
   PlaceholderZone,
   type PlaceholderZoneVariant,
 } from "./PlaceholderZone";
+import { books } from "../lib/books";
+import { hobbies } from "../lib/hobbies";
 import { posts } from "../lib/posts";
 
 const zones: {
@@ -31,48 +33,6 @@ const zones: {
     link: "https://github.com/lg114/RagMate",
     tooltip: "View on GitHub",
     tooltipCn: "去 GitHub 看看",
-  },
-];
-
-const books = [
-  {
-    title: "Siddhartha",
-    titleCn: "悉达多",
-    image: "/covers/s29396368.jpg",
-    slug: "siddhartha",
-  },
-  {
-    title: "Life and Death",
-    titleCn: "生死疲劳",
-    image: "/covers/s35289336.jpg",
-    slug: "life-and-death",
-  },
-];
-
-const hobbies = [
-  {
-    title: "Gym",
-    titleCn: "健身",
-    description:
-      "Training for less than a year. I love back workouts.",
-    descriptionCn:
-      "健身不到一年，喜欢做背部训练。",
-  },
-  {
-    title: "Snooker",
-    titleCn: "斯诺克",
-    description:
-      "I enjoy the feeling when the ball drops into the pocket.",
-    descriptionCn:
-      "我享受球进袋时的感觉，这让我十分满足。",
-  },
-  {
-    title: "Reading",
-    titleCn: "阅读",
-    description:
-      "Philosophy, history, and self-improvement.",
-    descriptionCn:
-      "主要读哲学、历史和自我提升类书籍。",
   },
 ];
 
@@ -110,7 +70,7 @@ export function BentoGrid() {
                     </span>
                   </div>
                   <div className="mini-book-cover">
-                    <Image src={book.image} alt={book.title} width={200} height={300} sizes="120px" className="mini-book-cover-img" />
+                    {book.image && <Image src={book.image} alt={book.title} width={200} height={300} sizes="120px" className="mini-book-cover-img" />}
                   </div>
                 </Link>
               ))}
