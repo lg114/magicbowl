@@ -1,19 +1,29 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useLang } from "./LanguageContext";
-import type { BlogEntry } from "../lib/posts";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import type { BlogPost } from "../lib/posts";
 
 type BlogDetailProps = {
-  post: BlogEntry;
+  post: BlogPost;
+  lang: "en" | "zh";
 };
 
-export function BlogDetail({ post }: BlogDetailProps) {
-  const { lang } = useLang();
+const mdxComponents = {
+  img: ({ src, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    if (!src || typeof src !== "string") return null;
+    return (
+      <Image src={src} alt={alt || ""} width={800} height={450} sizes="(max-width: 767px) 100vw, 700px" className="blog-detail-figure-img" />
+    );
+  },
+  blockquote: ({ children, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote>{children}</blockquote>
+  ),
+};
+
+export function BlogDetail({ post, lang }: BlogDetailProps) {
   const title = lang === "zh" ? post.titleCn : post.title;
   const date = lang === "zh" ? post.dateCn : post.date;
-  const paragraphs = lang === "zh" ? post.contentCn : post.content;
+  const content = lang === "zh" ? post.contentZh : post.contentEn;
 
   return (
     <article className="blog-detail">
@@ -30,19 +40,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
       </header>
 
       <div className="blog-detail-body">
-        {paragraphs.map((block, i) =>
-          block.type === "blockquote" ? (
-            <blockquote key={i}>
-              <p>{block.text}</p>
-            </blockquote>
-          ) : block.type === "image" ? (
-            <figure key={i} className="blog-detail-figure">
-              <Image src={block.text} alt={block.alt || ""} width={800} height={450} sizes="(max-width: 767px) 100vw, 700px" className="blog-detail-figure-img" />
-            </figure>
-          ) : (
-            <p key={i}>{block.text}</p>
-          )
-        )}
+        <MDXRemote source={content} components={mdxComponents} />
       </div>
     </article>
   );

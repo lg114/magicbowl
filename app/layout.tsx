@@ -25,6 +25,12 @@ const merriweather = localFont({
   variable: "--font-merriweather",
 });
 
+const smileySans = localFont({
+  src: [{ path: "../fonts/SmileySans-Oblique.otf.woff2", weight: "400", style: "normal" }],
+  display: "swap",
+  variable: "--font-smiley",
+});
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -70,7 +76,7 @@ export default async function RootLayout({
     cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
 
   return (
-    <html lang={lang} className={`${montserrat.variable} ${merriweather.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${montserrat.variable} ${merriweather.variable} ${smileySans.variable}`} suppressHydrationWarning>
       <body>
         <Providers initialLang={lang}>
           <RouteChangeAnimator>{children}</RouteChangeAnimator>

@@ -3,7 +3,7 @@ import { BlogPost } from "../components/BlogPost";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
-import { posts } from "../lib/posts";
+import { getAllPosts } from "../lib/posts";
 
 export async function generateMetadata() {
   const cookieStore = await cookies();
@@ -18,6 +18,7 @@ export async function generateMetadata() {
 }
 
 export default function BlogsPage() {
+  const posts = getAllPosts();
   return (
     <main className="page-shell">
       <div className="canvas">

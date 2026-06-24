@@ -10,7 +10,7 @@ import {
 } from "./PlaceholderZone";
 import { books } from "../lib/books";
 import { hobbies } from "../lib/hobbies";
-import { posts } from "../lib/posts";
+import type { BlogPostMeta } from "../lib/posts";
 
 const zones: {
   variant: PlaceholderZoneVariant;
@@ -36,7 +36,7 @@ const zones: {
   },
 ];
 
-export function BentoGrid() {
+export function BentoGrid({ posts }: { posts: BlogPostMeta[] }) {
   const { lang } = useLang();
 
   const items = [

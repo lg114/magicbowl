@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLang } from "./LanguageContext";
 
 export function IntroCard() {
@@ -10,10 +11,13 @@ export function IntroCard() {
       <section className="intro-card" aria-label="Introduction">
         <p>
           你好，我是 <strong className="intro-keyword">Gc</strong> 👋
+        </p>
+
+        <p>
           欢迎来到我的{" "}
-          <span className="intro-link intro-link--gold">
+          <Link href="/blogs/magicbowl-philosophy" className="intro-link intro-link--gold">
             <strong className="intro-keyword">magic bowl</strong>
-          </span>{" "}
+          </Link>{" "}
           🔮！
         </p>
 
@@ -61,10 +65,13 @@ export function IntroCard() {
     <section className="intro-card" aria-label="Introduction">
       <p>
         Hey there, I&apos;m <strong className="intro-keyword">Gc</strong> 👋
+      </p>
+
+      <p>
         Welcome to my{" "}
-        <span className="intro-link intro-link--gold">
+        <Link href="/blogs/magicbowl-philosophy" className="intro-link intro-link--gold">
           <strong className="intro-keyword">magic bowl</strong>
-        </span>{" "}
+        </Link>{" "}
         🔮!
       </p>
 

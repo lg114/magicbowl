@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { posts } from "./lib/posts";
+import { getAllPosts } from "./lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://magicbowl.vercel.app";
@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/project`, lastModified: new Date(), priority: 0.7 },
   ];
 
-  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+  const blogRoutes: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
     url: `${base}/blogs/${post.slug}`,
     lastModified: new Date(),
     priority: 0.6,

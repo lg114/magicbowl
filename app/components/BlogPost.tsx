@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useLang } from "./LanguageContext";
-import type { BlogEntry } from "../lib/posts";
+import type { BlogPostMeta } from "../lib/posts";
 
-type BlogPostProps = {
-  post: BlogEntry;
+type BlogPostCardProps = {
+  post: BlogPostMeta;
 };
 
-export function BlogPost({ post }: BlogPostProps) {
+export function BlogPost({ post }: BlogPostCardProps) {
   const { lang } = useLang();
   const title = lang === "zh" ? post.titleCn : post.title;
   const sub = lang === "zh" ? (post.subCn || post.sub) : post.sub;
