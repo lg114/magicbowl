@@ -33,14 +33,11 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPost(slug);
   if (!post) notFound();
 
-  const cookieStore = await cookies();
-  const lang = cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
-
   return (
     <main className="page-shell">
       <div className="canvas">
         <Header activeItem="Blogs" />
-        <BlogDetail post={post} lang={lang} />
+        <BlogDetail slug={slug} />
         <Footer />
       </div>
     </main>
