@@ -2,7 +2,7 @@
 
 `magicbowl` is Gc's personal homepage and digital garden. The site should feel minimal, quiet, and personal: a clean white page with deliberate typography, compact navigation, and flexible content zones for projects, blogs, books, and hobbies.
 
-For the Chinese design guide, see [README_ZH.md](C:/Users/19097/Documents/GitHub/magicbowl/README_ZH.md).
+For the Chinese design guide, see [README_ZH.md](README_ZH.md).
 
 ## Design Principles
 
@@ -15,28 +15,31 @@ For the Chinese design guide, see [README_ZH.md](C:/Users/19097/Documents/GitHub
 
 ## Typography
 
-Two font families, both self-hosted via `next/font/local`:
+Three font families, all self-hosted via `next/font/local`:
 
-- **Montserrat** (`--font-montserrat`): Primary UI font for body text, navigation, labels, and blog detail titles. Weights: 400, 500, 600, 700.
-- **Merriweather** (`--font-merriweather`): Serif display font for intro card, page titles, card titles, book titles, and blog body text. Weights: 300, 700.
+- **SmileySans** (`--font-smiley`): Primary font for all content. A playful, rounded Chinese typeface with natural visual weight. Weight: 400.
+- **Montserrat** (`--font-montserrat`): Latin UI font, used as fallback. Weights: 400, 500, 600, 700.
+- **Merriweather** (`--font-merriweather`): Serif display font, used as fallback for headings and blog body. Weights: 300, 700.
 
 Fallback stacks:
 
-- Montserrat: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
-- Merriweather: `Georgia, "Times New Roman", serif`
+- Body: `SmileySans, Montserrat, system-ui, sans-serif`
+- Headings / reading: `SmileySans, Merriweather, Georgia, "Times New Roman", serif`
 
-Font sizes are fluid:
+### Blog Detail Typography (Chinese mode)
 
-- Intro card / page titles: `clamp(28px, 2.75vw, 34px)` on desktop, `15px` on mobile
-- Blog detail title: `clamp(28px, 3vw, 40px)`
-- Card titles: `18px`
-- Body text: `16px`
-- Labels / meta: `12px` uppercase, `0.5px` letter-spacing, weight 600
-- Blog body paragraphs: `16px`, weight 300, line-height 1.9
+| Element | Color | Weight | Notes |
+|---|---|---|---|
+| Title h1 | `#333333` | 500 | `letter-spacing: 0.02em` |
+| Heading h2 | `#383838` | 500 | `margin-top: 2em` |
+| Heading h3 | `#3a3a3a` | 500 | |
+| Body p | `#404040` | 400 | `line-height: 2` |
+| Blockquote | `#555555` | 400 | `font-style: normal`, `border-left: #999` |
+| Date | `#888888` | 400 | |
 
 ## Color Tokens
 
-CSS variables live in [app/globals.css](C:/Users/19097/Documents/GitHub/magicbowl/app/globals.css).
+CSS variables live in [app/globals.css](app/globals.css).
 
 ### Base
 
@@ -65,7 +68,7 @@ CSS variables live in [app/globals.css](C:/Users/19097/Documents/GitHub/magicbow
 
 | Token | Value | Usage |
 |---|---|---|
-| `--accent` / `--accent-gold` | `#b8a88a` | Primary accent |
+| `--accent` / `--accent-gold` | `#b8a88a` | Primary accent, book card left border |
 | `--accent-green` | `#6b8f71` | Intro link hover (gym) |
 | `--accent-blue` | `#5b7fa5` | Intro link hover (AI) |
 | `--accent-red` | `#a05a5a` | Intro link hover |
@@ -82,56 +85,36 @@ CSS variables live in [app/globals.css](C:/Users/19097/Documents/GitHub/magicbow
 | `--status-finished` | `#87bcde` | Book status badge |
 | `--status-wishlist` | `#d4a76a` | Book status badge |
 
-### Spacing & Shadow
-
-| Token | Value |
-|---|---|
-| `--canvas-max` | `1600px` |
-| `--canvas-pad` | `32px` |
-| `--gap-x` | `24px` |
-| `--gap-y` | `24px` |
-| `--shadow` | `0 4px 16px rgba(0, 0, 0, 0.12)` |
-
 ## Layout
 
 The page uses a centered white canvas with a maximum width of `1600px`.
 
-Desktop layout:
+### Homepage Bento Grid
 
-- Sticky header with floating pill navigation at the top.
-- Main content uses a Bento-style CSS grid (5 columns).
-- Row 1: Intro card (cols 1–3) + project card and mini-books (cols 4–5).
-- Row 2: Mini-hobbies row (3 cards, full width).
-- Row 3: Mini-blogs row (2 cards, full width).
+- Top row: IntroCard (3fr) + Project zone (2fr) side by side.
+- Below: `.bento-cards` uses a 12-column CSS Grid.
+- Cards are interleaved: Book → Book → Hobby → Blog → Book → Hobby → Blog → Book → Hobby → Blog.
+- First row: 4 items (span 3 each). Second row: 3 items (span 4 each). Third row: 3 items.
+- Books use a vertical centered layout with cover, title, author, and status badge.
+- Hobbies and blogs use text-based card layouts.
 
-Responsive behavior:
+### Responsive
 
-- Above `1024px`: full 5-column Bento layout.
-- `768px` to `1024px`: simplified two-column layout.
-- Below `768px`: single-column layout, canvas capped at `390px`, padding reduced to `12px`.
-- Below `374px`: floating nav goes full-width.
+- Above `1024px`: 12-column bento grid.
+- `768px` to `1024px`: 6-column grid, items span 3.
+- Below `767px`: 2-column grid, wide items span 2.
 
 ## Navigation
 
 The navigation is a floating pill / segmented control.
 
-Items:
-
-- `Home`
-- `Hobbies`
-- `Project`
-- `Blogs`
-- `Books`
-- GitHub icon (external link)
-- X icon (external link)
-- Language toggle button (`中` / `En`)
+Items: `Home`, `Hobbies`, `Project`, `Blogs`, `Books`, GitHub icon, X icon, language toggle (`中` / `En`).
 
 Rules:
 
-- The current page is highlighted with `font-weight: 600` and black text.
+- Current page highlighted with `font-weight: 600` and black text.
 - Social icons open in new tabs with `rel="noreferrer"`.
-- The language toggle switches content inline via cookie-persisted context.
-- Hover, active, and focus-visible states should be subtle but clear.
+- Language toggle switches content inline via cookie-persisted React Context.
 
 ## Pages
 
@@ -141,31 +124,53 @@ Rules:
 | `/hobbies` | Hobbies page with 3 cards (gym, snooker, reading) |
 | `/project` | Projects page with project cards |
 | `/blogs` | Blog listing with blog post cards |
-| `/blogs/[slug]` | Individual blog detail view |
+| `/blogs/[slug]` | Individual blog detail view (MDX rendered) |
 | `/books` | Reading list with book cards |
 
-## Intro Area
+## Book Card Design
 
-The intro area is a clean text block, not a bordered card. Keywords are wrapped in colored hover-underlines.
+Book cards use a vertical centered layout with:
 
-Rules:
+- Header: "Books" label + status badge + arrow with tooltip.
+- Body: cover image (90×130, `object-fit: contain`) + title + author.
+- Left border: 3px `--accent-gold`.
+- Hover: cover lifts and scales, arrow translates.
 
-- No black outer border.
-- Keep the text large on desktop.
-- Keep the text readable and compact on mobile.
-- Do not add CTA buttons inside the intro.
-- Do not wrap it in a decorative card.
+## Blog System
 
-## Card Patterns
+Blog content is stored as MDX files in `content/blogs/`:
 
-All cards (book, project, blog, hobby, placeholder) share a consistent structural pattern:
+```
+content/blogs/
+  {slug}/
+    en.mdx    ← English content
+    zh.mdx    ← Chinese content
+```
 
-- Header row: uppercase label + optional sub-label + optional diagonal arrow.
-- Body: optional cover image + title + description/note.
-- Styling: `12px` border-radius, `--surface` background, hover to `--surface-hover`.
-- Hover: cover images scale to `1.03`, arrows translate `2px, -2px`.
+Each MDX file has YAML frontmatter:
 
-Hobby cards on the hobbies page have no arrow. Homepage mini-hobby cards have an arrow.
+```yaml
+---
+title: "Post Title"
+sub: "Category"
+excerpt: "Short description..."
+date: "Month Day, Year"
+---
+```
+
+The body supports full Markdown: headings, paragraphs, bold, italic, lists, links, images, blockquotes.
+
+### Data Layer
+
+- `app/lib/posts.ts`: Reads MDX files from filesystem using `fs` + `gray-matter`.
+- `getAllPosts()`: Returns all post metadata (for listing pages).
+- `getPost(slug)`: Returns post metadata + raw MDX content for both languages.
+
+### Rendering
+
+- `app/components/BlogDetail.tsx`: Server component that compiles both language versions using `compileMDX` from `next-mdx-remote/rsc`.
+- `app/components/BlogDetailClient.tsx`: Client component that switches between compiled content using `useLang()`.
+- Custom MDX components: images use `next/image`, blockquotes are styled.
 
 ## Tech Stack
 
@@ -173,59 +178,56 @@ Hobby cards on the hobbies page have no arrow. Homepage mini-hobby cards have an
 - React 19
 - TypeScript (strict mode)
 - Plain CSS in `app/globals.css`
-- Self-hosted `.woff2` fonts via `next/font/local`
+- Self-hosted `.woff2` fonts via `next/font/local` (SmileySans, Montserrat, Merriweather)
 - `sharp` for image optimization
-
-Useful commands:
-
-```bash
-npm run dev
-npm run build
-```
-
-Open the local site at:
-
-```text
-http://127.0.0.1:3000
-```
+- `next-mdx-remote` for MDX rendering
+- `gray-matter` for frontmatter parsing
 
 ## File Structure
 
-Key files:
+```
+magicbowl/
+  app/
+    layout.tsx              Root layout, fonts, metadata
+    page.tsx                Homepage
+    globals.css             Design tokens, styles, responsive
+    components/
+      BentoGrid.tsx         Homepage grid composition
+      BlogDetail.tsx        Server: compile MDX for both languages
+      BlogDetailClient.tsx  Client: switch content by language
+      BookCard.tsx          Book card (vertical layout)
+      BlogPost.tsx          Blog listing card
+      ...
+    lib/
+      posts.ts              Blog data (reads MDX from filesystem)
+      books.ts              Shared book data
+      hobbies.ts            Shared hobby data
+      projects.ts           Shared project data
+    blogs/[slug]/page.tsx   Blog detail page
+    books/page.tsx          Books page
+    hobbies/page.tsx        Hobbies page
+    project/page.tsx        Projects page
+    robots.ts               SEO robots.txt
+    sitemap.ts              SEO sitemap.xml
+  content/
+    blogs/
+      {slug}/
+        en.mdx              English blog content
+        zh.mdx              Chinese blog content
+  fonts/
+    SmileySans-Oblique.otf.woff2
+    montserrat-*.woff2
+    merriweather-*.woff2
+  public/
+    covers/                 Book cover images
+    projects/               Project screenshots
+```
 
-- [app/page.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/page.tsx): homepage composition.
-- [app/globals.css](C:/Users/19097/Documents/GitHub/magicbowl/app/globals.css): design tokens, layout, responsive rules.
-- [app/layout.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/layout.tsx): root metadata, font loading, global CSS import.
-- [app/components/Header.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/Header.tsx): sticky header shell.
-- [app/components/FloatingNav.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/FloatingNav.tsx): pill navigation, social icons, and language toggle.
-- [app/components/BentoGrid.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/BentoGrid.tsx): homepage grid composition (intro, project, books, hobbies, blogs).
-- [app/components/IntroCard.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/IntroCard.tsx): bilingual intro copy block with colored keyword underlines.
-- [app/components/PlaceholderZone.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/PlaceholderZone.tsx): reusable content zone shell.
-- [app/components/BookCard.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/BookCard.tsx): book card with cover, title, author, status badge.
-- [app/components/BookList.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/BookList.tsx): grid wrapper for BookCards.
-- [app/components/ProjectCard.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/ProjectCard.tsx): project card with cover, title, note, GitHub link.
-- [app/components/HobbyCard.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/HobbyCard.tsx): hobby card with label, title, description, optional cover.
-- [app/components/HobbyList.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/HobbyList.tsx): grid wrapper for HobbyCards.
-- [app/components/BlogPost.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/BlogPost.tsx): blog listing card.
-- [app/components/BlogDetail.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/BlogDetail.tsx): full blog post view.
-- [app/components/PageTitle.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/PageTitle.tsx): bilingual page header.
-- [app/components/Footer.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/Footer.tsx): site footer.
-- [app/components/LanguageContext.tsx](C:/Users/19097/Documents/GitHub/magicbowl/app/components/LanguageContext.tsx): React Context + cookie-based language toggle.
-- [app/lib/posts.ts](C:/Users/19097/Documents/GitHub/magicbowl/app/lib/posts.ts): blog post data.
+## Commands
 
-## Content Model
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+```
 
-- Blog posts are hardcoded in `app/lib/posts.ts` as a typed array (`BlogEntry`).
-- Each entry has `slug`, bilingual `title`/`excerpt`/`date`/`content`, and content blocks supporting `p` and `blockquote` types.
-- Books, projects, and hobbies are defined inline in their respective page files.
-
-## Future Design Notes
-
-Before expanding the site, consider:
-
-- Whether to add a dark mode variant.
-- Whether to support dynamic content via a CMS.
-- Whether to add an RSS feed for the blog.
-- Whether the hobbies page should include cover images.
-
-Preserve the core feeling: minimal, personal, quiet, and flexible.
+Open at `http://127.0.0.1:3000`.
