@@ -2,6 +2,19 @@ import { type Book } from "../components/BookCard";
 
 export const books: Book[] = [
   {
+    title: "Me and the Temple of Earth",
+    titleCn: "我与地坛",
+    slug: "me-and-the-temple-of-earth",
+    author: "Shi Tiesheng",
+    authorCn: "史铁生",
+    status: "Reading",
+    image: "/covers/s6313029.jpg",
+    note: "A contemplative essay about life, disability, and finding meaning in an ancient Beijing park.",
+    noteCn: "关于生命、残疾与在北京古老公园中寻找意义的沉思散文。",
+    link: "https://www.goodreads.com/book/show/18048869",
+    linkCn: "https://book.douban.com/subject/6079389/",
+  },
+  {
     title: "Siddhartha",
     titleCn: "悉达多",
     slug: "siddhartha",
