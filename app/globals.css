@@ -112,7 +112,7 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--text);
-  font-family: var(--font-smiley), var(--font-montserrat), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: var(--font-smiley), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   font-size: var(--text-lg);
   font-weight: 400;
@@ -375,7 +375,7 @@ button {
 .intro-card p {
   max-width: 700px;
   margin: 0 0 36px;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-display);
   font-weight: var(--weight-regular);
   line-height: var(--leading-normal);
@@ -619,7 +619,7 @@ button {
 
 .bk-card-bento-title {
   margin: var(--space-2) 0 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-base);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
@@ -654,7 +654,7 @@ button {
 
 .mini-hobby-title {
   margin: var(--space-3) 0 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
@@ -692,7 +692,7 @@ button {
 
 .mini-blog-title {
   margin: var(--space-3) 0 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
@@ -763,7 +763,7 @@ button {
 
 .page-title-text {
   margin: 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-display);
   font-weight: var(--weight-light);
   line-height: var(--leading-normal);
@@ -928,7 +928,7 @@ button {
 
 .project-card-title {
   margin: 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
@@ -1006,7 +1006,7 @@ button {
 
 .hobby-card-title {
   margin: 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
@@ -1109,7 +1109,7 @@ button {
 
 .blog-card-title {
   margin: 0 0 10px;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   line-height: var(--leading-snug);
@@ -1175,7 +1175,7 @@ button {
 
 .blog-detail-title {
   margin: 0;
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-display-lg);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
@@ -1194,7 +1194,7 @@ button {
 
 .blog-detail-body p {
   margin: 0 0 var(--space-7);
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-lg);
   font-weight: var(--weight-light);
   line-height: var(--leading-body);
@@ -1209,7 +1209,7 @@ button {
   margin: var(--space-10) 0;
   padding: var(--space-6) 0 var(--space-6) var(--space-6);
   border-left: 3px solid var(--text-primary);
-  font-family: var(--font-smiley), var(--font-merriweather), Georgia, "Times New Roman", serif;
+  font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
   font-size: var(--text-xl);
   font-weight: var(--weight-light);
   font-style: italic;

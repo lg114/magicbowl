@@ -5,26 +5,6 @@ import "./globals.css";
 import { Providers } from "./components/Providers";
 import RouteChangeAnimator from "./components/RouteChangeAnimator";
 
-const montserrat = localFont({
-  src: [
-    { path: "../fonts/montserrat-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/montserrat-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/montserrat-600.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/montserrat-700.woff2", weight: "700", style: "normal" },
-  ],
-  display: "swap",
-  variable: "--font-montserrat",
-});
-
-const merriweather = localFont({
-  src: [
-    { path: "../fonts/merriweather-300.woff2", weight: "300", style: "normal" },
-    { path: "../fonts/merriweather-700.woff2", weight: "700", style: "normal" },
-  ],
-  display: "swap",
-  variable: "--font-merriweather",
-});
-
 const smileySans = localFont({
   src: [{ path: "../fonts/SmileySans-Oblique.otf.woff2", weight: "400", style: "normal" }],
   display: "swap",
@@ -56,12 +36,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon.ico", sizes: "48x48" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { url: "/favicon/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
     ],
   },
 };
@@ -76,7 +60,7 @@ export default async function RootLayout({
     cookieStore.get("lang")?.value === "zh" ? "zh" : "en";
 
   return (
-    <html lang={lang} className={`${montserrat.variable} ${merriweather.variable} ${smileySans.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={smileySans.variable} suppressHydrationWarning>
       <body>
         <Providers initialLang={lang}>
           <RouteChangeAnimator>{children}</RouteChangeAnimator>

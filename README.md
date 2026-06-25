@@ -221,6 +221,7 @@ magicbowl/
   public/
     covers/                 Book cover images
     projects/               Project screenshots
+    favicon/                Favicon files (ico, png, apple-touch-icon)
 ```
 
 ## Commands
