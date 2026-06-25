@@ -1,4 +1,5 @@
 import { BookList } from "../components/BookList";
+import { DocumentTitle } from "../components/DocumentTitle";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
@@ -21,6 +22,7 @@ export default function BooksPage() {
   return (
     <main className="page-shell">
       <div className="canvas">
+        <DocumentTitle title="Books" titleCn="书单" />
         <Header activeItem="Books" />
 
         <PageTitle

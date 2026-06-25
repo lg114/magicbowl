@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { useLang } from "./LanguageContext";
+import { DocumentTitle } from "./DocumentTitle";
 
 type BlogDetailClientProps = {
   meta: {
@@ -23,6 +24,7 @@ export function BlogDetailClient({ meta, contentEn, contentZh }: BlogDetailClien
 
   return (
     <article className="blog-detail">
+      <DocumentTitle title={meta.title} titleCn={meta.titleCn} />
       <Link href="/blogs" className="blog-detail-back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M19 12H5M12 19l-7-7 7-7" />

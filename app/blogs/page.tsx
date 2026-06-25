@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { BlogPost } from "../components/BlogPost";
+import { DocumentTitle } from "../components/DocumentTitle";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
@@ -22,6 +23,7 @@ export default function BlogsPage() {
   return (
     <main className="page-shell">
       <div className="canvas">
+        <DocumentTitle title="Blogs" titleCn="博客" />
         <Header activeItem="Blogs" />
 
         <PageTitle

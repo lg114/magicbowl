@@ -1,4 +1,5 @@
 import { HobbyList } from "../components/HobbyList";
+import { DocumentTitle } from "../components/DocumentTitle";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
@@ -21,6 +22,7 @@ export default function HobbiesPage() {
   return (
     <main className="page-shell">
       <div className="canvas">
+        <DocumentTitle title="Hobbies" titleCn="爱好" />
         <Header activeItem="Hobbies" />
 
         <PageTitle

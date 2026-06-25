@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { BentoGrid } from "./components/BentoGrid";
+import { DocumentTitle } from "./components/DocumentTitle";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { getAllPosts } from "./lib/posts";
@@ -24,6 +25,7 @@ export default function Home() {
   return (
     <main className="page-shell">
       <div className="canvas">
+        <DocumentTitle title="Home" titleCn="首页" />
         <Header />
         <BentoGrid posts={posts} />
         <Footer />

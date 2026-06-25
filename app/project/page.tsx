@@ -1,3 +1,4 @@
+import { DocumentTitle } from "../components/DocumentTitle";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PageTitle } from "../components/PageTitle";
@@ -21,6 +22,7 @@ export default function ProjectPage() {
   return (
     <main className="page-shell">
       <div className="canvas">
+        <DocumentTitle title="Project" titleCn="项目" />
         <Header activeItem="Project" />
 
         <PageTitle
