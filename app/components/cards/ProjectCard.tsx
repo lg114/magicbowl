@@ -1,19 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useLang } from "./LanguageContext";
-
-export type Project = {
-  title: string;
-  titleCn?: string;
-  sub?: string;
-  subCn?: string;
-  image?: string;
-  note?: string;
-  noteCn?: string;
-  link?: string;
-  linkCn?: string;
-};
+import { useLang } from "../context/LanguageContext";
+import type { Project } from "../../types/project";
 
 type ProjectCardProps = {
   project: Project;

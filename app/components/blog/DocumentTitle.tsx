@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useLang } from "./LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export function DocumentTitle({
   title,

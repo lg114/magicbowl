@@ -1,6 +1,6 @@
 "use client";
 
-import { useLang } from "./LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 type PageTitleProps = {
   title: string;

@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
+import { Footer } from "../../components/layout/Footer";
+import { Header } from "../../components/layout/Header";
 import { getAllPosts, getPost } from "../../lib/posts";
-import { BlogDetail } from "../../components/BlogDetail";
+import { BlogDetail } from "../../components/blog/BlogDetail";
 
 type Props = {
   params: Promise<{ slug: string }>;

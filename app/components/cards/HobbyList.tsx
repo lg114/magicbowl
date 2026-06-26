@@ -1,4 +1,5 @@
-import { HobbyCard, type Hobby } from "./HobbyCard";
+import { HobbyCard } from "./HobbyCard";
+import type { Hobby } from "../../types/hobby";
 
 type HobbyListProps = {
   hobbies: Hobby[];

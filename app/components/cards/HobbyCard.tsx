@@ -1,15 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useLang } from "./LanguageContext";
-
-export type Hobby = {
-  title: string;
-  titleCn?: string;
-  description: string;
-  descriptionCn?: string;
-  image?: string;
-};
+import { useLang } from "../context/LanguageContext";
+import type { Hobby } from "../../types/hobby";
 
 type HobbyCardProps = {
   hobby: Hobby;

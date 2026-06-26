@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { useLang } from "./LanguageContext";
+import { useLang } from "../context/LanguageContext";
 import { DocumentTitle } from "./DocumentTitle";
 
 type BlogDetailClientProps = {

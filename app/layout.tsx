@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Providers } from "./components/Providers";
-import RouteChangeAnimator from "./components/RouteChangeAnimator";
+import { Providers } from "./components/context/Providers";
+import RouteChangeAnimator from "./components/context/RouteChangeAnimator";
 
 const smileySans = localFont({
   src: [{ path: "../fonts/SmileySans-Oblique.otf.woff2", weight: "400", style: "normal" }],

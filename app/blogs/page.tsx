@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
-import { BlogPost } from "../components/BlogPost";
-import { DocumentTitle } from "../components/DocumentTitle";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { PageTitle } from "../components/PageTitle";
+import { BlogPost } from "../components/cards/BlogPost";
+import { DocumentTitle } from "../components/blog/DocumentTitle";
+import { Footer } from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import { PageTitle } from "../components/ui/PageTitle";
 import { getAllPosts } from "../lib/posts";
 
 export async function generateMetadata() {

@@ -61,8 +61,25 @@ Rendering:
 - `app/lib/hobbies.ts` — hobby data (exported `hobbies: Hobby[]`)
 - `app/lib/projects.ts` — project data (exported `projects: Project[]`)
 - `app/lib/posts.ts` — blog data (filesystem-based, see above)
+- `app/lib/bento-layout.ts` — BentoGrid layout config and interleaving logic
 
 These are imported by both page files and `BentoGrid.tsx`.
+
+### Type System
+Types are defined in `app/types/` and imported by both `lib/` and `components/`:
+- `app/types/book.ts` — `Book`, `BookStatus`
+- `app/types/hobby.ts` — `Hobby`
+- `app/types/project.ts` — `Project`
+- `app/types/index.ts` — unified exports
+
+### Component Organization
+Components are grouped by responsibility in `app/components/`:
+- `layout/` — Header, Footer, FloatingNav
+- `cards/` — BookCard, BookList, HobbyCard, HobbyList, ProjectCard, BlogPost
+- `blog/` — BlogDetail, BlogDetailClient, DocumentTitle
+- `bento/` — BentoGrid, IntroCard, PlaceholderZone
+- `ui/` — PageTitle, IconArrow
+- `context/` — LanguageContext, Providers, RouteChangeAnimator
 
 ### Fonts
 Three font families, all self-hosted in `fonts/`:

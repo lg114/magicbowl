@@ -191,18 +191,24 @@ magicbowl/
     layout.tsx              Root layout, fonts, metadata
     page.tsx                Homepage
     globals.css             Design tokens, styles, responsive
+    types/
+      book.ts               Book, BookStatus types
+      hobby.ts              Hobby type
+      project.ts            Project type
+      index.ts              Unified exports
     components/
-      BentoGrid.tsx         Homepage grid composition
-      BlogDetail.tsx        Server: compile MDX for both languages
-      BlogDetailClient.tsx  Client: switch content by language
-      BookCard.tsx          Book card (vertical layout)
-      BlogPost.tsx          Blog listing card
-      ...
+      layout/               Header, Footer, FloatingNav
+      cards/                BookCard, BookList, HobbyCard, HobbyList, ProjectCard, BlogPost
+      blog/                 BlogDetail, BlogDetailClient, DocumentTitle
+      bento/                BentoGrid, IntroCard, PlaceholderZone
+      ui/                   PageTitle, IconArrow
+      context/              LanguageContext, Providers, RouteChangeAnimator
     lib/
       posts.ts              Blog data (reads MDX from filesystem)
       books.ts              Shared book data
       hobbies.ts            Shared hobby data
       projects.ts           Shared project data
+      bento-layout.ts       BentoGrid layout config and interleaving logic
     blogs/[slug]/page.tsx   Blog detail page
     books/page.tsx          Books page
     hobbies/page.tsx        Hobbies page

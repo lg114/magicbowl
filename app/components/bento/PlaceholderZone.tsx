@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useLang } from "./LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 export type PlaceholderZoneVariant =
   | "side"

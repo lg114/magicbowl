@@ -1,8 +1,8 @@
-import { DocumentTitle } from "../components/DocumentTitle";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { PageTitle } from "../components/PageTitle";
-import { ProjectCard } from "../components/ProjectCard";
+import { DocumentTitle } from "../components/blog/DocumentTitle";
+import { Footer } from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import { PageTitle } from "../components/ui/PageTitle";
+import { ProjectCard } from "../components/cards/ProjectCard";
 import { projects } from "../lib/projects";
 
 export async function generateMetadata() {

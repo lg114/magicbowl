@@ -1,4 +1,4 @@
-import { type Book } from "../components/BookCard";
+import type { Book } from "../types/book";
 
 export const books: Book[] = [
   {

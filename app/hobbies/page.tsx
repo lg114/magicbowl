@@ -1,8 +1,8 @@
-import { HobbyList } from "../components/HobbyList";
-import { DocumentTitle } from "../components/DocumentTitle";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { PageTitle } from "../components/PageTitle";
+import { HobbyList } from "../components/cards/HobbyList";
+import { DocumentTitle } from "../components/blog/DocumentTitle";
+import { Footer } from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import { PageTitle } from "../components/ui/PageTitle";
 import { hobbies } from "../lib/hobbies";
 
 export async function generateMetadata() {

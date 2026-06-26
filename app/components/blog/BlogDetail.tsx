@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { getPost } from "../lib/posts";
+import { getPost } from "../../lib/posts";
 import { cookies } from "next/headers";
 import { BlogDetailClient } from "./BlogDetailClient";
 

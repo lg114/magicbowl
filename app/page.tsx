@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
-import { BentoGrid } from "./components/BentoGrid";
-import { DocumentTitle } from "./components/DocumentTitle";
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
+import { BentoGrid } from "./components/bento/BentoGrid";
+import { DocumentTitle } from "./components/blog/DocumentTitle";
+import { Footer } from "./components/layout/Footer";
+import { Header } from "./components/layout/Header";
 import { getAllPosts } from "./lib/posts";
 
 export async function generateMetadata() {

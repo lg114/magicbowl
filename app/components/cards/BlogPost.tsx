@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useLang } from "./LanguageContext";
-import type { BlogPostMeta } from "../lib/posts";
+import { useLang } from "../context/LanguageContext";
+import type { BlogPostMeta } from "../../lib/posts";
 
 type BlogPostCardProps = {
   post: BlogPostMeta;

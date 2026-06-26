@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useLang } from "./LanguageContext";
+import { useLang } from "../context/LanguageContext";
 
 const navItems = [
   { en: "Home", cn: "首页", href: "/" },

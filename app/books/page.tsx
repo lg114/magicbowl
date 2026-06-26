@@ -1,8 +1,8 @@
-import { BookList } from "../components/BookList";
-import { DocumentTitle } from "../components/DocumentTitle";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { PageTitle } from "../components/PageTitle";
+import { BookList } from "../components/cards/BookList";
+import { DocumentTitle } from "../components/blog/DocumentTitle";
+import { Footer } from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import { PageTitle } from "../components/ui/PageTitle";
 import { books } from "../lib/books";
 
 export async function generateMetadata() {
