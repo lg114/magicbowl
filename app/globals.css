@@ -611,9 +611,9 @@ button {
 
 .bk-card-bento-cover-img {
   display: block;
-  width: auto;
+  width: auto !important;
   max-width: 100%;
-  height: auto;
+  height: auto !important;
   object-fit: contain;
 }
 

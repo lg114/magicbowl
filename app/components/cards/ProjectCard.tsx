@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import { useLang } from "../context/LanguageContext";
 import type { Project } from "../../types/project";
@@ -8,7 +9,7 @@ type ProjectCardProps = {
   project: Project;
 };
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
   const { lang } = useLang();
   const href = lang === "zh" ? (project.linkCn || project.link) : project.link;
   const title = lang === "zh" && project.titleCn ? project.titleCn : project.title;
@@ -60,4 +61,4 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
     </article>
   );
-}
+});

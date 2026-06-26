@@ -74,7 +74,7 @@ export function PlaceholderZone({ variant, image, label, labelCn, sub, subCn, li
       </div>
       {image && (
         <div className="content-zone-cover">
-          <Image src={image} alt="" width={2034} height={1150} sizes="(max-width: 767px) 100vw, 600px" loading="eager" className="content-zone-cover-img" />
+          <Image src={image} alt="" width={2034} height={1150} sizes="(max-width: 767px) 100vw, 600px" className="content-zone-cover-img" />
         </div>
       )}
       {children}

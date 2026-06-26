@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLang } from "../context/LanguageContext";
@@ -16,7 +17,7 @@ const statusLabel: Record<BookStatus, { en: string; zh: string }> = {
   Wishlist: { en: "Wishlist", zh: "想读" },
 };
 
-export function BookCard({ book, href }: BookCardProps) {
+export const BookCard = memo(function BookCard({ book, href }: BookCardProps) {
   const { lang } = useLang();
   const linkHref = href ?? (lang === "zh" ? book.linkCn : book.link);
   const title = lang === "zh" && book.titleCn ? book.titleCn : book.title;
@@ -60,4 +61,4 @@ export function BookCard({ book, href }: BookCardProps) {
     );
   }
   return card;
-}
+});

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import { useLang } from "../context/LanguageContext";
 import { BookCard } from "../cards/BookCard";
@@ -13,7 +14,7 @@ import type { BlogPostMeta } from "../../lib/posts";
 
 export function BentoGrid({ posts }: { posts: BlogPostMeta[] }) {
   const { lang } = useLang();
-  const items = buildBentoItems(books, hobbies, posts);
+  const items = useMemo(() => buildBentoItems(books, hobbies, posts), [posts]);
 
   return (
     <div className="bento-grid">

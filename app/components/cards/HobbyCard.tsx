@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import { useLang } from "../context/LanguageContext";
 import type { Hobby } from "../../types/hobby";
@@ -8,7 +9,7 @@ type HobbyCardProps = {
   hobby: Hobby;
 };
 
-export function HobbyCard({ hobby }: HobbyCardProps) {
+export const HobbyCard = memo(function HobbyCard({ hobby }: HobbyCardProps) {
   const { lang } = useLang();
   const title = lang === "zh" && hobby.titleCn ? hobby.titleCn : hobby.title;
   const description =
@@ -34,4 +35,4 @@ export function HobbyCard({ hobby }: HobbyCardProps) {
       </div>
     </article>
   );
-}
+});

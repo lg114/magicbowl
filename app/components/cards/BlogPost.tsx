@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Link from "next/link";
 import { useLang } from "../context/LanguageContext";
 import type { BlogPostMeta } from "../../lib/posts";
@@ -8,7 +9,7 @@ type BlogPostCardProps = {
   post: BlogPostMeta;
 };
 
-export function BlogPost({ post }: BlogPostCardProps) {
+export const BlogPost = memo(function BlogPost({ post }: BlogPostCardProps) {
   const { lang } = useLang();
   const title = lang === "zh" ? post.titleCn : post.title;
   const sub = lang === "zh" ? (post.subCn || post.sub) : post.sub;
@@ -42,4 +43,4 @@ export function BlogPost({ post }: BlogPostCardProps) {
       </div>
     </Link>
   );
-}
+});
