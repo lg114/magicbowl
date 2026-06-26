@@ -44,7 +44,7 @@ export const BookCard = memo(function BookCard({ book, href }: BookCardProps) {
       <div className="bk-card-bento-body">
         {book.image && (
           <div className="bk-card-bento-cover">
-            <Image src={book.image} alt={title} width={90} height={130} sizes="90px" className="bk-card-bento-cover-img" />
+            <Image src={book.image} alt={title} fill sizes="90px" className="bk-card-bento-cover-img" />
           </div>
         )}
         <h3 className="bk-card-bento-title">{title}</h3>

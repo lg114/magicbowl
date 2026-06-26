@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 import matter from "gray-matter";
 
 export type BlogPostMeta = {
@@ -21,7 +22,7 @@ export type BlogPost = BlogPostMeta & {
 
 const BLOGS_DIR = path.join(process.cwd(), "content", "blogs");
 
-export function getAllPosts(): BlogPostMeta[] {
+export const getAllPosts = cache((): BlogPostMeta[] => {
   const slugs = fs.readdirSync(BLOGS_DIR).filter((dir) =>
     fs.statSync(path.join(BLOGS_DIR, dir)).isDirectory()
   );
@@ -55,9 +56,9 @@ export function getAllPosts(): BlogPostMeta[] {
       const dateB = new Date(b!.date);
       return dateB.getTime() - dateA.getTime();
     }) as BlogPostMeta[];
-}
+});
 
-export function getPost(slug: string): BlogPost | null {
+export const getPost = cache((slug: string): BlogPost | null => {
   const enPath = path.join(BLOGS_DIR, slug, "en.mdx");
   const zhPath = path.join(BLOGS_DIR, slug, "zh.mdx");
 
@@ -79,4 +80,4 @@ export function getPost(slug: string): BlogPost | null {
     contentEn: enFile.content,
     contentZh: zhFile.content,
   };
-}
+});

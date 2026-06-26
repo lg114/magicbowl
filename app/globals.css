@@ -598,6 +598,9 @@ button {
 }
 
 .bk-card-bento-cover {
+  position: relative;
+  width: 90px;
+  height: 130px;
   border-radius: 3px 5px 5px 3px;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.15);
   overflow: hidden;
@@ -610,10 +613,6 @@ button {
 }
 
 .bk-card-bento-cover-img {
-  display: block;
-  width: auto !important;
-  max-width: 100%;
-  height: auto !important;
   object-fit: contain;
 }
 
