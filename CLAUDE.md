@@ -141,7 +141,7 @@ date:    #888
 ## Conventions
 
 - No emoji as icons (use inline SVG)
-- Book images use `next/image` with explicit width/height
+- Book images use `next/image` with `fill` mode (container sized at 90×130)
 - All `<img>` migrated to `next/image`
 - Dependencies pinned with `^` (not `"latest"`)
 - SEO: `robots.ts`, `sitemap.ts`, openGraph/twitter metadata on all pages
