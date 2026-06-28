@@ -14,32 +14,18 @@ export const HobbyCard = memo(function HobbyCard({ hobby }: HobbyCardProps) {
   const title = lang === "zh" && hobby.titleCn ? hobby.titleCn : hobby.title;
   const description =
     lang === "zh" && hobby.descriptionCn ? hobby.descriptionCn : hobby.description;
+  const coverImage = hobby.images && hobby.images.length > 0 ? hobby.images[0] : hobby.image;
 
   return (
-    <article className="hobby-card">
-      <div className="hobby-card-header">
-        <span className="hobby-card-label">
-          {lang === "zh" ? "爱好" : "Hobby"}
-        </span>
-      </div>
-
-      {hobby.images && hobby.images.length > 0 ? (
-        <div className="hobby-card-gallery">
-          {hobby.images.map((src, i) => (
-            <div key={src} className="hobby-card-cover">
-              <Image src={src} alt={`${title} ${i + 1}`} width={800} height={600} sizes="(max-width: 767px) 100vw, 50vw" className="hobby-card-cover-img" />
-            </div>
-          ))}
+    <article className="hobby-bento-card">
+      {coverImage && (
+        <Image src={coverImage} alt={title} fill sizes="(max-width: 767px) 100vw, 50vw" className="hobby-bento-cover-img" />
+      )}
+      <div className="hobby-bento-overlay hobby-bento-overlay--bottom">
+        <div className="hobby-bento-info">
+          <h3 className="hobby-bento-title">{title}</h3>
+          <p className="hobby-bento-desc">{description}</p>
         </div>
-      ) : hobby.image ? (
-        <div className="hobby-card-cover">
-          <Image src={hobby.image} alt={`${title}`} width={800} height={600} sizes="(max-width: 767px) 100vw, 50vw" className="hobby-card-cover-img" />
-        </div>
-      ) : null}
-
-      <div className="hobby-card-info">
-        <h3 className="hobby-card-title">{title}</h3>
-        <p className="hobby-card-description">{description}</p>
       </div>
     </article>
   );

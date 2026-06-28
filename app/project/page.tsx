@@ -23,7 +23,7 @@ export default function ProjectPage() {
     <main className="page-shell">
       <div className="canvas">
         <DocumentTitle title="Project" titleCn="项目" />
-        <Header activeItem="Project" />
+        <Header />
 
         <PageTitle
           title="Project"

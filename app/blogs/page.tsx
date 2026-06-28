@@ -24,7 +24,7 @@ export default function BlogsPage() {
     <main className="page-shell">
       <div className="canvas">
         <DocumentTitle title="Blogs" titleCn="博客" />
-        <Header activeItem="Blogs" />
+        <Header />
 
         <PageTitle
           title="Blogs"

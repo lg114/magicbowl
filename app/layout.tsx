@@ -61,6 +61,13 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} className={smileySans.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body>
         <Providers initialLang={lang}>
           <RouteChangeAnimator>{children}</RouteChangeAnimator>

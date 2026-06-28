@@ -23,7 +23,7 @@ export default function BooksPage() {
     <main className="page-shell">
       <div className="canvas">
         <DocumentTitle title="Books" titleCn="书单" />
-        <Header activeItem="Books" />
+        <Header />
 
         <PageTitle
           title="Books"

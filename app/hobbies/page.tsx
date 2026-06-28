@@ -23,7 +23,7 @@ export default function HobbiesPage() {
     <main className="page-shell">
       <div className="canvas">
         <DocumentTitle title="Hobbies" titleCn="爱好" />
-        <Header activeItem="Hobbies" />
+        <Header />
 
         <PageTitle
           title="Hobbies"

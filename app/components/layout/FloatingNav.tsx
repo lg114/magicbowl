@@ -1,69 +1,88 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useLang } from "../context/LanguageContext";
 
 const navItems = [
-  { en: "Home", cn: "首页", href: "/" },
-  { en: "Hobbies", cn: "爱好", href: "/hobbies" },
-  { en: "Project", cn: "项目", href: "/project" },
-  { en: "Blogs", cn: "博客", href: "/blogs" },
-  { en: "Books", cn: "书单", href: "/books" },
+  { en: "Home", cn: "首页", href: "/", match: ["/"] },
+  { en: "Writing", cn: "写作", href: "/blogs", match: ["/blogs", "/books"] },
+  { en: "Bowl", cn: "碗里", href: "/hobbies", match: ["/hobbies", "/project"] },
 ];
 
-const socialIcons = [
-  {
-    label: "GitHub",
-    href: "https://github.com/lg114",
-    svg: (
-      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-      </svg>
-    ),
-  },
-  {
-    label: "X",
-    href: "https://x.com/gc20010801",
-    svg: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-];
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  );
+}
 
-type FloatingNavProps = {
-  activeItem?: string;
-};
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
 
-export function FloatingNav({ activeItem = "Home" }: FloatingNavProps) {
+export function FloatingNav() {
   const { lang, toggle } = useLang();
+  const pathname = usePathname();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const current = document.documentElement.getAttribute("data-theme");
+    setTheme(current === "dark" ? "dark" : "light");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    if (next === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
+  const isActive = (item: (typeof navItems)[number]) => {
+    if (item.match.length === 1 && item.match[0] === "/") {
+      return pathname === "/";
+    }
+    return item.match.some((p) => pathname.startsWith(p));
+  };
 
   return (
     <nav className="floating-nav" aria-label="Site sections">
       {navItems.map((item) => (
         <Link
-          className={
-            item.en === activeItem ? "nav-item is-active" : "nav-item"
-          }
+          className={isActive(item) ? "nav-item is-active" : "nav-item"}
           href={item.href}
           key={item.en}
         >
           {lang === "zh" ? item.cn : item.en}
         </Link>
       ))}
-      {socialIcons.map((icon) => (
-        <a
-          className="nav-icon"
-          href={icon.href}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={icon.label}
-          key={icon.label}
-        >
-          {icon.svg}
-        </a>
-      ))}
+      <button
+        className="theme-toggle"
+        type="button"
+        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        onClick={toggleTheme}
+      >
+        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      </button>
       <button
         className="language-toggle"
         type="button"

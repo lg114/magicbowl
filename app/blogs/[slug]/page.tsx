@@ -36,7 +36,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main className="page-shell">
       <div className="canvas">
-        <Header activeItem="Blogs" />
+        <Header />
         <BlogDetail slug={slug} />
         <Footer />
       </div>
