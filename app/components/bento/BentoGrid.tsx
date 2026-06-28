@@ -61,7 +61,7 @@ export function BentoGrid({ posts }: { posts: BlogPostMeta[] }) {
                 <div className="mini-hobby-body">
                   {hasImage && (
                     <div className="mini-hobby-cover">
-                      <Image src={item.data.image!} alt="" width={800} height={600} sizes="(max-width: 767px) 100vw, 33vw" className="mini-hobby-cover-img" />
+                      <Image src={item.data.image!} alt="" fill sizes="(max-width: 767px) 100vw, 33vw" className="mini-hobby-cover-img" />
                     </div>
                   )}
                   {!hasImage && (
