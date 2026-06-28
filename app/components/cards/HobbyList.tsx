@@ -8,8 +8,8 @@ type HobbyListProps = {
 export function HobbyList({ hobbies }: HobbyListProps) {
   return (
     <div className="hobbies-grid">
-      {hobbies.map((hobby) => (
-        <HobbyCard key={hobby.title} hobby={hobby} />
+      {hobbies.map((hobby, i) => (
+        <HobbyCard key={`${hobby.title}-${i}`} hobby={hobby} />
       ))}
     </div>
   );

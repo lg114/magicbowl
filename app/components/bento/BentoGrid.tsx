@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLang } from "../context/LanguageContext";
 import { BookCard } from "../cards/BookCard";
 import { IntroCard } from "./IntroCard";
@@ -46,9 +47,10 @@ export function BentoGrid({ posts }: { posts: BlogPostMeta[] }) {
           }
 
           if (item.type === "hobby") {
+            const hasImage = !!item.data.image;
             return (
-              <Link href="/hobbies" className={`mini-hobby-card bento-item bento-item--${size}`} key={`hobby-${item.data.title}`}>
-                <div className="content-zone-header">
+              <Link href="/hobbies" className={`mini-hobby-card ${hasImage ? "mini-hobby-card--image" : ""} bento-item bento-item--${size}`} key={`hobby-${i}`}>
+                <div className="mini-hobby-header">
                   <div className="content-zone-meta">
                     <span className="content-zone-label">
                       {lang === "zh" ? "爱好" : "Hobby"}
@@ -56,12 +58,23 @@ export function BentoGrid({ posts }: { posts: BlogPostMeta[] }) {
                   </div>
                   <IconArrow />
                 </div>
-                <h3 className="mini-hobby-title">
-                  {lang === "zh" ? item.data.titleCn : item.data.title}
-                </h3>
-                <p className="mini-hobby-description">
-                  {lang === "zh" ? item.data.descriptionCn : item.data.description}
-                </p>
+                <div className="mini-hobby-body">
+                  {hasImage && (
+                    <div className="mini-hobby-cover">
+                      <Image src={item.data.image!} alt="" width={800} height={600} sizes="(max-width: 767px) 100vw, 33vw" className="mini-hobby-cover-img" />
+                    </div>
+                  )}
+                  {!hasImage && (
+                    <>
+                      <h3 className="mini-hobby-title">
+                        {lang === "zh" ? item.data.titleCn : item.data.title}
+                      </h3>
+                      <p className="mini-hobby-description">
+                        {lang === "zh" ? item.data.descriptionCn : item.data.description}
+                      </p>
+                    </>
+                  )}
+                </div>
               </Link>
             );
           }

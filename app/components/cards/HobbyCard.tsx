@@ -23,11 +23,19 @@ export const HobbyCard = memo(function HobbyCard({ hobby }: HobbyCardProps) {
         </span>
       </div>
 
-      {hobby.image && (
+      {hobby.images && hobby.images.length > 0 ? (
+        <div className="hobby-card-gallery">
+          {hobby.images.map((src, i) => (
+            <div key={src} className="hobby-card-cover">
+              <Image src={src} alt={`${title} ${i + 1}`} width={800} height={600} sizes="(max-width: 767px) 100vw, 50vw" className="hobby-card-cover-img" />
+            </div>
+          ))}
+        </div>
+      ) : hobby.image ? (
         <div className="hobby-card-cover">
           <Image src={hobby.image} alt={`${title}`} width={800} height={600} sizes="(max-width: 767px) 100vw, 50vw" className="hobby-card-cover-img" />
         </div>
-      )}
+      ) : null}
 
       <div className="hobby-card-info">
         <h3 className="hobby-card-title">{title}</h3>

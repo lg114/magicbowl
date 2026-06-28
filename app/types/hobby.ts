@@ -4,4 +4,5 @@ export type Hobby = {
   description: string;
   descriptionCn?: string;
   image?: string;
+  images?: string[];
 };

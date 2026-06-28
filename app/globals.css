@@ -664,12 +664,58 @@ button {
   background: var(--surface-hover);
 }
 
+.mini-hobby-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
 .mini-hobby-card:hover .content-zone-arrow {
   color: var(--text-tertiary);
   background: var(--surface-active);
   transform: translate(2px, -2px);
 }
 
+/* --- Image variant: full-bleed cover with hover reveal --- */
+.mini-hobby-card--image {
+  padding: 0;
+  overflow: hidden;
+}
+
+.mini-hobby-card--image .mini-hobby-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  padding: var(--space-3) var(--space-5);
+}
+
+.mini-hobby-card--image .mini-hobby-body {
+  margin-top: -64px;
+}
+
+@media (hover: hover) {
+  .mini-hobby-card--image .mini-hobby-body {
+    transition: margin-top 0.3s ease-out;
+  }
+  .mini-hobby-card--image:hover .mini-hobby-body {
+    margin-top: 0;
+  }
+}
+
+.mini-hobby-card--image .mini-hobby-cover {
+  line-height: 0;
+}
+
+.mini-hobby-card--image .mini-hobby-cover-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Text-only hobby card --- */
 .mini-hobby-title {
   margin: var(--space-3) 0 0;
   font-family: var(--font-smiley), Georgia, "Times New Roman", serif;
@@ -1003,6 +1049,12 @@ button {
 
 .hobby-card:hover .hobby-card-cover {
   background: var(--surface-alt);
+}
+
+.hobby-card-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
 }
 
 .hobby-card-cover-img {
@@ -1388,6 +1440,11 @@ button {
     grid-column: span 2;
   }
 
+  .bento-item--narrow,
+  .bento-item--normal {
+    grid-column: span 1;
+  }
+
   .intro-card {
     grid-column: 1;
     padding: var(--space-3) 0 var(--space-4);
@@ -1407,6 +1464,10 @@ button {
 
   .mini-hobby-card {
     padding: var(--space-4);
+  }
+
+  .mini-hobby-card--image {
+    padding: 0;
   }
 
   .content-zone,

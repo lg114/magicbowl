@@ -25,4 +25,22 @@ export const hobbies: Hobby[] = [
     descriptionCn:
       "主要读哲学、历史和自我提升类书籍。阅读帮我更清晰地思考生活。",
   },
+  {
+    title: "AI Artworks",
+    titleCn: "AI 绘画",
+    description:
+      "Snooker legends — turning imagination into visuals with a few words.",
+    descriptionCn:
+      "斯诺克传奇——用几句话将想象变为画面。",
+    image: "/hobbies/snooker.png",
+  },
+  {
+    title: "AI Artworks",
+    titleCn: "AI 绘画",
+    description:
+      "Shiba warrior — exploring the boundaries of AI-generated art.",
+    descriptionCn:
+      "柴犬武士——探索 AI 生成艺术的边界。",
+    image: "/hobbies/shiba.png",
+  },
 ];
