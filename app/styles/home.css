@@ -158,7 +158,4 @@ html {
   .scroll-cue {
     animation: none;
   }
-  html {
-    scroll-behavior: auto;
-  }
 }
