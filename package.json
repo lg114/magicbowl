@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fontsource/noto-sans-sc": "^5.2.9",
-    "@fontsource/noto-serif-sc": "^5.2.9",
     "gray-matter": "^4.0.3",
     "next": "^16.2.9",
     "next-mdx-remote": "^6.0.0",
