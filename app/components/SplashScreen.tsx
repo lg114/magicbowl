@@ -7,8 +7,23 @@ export default function SplashScreen({ children }: { children: React.ReactNode }
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setExiting(true), 4_500);
-    return () => clearTimeout(timer);
+    const startTime = Date.now();
+    const MIN_ANIMATION_MS = 2_500; // 最少播 2.5s，确保至少两轮弹跳
+
+    const exit = () => {
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, MIN_ANIMATION_MS - elapsed);
+      setTimeout(() => setExiting(true), remaining);
+    };
+
+    if (document.readyState === "complete") {
+      // 页面已全部加载完 → 只等动画最短时间
+      exit();
+    } else {
+      // 还在加载中 → 等 load 事件触发（所有资源就绪）
+      window.addEventListener("load", exit, { once: true });
+      return () => window.removeEventListener("load", exit);
+    }
   }, []);
 
   return (
