@@ -16,13 +16,11 @@ export default function Home() {
       <div className="home-grid">
         {/* 第一行：头像（左） | 关于我（右，占两列） */}
         <div className="home-card home-card--about">
-          <h2 className="home-card__title">关于我</h2>
-          <p className="about-brief">
-            你好，我是 MagicBowl。这里记录我的技术探索、设计思考与生活碎片。
-          </p>
-          <Link href="/about" className="home-card__action">
-            了解更多 →
-          </Link>
+          <p className="about-greeting">你好，我是 Gc 👋</p>
+          <p className="about-line">欢迎来到我的 magic bowl 🔮！</p>
+          <p className="about-line">我喜欢捣鼓东西，最近对 AI 和 LLMs 特别着迷。</p>
+          <p className="about-line">不忙的时候，我喜欢去健身房锻炼 💪🏻 和打斯诺克 🎱。</p>
+          <p className="about-line">除此之外，我有空的时候会阅读有关哲学、历史和自我提升的书籍 📚。</p>
         </div>
 
         <div className="home-card home-card--avatar">
