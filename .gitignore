@@ -6,3 +6,6 @@ out
 
 .env*
 !.env.example
+
+# assistant workspace data (not part of the site)
+.workbuddy/
