@@ -5,66 +5,6 @@
    Supports dark / light themes and prefers-reduced-motion.
    ============================================================ */
 
-/* ---------- Site header (fixed, transparent → frosted on scroll) ---------- */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 40;
-  padding: 12px 24px;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background 0.3s ease, border-color 0.3s ease,
-    backdrop-filter 0.3s ease;
-}
-
-.site-header.is-scrolled {
-  background: color-mix(in srgb, var(--bg) 72%, transparent);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-bottom-color: var(--border);
-}
-
-.site-header__inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 64px; /* leave room for the fixed ThemeToggle */
-}
-
-.site-header__logo {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.site-header__nav {
-  display: flex;
-  gap: 24px;
-}
-
-.site-header__link {
-  font-size: 15px;
-  color: var(--text);
-  opacity: 0.7;
-  text-decoration: none;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.site-header__link:hover {
-  opacity: 1;
-}
-
-.site-header__link.is-active {
-  opacity: 1;
-  color: var(--primary);
-}
-
 /* ---------- Layout shell: main + sidebar (desktop two-column) ---------- */
 .blog-shell {
   max-width: 1100px;
@@ -539,64 +479,6 @@
   border-color: var(--primary);
 }
 
-/* ---------- Site footer ---------- */
-.site-footer {
-  padding: 48px 24px 72px;
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.site-footer__inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.site-footer__name {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.site-footer__tagline {
-  max-width: 320px;
-  margin-top: 8px;
-  font-size: 14px;
-  opacity: 0.6;
-}
-
-.site-footer__links,
-.site-footer__social {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.site-footer__link,
-.site-footer__social a {
-  font-size: 14px;
-  color: var(--text);
-  opacity: 0.7;
-  text-decoration: none;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.site-footer__link:hover,
-.site-footer__social a:hover {
-  opacity: 1;
-  color: var(--primary);
-}
-
-.site-footer__copy {
-  max-width: 1100px;
-  margin: 32px auto 0;
-  font-size: 13px;
-  opacity: 0.5;
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .blog-shell {
@@ -617,14 +499,6 @@
   .post-detail {
     padding: 24px;
   }
-
-  .site-header__inner {
-    padding-right: 56px;
-  }
-
-  .site-header__nav {
-    gap: 16px;
-  }
 }
 
 /* ---------- Respect reduced-motion ---------- */
@@ -641,31 +515,32 @@
 }
 
 /* ============================================================
-   Home page — Card Grid Layout
-   Main title (MagicBowl) on top, then a 2-column card grid:
-   Row 1: 技术栈 | 头像
-   Row 2: 文章 | 关于我
-   Row 3: 爱好 (full width)
+   Home page — 3×2 Card Grid Layout
+   Row 1: 技术栈 | MagicBowl (title cell) | 头像
+   Row 2: 文章 | 关于我 | 爱好
    ============================================================ */
 
 .home-wrap {
-  max-width: 880px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 96px 24px 96px;
-}
-
-.home-title-main {
-  font-size: clamp(48px, 9vw, 80px);
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  text-align: center;
-  margin: 0 0 56px;
+  padding: 96px 32px 96px;
 }
 
 .home-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+
+/* --- Title cell (center of row 1, no card background) --- */
+.home-title-cell {
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .home-card {
@@ -681,11 +556,6 @@
 
 .home-card:hover {
   border-color: var(--primary);
-}
-
-/* --- Hobbies spans full width --- */
-.home-card--hobbies {
-  grid-column: 1 / -1;
 }
 
 /* --- Avatar card --- */
@@ -838,18 +708,15 @@
     padding: 64px 16px 72px;
   }
 
-  .home-title-main {
-    font-size: clamp(40px, 12vw, 56px);
-    margin-bottom: 40px;
-  }
-
   .home-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .home-card--hobbies {
-    grid-column: auto;
+  .home-title-cell {
+    font-size: clamp(32px, 10vw, 48px);
+    min-height: 120px;
+    order: -1;
   }
 
   .home-card {

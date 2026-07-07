@@ -9,10 +9,8 @@ export default function Home() {
 
   return (
     <main className="home-wrap">
-      <h1 className="home-title-main">{siteConfig.name}</h1>
-
       <div className="home-grid">
-        {/* 技术栈 | 头像 */}
+        {/* Row 1: 技术栈 | MagicBowl | 头像 */}
         <div className="home-card home-card--skills">
           <h2 className="home-card__title">技术栈</h2>
           <div className="skill-tags">
@@ -24,13 +22,15 @@ export default function Home() {
           </div>
         </div>
 
+        <h1 className="home-title-cell">{siteConfig.name}</h1>
+
         <div className="home-card home-card--avatar">
           <div className="avatar-placeholder">
             <span className="avatar-placeholder__text">头像</span>
           </div>
         </div>
 
-        {/* 文章 | 关于我 */}
+        {/* Row 2: 文章 | 关于我 | 爱好 */}
         <div className="home-card home-card--posts">
           <div className="home-card__header">
             <h2 className="home-card__title">文章</h2>
@@ -69,7 +69,6 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* 爱好（占满整行） */}
         <div className="home-card home-card--hobbies">
           <h2 className="home-card__title">爱好</h2>
           <div className="hobby-list">
