@@ -4,12 +4,15 @@ import Link from "next/link";
 import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";
 import GitHubHeatmap from "./components/GitHubHeatmap";
+import BootSplash from "./components/BootSplash";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 5);
 
   return (
     <main className="home-wrap">
+      {/* 启动动画：每次刷新显示碗 ~1.2s 后淡出 */}
+      <BootSplash />
       <div className="home-grid">
         {/* 第一行：头像（左） | 关于我（右，占两列） */}
         <div className="home-card home-card--about">
