@@ -72,9 +72,14 @@
   -webkit-backdrop-filter: blur(8px);
   color: var(--text);
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+  box-shadow: var(--toggle-shadow);
+  transition: background 0.4s ease-in-out, color 0.4s ease-in-out,
+    border-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
     transform 0.15s ease;
 }
+
+/* Theme toggle: a simple button micro-interaction (scale + fade) on click;
+   the actual theme switch lives in app/components/ThemeToggle.tsx. */
 
 .theme-toggle:hover {
   transform: scale(1.08);

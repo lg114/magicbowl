@@ -1,0 +1,164 @@
+/* ============================================================
+   Home hero + scroll cue + main-content placeholder
+   - Hero occupies the first viewport (100vh) and rises in on load
+   - A downward arrow cue at the bottom smooth-scrolls to #main-content
+   - #main-content is a minimal stub, ready to be replaced later
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---- Hero (first screen) ---- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 24px;
+}
+
+.home-title {
+  font-size: clamp(48px, 12vw, 120px);
+  letter-spacing: 0.02em;
+  color: var(--text);
+  /* rises in from below + fades in (pronounced, ~1.2s) */
+  opacity: 0;
+  transform: translateY(80px);
+  animation: hero-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+.home-sub {
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(80px);
+  /* staggered, ends at the muted 0.55 opacity used before */
+  animation: hero-rise-sub 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+/* ---- Downward scroll cue (a <button>, not an <a>, so it scrolls
+       without adding a #hash to the URL or history entries) ---- */
+.scroll-cue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  /* reset native button styling */
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  color: var(--text);
+  opacity: 0.5;
+  transition: opacity 0.25s ease, color 0.25s ease, background 0.25s ease;
+  animation: cue-bob 2.2s ease-in-out infinite 0.8s;
+}
+
+.scroll-cue:hover,
+.scroll-cue:focus-visible {
+  opacity: 1;
+  color: var(--primary);
+  background: var(--surface);
+  outline: none;
+}
+
+.scroll-cue svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---- Main content (minimal stub) ---- */
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.main-content h2 {
+  font-size: clamp(22px, 5vw, 40px);
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.main-content p {
+  font-size: clamp(13px, 2vw, 16px);
+  color: var(--text);
+  opacity: 0.4;
+}
+
+/* ---- Keyframes ---- */
+@keyframes hero-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-rise-sub {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  55% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0.55;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+/* ---- Respect reduced-motion preferences ---- */
+@media (prefers-reduced-motion: reduce) {
+  .home-title,
+  .home-sub {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .home-sub {
+    opacity: 0.55;
+  }
+  .scroll-cue {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

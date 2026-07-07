@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 const STORAGE_KEY = "mb-theme";
 
@@ -13,15 +13,29 @@ export default function ThemeToggle() {
     setTheme(current === "light" ? "light" : "dark");
   }, []);
 
-  const toggle = () => {
+  const toggle = (e?: MouseEvent<HTMLButtonElement>) => {
     const next: "dark" | "light" = theme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* ignore storage errors (private mode, etc.) */
-    }
-    setTheme(next);
+
+    const commit = () => {
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        /* ignore storage errors (private mode, etc.) */
+      }
+      setTheme(next);
+    };
+
+    commit();
+
+    // Button micro-interaction: scale down + fade as it switches themes.
+    e?.currentTarget?.animate(
+      [
+        { transform: "scale(1)", opacity: 1 },
+        { transform: "scale(0.4)", opacity: 0 },
+      ],
+      { duration: 500, easing: "cubic-bezier(0.34, 1.56, 0.64, 1)" }
+    );
   };
 
   return (
