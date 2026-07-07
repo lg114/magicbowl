@@ -14,6 +14,12 @@
   background: #4163e9;
 }
 
+.bowl-loading.exit {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
 /* Scene container */
 .bowl-scene {
   position: relative;
