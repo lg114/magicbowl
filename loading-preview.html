@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MagicBowl Loading - Preview</title>
+    <style>
+      /* ========================================
+         MagicBowl Loading Animation Preview
+         Bouncing + Floating Bowl (Q-bouncy)
+         Brand blue: #4163E9
+         ======================================== */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .bowl-loading {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #4163e9;
+      }
+
+      .bowl-scene {
+        position: relative;
+        width: 160px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Outer layer: gentle floating drift */
+      .bowl-float {
+        animation: bowl-float 3.5s ease-in-out infinite;
+      }
+
+      /* Inner layer: bouncy squash & stretch */
+      .bowl-svg {
+        display: block;
+        opacity: 0;
+        transform: scale(0.85);
+        animation: bowl-enter 0.6s ease-out forwards,
+          bowl-bounce 1.2s cubic-bezier(0.3, 0, 0.2, 1) infinite 0.6s;
+      }
+
+      /* Ground shadow - reacts opposite to the bounce */
+      .bowl-shadow {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        width: 108px;
+        height: 12px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        animation: bowl-shadow 1.2s cubic-bezier(0.3, 0, 0.2, 1) infinite 0.6s;
+      }
+
+      /* ---- Keyframes ---- */
+      @keyframes bowl-enter {
+        0% {
+          opacity: 0;
+          transform: scale(0.85);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes bowl-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      /* Springy bounce: squash on land, stretch in air, small rebound */
+      @keyframes bowl-bounce {
+        0% {
+          transform: translateY(0) scale(1.1, 0.88);
+          animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+        }
+        20% {
+          transform: translateY(-20px) scale(0.92, 1.1);
+          animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        38% {
+          transform: translateY(-24px) scale(1, 1);
+          animation-timing-function: cubic-bezier(0.5, 0, 0.7, 0.5);
+        }
+        56% {
+          transform: translateY(-18px) scale(0.95, 1.05);
+          animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+        }
+        72% {
+          transform: translateY(0) scale(1.16, 0.8);
+          animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
+        }
+        86% {
+          transform: translateY(-5px) scale(0.98, 1.03);
+          animation-timing-function: ease-out;
+        }
+        100% {
+          transform: translateY(0) scale(1.1, 0.88);
+        }
+      }
+
+      /* Shadow shrinks + fades as the bowl rises */
+      @keyframes bowl-shadow {
+        0% {
+          transform: translateX(-50%) scale(1.15, 1);
+          opacity: 0.32;
+        }
+        20% {
+          transform: translateX(-50%) scale(0.7, 1);
+          opacity: 0.16;
+        }
+        38% {
+          transform: translateX(-50%) scale(0.55, 1);
+          opacity: 0.1;
+        }
+        56% {
+          transform: translateX(-50%) scale(0.7, 1);
+          opacity: 0.16;
+        }
+        72% {
+          transform: translateX(-50%) scale(1.2, 1);
+          opacity: 0.34;
+        }
+        86% {
+          transform: translateX(-50%) scale(0.82, 1);
+          opacity: 0.18;
+        }
+        100% {
+          transform: translateX(-50%) scale(1.15, 1);
+          opacity: 0.32;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bowl-loading">
+      <div class="bowl-scene">
+        <div class="bowl-float">
+          <svg
+            class="bowl-svg"
+            width="160"
+            height="100"
+            viewBox="0 0 160 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <ellipse cx="80" cy="62" rx="60" ry="34" fill="#FFFFFF" />
+            <ellipse cx="80" cy="38" rx="42" ry="16" fill="#333333" />
+          </svg>
+        </div>
+        <div class="bowl-shadow"></div>
+      </div>
+    </div>
+  </body>
+</html>

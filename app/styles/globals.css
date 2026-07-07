@@ -1,3 +1,12 @@
+/* ===== Brand font: SmileySans (self-hosted woff2) ===== */
+@font-face {
+  font-family: "SmileySans";
+  src: url("./SmileySans-Oblique.otf.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -11,13 +20,68 @@ body {
   height: 100%;
 }
 
+/* ===== Theme tokens (dual theme, default = dark) ===== */
+:root,
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --text: #ffffff;
+  --primary: #4163e9;
+  --surface: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f7f9;
+  --text: #16191f;
+  --primary: #4163e9;
+  --surface: rgba(0, 0, 0, 0.04);
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+/* Global font: SmileySans first, then system fallbacks for Latin + CJK */
+html {
+  font-family: "SmileySans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+}
+
 body {
-  background: #000000;
-  color: #ffffff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Form controls don't inherit font-family by default — force it */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 main {
   min-height: 100vh;
+}
+
+/* ===== Minimal placeholder home (replace as the blog grows) ===== */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+}
+
+.home-title {
+  font-size: clamp(48px, 12vw, 120px);
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.home-sub {
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: var(--text);
+  opacity: 0.55;
 }
