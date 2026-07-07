@@ -28,7 +28,9 @@ export default function Home() {
             <span className="avatar-sparkle avatar-sparkle--2" />
             <span className="avatar-sparkle avatar-sparkle--3" />
             <span className="avatar-sparkle avatar-sparkle--4" />
-            <img src="/avatar.png" alt="avatar" className="avatar-img" />
+            <div className="avatar-float">
+              <img src="/avatar.png" alt="avatar" className="avatar-img" />
+            </div>
             <span className="avatar-shadow" />
             <span className="avatar-bubble" role="tooltip">
               Hi, I&apos;m gc 👋
