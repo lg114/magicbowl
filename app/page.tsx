@@ -3,6 +3,7 @@ import "./styles/blog.css";
 import Link from "next/link";
 import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";
+import GitHubHeatmap from "./components/GitHubHeatmap";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 5);
@@ -10,27 +11,28 @@ export default function Home() {
   return (
     <main className="home-wrap">
       <div className="home-grid">
-        {/* Row 1: 技术栈 | MagicBowl | 头像 */}
-        <div className="home-card home-card--skills">
-          <h2 className="home-card__title">技术栈</h2>
-          <div className="skill-tags">
-            {siteConfig.skills.map((s) => (
-              <span key={s} className="skill-tag">
-                {s}
-              </span>
-            ))}
-          </div>
+        {/* 第一行：头像（左） | 关于我（右，占两列） */}
+        <div className="home-card home-card--about">
+          <h2 className="home-card__title">关于我</h2>
+          <p className="about-brief">
+            你好，我是 MagicBowl。这里记录我的技术探索、设计思考与生活碎片。
+          </p>
+          <Link href="/about" className="home-card__action">
+            了解更多 →
+          </Link>
         </div>
-
-        <h1 className="home-title-cell">{siteConfig.name}</h1>
 
         <div className="home-card home-card--avatar">
-          <div className="avatar-placeholder">
-            <span className="avatar-placeholder__text">头像</span>
+          <div className="avatar-stage">
+            <span className="avatar-sparkle avatar-sparkle--1" />
+            <span className="avatar-sparkle avatar-sparkle--2" />
+            <span className="avatar-sparkle avatar-sparkle--3" />
+            <span className="avatar-sparkle avatar-sparkle--4" />
+            <img src="/avatar.png" alt="avatar" className="avatar-img" />
+            <span className="avatar-shadow" />
           </div>
         </div>
 
-        {/* Row 2: 文章 | 关于我 | 爱好 */}
         <div className="home-card home-card--posts">
           <div className="home-card__header">
             <h2 className="home-card__title">文章</h2>
@@ -59,16 +61,6 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="home-card home-card--about">
-          <h2 className="home-card__title">关于我</h2>
-          <p className="about-brief">
-            你好，我是 MagicBowl。这里记录我的技术探索、设计思考与生活碎片。
-          </p>
-          <Link href="/about" className="home-card__action">
-            了解更多 →
-          </Link>
-        </div>
-
         <div className="home-card home-card--hobbies">
           <h2 className="home-card__title">爱好</h2>
           <div className="hobby-list">
@@ -78,6 +70,35 @@ export default function Home() {
               </span>
             ))}
           </div>
+        </div>
+
+        {/* 第二行：爱好 | 技术栈 | 文章 */}
+        <div className="home-card home-card--skills">
+          <h2 className="home-card__title">技术栈</h2>
+          <div className="skill-tags">
+            {siteConfig.skills.map((s) => (
+              <span key={s} className="skill-tag">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="home-card home-card--footprints">
+          <h2 className="home-card__title">足迹</h2>
+          <div className="footprint-list">
+            {siteConfig.footprints.map((f) => (
+              <span key={f} className="footprint-tag">
+                {f}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 第三行：足迹 | GitHub 热力图（占两列） */}
+        <div className="home-card home-card--heatmap">
+          <h2 className="home-card__title">GitHub 热力图</h2>
+          <GitHubHeatmap />
         </div>
       </div>
     </main>

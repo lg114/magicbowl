@@ -23,6 +23,15 @@ export const siteConfig = {
     "Docker",
   ],
   hobbies: ["阅读", "咖啡", "音乐", "摄影", "游戏", "旅行"],
+  footprints: [
+    "北京",
+    "上海",
+    "杭州",
+    "深圳",
+    "成都",
+    "东京",
+    "新加坡",
+  ],
   social: {
     github: "https://github.com/your-name",
     email: "mailto:you@example.com",

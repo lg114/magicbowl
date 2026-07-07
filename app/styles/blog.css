@@ -515,9 +515,11 @@
 }
 
 /* ============================================================
-   Home page — 3×2 Card Grid Layout
-   Row 1: 技术栈 | MagicBowl (title cell) | 头像
-   Row 2: 文章 | 关于我 | 爱好
+   Home page — Card Grid Layout
+   Row 1: 关于我 | 头像 | 文章
+   Row 2: 爱好   | 头像 | 文章
+   Row 3: 技术栈 | 足迹 (跨两列)
+   Row 4: GitHub 热力图 (占满)
    ============================================================ */
 
 .home-wrap {
@@ -530,17 +532,32 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  grid-template-areas:
+    "avatar  about   about"
+    "hobbies skills  posts"
+    "prints  heat    heat";
 }
 
-/* --- Title cell (center of row 1, no card background) --- */
-.home-title-cell {
-  font-size: clamp(28px, 4vw, 48px);
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.home-card--about {
+  grid-area: about;
+}
+.home-card--avatar {
+  grid-area: avatar;
+}
+.home-card--posts {
+  grid-area: posts;
+}
+.home-card--hobbies {
+  grid-area: hobbies;
+}
+.home-card--skills {
+  grid-area: skills;
+}
+.home-card--footprints {
+  grid-area: prints;
+}
+.home-card--heatmap {
+  grid-area: heat;
 }
 
 .home-card {
@@ -558,27 +575,110 @@
   border-color: var(--primary);
 }
 
-/* --- Avatar card --- */
+/* --- Avatar card (transparent container, no bg/border, animation lives on the avatar) --- */
 .home-card--avatar {
+  background: transparent;
+  border: none;
+  box-shadow: none;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.avatar-placeholder {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: var(--border);
+.home-card--avatar:hover {
+  border-color: transparent;
+}
+
+.avatar-stage {
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  width: min(100%, 220px);
+  /* 入场：从上方掉落并弹两下，仅播放一次 */
+  animation: avatar-enter 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.avatar-placeholder__text {
-  font-size: 14px;
-  opacity: 0.5;
+.avatar-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform-origin: center bottom;
+  /* 持续漂浮 + 轻微摇摆（入场结束后无缝接上） */
+  animation: avatar-float 4s ease-in-out 0.9s infinite;
+  will-change: transform;
 }
+
+/* 地面脉冲阴影：随漂浮同步缩放+淡化 */
+.avatar-shadow {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62%;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.16);
+  filter: blur(4px);
+  pointer-events: none;
+  animation: avatar-shadow-pulse 4s ease-in-out 0.9s infinite;
+}
+
+/* 周围点缀：错峰闪烁的小星点 */
+.avatar-sparkle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+  opacity: 0;
+  pointer-events: none;
+  animation: avatar-sparkle 2.6s ease-in-out infinite;
+}
+
+.avatar-sparkle--1 { top: 6%;  left: 4%;  animation-delay: 0s; }
+.avatar-sparkle--2 { top: 14%; right: 2%; animation-delay: 0.7s; }
+.avatar-sparkle--3 { bottom: 26%; left: -2%; animation-delay: 1.4s; }
+.avatar-sparkle--4 { bottom: 34%; right: 0%; animation-delay: 2.1s; }
+
+/* hover：头像俏皮放大 + 歪头，弹性回弹 */
+.home-card--avatar:hover .avatar-img {
+  animation: avatar-excited 0.7s ease-in-out;
+}
+
+@keyframes avatar-enter {
+  0%   { transform: translateY(-150px); opacity: 0; }
+  60%  { transform: translateY(10px);   opacity: 1; }
+  80%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes avatar-float {
+  0%, 100% { transform: translateY(0)    rotate(-2deg); }
+  25%      { transform: translateY(-9px) rotate(0deg); }
+  50%      { transform: translateY(0)    rotate(2deg); }
+  75%      { transform: translateY(-6px) rotate(0deg); }
+}
+
+@keyframes avatar-shadow-pulse {
+  0%, 100% { transform: translateX(-50%) scale(1);    opacity: 0.5; }
+  50%      { transform: translateX(-50%) scale(0.7);  opacity: 0.26; }
+}
+
+@keyframes avatar-sparkle {
+  0%, 100% { opacity: 0;    transform: scale(0.6); }
+  50%      { opacity: 0.9;  transform: scale(1.1); }
+}
+
+@keyframes avatar-excited {
+  0%   { transform: translateY(0)    rotate(0deg)  scale(1); }
+  30%  { transform: translateY(-10px) rotate(-8deg) scale(1.08); }
+  60%  { transform: translateY(0)    rotate(6deg)  scale(1.04); }
+  100% { transform: translateY(0)    rotate(0deg)  scale(1); }
+}
+
+/* 头像动画按用户要求始终播放，不响应 reduced-motion */
 
 /* --- Shared card title --- */
 .home-card__title {
@@ -702,6 +802,69 @@
   opacity: 0.75;
 }
 
+/* --- Footprints card --- */
+.footprint-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footprint-tag {
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--border);
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+/* --- GitHub heatmap card (full-width, row 3) --- */
+.heatmap {
+  margin-top: 4px;
+}
+
+.heatmap__grid {
+  display: grid;
+  grid-template-columns: repeat(26, 1fr);
+  gap: 3px;
+}
+
+.heatmap__cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.heatmap__cell--l0 {
+  background: var(--border);
+}
+.heatmap__cell--l1 {
+  background: rgba(65, 99, 233, 0.25);
+}
+.heatmap__cell--l2 {
+  background: rgba(65, 99, 233, 0.45);
+}
+.heatmap__cell--l3 {
+  background: rgba(65, 99, 233, 0.7);
+}
+.heatmap__cell--l4 {
+  background: rgba(65, 99, 233, 1);
+}
+
+.heatmap__legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.heatmap__legend .heatmap__cell {
+  width: 12px;
+  aspect-ratio: 1 / 1;
+}
+
 /* ---------- Responsive: home grid ---------- */
 @media (max-width: 720px) {
   .home-wrap {
@@ -710,14 +873,28 @@
 
   .home-grid {
     grid-template-columns: 1fr;
+    grid-template-areas: none;
     gap: 16px;
   }
 
-  .home-title-cell {
-    font-size: clamp(32px, 10vw, 48px);
-    min-height: 120px;
-    order: -1;
+  .home-card--about,
+  .home-card--avatar,
+  .home-card--posts,
+  .home-card--hobbies,
+  .home-card--skills,
+  .home-card--footprints,
+  .home-card--heatmap {
+    grid-area: auto;
   }
+
+  /* 小屏顺序：头像 → 关于我 → 爱好 → 技术栈 → 文章 → 足迹 → 热力图 */
+  .home-card--avatar { order: -1; }
+  .home-card--about { order: 0; }
+  .home-card--hobbies { order: 1; }
+  .home-card--skills { order: 2; }
+  .home-card--posts { order: 3; }
+  .home-card--footprints { order: 4; }
+  .home-card--heatmap { order: 5; }
 
   .home-card {
     min-height: unset;
