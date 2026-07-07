@@ -642,9 +642,45 @@
 .avatar-sparkle--3 { bottom: 26%; left: -2%; animation-delay: 1.4s; }
 .avatar-sparkle--4 { bottom: 34%; right: 0%; animation-delay: 2.1s; }
 
+/* 交互：hover 弹出打招呼气泡 */
+.avatar-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 2px);
+  z-index: 3;
+  transform: translate(-50%, 10px);
+  background: var(--primary);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(65, 99, 233, 0.35);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.avatar-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--primary);
+}
+
 /* hover：头像俏皮放大 + 歪头，弹性回弹 */
 .home-card--avatar:hover .avatar-img {
   animation: avatar-excited 0.7s ease-in-out;
+}
+
+/* hover：打招呼气泡浮现 */
+.home-card--avatar:hover .avatar-bubble {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 @keyframes avatar-enter {

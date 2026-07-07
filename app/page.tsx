@@ -30,6 +30,9 @@ export default function Home() {
             <span className="avatar-sparkle avatar-sparkle--4" />
             <img src="/avatar.png" alt="avatar" className="avatar-img" />
             <span className="avatar-shadow" />
+            <span className="avatar-bubble" role="tooltip">
+              Hi, I&apos;m gc 👋
+            </span>
           </div>
         </div>
 
