@@ -63,7 +63,7 @@ export const siteConfig = {
   },
   // 首页「链接」卡片内容：替换为你的真实链接即可
   links: [
-    { label: "GitHub", href: "https://github.com/your-name", logo: "/logos/github.svg" },
+    { label: "GitHub", href: "https://github.com/your-name", logo: "/logos/github.png" },
     { label: "Bilibili", href: "https://space.bilibili.com/your-id", logo: "/logos/bilibili.webp" },
   ],
   // Giscus 评论配置：前往 https://giscus.app 完成设置后填入下方字段。
