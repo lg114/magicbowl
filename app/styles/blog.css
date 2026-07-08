@@ -687,15 +687,24 @@
   border-top-color: var(--primary);
 }
 
-/* hover：头像俏皮放大 + 歪头，弹性回弹 */
-.home-card--avatar:hover .avatar-img {
-  animation: avatar-excited 0.7s ease-in-out;
+/* 桌面（有真实 hover 能力）：hover 触发头像俏皮动画 + 气泡浮现 */
+@media (hover: hover) {
+  .home-card--avatar:hover .avatar-img {
+    animation: avatar-excited 0.7s ease-in-out;
+  }
+
+  .home-card--avatar:hover .avatar-bubble {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
-/* hover：打招呼气泡浮现 */
-.home-card--avatar:hover .avatar-bubble {
-  opacity: 1;
-  transform: translate(-50%, 0);
+/* 触屏（无 hover 能力）：点击头像卡片切换 .avatar-bubble--on 浮现气泡 */
+@media (hover: none) {
+  .avatar-bubble--on {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 @keyframes avatar-enter {

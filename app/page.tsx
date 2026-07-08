@@ -5,6 +5,7 @@ import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";
 import GitHubHeatmap from "./components/GitHubHeatmap";
 import BootSplash from "./components/BootSplash";
+import AvatarCard from "./components/AvatarCard";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 5);
@@ -23,21 +24,7 @@ export default function Home() {
           <p className="about-line">除此之外，我有空的时候会阅读有关哲学、历史和自我提升的书籍 📚。</p>
         </div>
 
-        <div className="home-card home-card--avatar">
-          <div className="avatar-stage">
-            <span className="avatar-sparkle avatar-sparkle--1" />
-            <span className="avatar-sparkle avatar-sparkle--2" />
-            <span className="avatar-sparkle avatar-sparkle--3" />
-            <span className="avatar-sparkle avatar-sparkle--4" />
-            <div className="avatar-float">
-              <img src="/avatar.png" alt="avatar" className="avatar-img" />
-            </div>
-            <span className="avatar-shadow" />
-            <span className="avatar-bubble" role="tooltip">
-              Hi, I&apos;m gc 👋
-            </span>
-          </div>
-        </div>
+        <AvatarCard />
 
         <div className="home-card home-card--posts">
           <div className="home-card__header">
