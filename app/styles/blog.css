@@ -40,12 +40,6 @@
   letter-spacing: 0.01em;
 }
 
-.section-more {
-  font-size: 14px;
-  color: var(--primary);
-  text-decoration: none;
-}
-
 .filter-chip {
   display: inline-flex;
   align-items: center;
@@ -77,11 +71,11 @@
 }
 
 .post-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: var(--card-shadow);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
@@ -96,7 +90,7 @@
   gap: 12px;
   margin-bottom: 12px;
   font-size: 13px;
-  opacity: 0.7;
+  color: var(--text-muted);
 }
 
 .post-card__category {
@@ -125,7 +119,7 @@
   margin-bottom: 16px;
   font-size: 15px;
   line-height: 1.7;
-  opacity: 0.75;
+  color: var(--text-muted);
 }
 
 .post-card__tags {
@@ -206,7 +200,7 @@
 
 .category-nav__count {
   font-size: 12px;
-  opacity: 0.6;
+  color: var(--text-muted);
 }
 
 .tag-cloud {
@@ -256,7 +250,7 @@
 
 .popular-list__date {
   font-size: 12px;
-  opacity: 0.6;
+  color: var(--text-muted);
 }
 
 /* ---------- Post detail ---------- */
@@ -443,46 +437,6 @@
   text-decoration: underline;
 }
 
-/* ---------- Hero CTA buttons (home intro) ---------- */
-.hero-cta {
-  display: flex;
-  gap: 16px;
-  margin-top: 32px;
-  opacity: 0;
-  transform: translateY(80px);
-  animation: hero-rise-sub 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
-}
-
-.hero-cta__primary,
-.hero-cta__ghost {
-  padding: 12px 28px;
-  border-radius: 999px;
-  font-size: 15px;
-  text-decoration: none;
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-.hero-cta__primary {
-  color: #fff;
-  background: var(--primary);
-  border: 1px solid var(--primary);
-}
-
-.hero-cta__primary:hover {
-  transform: translateY(-2px);
-}
-
-.hero-cta__ghost {
-  color: var(--text);
-  background: transparent;
-  border: 1px solid var(--border);
-}
-
-.hero-cta__ghost:hover {
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .blog-shell {
@@ -507,12 +461,6 @@
 
 /* ---------- Respect reduced-motion ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .hero-cta {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
   .post-card:hover {
     transform: none;
   }
@@ -566,14 +514,14 @@
 }
 
 .home-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
   min-height: 200px;
-  box-shadow: var(--card-shadow);
   transition: border-color 0.25s ease, transform 0.25s ease,
     box-shadow 0.25s ease;
 }
@@ -581,6 +529,37 @@
 .home-card:hover {
   border-color: var(--primary);
   box-shadow: 0 0 0 1px var(--primary), 0 10px 30px rgba(65, 99, 233, 0.28);
+}
+
+/* --- Light theme: transparent black cards. Background is set directly on the
+   element (NOT on ::before) so it survives the OS "reduce transparency" setting
+   that display:none's the pseudo-element. --- */
+[data-theme="light"] .home-card:not(.home-card--avatar),
+[data-theme="light"] .post-card {
+  background: rgba(0, 0, 0, 0.4);
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --primary: #6b8cff;
+  color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Keep pill tags readable on their light backgrounds */
+[data-theme="light"] .skill-tag,
+[data-theme="light"] .hobby-tag,
+[data-theme="light"] .footprint-tag,
+[data-theme="light"] .tag-pill {
+  --text: #16191f;
+  --text-muted: #4b5563;
+  --primary: #4163e9;
+  color: #16191f;
+}
+
+[data-theme="light"] .skill-tag:hover,
+[data-theme="light"] .hobby-tag:hover,
+[data-theme="light"] .footprint-tag:hover,
+[data-theme="light"] .tag-pill:hover {
+  color: #4163e9;
 }
 
 /* --- Avatar card (transparent container, no bg/border, animation lives on the avatar) --- */
@@ -788,16 +767,16 @@
   padding: 6px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
+  background: var(--surface-raised);
   font-size: 13px;
-  color: var(--text);
-  opacity: 0.8;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  color: var(--text-muted);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 
 .skill-tag:hover {
   border-color: var(--primary);
   color: var(--primary);
-  opacity: 1;
+  background: var(--surface-raised);
 }
 
 /* --- Post list inside card --- */
@@ -836,7 +815,7 @@
 
 .home-post-item__date {
   font-size: 12px;
-  opacity: 0.6;
+  color: var(--text-muted);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -853,7 +832,7 @@
 .about-line {
   font-size: clamp(16px, 1.5vw, 20px);
   line-height: 1.9;
-  opacity: 0.85;
+  color: var(--text-muted);
   margin: 0 0 12px 0;
 }
 
@@ -871,10 +850,16 @@
 .hobby-tag {
   padding: 6px 16px;
   border-radius: 999px;
-  background: var(--border);
+  background: var(--surface-raised);
+  border: 1px solid transparent;
   font-size: 14px;
-  color: var(--text);
-  opacity: 0.75;
+  color: var(--text-muted);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.hobby-tag:hover {
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 /* --- Footprints card --- */
@@ -887,10 +872,16 @@
 .footprint-tag {
   padding: 6px 16px;
   border-radius: 999px;
-  background: var(--border);
+  background: var(--surface-raised);
+  border: 1px solid transparent;
   font-size: 14px;
-  color: var(--text);
-  opacity: 0.75;
+  color: var(--text-muted);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.footprint-tag:hover {
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 /* --- GitHub heatmap card (full-width, row 3) --- */

@@ -1,5 +1,3 @@
-import "./styles/home.css";
-import "./styles/blog.css";
 import Link from "next/link";
 import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";

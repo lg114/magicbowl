@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Turbopack: CJS ESM interop for next-mdx-remote (see next.js#64525)
+  transpilePackages: ["next-mdx-remote"],
+  // App Router: packages using Node built-ins must be external
+  serverExternalPackages: ["gray-matter"],
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
@@ -28,5 +32,6 @@ const nextConfig = {
     ];
   },
 };
+
 
 export default nextConfig;
