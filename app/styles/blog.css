@@ -464,14 +464,31 @@
   .post-card:hover {
     transform: none;
   }
+  /* show all tags wrapped (no clipping, no hidden scrollbar) when motion is off */
+  .home-card--hobbies .hobby-list,
+  .home-card--skills .skill-tags {
+    flex-wrap: wrap;
+    overflow: visible;
+    scrollbar-width: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .home-card--hobbies .hobby-list::-webkit-scrollbar,
+  .home-card--skills .skill-tags::-webkit-scrollbar {
+    display: initial;
+  }
+  .home-card--hobbies .hobby-list > .marquee-track,
+  .home-card--skills .skill-tags > .marquee-track {
+    animation: none;
+    width: auto;
+  }
 }
 
 /* ============================================================
-   Home page — Card Grid Layout
-   Row 1: 关于我 | 头像 | 文章
-   Row 2: 爱好   | 头像 | 文章
-   Row 3: 技术栈 | 足迹 (跨两列)
-   Row 4: GitHub 热力图 (占满)
+   Home page — Card Grid Layout (3 columns)
+   Row 1: 头像 | 关于我 (跨 2 列)
+   Row 2: 技术栈+爱好 (左列堆叠，两卡等分此行高度) | 项目 | 文章
+   Row 3: 足迹 (最左) | GitHub 热力图 (跨 2 列)
    ============================================================ */
 
 .home-wrap {
@@ -485,9 +502,19 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   grid-template-areas:
-    "avatar  about   about"
-    "hobbies skills  posts"
-    "prints  heat    heat";
+    "avatar   about    about"
+    "left     projects posts"
+    "prints   heat     heat";
+}
+
+/* 左列：技术栈（上） + 爱好（下），纵向堆叠 */
+.home-col-left {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
 }
 
 .home-card--about {
@@ -500,17 +527,110 @@
 .home-card--posts {
   grid-area: posts;
 }
-.home-card--hobbies {
-  grid-area: hobbies;
+/* --- Hobbies / Skills: compact cards; tags scroll as a marquee when
+   they don't all fit on one row --- */
+/* NOTE: specificity must beat the base `.home-card` rule below (which sets
+   min-height:200px / padding:28px 24px). Two-class selector (0,2,0) wins.
+   左列现在只占第 2 行（见 .home-grid），两卡 flex:1 等分该行高度，
+   因此 技术栈+爱好 合计高度 = 项目/文章 卡片高度。 */
+/* 技术栈有 logo tile（比文字药丸高），给它更多垂直空间。
+   整体不加 hover 动效（用户要求）。 */
+.home-card.home-card--skills {
+  min-height: 0;
+  flex: 1.6 1 0;
+  padding: 14px 18px;
+  justify-content: center;
 }
-.home-card--skills {
-  grid-area: skills;
+.home-card.home-card--skills:hover {
+  transform: none;
+}
+.home-card.home-card--links:hover {
+  transform: none;
+}
+.home-card.home-card--hobbies:hover {
+  transform: none;
+}
+.home-card.home-card--hobbies {
+  min-height: 0;
+  flex: 1 1 0;
+  padding: 14px 18px;
+  justify-content: center;
+}
+.home-card.home-card--hobbies .home-card__title,
+.home-card.home-card--skills .home-card__title {
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+/* 链接卡：与技术栈/爱好同款，flex:1 等分左列高度（三卡合计 = 项目/文章 行高） */
+.home-card.home-card--links {
+  min-height: 0;
+  flex: 1 1 0;
+  padding: 16px 18px;
+  justify-content: center;
+}
+.home-card.home-card--links .home-card__title {
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* scrolling viewport: hidden scrollbar + edge fade mask */
+.home-card--hobbies .hobby-list,
+.home-card--skills .skill-tags {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 14px,
+    #000 calc(100% - 14px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 14px,
+    #000 calc(100% - 14px),
+    transparent 100%
+  );
+}
+.home-card--hobbies .hobby-list::-webkit-scrollbar,
+.home-card--skills .skill-tags::-webkit-scrollbar {
+  display: none;
+}
+
+/* the track holds two identical copies for a seamless, gap-preserving loop */
+.home-card--hobbies .hobby-list > .marquee-track,
+.home-card--skills .skill-tags > .marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: max-content;
+  animation: home-marquee 18s linear infinite;
+}
+
+@keyframes home-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 .home-card--footprints {
   grid-area: prints;
 }
 .home-card--heatmap {
   grid-area: heat;
+}
+.home-card--projects {
+  grid-area: projects;
+  min-height: 340px;
+}
+.home-card--posts {
+  grid-area: posts;
+  min-height: 340px;
 }
 
 .home-card {
@@ -763,20 +883,63 @@
   gap: 8px;
 }
 
-.skill-tag {
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface-raised);
-  font-size: 13px;
-  color: var(--text-muted);
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+/* Tech-stack brand logos: bare SVGs, no background tile (requested). */
+.skill-logo {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 64px;
+}
+.skill-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+.skill-logo__name {
+  font-size: 11px;
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+  white-space: nowrap;
 }
 
-.skill-tag:hover {
-  border-color: var(--primary);
+/* --- Projects card --- */
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.project-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.project-item:hover {
+  background: var(--border);
+}
+.project-item__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  transition: color 0.2s ease;
+}
+.project-item:hover .project-item__name {
   color: var(--primary);
-  background: var(--surface-raised);
+}
+.project-item__desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
 }
 
 /* --- Post list inside card --- */
@@ -848,11 +1011,11 @@
 }
 
 .hobby-tag {
-  padding: 6px 16px;
+  padding: 4px 12px;
   border-radius: 999px;
   background: var(--surface-raised);
   border: 1px solid transparent;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-muted);
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
@@ -860,6 +1023,34 @@
 .hobby-tag:hover {
   border-color: var(--primary);
   color: var(--primary);
+}
+
+/* --- Links card --- */
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+}
+.link-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+.link-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
 }
 
 /* --- Footprints card --- */
@@ -946,18 +1137,18 @@
   .home-card--about,
   .home-card--avatar,
   .home-card--posts,
-  .home-card--hobbies,
-  .home-card--skills,
+  .home-card--projects,
   .home-card--footprints,
-  .home-card--heatmap {
+  .home-card--heatmap,
+  .home-col-left {
     grid-area: auto;
   }
 
-  /* 小屏顺序：头像 → 关于我 → 爱好 → 技术栈 → 文章 → 足迹 → 热力图 */
+  /* 小屏顺序：头像 → 关于我 →（技术栈 → 爱好）→ 项目 → 文章 → 足迹 → 热力图 */
   .home-card--avatar { order: -1; }
   .home-card--about { order: 0; }
-  .home-card--hobbies { order: 1; }
-  .home-card--skills { order: 2; }
+  .home-col-left { order: 1; }
+  .home-card--projects { order: 2; }
   .home-card--posts { order: 3; }
   .home-card--footprints { order: 4; }
   .home-card--heatmap { order: 5; }

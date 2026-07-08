@@ -52,27 +52,87 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="home-card home-card--hobbies">
-          <h2 className="home-card__title">爱好</h2>
-          <div className="hobby-list">
-            {siteConfig.hobbies.map((h) => (
-              <span key={h} className="hobby-tag">
-                {h}
-              </span>
-            ))}
+        {/* 左列：技术栈（上） | 爱好（下） */}
+        <div className="home-col-left">
+          <div className="home-card home-card--skills">
+            <h2 className="home-card__title">技术栈</h2>
+            <div className="skill-tags">
+              <div className="marquee-track">
+                {siteConfig.skills.map((s) => (
+                  <span key={s.name} className="skill-logo" title={s.name}>
+                    <img src={s.logo} alt={s.name} />
+                    <span className="skill-logo__name">{s.name}</span>
+                  </span>
+                ))}
+              </div>
+              <div className="marquee-track" aria-hidden="true">
+                {siteConfig.skills.map((s) => (
+                  <span key={`${s.name}-dup`} className="skill-logo">
+                    <img src={s.logo} alt="" />
+                    <span className="skill-logo__name">{s.name}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="home-card home-card--hobbies">
+            <h2 className="home-card__title">爱好</h2>
+            <div className="hobby-list">
+              <div className="marquee-track">
+                {siteConfig.hobbies.slice(0, 5).map((h) => (
+                  <span key={h} className="hobby-tag">
+                    {h}
+                  </span>
+                ))}
+              </div>
+              <div className="marquee-track" aria-hidden="true">
+                {siteConfig.hobbies.slice(0, 5).map((h) => (
+                  <span key={`${h}-dup`} className="hobby-tag">
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="home-card home-card--links">
+            <h2 className="home-card__title">链接</h2>
+            <div className="link-list">
+              {siteConfig.links.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className="link-icon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={l.label}
+                >
+                  <img src={l.logo} alt={l.label} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* 第二行：爱好 | 技术栈 | 文章 */}
-        <div className="home-card home-card--skills">
-          <h2 className="home-card__title">技术栈</h2>
-          <div className="skill-tags">
-            {siteConfig.skills.map((s) => (
-              <span key={s} className="skill-tag">
-                {s}
-              </span>
+        {/* 项目卡片 */}
+        <div className="home-card home-card--projects">
+          <h2 className="home-card__title">项目</h2>
+          <ul className="project-list">
+            {siteConfig.projects.map((p) => (
+              <li key={p.name}>
+                <a
+                  href={p.href}
+                  className="project-item"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="project-item__name">{p.name}</span>
+                  <span className="project-item__desc">{p.desc}</span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className="home-card home-card--footprints">
@@ -86,7 +146,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 第三行：足迹 | GitHub 热力图（占两列） */}
+        {/* 第三行：足迹 | GitHub 热力图 */}
         <div className="home-card home-card--heatmap">
           <h2 className="home-card__title">GitHub 热力图</h2>
           <GitHubHeatmap />
