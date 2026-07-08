@@ -91,10 +91,16 @@ body::before {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* ---- Custom scrollbar ---- */
+/* ---- Scrollbar: thin slate, fully-round thumb (global, single gray for both themes) ---- */
+html,
+.prose pre {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.5) transparent;
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -102,19 +108,12 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-  transition: background 0.2s ease;
+  background: rgba(148, 163, 184, 0.6);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
-/* Firefox */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  background: rgba(148, 163, 184, 0.9);
 }
 
 /* Form controls don't inherit font-family by default — force it */
