@@ -1159,6 +1159,14 @@
   .home-card--footprints { order: 4; }
   .home-card--heatmap { order: 5; }
 
+  /* 小屏：左列三卡（技术栈/爱好/链接）改为内容高度，避免 flex-basis:0 把卡片压成只有标题。
+     选择器需与桌面规则同等特异性（.home-card.home-card--X）才能在媒体查询里覆盖。 */
+  .home-card.home-card--skills,
+  .home-card.home-card--hobbies,
+  .home-card.home-card--links {
+    flex: 0 0 auto;
+  }
+
   .home-card {
     min-height: unset;
     padding: 24px 20px;

@@ -42,7 +42,7 @@ export const siteConfig = {
   projects: [
     {
       name: "RagMate",
-      desc: "企业级 RAG 知识管理系统 · 混合检索 + LangGraph 代理 · Python",
+      desc: "企业级 RAG 知识管理系统 · 混合检索",
       href: "https://github.com/lg114/RagMate",
     },
     {
@@ -52,7 +52,7 @@ export const siteConfig = {
     },
     {
       name: "bagger",
-      desc: "项目描述待补充",
+      desc: "AI 编程对话收集器 · Claude Code 记录本地检索",
       href: "https://github.com/lg114/bagger",
     },
   ],
