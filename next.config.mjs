@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Allow LAN access to dev resources (HMR websocket etc.)
+  allowedDevOrigins: ["192.168.1.14"],
   // Turbopack: CJS ESM interop for next-mdx-remote (see next.js#64525)
   transpilePackages: ["next-mdx-remote"],
   // App Router: packages using Node built-ins must be external
