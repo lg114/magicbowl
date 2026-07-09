@@ -437,6 +437,12 @@
   text-decoration: underline;
 }
 
+/* 顶部返回链接（列表页 / 详情页顶部使用），去底部外边距、改到底部间距 */
+.back-link--top {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .blog-shell {

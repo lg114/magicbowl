@@ -29,6 +29,9 @@ export default async function PostsPage({
   return (
     <main className="blog-shell">
       <div className="blog-main">
+        <Link href="/" className="back-link back-link--top">
+          ← 返回主页面
+        </Link>
         <div className="section-head">
           <h1 className="section-title">文章</h1>
           {filterLabel && (

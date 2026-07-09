@@ -55,6 +55,9 @@ export default async function PostPage({
   return (
     <main className="blog-shell blog-shell--single">
       <article className="post-detail">
+        <Link href="/" className="back-link back-link--top">
+          ← 返回主页面
+        </Link>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
