@@ -29,7 +29,7 @@ export const siteConfig = {
     { name: "OpenClaw", logo: "/logos/openclaw-color.svg" },
     { name: "HermesAgent", logo: "/logos/hermesagent.webp" },
   ],
-  hobbies: ["阅读", "咖啡", "音乐", "摄影", "游戏", "旅行"],
+  hobbies: ["阅读", "咖啡", "音乐", "摄影", "游戏", "旅行", "电影", "赛车", "健身", "斯诺克"],
   footprints: [
     "北京",
     "上海",
@@ -41,29 +41,29 @@ export const siteConfig = {
   ],
   projects: [
     {
-      name: "memorized",
-      desc: "AI Agent 长期记忆运行时 · 本地优先 · Python",
-      href: "https://github.com/your-name/memorized",
+      name: "RagMate",
+      desc: "企业级 RAG 知识管理系统 · 混合检索 + LangGraph 代理 · Python",
+      href: "https://github.com/lg114/RagMate",
     },
     {
       name: "MagicBowl",
       desc: "你正在看的这个站点 · Next.js + TypeScript",
-      href: "https://github.com/your-name/magicbowl",
+      href: "https://github.com/lg114/magicbowl",
     },
     {
-      name: "你的下一个项目",
-      desc: "在 lib/site.ts 的 projects 里替换成你的真实项目",
-      href: "#",
+      name: "bagger",
+      desc: "项目描述待补充",
+      href: "https://github.com/lg114/bagger",
     },
   ],
   social: {
-    github: "https://github.com/your-name",
+    github: "https://github.com/lg114",
     email: "mailto:you@example.com",
     twitter: "https://twitter.com/your-name",
   },
   // 首页「链接」卡片内容：替换为你的真实链接即可
   links: [
-    { label: "GitHub", href: "https://github.com/your-name", logo: "/logos/github.png" },
+    { label: "GitHub", href: "https://github.com/lg114", logo: "/logos/github.png" },
     { label: "Bilibili", href: "https://space.bilibili.com/your-id", logo: "/logos/bilibili.webp" },
   ],
   // Giscus 评论配置：前往 https://giscus.app 完成设置后填入下方字段。

@@ -611,7 +611,11 @@
   flex-wrap: nowrap;
   gap: 8px;
   width: max-content;
-  animation: home-marquee 18s linear infinite;
+  /* 关键：轨道禁止被外层 flex 压缩，否则中文胶囊会被压成单字 */
+  flex-shrink: 0;
+  /* 时长由卡片内联 --marquee-duration 控制：按项目数等比，
+     使爱好（项少）与技术栈（项多）滚动的视觉速度一致 */
+  animation: home-marquee var(--marquee-duration, 18s) linear infinite;
 }
 
 @keyframes home-marquee {
@@ -1017,6 +1021,8 @@
   border: 1px solid transparent;
   font-size: 12px;
   color: var(--text-muted);
+  /* 中文可在任意字间断行，不设 nowrap 会被 flex 压成单字 */
+  white-space: nowrap;
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 

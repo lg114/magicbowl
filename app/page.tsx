@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";
 import GitHubHeatmap from "./components/GitHubHeatmap";
@@ -7,6 +8,12 @@ import AvatarCard from "./components/AvatarCard";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 5);
+
+  // 爱好卡滚动时长：按项目数与技术栈等比，使两张卡滚动视觉速度一致
+  // 技术栈 14 项 = 18s，爱好 6 项 ≈ 7.7s（技术栈保持默认 18s 不变）
+  const hobbyMarqueeDuration = `${
+    (siteConfig.hobbies.length / siteConfig.skills.length) * 18
+  }s`;
 
   return (
     <main className="home-wrap">
@@ -78,16 +85,19 @@ export default function Home() {
 
           <div className="home-card home-card--hobbies">
             <h2 className="home-card__title">爱好</h2>
-            <div className="hobby-list">
+            <div
+              className="hobby-list"
+              style={{ "--marquee-duration": hobbyMarqueeDuration } as CSSProperties}
+            >
               <div className="marquee-track">
-                {siteConfig.hobbies.slice(0, 5).map((h) => (
+                {siteConfig.hobbies.map((h) => (
                   <span key={h} className="hobby-tag">
                     {h}
                   </span>
                 ))}
               </div>
               <div className="marquee-track" aria-hidden="true">
-                {siteConfig.hobbies.slice(0, 5).map((h) => (
+                {siteConfig.hobbies.map((h) => (
                   <span key={`${h}-dup`} className="hobby-tag">
                     {h}
                   </span>
