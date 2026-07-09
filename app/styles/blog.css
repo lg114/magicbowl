@@ -677,7 +677,6 @@
 /* Keep pill tags readable on their light backgrounds */
 [data-theme="light"] .skill-tag,
 [data-theme="light"] .hobby-tag,
-[data-theme="light"] .footprint-tag,
 [data-theme="light"] .tag-pill {
   --text: #16191f;
   --text-muted: #4b5563;
@@ -687,7 +686,6 @@
 
 [data-theme="light"] .skill-tag:hover,
 [data-theme="light"] .hobby-tag:hover,
-[data-theme="light"] .footprint-tag:hover,
 [data-theme="light"] .tag-pill:hover {
   color: #4163e9;
 }
@@ -1066,25 +1064,309 @@
 }
 
 /* --- Footprints card --- */
-.footprint-list {
+.footprint-quote {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+
+/* --- Footprints card: clickable, opens world map --- */
+.footprint-card {
+  cursor: pointer;
+  position: relative;
+}
+.footprint-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.footprint-open-hint {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+/* --- 3D globe modal --- */
+.globe-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 4vmin;
+  background: rgba(8, 10, 16, 0.62);
+  backdrop-filter: blur(14px) saturate(140%);
+  animation: globe-modal-fade 0.28s ease both;
 }
-
-.footprint-tag {
-  padding: 6px 16px;
-  border-radius: 999px;
-  background: var(--surface-raised);
-  border: 1px solid transparent;
+@keyframes globe-modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.globe-modal__panel {
+  position: relative;
+  width: min(960px, 94vw);
+  height: min(80vh, 760px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  background: radial-gradient(
+      120% 120% at 50% 0%,
+      rgba(40, 48, 66, 0.92),
+      rgba(14, 17, 26, 0.96)
+    );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.8);
+  animation: globe-panel-pop 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes globe-panel-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.globe-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.globe-modal__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e8ecf5;
+}
+.globe-modal__close {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cdd4e2;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.globe-modal__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transform: rotate(90deg);
+}
+/* --- 足迹地图（高德 JS API）--- */
+.map-layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.world-map-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+/* 高德容器挂载点 */
+.amap-host {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0b0e14;
+}
+[data-theme="light"] .amap-host {
+  background: #e8ecf3;
+}
+.amap-host .amap-container,
+.amap-host .amap-map {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 14px;
+  font: inherit;
+}
+/* 加载 / 错误浮层 */
+.map-loading,
+.globe-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  pointer-events: none;
+  color: #aeb6c8;
   font-size: 14px;
-  color: var(--text-muted);
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.04em;
 }
-
-.footprint-tag:hover {
-  border-color: var(--primary);
-  color: var(--primary);
+.globe-loading--err {
+  color: #ff9a9a;
+}
+/* 城市「点亮」：光晕 + 爆发环 + 脉冲 + 核心点 + 常驻标签（高德 Marker content 注入的 HTML） */
+.city-marker {
+  position: relative;
+  width: 0;
+  height: 0;
+  opacity: 0; /* 默认隐藏，.city-markers--lit 后按 --i 错峰点亮 */
+}
+.city-halo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--primary) 42%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.city-burst {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%) scale(0.3);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--primary) 65%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.city-pulse {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--primary) 50%, transparent);
+  animation: city-pulse 2.4s ease-out infinite;
+  z-index: 2;
+}
+.city-core {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 11px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 85%, transparent);
+  z-index: 3;
+}
+.city-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, 15px);
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(15, 20, 30, 0.72);
+  padding: 2px 9px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
+  pointer-events: none;
+  z-index: 4;
+}
+[data-theme="light"] .city-label {
+  background: rgba(255, 255, 255, 0.82);
+  color: #1b2230;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+/* 开场：城市依次爆发点亮（按 --i 错峰） */
+.city-markers--lit .city-marker {
+  animation: city-pop 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 130ms);
+}
+.city-markers--lit .city-burst {
+  animation: city-burst 0.8s ease-out both;
+  animation-delay: calc(var(--i) * 130ms);
+}
+@keyframes city-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes city-burst {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.4);
+  }
+}
+@keyframes city-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.7;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(2.6);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.6);
+    opacity: 0;
+  }
+}
+.globe-modal__tip {
+  margin: 0;
+  padding: 12px 20px 16px;
+  text-align: center;
+  font-size: 12px;
+  color: #98a1b6;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+/* 高德 Logo / 版权在暗色下适当提亮 */
+.amap-host .amap-logo,
+.amap-host .amap-copyright {
+  opacity: 0.55;
+}
+@media (prefers-reduced-motion: reduce) {
+  .city-marker {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .city-burst {
+    display: none;
+  }
+  .city-pulse {
+    animation: none;
+  }
 }
 
 /* --- GitHub heatmap card (full-width, row 3) --- */
@@ -1176,5 +1458,17 @@
   .home-card {
     min-height: unset;
     padding: 24px 20px;
+  }
+
+  /* 小屏：地球弹窗全屏沉浸 */
+  .globe-modal {
+    padding: 0;
+  }
+  .globe-modal__panel {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+    border: none;
   }
 }

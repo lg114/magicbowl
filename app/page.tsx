@@ -5,6 +5,7 @@ import { siteConfig } from "../lib/site";
 import GitHubHeatmap from "./components/GitHubHeatmap";
 import BootSplash from "./components/BootSplash";
 import AvatarCard from "./components/AvatarCard";
+import FootprintMap from "./components/FootprintMap";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 5);
@@ -145,16 +146,7 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="home-card home-card--footprints">
-          <h2 className="home-card__title">足迹</h2>
-          <div className="footprint-list">
-            {siteConfig.footprints.map((f) => (
-              <span key={f} className="footprint-tag">
-                {f}
-              </span>
-            ))}
-          </div>
-        </div>
+        <FootprintMap footprints={siteConfig.footprints} />
 
         {/* 第三行：足迹 | GitHub 热力图 */}
         <div className="home-card home-card--heatmap">
