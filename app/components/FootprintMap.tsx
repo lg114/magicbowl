@@ -65,7 +65,25 @@ export default function FootprintMap({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="globe-modal__head">
-              <span className="globe-modal__title">我的足迹</span>
+              <div className="globe-modal__heading">
+                <span className="globe-modal__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <span className="globe-modal__titles">
+                  <span className="globe-modal__title">我的足迹</span>
+                  <span className="globe-modal__sub">千里之行，始于足下</span>
+                </span>
+              </div>
               <button
                 type="button"
                 className="globe-modal__close"

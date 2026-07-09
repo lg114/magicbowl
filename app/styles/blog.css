@@ -1092,7 +1092,7 @@
   opacity: 0.85;
 }
 
-/* --- 3D globe modal --- */
+/* --- 足迹地图弹窗（主题自适应，融入整站玻璃卡片语言）--- */
 .globe-modal {
   position: fixed;
   inset: 0;
@@ -1101,9 +1101,12 @@
   align-items: center;
   justify-content: center;
   padding: 4vmin;
-  background: rgba(8, 10, 16, 0.62);
-  backdrop-filter: blur(14px) saturate(140%);
+  background: rgba(8, 10, 16, 0.55);
+  backdrop-filter: blur(16px) saturate(140%);
   animation: globe-modal-fade 0.28s ease both;
+}
+[data-theme="light"] .globe-modal {
+  background: rgba(226, 230, 238, 0.5);
 }
 @keyframes globe-modal-fade {
   from {
@@ -1115,20 +1118,44 @@
 }
 .globe-modal__panel {
   position: relative;
-  width: min(960px, 94vw);
-  height: min(80vh, 760px);
+  width: min(1000px, 94vw);
+  height: min(82vh, 780px);
   display: flex;
   flex-direction: column;
-  border-radius: 22px;
+  border-radius: 24px;
   overflow: hidden;
-  background: radial-gradient(
-      120% 120% at 50% 0%,
-      rgba(40, 48, 66, 0.92),
-      rgba(14, 17, 26, 0.96)
-    );
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.8);
-  animation: globe-panel-pop 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 32, 40, 0.92),
+    rgba(18, 20, 26, 0.95)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 120px -36px rgba(0, 0, 0, 0.7);
+  animation: globe-panel-pop 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+[data-theme="light"] .globe-modal__panel {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(246, 247, 249, 0.97)
+  );
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 30px 90px -30px rgba(16, 25, 31, 0.35);
+}
+/* 顶部主色渐变细线，呼应站点强调色 */
+.globe-modal__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary),
+    transparent
+  );
+  z-index: 6;
+  pointer-events: none;
 }
 @keyframes globe-panel-pop {
   from {
@@ -1144,47 +1171,102 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+[data-theme="light"] .globe-modal__head {
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+.globe-modal__heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.globe-modal__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+  color: var(--primary);
+}
+.globe-modal__icon svg {
+  width: 20px;
+  height: 20px;
+}
+.globe-modal__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 .globe-modal__title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #e8ecf5;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f0f3fa;
+}
+.globe-modal__sub {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #98a1b6;
+}
+[data-theme="light"] .globe-modal__title {
+  color: var(--text);
+}
+[data-theme="light"] .globe-modal__sub {
+  color: var(--text-muted);
 }
 .globe-modal__close {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   color: #cdd4e2;
   font-size: 15px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease,
+    border-color 0.2s ease;
 }
 .globe-modal__close:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+  color: var(--primary);
   transform: rotate(90deg);
 }
-/* --- 足迹地图（高德 JS API）--- */
+[data-theme="light"] .globe-modal__close {
+  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-muted);
+}
+/* --- 足迹地图（高德 JS API）：内嵌成卡片框 --- */
 .map-layout {
   flex: 1;
   min-height: 0;
   display: flex;
+  padding: 14px;
 }
 .world-map-wrap {
   position: relative;
   flex: 1;
   min-width: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+[data-theme="light"] .world-map-wrap {
+  border-color: rgba(0, 0, 0, 0.08);
 }
 /* 高德容器挂载点 */
 .amap-host {
   position: absolute;
   inset: 0;
-  border-radius: 14px;
-  overflow: hidden;
   background: #0b0e14;
 }
 [data-theme="light"] .amap-host {
@@ -1194,7 +1276,6 @@
 .amap-host .amap-map {
   width: 100% !important;
   height: 100% !important;
-  border-radius: 14px;
   font: inherit;
 }
 /* 加载 / 错误浮层 */
@@ -1207,7 +1288,7 @@
   justify-content: center;
   z-index: 6;
   pointer-events: none;
-  color: #aeb6c8;
+  color: var(--text-muted);
   font-size: 14px;
   letter-spacing: 0.04em;
 }
@@ -1350,6 +1431,10 @@
   font-size: 12px;
   color: #98a1b6;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+[data-theme="light"] .globe-modal__tip {
+  color: var(--text-muted);
+  border-top-color: rgba(0, 0, 0, 0.07);
 }
 /* 高德 Logo / 版权在暗色下适当提亮 */
 .amap-host .amap-logo,
