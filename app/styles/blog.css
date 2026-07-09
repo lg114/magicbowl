@@ -1454,53 +1454,6 @@
   }
 }
 
-/* --- GitHub heatmap card (full-width, row 3) --- */
-.heatmap {
-  margin-top: 4px;
-}
-
-.heatmap__grid {
-  display: grid;
-  grid-template-columns: repeat(26, 1fr);
-  gap: 3px;
-}
-
-.heatmap__cell {
-  aspect-ratio: 1 / 1;
-  border-radius: 2px;
-  background: var(--border);
-}
-
-.heatmap__cell--l0 {
-  background: var(--border);
-}
-.heatmap__cell--l1 {
-  background: rgba(65, 99, 233, 0.25);
-}
-.heatmap__cell--l2 {
-  background: rgba(65, 99, 233, 0.45);
-}
-.heatmap__cell--l3 {
-  background: rgba(65, 99, 233, 0.7);
-}
-.heatmap__cell--l4 {
-  background: rgba(65, 99, 233, 1);
-}
-
-.heatmap__legend {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 12px;
-  font-size: 12px;
-  opacity: 0.6;
-}
-
-.heatmap__legend .heatmap__cell {
-  width: 12px;
-  aspect-ratio: 1 / 1;
-}
-
 /* ---------- Responsive: home grid ---------- */
 @media (max-width: 720px) {
   .home-wrap {

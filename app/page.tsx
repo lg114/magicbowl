@@ -2,12 +2,11 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";
-import GitHubHeatmap from "./components/GitHubHeatmap";
 import BootSplash from "./components/BootSplash";
 import AvatarCard from "./components/AvatarCard";
 import FootprintMap from "./components/FootprintMap";
 
-export default function Home() {
+export default async function Home() {
   const posts = getAllPosts().slice(0, 5);
 
   // 爱好卡滚动时长：按项目数与技术栈等比，使两张卡滚动视觉速度一致
@@ -147,12 +146,6 @@ export default function Home() {
         </div>
 
         <FootprintMap footprints={siteConfig.footprints} />
-
-        {/* 第三行：足迹 | GitHub 热力图 */}
-        <div className="home-card home-card--heatmap">
-          <h2 className="home-card__title">GitHub 热力图</h2>
-          <GitHubHeatmap />
-        </div>
       </div>
     </main>
   );
