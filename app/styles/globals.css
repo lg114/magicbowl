@@ -20,7 +20,7 @@ body {
   height: 100%;
 }
 
-/* ===== Theme tokens (dual theme, default = dark) ===== */
+/* ===== Theme tokens (dual theme; runtime default = light, set in layout.tsx) ===== */
 :root,
 :root[data-theme="dark"] {
   --bg: #0c0c0f;
