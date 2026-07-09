@@ -2,12 +2,16 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getAllPosts } from "../lib/posts";
 import { siteConfig } from "../lib/site";
+import { getContributions } from "../lib/github-contributions";
 import BootSplash from "./components/BootSplash";
 import AvatarCard from "./components/AvatarCard";
 import FootprintMap from "./components/FootprintMap";
+import GitHubHeatmap from "./components/GitHubHeatmap";
 
 export default async function Home() {
   const posts = getAllPosts().slice(0, 5);
+  const thisYear = new Date().getFullYear();
+  const yearData = await getContributions(thisYear);
 
   // 爱好卡滚动时长：按项目数与技术栈等比，使两张卡滚动视觉速度一致
   // 技术栈 14 项 = 18s，爱好 6 项 ≈ 7.7s（技术栈保持默认 18s 不变）
@@ -146,6 +150,12 @@ export default async function Home() {
         </div>
 
         <FootprintMap footprints={siteConfig.footprints} />
+
+        {/* GitHub 贡献热力图 */}
+        <div className="home-card home-card--heatmap">
+          <h2 className="home-card__title">GitHub 热力图</h2>
+          <GitHubHeatmap data={yearData} year={thisYear} />
+        </div>
       </div>
     </main>
   );

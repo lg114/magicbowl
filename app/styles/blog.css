@@ -1454,6 +1454,168 @@
   }
 }
 
+/* ─── GitHub 热力图（Flexbox 列 + CSS group-hover）─── */
+.gh-heatmap {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 月份标签行 */
+.gh-months {
+  display: flex;
+  align-items: flex-end;
+  height: 20px;
+  margin-bottom: 4px;
+  padding-left: 34px;
+}
+.gh-month {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* 主体：星期标签 + 网格 */
+.gh-body {
+  display: flex;
+  gap: 4px;
+}
+
+/* 星期标签列 */
+.gh-weekdays {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 30px;
+  padding-right: 0;
+  flex-shrink: 0;
+}
+.gh-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 10px;
+  color: var(--text-muted);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* 横向滚动容器 */
+.gh-scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.gh-scroll::-webkit-scrollbar { height: 0; display: none; }
+
+/* 网格：周之间 flex row */
+.gh-grid {
+  display: flex;
+  min-width: max-content;
+}
+
+/* 周列 */
+.gh-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 日格 */
+.gh-cell {
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: outline 0.1s, transform 0.1s;
+  outline: 2px solid transparent;
+  outline-offset: -1px;
+}
+.gh-cell:hover,
+.gh-cell:focus-visible {
+  outline-color: rgba(128, 128, 128, 0.5);
+  transform: scale(1.25);
+  z-index: 1;
+}
+[data-theme="dark"] .gh-cell:hover,
+[data-theme="dark"] .gh-cell:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tooltip: portal-based, floats above everything */
+.gh-tip {
+  padding: 5px 10px;
+  background: var(--surface-card, #fff);
+  color: var(--text, #1f2328);
+  border: 1px solid var(--border, #d0d7de);
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 2147483647;
+}
+[data-theme="dark"] .gh-tip {
+  background: var(--surface-card, #1c2128);
+  color: var(--text, #e6edf3);
+  border-color: var(--border, #30363d);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.gh-cell__count {
+  font-weight: 600;
+}
+
+/* 底部：图例 + 总数 */
+.gh-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.gh-legend__bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.gh-legend__label {
+  font-size: 11px;
+  color: var(--text-muted);
+  user-select: none;
+}
+.gh-legend__swatch {
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.gh-total {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* 空状态 */
+.gh-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 20px 0;
+}
+
+/* 响应式：小屏缩小字号 */
+@media (max-width: 768px) {
+  .gh-month,
+  .gh-weekday { font-size: 9px; }
+  .gh-legend__label { font-size: 9px; }
+}
+@media (max-width: 480px) {
+  .gh-legend { gap: 8px; }
+}
+
 /* ---------- Responsive: home grid ---------- */
 @media (max-width: 720px) {
   .home-wrap {

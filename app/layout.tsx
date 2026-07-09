@@ -4,6 +4,7 @@ import "./styles/clock.css";
 import "./styles/blog.css";
 import ThemeToggle from "./components/ThemeToggle";
 import ClockBadge from "./components/ClockBadge";
+import OverlayScrollbar from "./components/OverlayScrollbar";
 import { siteConfig } from "../lib/site";
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
+        <OverlayScrollbar />
         <ThemeToggle />
         {children}
         <ClockBadge />

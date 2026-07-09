@@ -91,29 +91,26 @@ body::before {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* ---- Scrollbar: thin slate, fully-round thumb (global, single gray for both themes) ---- */
-html,
-.prose pre {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.5) transparent;
+/* ---- Scrollbar: overlay, no layout space ---- */
+/* Hide native scrollbar everywhere */
+html {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge Legacy */
 }
 
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+html::-webkit-scrollbar {         /* Chrome/Safari/Edge */
+  width: 0;
+  height: 0;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+/* Custom overlay scrollbar thumb */
+.overlay-scrollbar-thumb.is-visible {
+  opacity: 1 !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.6);
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.9);
+:root[data-theme="dark"] .overlay-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18) !important;
 }
 
 /* Form controls don't inherit font-family by default — force it */
