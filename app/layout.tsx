@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh" suppressHydrationWarning>
+    <html lang="zh" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#000000" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

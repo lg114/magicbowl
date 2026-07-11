@@ -366,14 +366,14 @@ main {
   /* 避免 emoji 被加粗导致视觉偏重 */
   font-weight: 400;
 }
-/* 身份标签行：等宽 --mono + 灰，语义上对应「标签类」，作为三级层级最弱的一层 */
+/* 身份标签行：衬线（与箴言、正文统一），作为三级层级最弱的一层 */
 .welcome__roles {
   margin: 16px 0 0;
-  font-family: var(--mono);
+  font-family: var(--serif);
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--meta);
-  letter-spacing: 0.6px;
+  letter-spacing: 0.3px;
 }
 /* 身份词 hover 发亮：仅颜色过渡，无位移/旋转，落在眩晕安全区；
    双主题下均提亮为 accent 蓝，并叠一层柔和蓝辉光，鼠标移开即淡回 */
@@ -427,11 +427,11 @@ main {
   opacity: 0;
   animation: fadeUp 0.8s ease 0.5s both;
 }
-/* 引用样式：衬线 + 斜体 + 大引号，与 hero 的无衬线正文形成区分 */
+/* 引用样式：衬线 + 斜体 + 大引号 */
 .wisdom__quote {
   margin: 0;
   max-width: 640px;
-  font-family: Georgia, "Times New Roman", "Songti SC", "Noto Serif SC", serif;
+  font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
   font-size: 1.7rem;
@@ -631,39 +631,81 @@ main {
   margin: 0 auto;
 }
 
-/* 分页：纯按钮翻页（无滚动注入、无位移动效，契合眩晕安全区） */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 42px;
+/* 归档列表：紧凑「一行一篇」，按年分组；年份吸顶，扫读密度远高于卡片网格 */
+.archive-list {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
 }
-.page-btn {
-  min-width: 38px;
-  height: 38px;
-  padding: 0 12px;
+.archive-year {
+  margin-bottom: 6px;
+}
+/* 年份吸顶标题：紧贴导航胶囊下方（top 与胶囊底部错开），半透明模糊背景保证压住正文时可读 */
+.archive-year__label {
+  position: sticky;
+  top: 70px;
+  z-index: 3;
+  margin: 0;
+  padding: 11px 4px 9px;
   font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: var(--meta);
   background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--card-border);
+}
+.archive-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.archive-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 12px 10px;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line, rgba(128, 128, 128, 0.12));
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+.archive-row:hover {
+  background: var(--card-bg);
+}
+.archive-row:hover .archive-row__title {
+  color: var(--accent);
+}
+.archive-row__date {
+  flex: 0 0 64px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.3px;
+  color: var(--meta);
+}
+.archive-row__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.archive-row__cat {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  color: var(--accent);
   border: 1px solid var(--card-border);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.page-btn:hover:not(:disabled) {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-.page-btn--active {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-.page-btn:disabled {
-  opacity: 0.4;
-  cursor: default;
+  border-radius: 999px;
+  padding: 2px 9px;
+  white-space: nowrap;
 }
 
 /* ---------- 文章详情页 /posts/[slug] ---------- */
@@ -815,6 +857,7 @@ main {
   .post__title { font-size: 1.6rem; }
   .nav { top: 14px; left: 14px; gap: 11px; padding: 7px 14px; }
   .nav__links { gap: 11px; }
+  .archive-year__label { top: 62px; }
 }
 
 /* ---------- 响应式：手机 ---------- */

@@ -1,58 +1,49 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 import type { PostMeta } from "../../lib/post-types";
-import PostCard from "./PostCard";
 
-// 归档页分页：客户端按页切片，按钮翻页、无滚动注入、无位移动效，
-// 契合「眩晕安全区」偏好。整份文章列表一次性传入，翻页仅切换可见切片。
-const PER_PAGE = 12;
+// 归档页：紧凑列表 + 按年分组。
+// 设计取向：文章数量大时，卡片网格信息密度低、翻页累；
+// 改为「一行一篇」的列表（日期 + 标题 + 分类），再按年份分段，
+// 年份做吸顶小标题，一屏可扫 15–20 篇，几百篇也不慌。
+// 全部文章一次性渲染、不翻页、无位移动效，契合「眩晕安全区」偏好。
+
+// 由 YYYY-MM-DD 取「M月D日」，省去年份（年份已是分组标题）。
+function shortDate(iso: string): string {
+  const [, m, d] = iso.split("-");
+  if (!m || !d) return iso;
+  return `${Number(m)}月${Number(d)}日`;
+}
 
 export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
-  const [page, setPage] = useState(1);
-  const totalPages = Math.max(1, Math.ceil(posts.length / PER_PAGE));
-  const start = (page - 1) * PER_PAGE;
-  const visible = posts.slice(start, start + PER_PAGE);
+  // posts 已由 getAllPosts 按日期倒序排好，故首次遇到的年份即最新；
+  // 直接按出现顺序塞进 Map，分组自然呈「年↓」排列。
+  const groups = new Map<string, PostMeta[]>();
+  for (const post of posts) {
+    const year = post.date.slice(0, 4) || "未知";
+    if (!groups.has(year)) groups.set(year, []);
+    groups.get(year)!.push(post);
+  }
 
   return (
-    <>
-      <div className="cards__grid">
-        {visible.map((post) => (
-          <PostCard key={post.slug} post={post} />
-        ))}
-      </div>
-
-      {totalPages > 1 && (
-        <nav className="pagination" aria-label="文章分页">
-          <button
-            type="button"
-            className="page-btn"
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            disabled={page === 1}
-          >
-            ← 上一页
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-            <button
-              key={n}
-              type="button"
-              className={`page-btn${n === page ? " page-btn--active" : ""}`}
-              onClick={() => setPage(n)}
-              aria-current={n === page ? "page" : undefined}
-            >
-              {n}
-            </button>
-          ))}
-          <button
-            type="button"
-            className="page-btn"
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-          >
-            下一页 →
-          </button>
-        </nav>
-      )}
-    </>
+    <div className="archive-list">
+      {[...groups.entries()].map(([year, items]) => (
+        <section className="archive-year" key={year}>
+          <h2 className="archive-year__label">{year}</h2>
+          <ul className="archive-rows">
+            {items.map((post) => (
+              <li key={post.slug}>
+                <Link href={`/posts/${post.slug}`} className="archive-row">
+                  <time className="archive-row__date" dateTime={post.date}>
+                    {shortDate(post.date)}
+                  </time>
+                  <span className="archive-row__title">{post.title}</span>
+                  <span className="archive-row__cat">{post.category}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
   );
 }
