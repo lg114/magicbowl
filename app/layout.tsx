@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
-import "./styles/clock.css";
-import "./styles/blog.css";
-import ThemeToggle from "./components/ThemeToggle";
-import ClockBadge from "./components/ClockBadge";
-import OverlayScrollbar from "./components/OverlayScrollbar";
 import { siteConfig } from "../lib/site";
+import ThemeToggle from "./components/ThemeToggle";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -15,25 +11,11 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   authors: [{ name: siteConfig.author }],
-  openGraph: {
-    title: siteConfig.title,
-    description: siteConfig.description,
-    type: "website",
-    locale: siteConfig.locale,
-    siteName: siteConfig.name,
-    url: siteConfig.url,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.title,
-    description: siteConfig.description,
-  },
 };
 
-// Set theme before first paint to avoid a flash of the wrong theme.
-// Also disable browser scroll restoration so a refresh/Ctrl+R returns to the
-// top instead of jumping back to a previous scroll position (e.g. #main-content).
-const themeInitScript = `(function(){try{history.scrollRestoration='manual';}catch(e){}try{var t=localStorage.getItem('mb-theme');if(!t){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`;
+// 首屏前应用主题，避免闪烁。原型约定：localStorage key = memorized-theme，
+// 未设置时跟随系统 prefers-color-scheme，回退为暗色（原型默认暗色）。
+const themeInitScript = `(function(){try{var t=localStorage.getItem('memorized-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}if(t==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -46,10 +28,8 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <OverlayScrollbar />
         <ThemeToggle />
         {children}
-        <ClockBadge />
       </body>
     </html>
   );
