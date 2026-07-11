@@ -20,6 +20,8 @@ export default function ThemeToggle() {
 
     const sync = () => {
       const isLight = root.getAttribute("data-theme") === "light";
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", isLight ? "#f6f6f6" : "#000000");
       setMode(isLight ? { label: "DARK", icon: "moon" } : { label: "LIGHT", icon: "sun" });
     };
 

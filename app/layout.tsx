@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 // 首屏前应用主题，避免闪烁。原型约定：localStorage key = memorized-theme，
 // 未设置时跟随系统 prefers-color-scheme，回退为暗色（原型默认暗色）。
-const themeInitScript = `(function(){try{var t=localStorage.getItem('memorized-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}if(t==='light'){document.documentElement.setAttribute('data-theme','light');}else{document.documentElement.removeAttribute('data-theme');}}catch(e){}})();`;
+// 同时同步 theme-color meta，让 iOS Safari 的地址栏/刘海区颜色跟随主题。
+const themeInitScript = `(function(){try{var t=localStorage.getItem('memorized-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}var m=document.querySelector('meta[name="theme-color"]');if(t==='light'){document.documentElement.setAttribute('data-theme','light');if(m)m.setAttribute('content','#f6f6f6');}else{document.documentElement.removeAttribute('data-theme');if(m)m.setAttribute('content','#000000');}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="zh" suppressHydrationWarning>
       <head>
+        <meta name="theme-color" content="#000000" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
