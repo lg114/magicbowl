@@ -137,6 +137,10 @@ main {
   align-items: center;
   justify-content: center;
   gap: 30px;
+  /* 让内容稳稳压在萤火虫层之上：firefly-field 是 z-index:1 的定位元素，
+     若不显式给 hero 提权，蓝点会画在文字/头像之上（与「背景层」意图相反） */
+  position: relative;
+  z-index: 2;
 }
 /* 外层：一次性落下入场（forwards 保持终态），只管入场，不参与弹跳 */
 .avatar-drop {
@@ -244,10 +248,10 @@ main {
 }
 .welcome__hi {
   margin: 0;
-  font-size: 1.9rem;
-  font-weight: 600;
+  font-size: 2.6rem;
+  font-weight: 700;
   color: var(--ink);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.5px;
 }
 .welcome__name {
   color: var(--accent);
@@ -257,11 +261,20 @@ main {
   font-weight: 400;
 }
 .welcome__sub {
-  margin: 12px 0 0;
-  font-size: 1.05rem;
+  margin: 10px 0 0;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--text);
   letter-spacing: 0.3px;
+}
+/* 身份标签行：等宽 --mono + 灰，语义上对应「标签类」，作为三级层级最弱的一层 */
+.welcome__roles {
+  margin: 16px 0 0;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--meta);
+  letter-spacing: 0.6px;
 }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(12px); }
@@ -285,16 +298,16 @@ main {
   }
   .hero { gap: 24px; }
   .avatar { width: 160px; height: 160px; }
-  .avatar-aura { width: 300px; height: 300px; }
-  .welcome__hi { font-size: 1.6rem; }
-  .welcome__sub { font-size: 1rem; }
+  .welcome__hi { font-size: 2rem; }
+  .welcome__sub { font-size: 1.2rem; }
+  .welcome__roles { font-size: 0.85rem; }
 }
 
 /* ---------- 响应式：手机 ---------- */
 @media (max-width: 480px) {
   .hero { gap: 20px; padding: 0 20px; }
   .avatar { width: 130px; height: 130px; }
-  .avatar-aura { width: 250px; height: 250px; }
-  .welcome__hi { font-size: 1.35rem; }
-  .welcome__sub { font-size: 0.9rem; }
+  .welcome__hi { font-size: 1.6rem; }
+  .welcome__sub { font-size: 1.05rem; }
+  .welcome__roles { font-size: 0.8rem; }
 }

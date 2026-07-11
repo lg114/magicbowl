@@ -34,6 +34,9 @@ export default function Home() {
             <span className="welcome__wave">👋</span>
           </p>
           <p className="welcome__sub">Welcome to my magic bowl</p>
+          <p className="welcome__roles">
+            I am a learner · designer · reader · developer
+          </p>
         </div>
       </div>
     </main>
