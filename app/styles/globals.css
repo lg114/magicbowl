@@ -33,6 +33,11 @@
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
           "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --card-bg: rgba(10, 10, 10, 0.88);
+  /* 滚动条令牌：跟随主题的低调半透明，idle 极淡、hover 显形 */
+  --scroll-track: transparent;
+  --scroll-thumb-idle: rgba(255, 255, 255, 0.12);
+  --scroll-thumb: rgba(255, 255, 255, 0.30);
+  --scroll-thumb-hover: rgba(255, 255, 255, 0.50);
 }
 
 /* ---------- 亮色主题：仅覆盖与背景/网格相关的令牌 ---------- */
@@ -50,11 +55,45 @@
   --firefly: #1f6feb;
   --firefly-glow: rgba(31, 111, 235, 0.7);
   --card-bg: rgba(255, 255, 255, 0.92);
+  --scroll-track: transparent;
+  --scroll-thumb-idle: rgba(0, 0, 0, 0.10);
+  --scroll-thumb: rgba(0, 0, 0, 0.24);
+  --scroll-thumb-hover: rgba(0, 0, 0, 0.42);
 }
 
 html {
   scroll-behavior: smooth;
   transition: background-color 0.4s ease, color 0.4s ease;
+  /* Firefox：细滚动条 + 跟随主题 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+
+/* ---------- 滚动条：融入页面，跟随主题（Webkit） ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-idle);
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+/* 鼠标在页面上时，thumb 由极淡转为可见 */
+html:hover::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+}
+/* 悬停在滚动条本身时，再加深一点 */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::-webkit-scrollbar-thumb {
+    transition: none;
+  }
 }
 
 body {
