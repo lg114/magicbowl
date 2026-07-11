@@ -6,7 +6,7 @@ export const siteConfig = {
   // 部署后的站点地址，用于 SEO / sitemap / canonical
   url: "https://magicbowl.example.com",
   locale: "zh-CN",
-  avatar: "/avatar.jpg", // 头像路径，可替换为真实图片
+  avatar: "/avatar.png", // 头像路径，可替换为真实图片
   nav: [
     { href: "/", label: "首页" },
     { href: "/posts", label: "文章" },

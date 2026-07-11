@@ -6,6 +6,7 @@
 // 主题切换按钮由 layout 中的 ThemeToggle 提供。
 import Wisdom from "./components/Wisdom";
 import PostCards from "./components/PostCards";
+import { siteConfig } from "../lib/site";
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
             <div className="avatar-stage">
               {/* 外层做一次性落下入场，内层 img 做无限弹跳，各管各的 transform 避免冲突 */}
               <div className="avatar-drop">
-                <img className="avatar" src="/avatar.png" alt="MagicBowl" />
+                <img className="avatar" src={siteConfig.avatar} alt="MagicBowl" />
               </div>
             </div>
             <div className="welcome">
