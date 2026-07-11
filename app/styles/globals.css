@@ -385,7 +385,8 @@ main {
 @media (prefers-reduced-motion: reduce) {
   .avatar-drop { animation: avatarDrop 0.6s ease-out forwards; }
   .wisdom__quote { animation: none; }
-  .scroll-cue { animation: none; }
+  /* 注：箭头 cueBreath 明暗呼吸此处不关闭（gc 明确要求两端都要呼吸；
+     纯 opacity 变化、无位移/旋转，对眩晕安全，仅对光敏感者仍属轻微刺激） */
 }
 
 /* ---------- 响应式：平板 / 窄屏 ---------- */
