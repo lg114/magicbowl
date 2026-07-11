@@ -1,5 +1,23 @@
-// 首页仅渲染背景（纯 CSS 网格 + 呼吸动效，见 globals.css 的 body::before）。
-// 主题切换按钮由 layout 中的 ThemeToggle 提供。此处不渲染任何内容卡片。
+// 首页渲染背景（纯 CSS 网格 + 呼吸动效，见 globals.css 的 body::before）
+// + 居中头像（从上往下淡入落下、持续弹跳，见 .avatar）
+// + 头像下方的欢迎语（见 .welcome）。
+// 主题切换按钮由 layout 中的 ThemeToggle 提供。
 export default function Home() {
-  return <main aria-hidden="true" />;
+  return (
+    <main>
+      <div className="hero">
+        {/* 外层做一次性落下入场，内层 img 做无限弹跳，各管各的 transform 避免冲突 */}
+        <div className="avatar-drop">
+          <img className="avatar" src="/avatar.png" alt="MagicBowl" />
+        </div>
+        <div className="welcome">
+          <p className="welcome__hi">
+            Hey there, I&apos;m <span className="welcome__name">Gc</span>{" "}
+            <span className="welcome__wave">👋</span>
+          </p>
+          <p className="welcome__sub">Welcome to my magic bowl</p>
+        </div>
+      </div>
+    </main>
+  );
 }

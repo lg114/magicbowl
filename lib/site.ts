@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "MagicBowl",
-  title: "MagicBowl · 一个正在生长的地方",
+  title: "MagicBowl",
   description: "MagicBowl 的个人博客，记录技术、设计与日常思考。",
   author: "MagicBowl",
   // 部署后的站点地址，用于 SEO / sitemap / canonical
