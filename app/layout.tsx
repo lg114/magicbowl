@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./styles/globals.css";
 import { siteConfig } from "../lib/site";
 import ThemeToggle from "./components/ThemeToggle";
+import NavBar from "./components/NavBar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -46,6 +47,7 @@ export default function RootLayout({
           <span className="spark" />
         </div>
         <ThemeToggle />
+        <NavBar />
         {children}
       </body>
     </html>
