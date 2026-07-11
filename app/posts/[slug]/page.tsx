@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
+import { formatDate } from "../../../lib/post-types";
 
 // 静态生成所有文章详情页
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function PostPage({
         </Link>
         <div className="post__meta">
           <time className="card__date" dateTime={post.date}>
-            {post.date}
+            {formatDate(post.date)}
           </time>
           <span className="card__cat">{post.category}</span>
         </div>

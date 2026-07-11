@@ -331,6 +331,10 @@ main {
   justify-content: center;
   padding: 20px 24px 34px; /* 同一屏内留白收窄，避免把内容顶出屏幕 */
   text-align: center;
+  /* 与上方 welcome 同源的入屏淡入上移（纯垂直 12px + opacity，眩晕安全区）；
+     箭头作为子元素随之入场，自身再叠加 cueBreath 呼吸 */
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s both;
 }
 /* 引用样式：衬线 + 斜体 + 大引号，与 hero 的无衬线正文形成区分 */
 .wisdom__quote {
@@ -345,7 +349,6 @@ main {
   cursor: pointer;
   position: relative;
   padding: 0 1.4rem;
-  animation: wisdomIn 0.7s ease both;
 }
 /* 引号紧贴引文文字两端（加在文字 span 上，而非 blockquote，
    否则 ::after 会落到 cite 署名之后导致错位；随居中一起走，永不偏位） */
@@ -374,10 +377,6 @@ main {
   font-weight: 500;
   color: var(--meta);
   letter-spacing: 0.3px;
-}
-@keyframes wisdomIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 /* 滚动提示箭头：位于箴言下方，纯垂直小幅浮动（眩晕安全区），点击平滑滚到页底 */
 .scroll-cue {
@@ -694,10 +693,9 @@ main {
 
 /* 尊重系统的「减少动态效果」偏好：入场淡化为更短的一次性动画；
    温和的上下弹跳（垂直、16px 小幅度，属眩晕安全区）仍保留，以满足显式需求；
-   箴言轮换淡入与箭头浮动则完全关闭，避免持续动态干扰 */
+   箴言/箭头/欢迎语的纯垂直淡入上移（fadeUp）属眩晕安全区，与 welcome 一致保留 */
 @media (prefers-reduced-motion: reduce) {
   .avatar-drop { animation: avatarDrop 0.6s ease-out forwards; }
-  .wisdom__quote { animation: none; }
   /* 注：箭头 cueBreath 明暗呼吸此处不关闭（gc 明确要求两端都要呼吸；
      纯 opacity 变化、无位移/旋转，对眩晕安全，仅对光敏感者仍属轻微刺激） */
 }
