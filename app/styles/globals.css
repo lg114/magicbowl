@@ -290,6 +290,27 @@ main {
   color: var(--accent);
   text-shadow: 0 0 8px rgba(138, 180, 248, 0.45);
 }
+/* 社交图标行：位于身份行下方，水平居中；图标用 currentColor 跟随主题色，
+   hover 与身份词一致地提亮为 accent 蓝（仅颜色过渡，无位移/旋转，眩晕安全） */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+.social__link {
+  display: inline-flex;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+.social__icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.social__link:hover {
+  color: var(--accent);
+}
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
