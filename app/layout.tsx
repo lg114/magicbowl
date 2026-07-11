@@ -28,6 +28,23 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
+        {/* 全屏萤火虫夜空层：body 级背景，所有路由共享（首页/归档/详情）。
+            蓝点固定于 z-index:1，内容层（main 等）均在 z-index:2 之上，
+            且 pointer-events:none 不挡交互。 */}
+        <div className="firefly-field" aria-hidden="true">
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+          <span className="spark" />
+        </div>
         <ThemeToggle />
         {children}
       </body>

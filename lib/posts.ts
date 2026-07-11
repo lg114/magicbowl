@@ -4,18 +4,11 @@ import matter from "gray-matter";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
-export interface PostMeta {
-  slug: string;
-  title: string;
-  date: string;
-  category: string;
-  tags: string[];
-  excerpt: string;
-}
-
-export interface Post extends PostMeta {
-  content: string;
-}
+// 纯类型与无副作用工具独立成模块（post-types.ts），供 client 组件引用，
+// 避免把 fs / path 等 Node API 一起打进浏览器包。
+import type { Post, PostMeta } from "./post-types";
+export type { Post, PostMeta } from "./post-types";
+export { formatDate } from "./post-types";
 
 export function getPostSlugs(): string[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
@@ -80,11 +73,4 @@ export function getTags(): { name: string; count: number }[] {
 // 热门文章：默认按发布日期最近排序（可在 siteConfig 调整策略）
 export function getPopularPosts(limit = 5): PostMeta[] {
   return getAllPosts().slice(0, limit);
-}
-
-export function formatDate(date: string): string {
-  if (!date) return "";
-  const d = new Date(date);
-  if (Number.isNaN(d.getTime())) return date;
-  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 }

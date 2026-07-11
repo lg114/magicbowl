@@ -37,10 +37,12 @@ export default function Wisdom() {
   const advance = () => setIndex((prev) => randomIndex(prev ?? undefined));
   const scrollDown = (e: MouseEvent) => {
     e.stopPropagation();
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: reduced ? "auto" : "smooth",
-    });
+    // 滚动到首屏之下的卡片区顶部（而非页底），让箭头成为通往卡片的入口
+    const target = document.querySelector<HTMLElement>(".cards");
+    const top = target
+      ? target.getBoundingClientRect().top + window.scrollY
+      : document.body.scrollHeight;
+    window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
   };
 
   const q = QUOTES[index];
@@ -58,6 +60,9 @@ export default function Wisdom() {
       </blockquote>
       <button className="scroll-cue" aria-label="向下滚动" onClick={scrollDown}>
         <span className="scroll-cue__arrow" aria-hidden="true" />
+        <span className="scroll-cue__label" aria-hidden="true">
+          Scroll
+        </span>
       </button>
     </section>
   );
