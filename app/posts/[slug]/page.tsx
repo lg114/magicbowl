@@ -36,7 +36,7 @@ export default async function PostPage({
     <main className="post-wrap">
       <article className="post">
         <Link href="/posts" className="post__back">
-          ← All posts
+          ← 返回文章
         </Link>
         <div className="post__meta">
           <time className="card__date" dateTime={post.date}>

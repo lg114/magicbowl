@@ -19,24 +19,23 @@ export default function Home() {
             <div className="avatar-stage">
               {/* 外层做一次性落下入场，内层 img 做无限弹跳，各管各的 transform 避免冲突 */}
               <div className="avatar-drop">
-                <img className="avatar" src={siteConfig.avatar} alt="MagicBowl" />
+                <img className="avatar" src={siteConfig.avatar} alt="Gc 的头像" />
               </div>
             </div>
             <div className="welcome">
               <p className="welcome__hi">
-                Hey there, I&apos;m <span className="welcome__name">Gc</span>{" "}
+                你好，我是 <span className="welcome__name">Gc</span>{" "}
                 <span className="welcome__wave">👋</span>
               </p>
-              <p className="welcome__sub">Welcome to my magic bowl</p>
               <p className="welcome__roles">
-                I am a{" "}
-                <span className="role-word">learner</span>
+                我是一个{" "}
+                <span className="role-word">学习者</span>
                 {" · "}
-                <span className="role-word">designer</span>
+                <span className="role-word">设计者</span>
                 {" · "}
-                <span className="role-word">reader</span>
+                <span className="role-word">阅读者</span>
                 {" · "}
-                <span className="role-word">developer</span>
+                <span className="role-word">开发者</span>
               </p>
               <div className="social">
                 <a

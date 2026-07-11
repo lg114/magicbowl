@@ -30,7 +30,7 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
           >
-            ← Prev
+            ← 上一页
           </button>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
             <button
@@ -49,7 +49,7 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
           >
-            Next →
+            下一页 →
           </button>
         </nav>
       )}

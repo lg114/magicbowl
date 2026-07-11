@@ -13,7 +13,7 @@ export default function PostCards() {
   return (
     <section className="cards" id="posts">
       <div className="cards__inner">
-        <h2 className="cards__heading">Posts</h2>
+        <h2 className="cards__heading">文章</h2>
         <div className="cards__grid">
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
@@ -21,7 +21,7 @@ export default function PostCards() {
         </div>
         {total > posts.length && (
           <a className="cards__more" href="/posts">
-            View all {total} posts →
+            查看全部 {total} 篇文章 →
           </a>
         )}
       </div>

@@ -3,7 +3,7 @@ import { getAllPosts } from "../../lib/posts";
 import PostsArchive from "../components/PostsArchive";
 
 export const metadata: Metadata = {
-  title: "Writing",
+  title: "文章",
 };
 
 // 归档页（仓库）：列出全部文章，交给客户端 PostsArchive 做分页翻页。
@@ -13,7 +13,7 @@ export default function PostsPage() {
   return (
     <main className="archive">
       <div className="cards__inner">
-        <h1 className="cards__heading">All posts</h1>
+        <h1 className="cards__heading">全部文章</h1>
         <PostsArchive posts={posts} />
       </div>
     </main>

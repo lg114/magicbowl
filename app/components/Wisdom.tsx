@@ -4,9 +4,10 @@ import { useEffect, useState, type MouseEvent } from "react";
 
 // 箴言数组：来自 gc 指定（含署名）。每次刷新随机展示一条，点击句子也可随机换一条。
 const QUOTES = [
-  { text: "Learn as if you were to live forever.", author: "Mahatma Gandhi" },
-  { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
-  { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+  { text: "任何不能杀死你的，终将使你更强大。", author: "尼采" },
+  { text: "在做成之前，一切看似不可能。", author: "曼德拉" },
+  { text: "取得领先的秘诀是先开始。", author: "马克·吐温" },
+  { text: "生存还是毁灭，这是一个问题。", author: "莎士比亚" },
 ];
 
 // 取一个随机下标；传入 exclude 时保证与当前不同（用于点击换句）。
@@ -61,7 +62,7 @@ export default function Wisdom() {
       <button className="scroll-cue" aria-label="向下滚动" onClick={scrollDown}>
         <span className="scroll-cue__arrow" aria-hidden="true" />
         <span className="scroll-cue__label" aria-hidden="true">
-          Scroll
+          下滑
         </span>
       </button>
     </section>

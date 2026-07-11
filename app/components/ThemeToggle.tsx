@@ -22,7 +22,7 @@ export default function ThemeToggle() {
       const isLight = root.getAttribute("data-theme") === "light";
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute("content", isLight ? "#f6f6f6" : "#000000");
-      setMode(isLight ? { label: "DARK", icon: "moon" } : { label: "LIGHT", icon: "sun" });
+      setMode(isLight ? { label: "暗色", icon: "moon" } : { label: "亮色", icon: "sun" });
     };
 
     const onClick = () => {
