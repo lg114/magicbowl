@@ -11,9 +11,9 @@ export default function PostCards() {
   const total = all.length;
 
   return (
-    <section className="cards" id="writing">
+    <section className="cards" id="posts">
       <div className="cards__inner">
-        <h2 className="cards__heading">Writing</h2>
+        <h2 className="cards__heading">Posts</h2>
         <div className="cards__grid">
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
