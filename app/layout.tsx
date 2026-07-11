@@ -12,12 +12,18 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   authors: [{ name: siteConfig.author }],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: siteConfig.name,
+  },
 };
 
 // 首屏前应用主题，避免闪烁。原型约定：localStorage key = memorized-theme，
 // 未设置时跟随系统 prefers-color-scheme，回退为暗色（原型默认暗色）。
 // 同时同步 theme-color meta，让 iOS Safari 的地址栏/刘海区颜色跟随主题。
-const themeInitScript = `(function(){try{var t=localStorage.getItem('memorized-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}var m=document.querySelector('meta[name="theme-color"]');if(t==='light'){document.documentElement.setAttribute('data-theme','light');if(m)m.setAttribute('content','#f6f6f6');}else{document.documentElement.removeAttribute('data-theme');if(m)m.setAttribute('content','#000000');}}catch(e){}})();`;
+// 末尾附 service worker 注册（仅 https 且非 localhost，避免干扰 dev 热更新）。
+const themeInitScript = `(function(){try{var t=localStorage.getItem('memorized-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}var m=document.querySelector('meta[name="theme-color"]');if(t==='light'){document.documentElement.setAttribute('data-theme','light');if(m)m.setAttribute('content','#f6f6f6');}else{document.documentElement.removeAttribute('data-theme');if(m)m.setAttribute('content','#000000');}}catch(e){}try{if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname!=='localhost'){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
