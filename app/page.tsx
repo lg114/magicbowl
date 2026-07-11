@@ -5,10 +5,28 @@
 export default function Home() {
   return (
     <main>
+      {/* 全屏萤火虫夜空层：蓝色萤火虫稀疏散布、缓慢明灭游动（装饰、不挡交互） */}
+      <div className="firefly-field" aria-hidden="true">
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+        <span className="spark" />
+      </div>
       <div className="hero">
-        {/* 外层做一次性落下入场，内层 img 做无限弹跳，各管各的 transform 避免冲突 */}
-        <div className="avatar-drop">
-          <img className="avatar" src="/avatar.png" alt="MagicBowl" />
+        {/* 头像舞台：相对定位，承载「落下入场 + 弹跳」的头像 */}
+        <div className="avatar-stage">
+          {/* 外层做一次性落下入场，内层 img 做无限弹跳，各管各的 transform 避免冲突 */}
+          <div className="avatar-drop">
+            <img className="avatar" src="/avatar.png" alt="MagicBowl" />
+          </div>
         </div>
         <div className="welcome">
           <p className="welcome__hi">
