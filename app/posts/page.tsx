@@ -6,14 +6,12 @@ export const metadata: Metadata = {
   title: "文章",
 };
 
-// 归档页（仓库）：列出全部文章，交给客户端 PostsArchive 做分页翻页。
-// 首页只放「最近 4 篇」作为橱窗，这里才是完整列表。
+// 归档页：列出全部文章。标题、工具区、排序、侧边栏筛选都在 PostsArchive 内统一渲染。
 export default function PostsPage() {
   const posts = getAllPosts();
   return (
     <main className="archive">
       <div className="cards__inner">
-        <h1 className="cards__heading">全部文章</h1>
         <PostsArchive posts={posts} />
       </div>
     </main>
