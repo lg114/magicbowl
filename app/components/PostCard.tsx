@@ -1,21 +1,27 @@
 import Link from "next/link";
-import { formatDate, type PostMeta } from "../../lib/post-types";
+import { type PostMeta } from "../../lib/post-types";
 
-// 单张可点击的文章卡片：被首页（限量展示）与 /posts 归档页（分页展示）共用。
-// 纯展示标记，无 hooks，因此可在 server 与 client 组件里同时安全引用。
+// 时间线条目：日期·分类 元信息行 + 衬线标题，沿一条静止细竖线排列。
+// 仅用于首页「最近文章」；详情页 meta 仍复用 .card__date / .card__cat。
+function shortDate(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const p = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}.${p(d.getMonth() + 1)}.${p(d.getDate())}`;
+}
+
 export default function PostCard({ post }: { post: PostMeta }) {
   return (
-    <Link href={`/posts/${post.slug}`} className="card-link">
-      <article className="card">
-        <div className="card__meta">
+    <li className="post-timeline__item">
+      <Link href={`/posts/${post.slug}`} className="post-timeline__row">
+        <span className="post-timeline__meta">
           <time className="card__date" dateTime={post.date}>
-            {formatDate(post.date)}
+            {shortDate(post.date)}
           </time>
-          <span className="card__cat">{post.category}</span>
-        </div>
-        <h3 className="card__title">{post.title}</h3>
-        <p className="card__excerpt">{post.excerpt}</p>
-      </article>
-    </Link>
+          <span className="post-timeline__cat">{post.category}</span>
+        </span>
+        <span className="post-timeline__title">{post.title}</span>
+      </Link>
+    </li>
   );
 }
