@@ -1,18 +1,11 @@
 import Link from "next/link";
-import type { PostMeta } from "../../lib/post-types";
+import { formatDate, type PostMeta } from "../../lib/post-types";
 
-// 归档页：紧凑列表 + 按年分组。
-// 设计取向：文章数量大时，卡片网格信息密度低、翻页累；
-// 改为「一行一篇」的列表（日期 + 标题 + 分类），再按年份分段，
-// 年份做吸顶小标题，一屏可扫 15–20 篇，几百篇也不慌。
-// 全部文章一次性渲染、不翻页、无位移动效，契合「眩晕安全区」偏好。
-
-// 由 YYYY-MM-DD 取「M月D日」，省去年份（年份已是分组标题）。
-function shortDate(iso: string): string {
-  const [, m, d] = iso.split("-");
-  if (!m || !d) return iso;
-  return `${Number(m)}月${Number(d)}日`;
-}
+// 归档页：传统博客文章流。
+// 设计取向：每篇文章独立成一块（大标题 + 日期·分类 + 摘要），按年份分组，
+// 年份做吸顶章节眉。阅读节奏接近独立博客，比「一行一篇」的密集表格更像一个文章流，
+// 整块淡底板同时柔化背景网格，给眼睛一个落脚点（契合「眩晕安全区」偏好）。
+// 全部文章一次性渲染、不翻页、无位移动效。
 
 export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
   // posts 已由 getAllPosts 按日期倒序排好，故首次遇到的年份即最新；
@@ -28,16 +21,22 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
     <div className="archive-list">
       {[...groups.entries()].map(([year, items]) => (
         <section className="archive-year" key={year}>
-          <h2 className="archive-year__label">{year}</h2>
-          <ul className="archive-rows">
+          <h2 className="archive-year__label">{year} 年</h2>
+          <ul className="archive-feed">
             {items.map((post) => (
               <li key={post.slug}>
-                <Link href={`/posts/${post.slug}`} className="archive-row">
-                  <time className="archive-row__date" dateTime={post.date}>
-                    {shortDate(post.date)}
-                  </time>
-                  <span className="archive-row__title">{post.title}</span>
-                  <span className="archive-row__cat">{post.category}</span>
+                <Link href={`/posts/${post.slug}`} className="feed-item">
+                  <h3 className="feed-item__title">{post.title}</h3>
+                  <div className="feed-item__meta">
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
+                    <span className="feed-item__dot" aria-hidden="true">
+                      ·
+                    </span>
+                    <span className="feed-item__cat">{post.category}</span>
+                  </div>
+                  {post.excerpt ? (
+                    <p className="feed-item__excerpt">{post.excerpt}</p>
+                  ) : null}
                 </Link>
               </li>
             ))}

@@ -631,81 +631,100 @@ main {
   margin: 0 auto;
 }
 
-/* 归档列表：紧凑「一行一篇」，按年分组；年份吸顶，扫读密度远高于卡片网格 */
+/* 归档列表：传统博客文章流——每篇独立成块（标题 + 日期·分类 + 摘要），
+   按年分组；年份做吸顶章节眉。整块淡底板柔化背景网格，给阅读一个落脚点，
+   也消掉旧版「表格感」。 */
 .archive-list {
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
+  /* 淡底板 + 模糊：让列表区背景网格淡出，眼睛有焦点，不眩晕 */
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 6px 14px 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .archive-year {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
-/* 年份吸顶标题：紧贴导航胶囊下方（top 与胶囊底部错开），半透明模糊背景保证压住正文时可读 */
+/* 年份吸顶章节眉：克制、像分区标题，不抢文章 */
 .archive-year__label {
   position: sticky;
   top: 70px;
   z-index: 3;
   margin: 0;
-  padding: 11px 4px 9px;
+  padding: 14px 6px 12px;
   font-family: var(--mono);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   color: var(--meta);
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--card-border);
 }
-.archive-rows {
+.archive-feed {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.archive-row {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 14px;
-  padding: 12px 10px;
+/* 单篇文章块：标题 + 元信息 + 摘要，hover 整块提亮 + 标题转蓝 */
+.feed-item {
+  display: block;
+  padding: 20px 14px;
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid var(--line, rgba(128, 128, 128, 0.12));
-  border-radius: 8px;
+  border-bottom: 1px solid var(--card-border);
+  border-radius: 12px;
   transition: background 0.2s ease;
 }
-.archive-row:hover {
-  background: var(--card-bg);
+.feed-item:last-child {
+  border-bottom: none;
 }
-.archive-row:hover .archive-row__title {
-  color: var(--accent);
+.feed-item:hover {
+  /* accent 蓝极淡版本：在底板上给出可辨的高亮反馈 */
+  background: rgba(138, 180, 248, 0.06);
 }
-.archive-row__date {
-  flex: 0 0 64px;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.3px;
-  color: var(--meta);
-}
-.archive-row__title {
-  flex: 1 1 auto;
-  min-width: 0;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.4;
+.feed-item__title {
+  font-family: var(--sans);
+  font-size: 1.28rem;
+  font-weight: 600;
+  line-height: 1.42;
   color: var(--ink);
+  margin: 0 0 9px;
   transition: color 0.2s ease;
 }
-.archive-row__cat {
-  flex: 0 0 auto;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.5px;
+.feed-item:hover .feed-item__title {
   color: var(--accent);
-  border: 1px solid var(--card-border);
-  border-radius: 999px;
-  padding: 2px 9px;
-  white-space: nowrap;
+}
+.feed-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.4px;
+  color: var(--meta);
+}
+.feed-item__cat {
+  color: var(--accent);
+}
+.feed-item__dot {
+  opacity: 0.45;
+}
+.feed-item__excerpt {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.72;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ---------- 文章详情页 /posts/[slug] ---------- */
@@ -874,6 +893,9 @@ main {
   .card__title { font-size: 1.1rem; }
   .cards__heading { margin-bottom: 24px; font-size: 1.3rem; }
   .archive { padding: 76px 16px 72px; }
+  .archive-list { padding: 4px 8px 10px; }
+  .feed-item { padding: 16px 10px; }
+  .feed-item__title { font-size: 1.15rem; }
   .post { padding: 28px 20px; }
   .post__title { font-size: 1.45rem; }
   .nav { gap: 9px; padding: 7px 12px; }
