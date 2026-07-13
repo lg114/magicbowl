@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const LINKS = [
   { href: "/", label: "首页" },
   { href: "/posts", label: "文章" },
+  { href: "/projects", label: "项目" },
 ];
 
 // 左上角固定导航条：玻璃胶囊风格，与右上角 ThemeToggle 视觉统一；

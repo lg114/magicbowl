@@ -1,3 +1,13 @@
+export interface Project {
+  name: string;
+  desc: string;
+  tech: string[];
+  status: "活跃" | "进行中" | "归档";
+  repo?: string;
+  demo?: string;
+  featured?: boolean;
+}
+
 export const siteConfig = {
   name: "MagicBowl",
   title: "MagicBowl",
@@ -10,6 +20,7 @@ export const siteConfig = {
   nav: [
     { href: "/", label: "首页" },
     { href: "/posts", label: "文章" },
+    { href: "/projects", label: "项目" },
     { href: "/about", label: "关于" },
   ],
   hobbies: ["阅读", "咖啡", "音乐", "摄影", "游戏", "旅行", "电影", "赛车", "健身", "斯诺克"],
@@ -37,19 +48,28 @@ export const siteConfig = {
     {
       name: "RagMate",
       desc: "企业级 RAG 知识管理系统 · 混合检索",
-      href: "https://github.com/lg114/RagMate",
+      tech: ["Python", "RAG", "向量检索"],
+      status: "活跃",
+      repo: "https://github.com/lg114/RagMate",
+      featured: true,
     },
     {
       name: "MagicBowl",
       desc: "你正在看的这个站点 · Next.js + TypeScript",
-      href: "https://github.com/lg114/magicbowl",
+      tech: ["Next.js", "TypeScript", "React", "MDX"],
+      status: "活跃",
+      repo: "https://github.com/lg114/magicbowl",
+      featured: true,
     },
     {
       name: "bagger",
       desc: "AI 编程对话收集器 · Claude Code 记录本地检索",
-      href: "https://github.com/lg114/bagger",
+      tech: ["AI", "CLI", "本地检索"],
+      status: "进行中",
+      repo: "https://github.com/lg114/bagger",
+      featured: true,
     },
-  ],
+  ] satisfies Project[],
   social: {
     github: "https://github.com/lg114",
     email: "mailto:you@example.com",
@@ -66,6 +86,6 @@ export const siteConfig = {
     reactionsEnabled: true,
     theme: "preferred_color_scheme",
   },
-} as const;
+};
 
 export type SiteConfig = typeof siteConfig;

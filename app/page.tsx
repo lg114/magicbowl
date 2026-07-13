@@ -6,6 +6,7 @@
 // 主题切换按钮由 layout 中的 ThemeToggle 提供。
 import Wisdom from "./components/Wisdom";
 import PostCards from "./components/PostCards";
+import FeaturedProjects from "./components/FeaturedProjects";
 import { siteConfig } from "../lib/site";
 
 export default function Home() {
@@ -67,6 +68,8 @@ export default function Home() {
         </section>
         {/* 卡片区：首屏之下的第二屏，箭头滚动至此 */}
         <PostCards />
+        {/* 精选项目：文章区下方，引流到 /projects */}
+        <FeaturedProjects />
       </main>
     </>
   );
