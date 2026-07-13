@@ -8,6 +8,13 @@ export interface Project {
   featured?: boolean;
 }
 
+export interface Footprint {
+  name: string;
+  country: string;
+  lat: number;
+  lng: number;
+}
+
 export const siteConfig = {
   name: "MagicBowl",
   title: "MagicBowl",
@@ -43,7 +50,7 @@ export const siteConfig = {
     { name: "悉尼", country: "Australia", lat: -33.8688, lng: 151.2093 },
     { name: "墨尔本", country: "Australia", lat: -37.8136, lng: 144.9631 },
     { name: "伍伦贡", country: "Australia", lat: -34.4278, lng: 150.8931 },
-  ],
+  ] satisfies Footprint[],
   projects: [
     {
       name: "RagMate",
