@@ -41,7 +41,7 @@ export default function Home() {
               <div className="social">
                 <a
                   className="social__link"
-                  href="https://github.com/"
+                  href={siteConfig.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
@@ -52,7 +52,7 @@ export default function Home() {
                 </a>
                 <a
                   className="social__link"
-                  href="https://x.com/"
+                  href={siteConfig.social.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="X"

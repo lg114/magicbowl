@@ -80,7 +80,7 @@ export const siteConfig = {
   social: {
     github: "https://github.com/lg114",
     email: "mailto:you@example.com",
-    twitter: "https://twitter.com/your-name",
+    twitter: "https://x.com/gc20010801",
   },
   // Giscus 评论配置：前往 https://giscus.app 完成设置后填入下方字段。
   // 留空时，评论区会渲染一个优雅的占位提示，不会报错。
