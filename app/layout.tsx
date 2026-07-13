@@ -3,6 +3,7 @@ import "./styles/globals.css";
 import { siteConfig } from "../lib/site";
 import ThemeToggle from "./components/ThemeToggle";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -57,6 +58,7 @@ export default function RootLayout({
         <ThemeToggle />
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
