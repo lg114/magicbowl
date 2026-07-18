@@ -3,14 +3,23 @@
 //  - 导航请求（页面 HTML）：网络优先，失败回退缓存首页，保证离线可打开站点
 //  - 静态资源（_next/static、图标等）：stale-while-revalidate，命中缓存即用并在后台更新
 //  - 非 GET / 跨域请求：直接走网络，不做处理
-const CACHE = "magicbowl-v1";
+// 版本：部署新版时改下方 APP_VERSION 即可让旧缓存整体失效（activate 期自动清理旧 cache）
+const APP_VERSION = "1.0.0";
+const CACHE = `magicbowl-${APP_VERSION}`;
 const PRECACHE = ["/"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE)
-      .then((cache) => cache.addAll(PRECACHE))
+      .then((cache) =>
+        // 逐条容错：单条失败（如首页临时不可达）不拖垮整个安装，其余照常预缓存
+        Promise.all(
+          PRECACHE.map((url) =>
+            cache.add(url).catch((e) => console.warn("[sw] precache skip:", url, e))
+          )
+        )
+      )
       .then(() => self.skipWaiting())
   );
 });
@@ -33,7 +42,11 @@ self.addEventListener("fetch", (event) => {
 
   // 页面导航：网络优先，离线回退首页
   if (req.mode === "navigate") {
-    event.respondWith(fetch(req).catch(() => caches.match("/")));
+    event.respondWith(
+      fetch(req).catch(() =>
+        caches.match("/").then((r) => r || Response.error())
+      )
+    );
     return;
   }
 
