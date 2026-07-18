@@ -1,0 +1,53 @@
+/* ============================================================
+   MagicBowl — 基础排版与背景层（base）
+   body / 网格背景 / 内容层 / 首屏容器 / 网格呼吸动效
+   ============================================================ */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.78;
+  font-size: 16px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.45s ease;
+}
+
+/* 背景网格单独成层，才能对它做「呼吸」动效而不影响正文 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: center;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+  transition: background 0.45s ease;
+  animation: gridBreathe 12s ease-in-out infinite;
+}
+
+/* 内容层位于网格之上 */
+main {
+  position: relative;
+  z-index: 2;
+}
+/* 首屏：hero + 箴言收进同一屏（100dvh），保持「不滚动也能看全」；
+   卡片区在其下方作为第二屏，箭头滚动至此 */
+.screen {
+  min-height: 100vh;
+  min-height: 100dvh; /* 移动端更贴近真实可视高度，规避 URL 栏导致的留白跳动 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 网格呼吸：线条亮度以 12s 慢周期轻微起伏（0.55↔0.76），
+   幅度小、频率慢，有「活的背景」氛围感，不干扰阅读 */
+@keyframes gridBreathe {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.76; }
+}

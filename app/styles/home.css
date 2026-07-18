@@ -1,0 +1,415 @@
+/* ============================================================
+   MagicBowl — 首页首屏与文章卡片区（home）
+   hero 头像 / 萤火虫 / 欢迎语 / 箴言 / 文章时间线
+   ============================================================ */
+
+/* 头像：居中于背景网格之上，从上往下淡入落下 + 持续弹跳 */
+.hero {
+  flex: 1 1 auto; /* 占满首屏剩余空间，把箴言 + 箭头自然压到同一屏底部 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  /* 让内容稳稳压在萤火虫层之上：firefly-field 是 z-index:1 的定位元素，
+     若不显式给 hero 提权，蓝点会画在文字/头像之上（与「背景层」意图相反） */
+  position: relative;
+  z-index: 2;
+  padding-top: 64px; /* 给右上角固定主题按钮留出安全空间，避免头像被压角 */
+}
+/* 外层：一次性落下入场（forwards 保持终态），只管入场，不参与弹跳 */
+.avatar-drop {
+  opacity: 0;
+  animation: avatarDrop 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes avatarDrop {
+  from { opacity: 0; transform: translateY(-56px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.avatar {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* 去掉 box-shadow：暗色下融进背景看不见，亮色下会变成一圈深色光晕（像裹了一层），故移除，保持干净圆形 */
+  /* 原地轻弹（无限循环），只作用于内层 img，与外层入场互不干扰；节奏放慢到 2.8s */
+  animation: avatarBounce 2.8s ease infinite;
+}
+/* 纯上下弹跳：上升减速、下落加速，像在原地轻轻跳（无缩放/旋转，落在眩晕安全区） */
+@keyframes avatarBounce {
+  0%   { transform: translateY(0);     animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1); }
+  55%  { transform: translateY(-16px); animation-timing-function: cubic-bezier(0.7, 0, 0.8, 0.3); }
+  100% { transform: translateY(0); }
+}
+/* 头像舞台：相对定位，让光点气场相对头像定位 */
+.avatar-stage {
+  position: relative;
+}
+/* 萤火虫背景层：覆盖整个视口的「夜空」，蓝色萤火虫稀疏散布、缓慢明灭游动（纯装饰、不挡交互） */
+.firefly-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* 在网格层之上、内容层之下 */
+}
+/* 单个萤火虫：暖色微光 + 柔光晕，闪烁用 opacity/scale/box-shadow，游动用 translate（独立属性，互不冲突） */
+.spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--firefly);
+  /* 辉光烘死在元素上（静态 box-shadow），twinkle 只动 opacity/scale，
+     不再每帧重算模糊半径 → 纯合成、滚动/低端机不卡 */
+  box-shadow: 0 0 10px 3px var(--firefly-glow);
+  opacity: 0;
+  /* 两个动画各管一个属性：twinkle 负责亮灭+缩放，drift 负责缓慢游动 */
+  animation:
+    twinkle 8s ease-in-out infinite,
+    drift 16s ease-in-out infinite;
+}
+/* 萤火虫式闪烁：短暂亮起 → 较快熄灭 → 长暗，再循环（亮的时间占比小、空档长，更稀疏自然）。
+   辉光由元素静态 box-shadow 提供，此处只动 opacity/scale，避免 box-shadow 动画引发的逐帧重绘。 */
+@keyframes twinkle {
+  0%   { opacity: 0;   scale: 0.4; }
+  6%   { opacity: 1;   scale: 1.1; }
+  16%  { opacity: 0.75; }
+  30%  { opacity: 0;   scale: 0.5; }
+  100% { opacity: 0;   scale: 0.4; }
+}
+/* 极缓慢的随意游动（幅度 ≤12px），让光点「活」起来而非钉死在原地 */
+@keyframes drift {
+  0%   { translate: 0 0; }
+  25%  { translate: 7px -9px; }
+  50%  { translate: -6px -12px; }
+  75%  { translate: 9px 5px; }
+  100% { translate: 0 0; }
+}
+/* 全屏稀疏散布 + 错峰明灭/游动：刻意用不规则坐标，避开规则环/网格，防止图案眩光 */
+.spark:nth-child(1)  { top: 14%; left: 12%; width: 4px; height: 4px; --t: 7.5s; --d: 0s;   --dr: 15s; }
+.spark:nth-child(2)  { top: 22%; left: 78%; width: 3px; height: 3px; --t: 6.8s; --d: 2.6s; --dr: 18s; }
+.spark:nth-child(3)  { top: 34%; left: 46%; width: 4px; height: 4px; --t: 9s;   --d: 1.2s; --dr: 16s; }
+.spark:nth-child(4)  { top: 48%; left: 88%; width: 3px; height: 3px; --t: 8s;   --d: 3.8s; --dr: 20s; }
+.spark:nth-child(5)  { top: 60%; left: 20%; width: 4px; height: 4px; --t: 7s;   --d: 5s;   --dr: 17s; }
+.spark:nth-child(6)  { top: 70%; left: 62%; width: 3px; height: 3px; --t: 8.5s; --d: 2s;   --dr: 19s; }
+.spark:nth-child(7)  { top: 82%; left: 34%; width: 4px; height: 4px; --t: 7.8s; --d: 4.4s; --dr: 14s; }
+.spark:nth-child(8)  { top: 88%; left: 80%; width: 3px; height: 3px; --t: 6.5s; --d: 1s;   --dr: 21s; }
+.spark:nth-child(9)  { top: 10%; left: 54%; width: 4px; height: 4px; --t: 9.2s; --d: 3s;   --dr: 22s; }
+.spark:nth-child(10) { top: 40%; left: 8%;  width: 3px; height: 3px; --t: 7.2s; --d: 5.6s; --dr: 15s; }
+.spark:nth-child(11) { top: 56%; left: 50%; width: 4px; height: 4px; --t: 8.2s; --d: 0.6s; --dr: 18s; }
+.spark:nth-child(12) { top: 76%; left: 90%; width: 3px; height: 3px; --t: 6.6s; --d: 4s;   --dr: 20s; }
+/* 用每点变量驱动各自时长与延迟 */
+.spark:nth-child(1),
+.spark:nth-child(2),
+.spark:nth-child(3),
+.spark:nth-child(4),
+.spark:nth-child(5),
+.spark:nth-child(6),
+.spark:nth-child(7),
+.spark:nth-child(8),
+.spark:nth-child(9),
+.spark:nth-child(10),
+.spark:nth-child(11),
+.spark:nth-child(12) {
+  animation-duration: var(--t), var(--dr);
+  animation-delay: var(--d), calc(var(--d) * 0.5);
+}
+/* 头像置于光点之上 */
+.avatar { z-index: 2; }
+/* 欢迎语：头像下方居中，用 --sans（正文/标题字体） */
+.welcome {
+  text-align: center;
+  font-family: var(--sans);
+  /* 极轻淡入上移：纯垂直 12px + opacity，属眩晕安全区，reduced-motion 下也保留（与弹跳同理） */
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.35s both;
+}
+.welcome__hi {
+  margin: 0;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+}
+.welcome__name {
+  color: var(--accent);
+}
+.welcome__wave {
+  /* 避免 emoji 被加粗导致视觉偏重 */
+  font-weight: 400;
+}
+/* 身份标签行：衬线（与箴言、正文统一），作为三级层级最弱的一层 */
+.welcome__roles {
+  margin: 16px 0 0;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--meta);
+  letter-spacing: 0.3px;
+}
+/* 身份词 hover 发亮：仅颜色过渡，无位移/旋转，落在眩晕安全区；
+   双主题下均提亮为 accent 蓝，并叠一层柔和蓝辉光，鼠标移开即淡回 */
+.welcome__roles .role-word {
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  cursor: default;
+}
+.welcome__roles .role-word:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(138, 180, 248, 0.45);
+}
+/* 社交图标行：位于身份行下方，水平居中；图标用 currentColor 跟随主题色，
+   hover 与身份词一致地提亮为 accent 蓝（仅颜色过渡，无位移/旋转，眩晕安全） */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+.social__link {
+  display: inline-flex;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+.social__icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.social__link:hover {
+  color: var(--accent);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 箴言区：与 hero 共屏、钉在同一屏底部的引用区块（轮换展示 + 引用样式） ---------- */
+.wisdom {
+  position: relative;
+  z-index: 2; /* 萤火虫已移到 main 之外，此处理论可不用，但显式提权更清晰稳妥 */
+  flex-shrink: 0; /* 不参与首屏填充，固定占底部一席，与 hero 同屏显示 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px 34px; /* 同一屏内留白收窄，避免把内容顶出屏幕 */
+  text-align: center;
+  /* 与上方 welcome 同源的入屏淡入上移（纯垂直 12px + opacity，眩晕安全区）；
+     箭头作为子元素随之入场，自身再叠加 cueBreath 呼吸 */
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+/* 引用样式：衬线 + 斜体 + 大引号 */
+.wisdom__quote {
+  margin: 0;
+  max-width: 640px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1.6;
+  color: var(--ink);
+  cursor: pointer;
+  position: relative;
+  padding: 0 1.4rem;
+}
+/* 引号紧贴引文文字两端（加在文字 span 上，而非 blockquote，
+   否则 ::after 会落到 cite 署名之后导致错位；随居中一起走，永不偏位） */
+.wisdom__text::before,
+.wisdom__text::after {
+  color: var(--meta);
+  opacity: 0.6;
+  font-size: 1.2em;
+  line-height: 0;
+  vertical-align: -0.12em;
+}
+.wisdom__text::before {
+  content: "\201C";
+  margin-right: 0.06em;
+}
+.wisdom__text::after {
+  content: "\201D";
+  margin-left: 0.04em;
+}
+/* 署名：引用下方独立一行，弱化、偏灰，与引文主体区分 */
+.wisdom__cite {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--meta);
+  letter-spacing: 0.3px;
+}
+/* 滚动提示箭头：位于箴言下方，纯垂直小幅浮动（眩晕安全区），点击平滑滚到页底 */
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin: 26px auto 0;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: cueBreath 3s ease-in-out infinite;
+}
+/* 滚动提示文字：等宽 --mono + 灰，与身份行同源；大写 + 宽字距像一行标签；
+   hover 与身份词/社交图标一致提亮为 accent 蓝（仅颜色过渡，无位移） */
+.scroll-cue__label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--meta);
+  transition: color 0.25s ease;
+}
+.scroll-cue:hover .scroll-cue__label {
+  color: var(--accent);
+}
+.scroll-cue__arrow {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-right: 2px solid var(--meta);
+  border-bottom: 2px solid var(--meta);
+  transform: rotate(45deg);
+}
+/* 箭头明暗呼吸：仅 opacity 在 1↔0.4 缓慢起伏，无位移/旋转，
+   像萤火虫轻轻明灭，对眩晕/光敏感最友好；静态时 opacity:1 完全可见 */
+@keyframes cueBreath {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* ---------- 文章卡片区：首屏之下的第二屏，箭头滚动至此 ---------- */
+.cards {
+  position: relative;
+  z-index: 2; /* 稳居萤火虫层之上 */
+  display: flex;
+  justify-content: center;
+  padding: 84px 24px 104px;
+}
+.cards__inner {
+  width: 100%;
+  max-width: 920px;
+}
+.cards__heading {
+  font-family: var(--sans);
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--ink);
+  text-align: left;
+  margin-bottom: 28px;
+}
+/* 时间线竖栏：最近文章沿一条静止细竖线排列（日期·分类 元信息行 + 衬线标题）。
+   竖线 1px 低对比、圆点小且稀疏(仅 4 篇)，不构成密集网格 —— 眩晕安全；
+   hover 仅改颜色（标题/圆点转 accent、整行微弱灰填充），无位移/缩放/旋转。 */
+.post-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+/* 单一静止竖线，低对比，左移对齐圆点中心 */
+.post-timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: var(--card-border);
+}
+.post-timeline__item {
+  position: relative;
+  padding-left: 30px;
+}
+/* 圆点：小、低对比，2px 背景环切断竖线避免 moiré；稀疏(仅 4 个) */
+.post-timeline__item::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 10px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--card-border-hi);
+  border: 2px solid var(--bg);
+  transition: background 0.2s ease;
+}
+.post-timeline__row {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.post-timeline__row:hover {
+  background: rgba(128, 128, 128, 0.1);
+}
+.post-timeline__row:hover .post-timeline__title {
+  color: var(--accent);
+}
+.post-timeline__item:hover::before {
+  background: var(--accent);
+}
+/* 元信息行：日期(mono 灰) + 分类(accent 纯文字，无 pill 以求极简) */
+.post-timeline__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.post-timeline__cat {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.post-timeline__title {
+  display: block;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+/* 日期用等宽 --mono，呼应身份行 / SCROLL 标签的标签语义 */
+.card__date {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  color: var(--meta);
+}
+/* 分类作为卡片上的小彩点：accent 蓝文字 + 中性边框，呼应「accent 是唯一彩色锚点」 */
+.card__cat {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+/* 卡片区底部的「查看全部」入口，呼应身份行 / SCROLL 的 mono 标签语感 */
+.cards__more {
+  display: inline-block;
+  margin-top: 30px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.cards__more:hover {
+  color: var(--accent);
+}

@@ -1,0 +1,54 @@
+/* ============================================================
+   MagicBowl — 404 页面（notfound）
+   ============================================================ */
+
+.notfound {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 104px 24px 100px;
+}
+.notfound__inner {
+  text-align: center;
+  max-width: 480px;
+}
+.notfound__code {
+  font-family: var(--mono);
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+.notfound__title {
+  font-family: var(--sans);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+.notfound__desc {
+  font-size: 0.98rem;
+  color: var(--meta);
+  margin: 0 0 28px;
+}
+.notfound__link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  background: var(--card-bg);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.notfound__link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}

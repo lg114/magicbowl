@@ -1,0 +1,101 @@
+/* ============================================================
+   MagicBowl — 设计令牌与基础重置（tokens）
+   纯 CSS 网格 + 呼吸动效 + 明暗双主题，无任何背景图片。
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- 设计令牌：暗色为默认 ---------- */
+:root {
+  --bg: #000000;
+  --ink: #f2f2f2;
+  --text: #c9c9c9;
+  --meta: #6b6b6b;
+  --line: #2e2e2e;
+  --grid-size: 56px;
+  --card-border: #2a2a2a;
+  --card-border-hi: #6a6a6a;
+  --accent: #8ab4f8;
+  /* 萤火虫光点：蓝色萤光 + 柔光晕 */
+  --firefly: #4da6ff;
+  --firefly-glow: rgba(77, 166, 255, 0.85);
+  /* 字体系统：
+     正文 / 标题 / 卡片 → 无衬线 --sans（mac/iOS 走系统 UI 字体 + 苹方，Windows 走 Segoe UI / 微软雅黑，中文优先 PingFang SC）
+     代码 / 标签类（日期、标签等）→ 等宽 --mono */
+  --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  /* 衬线源：身份标签行(.welcome__roles) / 箴言引用(.wisdom__quote) 等强调元素用。
+     此前 :root 未定义 --serif，导致这两处 var(--serif) 落回 --sans（系统无衬线），
+     与「衬线 / 衬线+斜体」的注释意图不符；现补上使其真正衬线化。
+     中文走系统衬线（macOS Songti SC / Windows SimSun），西文走 Georgia，尾接通用 serif。 */
+  --serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", Georgia, "Times New Roman", serif;
+  --card-bg: rgba(10, 10, 10, 0.88);
+  /* 滚动条令牌：跟随主题的低调半透明，idle 极淡、hover 显形 */
+  --scroll-track: transparent;
+  --scroll-thumb-idle: rgba(255, 255, 255, 0.12);
+  --scroll-thumb: rgba(255, 255, 255, 0.30);
+  --scroll-thumb-hover: rgba(255, 255, 255, 0.50);
+}
+
+/* ---------- 亮色主题：仅覆盖与背景/网格相关的令牌 ---------- */
+[data-theme="light"] {
+  --bg: #f6f6f6;
+  --ink: #1a1a1a;
+  --text: #4a4a4a;
+  --meta: #9a9a9a;
+  --line: #bdbdbd;
+  --grid-size: 56px;
+  --card-border: #e6e6e6;
+  --card-border-hi: #cfcfcf;
+  --accent: #2f6fed;
+  /* 萤火虫光点：亮色背景下用深蓝，保证对比可见 */
+  --firefly: #1f6feb;
+  --firefly-glow: rgba(31, 111, 235, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --scroll-track: transparent;
+  --scroll-thumb-idle: rgba(0, 0, 0, 0.10);
+  --scroll-thumb: rgba(0, 0, 0, 0.24);
+  --scroll-thumb-hover: rgba(0, 0, 0, 0.42);
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  /* Firefox：细滚动条 + 跟随主题 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+
+/* ---------- 滚动条：融入页面，跟随主题（Webkit） ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-idle);
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+/* 鼠标在页面上时，thumb 由极淡转为可见 */
+html:hover::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+}
+/* 悬停在滚动条本身时，再加深一点 */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::-webkit-scrollbar-thumb {
+    transition: none;
+  }
+}

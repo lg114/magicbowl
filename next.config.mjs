@@ -18,6 +18,12 @@ const nextConfig = {
   compress: true,
   // Security headers
   async headers() {
+    const isDev = process.env.NODE_ENV !== "production";
+    // 开发模式下 React/Turbopack HMR 需要 eval()（调试、重建调用栈等）；
+    // 生产模式 React 从不使用 eval，保持严格 CSP，不放开 'unsafe-eval'。
+    const scriptSrc = isDev
+      ? "'self' 'unsafe-inline' 'unsafe-eval'"
+      : "'self' 'unsafe-inline'";
     return [
       {
         source: "/(.*)",
@@ -39,8 +45,7 @@ const nextConfig = {
           // 仅同源，无外链脚本/字体/图片，MDX 走 rsc 不注入脚本。
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'`,
           },
         ],
       },

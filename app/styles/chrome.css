@@ -1,0 +1,92 @@
+/* ============================================================
+   MagicBowl — 固定位 UI 装饰（chrome）
+   右上角主题切换 / 左上角导航胶囊：同款玻璃质感
+   ============================================================ */
+
+/* 主题切换按钮 */
+.toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 38px;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.6px;
+  color: var(--meta);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.toggle:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.toggle:active {
+  transform: scale(0.96);
+}
+.toggle__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.toggle__icon svg {
+  width: 14px;
+  height: 14px;
+}
+.toggle__label {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.6px;
+}
+
+/* 左上角导航条：与右上角 ThemeToggle 同款玻璃胶囊，按当前路由高亮 */
+.nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 38px;
+  gap: 12px;
+  padding: 0 15px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav__link {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.4px;
+  color: var(--meta);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.nav__link:hover {
+  color: var(--ink);
+}
+.nav__link.is-active {
+  color: var(--accent);
+}
