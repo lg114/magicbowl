@@ -47,11 +47,11 @@ app/
   styles/
     globals.css           # 设计令牌 + 全部样式 + 萤火虫背景
 lib/
-  site.ts                 # 站点配置（导航、项目、社交、足迹数据、Giscus 占位）
-  posts.ts                # 博客文章读取与解析
+  site.ts                 # 站点配置（导航 = NavBar 唯一真相源、项目、社交）
+  posts.ts                # 博客文章读取与解析（含模块级缓存，一次解析）
+  taxonomy.ts             # 分类 / 标签聚合（从 posts 的一次解析结果派生）
   post-types.ts           # 文章类型定义
 content/
-  about.md                # 关于页内容（内容已备，但关于页路由尚未创建）
   posts/                  # 博客文章（Markdown，当前 5 篇）
 public/
   avatar.png              # 头像
@@ -81,9 +81,7 @@ npm start
 
 - `projects` — 项目展示（首页精选 + `/projects` 页都读取它）
 - `social` — 社交链接（`github` / `twitter` / `email`），用于页脚与首页 hero 图标
-- `giscus` — 评论系统配置占位（前往 [giscus.app](https://giscus.app) 获取字段填入；当前仅预留、未接入渲染）
-- `nav` — 导航项（当前 NavBar 实际渲染「首页 / 文章 / 项目」；配置中另含「关于」项，对应 `content/about.md`，但关于页路由尚未创建）
-- `hobbies` / `footprints` — 数据已保留在配置中，暂未在界面上展示
+- `nav` — 导航唯一真相源（NavBar 直接 `map(siteConfig.nav)`，新增页面只改这里；当前为「首页 / 文章 / 项目」）
 
 博客文章放在 `content/posts/` 目录，使用 Markdown + YAML frontmatter：
 

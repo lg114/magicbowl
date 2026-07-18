@@ -54,8 +54,14 @@ export function getPostBySlug(slug: string): Post | null {
   };
 }
 
+// 模块级缓存：整个进程内只解析一次全部文章（灰度/解析开销集中在构建期），
+// getCategories / getTags / PostCards / 归档页都共享这一份结果，避免重复读盘。
+// 注意：next dev 下改了 content/posts/*.md 需重启 dev server 才会刷新。
+let _allPostsCache: PostMeta[] | null = null;
+
 export function getAllPosts(): PostMeta[] {
-  return getPostSlugs()
+  if (_allPostsCache) return _allPostsCache;
+  _allPostsCache = getPostSlugs()
     .map((slug) => {
       const post = getPostBySlug(slug);
       if (!post) return null;
@@ -64,28 +70,7 @@ export function getAllPosts(): PostMeta[] {
     })
     .filter((p): p is PostMeta => p !== null)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
-}
-
-export function getCategories(): { name: string; count: number }[] {
-  const map = new Map<string, number>();
-  for (const post of getAllPosts()) {
-    map.set(post.category, (map.get(post.category) ?? 0) + 1);
-  }
-  return [...map.entries()]
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count);
-}
-
-export function getTags(): { name: string; count: number }[] {
-  const map = new Map<string, number>();
-  for (const post of getAllPosts()) {
-    for (const tag of post.tags) {
-      map.set(tag, (map.get(tag) ?? 0) + 1);
-    }
-  }
-  return [...map.entries()]
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count);
+  return _allPostsCache;
 }
 
 // 热门文章：默认按发布日期最近排序（可在 siteConfig 调整策略）
