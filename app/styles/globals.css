@@ -32,6 +32,11 @@
   --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
           "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  /* 衬线源：身份标签行(.welcome__roles) / 箴言引用(.wisdom__quote) 等强调元素用。
+     此前 :root 未定义 --serif，导致这两处 var(--serif) 落回 --sans（系统无衬线），
+     与「衬线 / 衬线+斜体」的注释意图不符；现补上使其真正衬线化。
+     中文走系统衬线（macOS Songti SC / Windows SimSun），西文走 Georgia，尾接通用 serif。 */
+  --serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", Georgia, "Times New Roman", serif;
   --card-bg: rgba(10, 10, 10, 0.88);
   /* 滚动条令牌：跟随主题的低调半透明，idle 极淡、hover 显形 */
   --scroll-track: transparent;
@@ -117,7 +122,6 @@ body::before {
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   background-position: center;
-  background-attachment: fixed;
   opacity: 0.6;
   z-index: 0;
   pointer-events: none;
@@ -291,19 +295,23 @@ main {
   height: 4px;
   border-radius: 50%;
   background: var(--firefly);
+  /* 辉光烘死在元素上（静态 box-shadow），twinkle 只动 opacity/scale，
+     不再每帧重算模糊半径 → 纯合成、滚动/低端机不卡 */
+  box-shadow: 0 0 10px 3px var(--firefly-glow);
   opacity: 0;
-  /* 两个动画各管一个属性：twinkle 负责亮灭+光晕，drift 负责缓慢游动 */
+  /* 两个动画各管一个属性：twinkle 负责亮灭+缩放，drift 负责缓慢游动 */
   animation:
     twinkle 8s ease-in-out infinite,
     drift 16s ease-in-out infinite;
 }
-/* 萤火虫式闪烁：短暂亮起 → 柔光晕绽放 → 较快熄灭 → 长暗，再循环（亮的时间占比小、空档长，更稀疏自然） */
+/* 萤火虫式闪烁：短暂亮起 → 较快熄灭 → 长暗，再循环（亮的时间占比小、空档长，更稀疏自然）。
+   辉光由元素静态 box-shadow 提供，此处只动 opacity/scale，避免 box-shadow 动画引发的逐帧重绘。 */
 @keyframes twinkle {
-  0%   { opacity: 0;   scale: 0.4; box-shadow: 0 0 0 0 transparent; }
-  6%   { opacity: 1;   scale: 1.1; box-shadow: 0 0 10px 3px var(--firefly-glow); }
+  0%   { opacity: 0;   scale: 0.4; }
+  6%   { opacity: 1;   scale: 1.1; }
   16%  { opacity: 0.75; }
-  30%  { opacity: 0;   scale: 0.5; box-shadow: 0 0 0 0 transparent; }
-  100% { opacity: 0;   scale: 0.4; box-shadow: 0 0 0 0 transparent; }
+  30%  { opacity: 0;   scale: 0.5; }
+  100% { opacity: 0;   scale: 0.4; }
 }
 /* 极缓慢的随意游动（幅度 ≤12px），让光点「活」起来而非钉死在原地 */
 @keyframes drift {
@@ -954,6 +962,62 @@ main {
 }
 [data-theme="light"] .feed-item__tag {
   background: rgba(0, 0, 0, 0.05);
+}
+
+/* 按年分组：年份吸顶（sticky），滚动时该年标题停在内容区顶部，
+   视觉权重低（mono + meta 灰），与文章流同处眩晕安全区。 */
+.archive-years {
+  display: block;
+}
+.archive-year {
+  margin-bottom: 10px;
+}
+.archive-year__label {
+  position: sticky;
+  /* 吸顶时让开左上角固定导航（top:20px + 高 38px ≈ 58px），并留呼吸余量 */
+  top: 72px;
+  z-index: 3;
+  margin: 0 0 6px;
+  padding: 10px 0 8px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--meta);
+  /* 与底板同色 + 模糊，吸顶时柔化背景网格并盖住下方滚动的文章，避免穿透 */
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+}
+/* 小屏导航更矮，年份吸顶高度相应下调 */
+@media (max-width: 680px) {
+  .archive-year__label {
+    top: 60px;
+  }
+}
+
+/* 阈值分页：「加载更多」胶囊按钮（阈值门控，当前仅 5 篇不显示） */
+.archive-loadmore-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 8px;
+}
+.archive-loadmore {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 9px 20px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.archive-loadmore:hover {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* ---------- 文章详情页 /posts/[slug] ---------- */

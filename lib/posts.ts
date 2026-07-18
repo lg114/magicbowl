@@ -72,8 +72,3 @@ export function getAllPosts(): PostMeta[] {
     .sort((a, b) => (a.date < b.date ? 1 : -1));
   return _allPostsCache;
 }
-
-// 热门文章：默认按发布日期最近排序（可在 siteConfig 调整策略）
-export function getPopularPosts(limit = 5): PostMeta[] {
-  return getAllPosts().slice(0, limit);
-}

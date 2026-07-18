@@ -5,6 +5,10 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { formatDate } from "../../../lib/post-types";
 
+// 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
+// 任何未预渲染的路径直接 404，阻断 URL 注入 ../ 等逃逸 content/posts 的路径穿越。
+export const dynamicParams = false;
+
 // 静态生成所有文章详情页
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug: slug.replace(/\.md$/, "") }));
