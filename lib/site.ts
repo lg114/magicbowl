@@ -14,7 +14,7 @@ export const siteConfig = {
   description: "MagicBowl 的个人博客，记录技术、设计与日常思考。",
   author: "MagicBowl",
   // 部署后的站点地址，用于 SEO / sitemap / canonical
-  url: "https://magicbowl.example.com",
+  url: "https://www.magicbowl.tech",
   locale: "zh-CN",
   avatar: "/avatar.png", // 头像路径，可替换为真实图片
   // 导航唯一真相源：NavBar 直接 map 本数组，新增页面只改这里。
