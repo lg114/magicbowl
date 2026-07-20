@@ -21,7 +21,8 @@
 - **深色 / 浅色主题** — 右上角切换，无闪烁、持久化
 - **萤火虫夜空背景** — 纯 CSS 蓝色光点 + 网格呼吸动效，内容层浮于其上（`pointer-events: none`，不挡交互）
 - **全局页脚** — © 年份 + 站名 + 社交图标（GitHub / X / Email）
-- **SEO** — `metadata` 基础元信息 + `sitemap.ts` + `robots.ts`
+- **SEO** — `metadata` 基础元信息 + `sitemap.ts`（覆盖全站路由：首页 / 文章 / 项目 + 全部文章 slug）+ `robots.ts`
+- **离线 / 缓存** — `public/sw.js`（仅 https 且非 localhost 注册）：`/` `/posts` `/projects` + 关键静态资源预缓存，其余走 stale-while-revalidate
 
 ## 目录结构
 
@@ -45,14 +46,25 @@ app/
     FeaturedProjects.tsx  # 首页精选项目
     ProjectCard.tsx       # 单个项目卡片
   styles/
-    globals.css           # 设计令牌 + 全部样式 + 萤火虫背景
+    globals.css           # 设计令牌 + 样式聚合入口（@import 11 个模块，按层叠顺序）
+    tokens.css            # 设计令牌 / :root 双主题 / 滚动条 / reset
+    base.css              # body · 网格背景层 · main · screen · 网格呼吸
+    chrome.css            # .toggle 主题按钮 · .nav 导航胶囊
+    home.css              # hero 头像 · 萤火虫 · 欢迎语 · 箴言 · 文章时间线
+    archive.css           # /posts 两栏 · 搜索 · 标签云 · 分页 · 按年分组
+    post.css              # 文章详情 · 长文排版
+    motion.css            # prefers-reduced-motion 降级
+    responsive.css        # 680 / 900 / 480 三档响应
+    notfound.css          # 404
+    projects.css          # 项目页 + 首页精选项目
+    footer.css            # 页脚
 lib/
   site.ts                 # 站点配置（导航 = NavBar 唯一真相源、项目、社交）
   posts.ts                # 博客文章读取与解析（含模块级缓存，一次解析）
   taxonomy.ts             # 分类 / 标签聚合（从 posts 的一次解析结果派生）
   post-types.ts           # 文章类型定义
 content/
-  posts/                  # 博客文章（Markdown，当前 5 篇）
+  posts/                  # 博客文章（Markdown，当前 4 篇）
 public/
   avatar.png              # 头像
   icon.svg                # 站点图标
