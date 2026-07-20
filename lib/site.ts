@@ -51,7 +51,7 @@ export const siteConfig = {
   ] satisfies Project[],
   social: {
     github: "https://github.com/lg114",
-    email: "mailto:you@example.com",
+    email: "mailto:190970720@qq.com",
     twitter: "https://x.com/gc20010801",
   },
 };

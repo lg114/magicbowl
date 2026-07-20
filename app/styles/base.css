@@ -10,6 +10,9 @@ body {
   line-height: 1.78;
   font-size: 16px;
   min-height: 100vh;
+  /* 纵向 flex：配合 main 的 flex:1，把 footer 钉在视口底（内容短时也不悬空） */
+  display: flex;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.45s ease;
 }
@@ -35,6 +38,7 @@ body::before {
 main {
   position: relative;
   z-index: 2;
+  flex: 1 0 auto; /* 占满剩余高度，把 footer 压到视口底部（sticky footer） */
 }
 /* 首屏：hero + 箴言收进同一屏（100dvh），保持「不滚动也能看全」；
    卡片区在其下方作为第二屏，箭头滚动至此 */
