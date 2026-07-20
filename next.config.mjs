@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
+import withBundleAnalyzer from "@next/bundle-analyzer";
+
+const withAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const nextConfig = {
   // Allow LAN access to dev resources (HMR websocket etc.)
   allowedDevOrigins: ["192.168.1.14"],
@@ -49,9 +55,38 @@ const nextConfig = {
           },
         ],
       },
+      // 静态资源长缓存：仅 public/ 下的图片与图标。
+      // 不含 /_next/static —— Next 已自动加 immutable；
+      // 不含 /sw.js —— Service Worker 必须能及时拉到新版，不能长缓存。
+      {
+        source: "/avatar.png",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/icon.svg",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/favicon.ico",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 };
 
-
-export default nextConfig;
+export default withAnalyzer(nextConfig);

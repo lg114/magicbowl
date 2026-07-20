@@ -7,6 +7,7 @@
 import Wisdom from "./components/Wisdom";
 import PostCards from "./components/PostCards";
 import FeaturedProjects from "./components/FeaturedProjects";
+import Image from "next/image";
 import { siteConfig } from "../lib/site";
 
 export default function Home() {
@@ -20,7 +21,16 @@ export default function Home() {
             <div className="avatar-stage">
               {/* 外层做一次性落下入场，内层 img 做无限弹跳，各管各的 transform 避免冲突 */}
               <div className="avatar-drop">
-                <img className="avatar" src={siteConfig.avatar} alt="Gc 的头像" />
+                <Image
+                  src={siteConfig.avatar}
+                  alt="Gc 的头像"
+                  width={200}
+                  height={200}
+                  className="avatar"
+                  priority
+                  decoding="async"
+                  sizes="(max-width: 480px) 130px, (max-width: 680px) 160px, 200px"
+                />
               </div>
             </div>
             <div className="welcome">

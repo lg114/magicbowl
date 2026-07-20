@@ -35,6 +35,8 @@ export default function RootLayout({
     <html lang="zh" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#000000" />
+        {/* LCP 优化：头像预加载（fetchpriority=high 确保 Lighthouse 不报缺优先级） */}
+        <link rel="preload" href={siteConfig.avatar} as="image" fetchPriority="high" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
