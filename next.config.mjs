@@ -1,9 +1,16 @@
 /** @type {import('next').NextConfig} */
-import withBundleAnalyzer from "@next/bundle-analyzer";
+import { createRequire } from "module";
 
-const withAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
+// Bundle analyzer 是 devDependency；生产部署常不装 devDep，
+// 故用 createRequire 同步探测，缺失则静默降级，避免 next.config 加载即崩。
+let withBundleAnalyzer = (config) => config;
+try {
+  const mod = createRequire(import.meta.url)("@next/bundle-analyzer");
+  const factory = mod.default || mod;
+  withBundleAnalyzer = factory({ enabled: process.env.ANALYZE === "true" });
+} catch {
+  // 包未安装：跳过 bundle 分析，正常构建
+}
 
 const nextConfig = {
   // Allow LAN access to dev resources (HMR websocket etc.)
@@ -89,4 +96,4 @@ const nextConfig = {
   },
 };
 
-export default withAnalyzer(nextConfig);
+export default withBundleAnalyzer(nextConfig);
