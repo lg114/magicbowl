@@ -410,12 +410,14 @@
   letter-spacing: 0.5px;
   color: var(--meta);
 }
-/* 分类作为卡片上的小彩点：accent 蓝文字 + 中性边框，呼应「accent 是唯一彩色锚点」 */
+/* 详情页 meta 分类：与 .chip 同源的「描边胶囊」语言——中性描边 + --text 文字。
+   不可点击（纯展示），故无 hover/active 态；accent 不再用于分类标识，
+   全站 accent 语义收敛为「交互/链接/hover」专用。 */
 .card__cat {
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.5px;
-  color: var(--accent);
+  color: var(--text);
   border: 1px solid var(--card-border);
   border-radius: 999px;
   padding: 2px 9px;

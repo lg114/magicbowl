@@ -320,15 +320,14 @@
 .feed-item__cat {
   color: var(--accent);
 }
+/* 归档页文章标签：与 .chip 同源的「描边胶囊」语言——中性描边 + --text 文字。
+   不可点击（纯展示），故无 hover/active 态；替代原先的灰底填充，全站胶囊统一描边体系。 */
 .feed-item__tag {
   font-size: 0.72rem;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--card-border);
   border-radius: 999px;
   padding: 2px 8px;
-}
-[data-theme="light"] .feed-item__tag {
-  background: rgba(0, 0, 0, 0.05);
 }
 
 /* 按年分组：年份吸顶（sticky），滚动时该年标题停在内容区顶部，
