@@ -200,16 +200,17 @@
   opacity: 0;
   animation: fadeUp 0.8s ease 0.5s both;
 }
-/* 引用样式：衬线 + 斜体 + 大引号 */
+/* 引用样式：衬线 + 斜体 + 大引号。视觉定位是「彩蛋」而非第二标题——
+   字号与色阶均弱于 welcome，鼠标点上去才换一句，静时退为背景一隅 */
 .wisdom__quote {
   margin: 0;
   max-width: 640px;
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   line-height: 1.6;
-  color: var(--ink);
+  color: var(--text);
   cursor: pointer;
   position: relative;
   padding: 0 1.4rem;

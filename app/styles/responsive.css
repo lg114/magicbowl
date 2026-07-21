@@ -16,7 +16,7 @@
   .avatar { width: 160px; height: 160px; }
   .welcome__hi { font-size: 2rem; }
   .welcome__roles { font-size: 0.85rem; }
-  .wisdom__quote { font-size: 1.35rem; }
+  .wisdom__quote { font-size: 1.15rem; }
   .wisdom__cite { font-size: 0.9rem; }
   .wisdom { padding: 16px 18px 26px; }
   .cards { padding: 64px 18px 84px; }
@@ -46,7 +46,7 @@
   .avatar { width: 130px; height: 130px; }
   .welcome__hi { font-size: 1.6rem; }
   .welcome__roles { font-size: 0.8rem; }
-  .wisdom__quote { font-size: 1.15rem; }
+  .wisdom__quote { font-size: 0.98rem; }
   .wisdom__cite { font-size: 0.82rem; }
   .wisdom { padding: 14px 16px 22px; }
   .cards { padding: 52px 16px 72px; }

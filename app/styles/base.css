@@ -1,6 +1,6 @@
 /* ============================================================
    MagicBowl — 基础排版与背景层（base）
-   body / 网格背景 / 内容层 / 首屏容器 / 网格呼吸动效
+   body / 网格背景 / 内容层 / 首屏容器
    ============================================================ */
 
 body {
@@ -17,7 +17,8 @@ body {
   transition: background-color 0.45s ease;
 }
 
-/* 背景网格单独成层，才能对它做「呼吸」动效而不影响正文 */
+/* 背景网格单独成层，完全静态：曾有的「呼吸」动效因 1px 细线稀释亮度而肉眼不可见，
+   已于 2026-07-21 移除（gc 偏好静态背景，萤火虫/头像动效足够承担「活」感） */
 body::before {
   content: "";
   position: fixed;
@@ -31,7 +32,6 @@ body::before {
   z-index: 0;
   pointer-events: none;
   transition: background 0.45s ease;
-  animation: gridBreathe 12s ease-in-out infinite;
 }
 
 /* 内容层位于网格之上 */
@@ -47,11 +47,4 @@ main {
   min-height: 100dvh; /* 移动端更贴近真实可视高度，规避 URL 栏导致的留白跳动 */
   display: flex;
   flex-direction: column;
-}
-
-/* 网格呼吸：线条亮度以 12s 慢周期轻微起伏（0.55↔0.76），
-   幅度小、频率慢，有「活的背景」氛围感，不干扰阅读 */
-@keyframes gridBreathe {
-  0%, 100% { opacity: 0.55; }
-  50%      { opacity: 0.76; }
 }

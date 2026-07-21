@@ -1,4 +1,4 @@
-// 首页渲染背景（纯 CSS 网格 + 呼吸动效，见 globals.css 的 body::before）
+// 首页渲染背景（纯 CSS 静态网格，见 globals.css 的 body::before）
 // + 居中头像（从上往下淡入落下、持续弹跳，见 .avatar）
 // + 头像下方的欢迎语（见 .welcome）
 // + 箴言区 Wisdom（见 app/components/Wisdom.tsx，每次刷新随机展示一条 + 滚动提示箭头）。
