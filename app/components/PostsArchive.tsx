@@ -257,6 +257,11 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
 
         {/* 右栏：分类 / 标签云（大屏常驻，小屏隐藏 → 改用上方「标签 ▾」） */}
         <aside className="archive-aside" aria-label="筛选">
+          {/* 统计头部：维度总量（分类/标签数），mono 小字弱化，让 sticky 侧栏不显得空。
+              不含篇数——主列工具栏已承担「当前/共 N 篇」，此处避免重复 */}
+          <p className="archive-stats">
+            {categories.length} 分类 · {tags.length} 标签
+          </p>
           <div className="filter-section">
             <span className="filter-section__label">分类</span>
             <div className="filter-cloud" role="group" aria-label="按分类筛选">

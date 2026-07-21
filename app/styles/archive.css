@@ -132,6 +132,19 @@
 .archive-search:focus {
   border-color: var(--accent);
 }
+/* 侧栏统计头部：mono 小字 + meta 灰，底边分隔线与下方筛选组区分。
+   内容形如「3 分类 · 8 标签」，只含维度总量（分类/标签数），不含篇数——
+   篇数由主列工具栏承担（共 N 篇 / N 篇），避免重复。让 sticky 侧栏顶部有依托。 */
+.archive-stats {
+  margin: 0 0 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--card-border);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  color: var(--meta);
+}
+
 /* 侧边栏筛选分组 */
 .filter-section {
   margin-bottom: 16px;
