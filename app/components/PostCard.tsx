@@ -12,7 +12,7 @@ function shortDate(iso: string): string {
 
 export default function PostCard({ post }: { post: PostMeta }) {
   return (
-    <li className="post-timeline__item">
+    <li className="post-timeline__item" data-category={post.category}>
       <Link href={`/posts/${post.slug}`} className="post-timeline__row">
         <span className="post-timeline__meta">
           <time className="card__date" dateTime={post.date}>

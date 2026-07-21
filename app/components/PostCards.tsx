@@ -13,7 +13,7 @@ export default function PostCards() {
   return (
     <section className="cards" id="posts">
       <div className="cards__inner">
-        <h2 className="cards__heading">文章</h2>
+        <h2 className="cards__heading">最近文章</h2>
         <ul className="post-timeline">
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
