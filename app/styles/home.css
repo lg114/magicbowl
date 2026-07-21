@@ -256,8 +256,9 @@
   cursor: pointer;
   animation: cueBreath 3s ease-in-out infinite;
 }
-/* 滚动提示文字：等宽 --mono + 灰，与身份行同源；大写 + 宽字距像一行标签；
-   hover 与身份词/社交图标一致提亮为 accent 蓝（仅颜色过渡，无位移） */
+/* 滚动提示文字：等宽 --mono + 灰，与身份行同源；英文 SCROLL + 大写 + 宽字距，
+   正好是 mono 字体标签语感的最佳载体（中文「下滑」无 uppercase 概念、
+   letter-spacing 会让两字分家，已改用英文）；hover 提亮为 accent 蓝（仅颜色过渡） */
 .scroll-cue__label {
   font-family: var(--mono);
   font-size: 0.7rem;

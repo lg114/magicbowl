@@ -62,7 +62,7 @@ export default function Wisdom() {
       <button className="scroll-cue" aria-label="向下滚动" onClick={scrollDown}>
         <span className="scroll-cue__arrow" aria-hidden="true" />
         <span className="scroll-cue__label" aria-hidden="true">
-          下滑
+          SCROLL
         </span>
       </button>
     </section>
