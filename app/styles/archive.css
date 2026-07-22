@@ -56,12 +56,12 @@
 }
 /* 左主列卡片：工具栏 + 搜索行 + 文章流 */
 .archive-feed-wrap {
-  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 58%, transparent);
   border: 1px solid var(--card-border);
-  border-radius: 18px;
+  border-radius: 14px;
   padding: 20px 22px 24px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 /* 右栏：分类 / 标签云侧边栏，常驻 */
 .archive-aside {
@@ -69,12 +69,12 @@
   position: sticky;
   top: 88px;
   align-self: flex-start;
-  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 42%, transparent);
   border: 1px solid var(--card-border);
-  border-radius: 18px;
+  border-radius: 14px;
   padding: 18px 16px 20px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 /* 搜索 + 标签触发行：坐在工具栏和文章卡片之间（参考图布局） */
 .archive-filter-bar {

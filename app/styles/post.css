@@ -22,7 +22,7 @@
   width: 100%;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 18px;
+  border-radius: 14px;
   padding: 44px 48px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -166,12 +166,12 @@
   margin: 28px 0;
 }
 .post-toc {
-  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 50%, transparent);
   border: 1px solid var(--card-border);
-  border-radius: 18px;
+  border-radius: 14px;
   padding: 16px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .post-toc--desktop {
   position: sticky;

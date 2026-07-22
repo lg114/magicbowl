@@ -3,7 +3,7 @@
    /projects 独立页 + 首页精选项目网格
    ============================================================ */
 
-/* 复用归档页容器节奏：玻璃底板之上、网格之下的内容层 */
+/* 复用归档页容器节奏：内容层浮在网格之上 */
 .projects {
   position: relative;
   z-index: 2;
@@ -19,22 +19,23 @@
   gap: 18px;
 }
 
-/* 项目卡片：玻璃底板 + 模糊，柔化背景网格、给焦点落脚（与归档侧栏同源）。
+/* 项目卡片：独立项目页保留清晰底板，作为可扫描的作品清单。
    动效仅边框/底色过渡，无位移/缩放/旋转，落在眩晕安全区 */
 .project-card {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: var(--card-bg);
+  background: color-mix(in srgb, var(--card-bg) 74%, transparent);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 22px 22px 20px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
   transition: border-color 0.25s ease, background 0.25s ease;
 }
 .project-card:hover {
   border-color: var(--card-border-hi);
+  background: color-mix(in srgb, var(--card-bg) 88%, transparent);
 }
 .project-card__head {
   display: flex;
@@ -148,6 +149,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 18px;
+}
+.featured-projects .project-card {
+  background: transparent;
+  border-color: color-mix(in srgb, var(--card-border) 72%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.featured-projects .project-card:hover {
+  background: rgba(128, 128, 128, 0.1);
+  border-color: var(--card-border-hi);
 }
 
 /* 窄屏：项目网格转单列、收紧容器内边距 */
