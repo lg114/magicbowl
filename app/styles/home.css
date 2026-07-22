@@ -350,10 +350,10 @@
   background: #7ee0a8;
 }
 .post-timeline__item[data-category="随笔"]::before {
-  background: var(--accent);
+  background: var(--cat-note);
 }
 .post-timeline__item[data-category="读后感"]::before {
-  background: #f0c674;
+  background: var(--cat-read);
 }
 /* hover 整行时节点放大 1.3 倍（9px→11.7px）：纯缩放、落在眩晕安全区，
    与标题下划线同时响应，强化「这一行 = 这个分类的一篇文章」整体感。 */
@@ -422,6 +422,18 @@
   border: 1px solid var(--card-border);
   border-radius: 999px;
   padding: 2px 9px;
+}
+.card__cat[data-category="生活"] {
+  color: var(--cat-life);
+  border-color: color-mix(in srgb, var(--cat-life) 42%, transparent);
+}
+.card__cat[data-category="随笔"] {
+  color: var(--cat-note);
+  border-color: color-mix(in srgb, var(--cat-note) 42%, transparent);
+}
+.card__cat[data-category="读后感"] {
+  color: var(--cat-read);
+  border-color: color-mix(in srgb, var(--cat-read) 42%, transparent);
 }
 
 /* 卡片区底部的「查看全部」入口，呼应身份行 / SCROLL 的 mono 标签语感 */

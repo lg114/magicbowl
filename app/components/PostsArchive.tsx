@@ -260,7 +260,9 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
                             <span className="feed-item__dot" aria-hidden="true">
                               ·
                             </span>
-                            <span className="feed-item__cat">{post.category}</span>
+                            <span className="feed-item__cat" data-category={post.category}>
+                              {post.category}
+                            </span>
                             {post.tags.map((tag) => (
                               <span key={tag} className="feed-item__tag">
                                 {tag}

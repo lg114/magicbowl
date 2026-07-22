@@ -70,7 +70,7 @@
   top: 88px;
   align-self: flex-start;
   background: color-mix(in srgb, var(--card-bg) 42%, transparent);
-  border: 1px solid var(--card-border);
+  border: 1px solid color-mix(in srgb, var(--card-border) 62%, transparent);
   border-radius: 12px;
   padding: 18px 16px 20px;
   backdrop-filter: blur(5px);
@@ -149,8 +149,8 @@
   font-family: var(--sans);
   font-size: 0.76rem;
   color: var(--ink);
-  background: rgba(128, 128, 128, 0.12);
-  border: 1px solid var(--card-border);
+  background: rgba(138, 180, 248, 0.1);
+  border: 1px solid color-mix(in srgb, var(--accent) 58%, transparent);
   border-radius: 999px;
   padding: 5px 10px 5px 12px;
   cursor: pointer;
@@ -194,7 +194,7 @@
 .archive-stats {
   margin: 0 0 14px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--card-border);
+  border-bottom: 1px solid color-mix(in srgb, var(--card-border) 62%, transparent);
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.5px;
@@ -213,7 +213,7 @@
   font-family: var(--sans);
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--meta);
   margin-bottom: 10px;
 }
 /* 标签云：胶囊换行 */
@@ -230,30 +230,31 @@
 .filter-bar__toggle.is-active .filter-toggle__icon {
   color: var(--accent);
 }
-/* 筛选胶囊：默认中性描边，hover 提亮，选中填 accent 蓝 */
+/* 筛选胶囊：默认低对比，选中态才使用 accent 表示当前状态 */
 .chip {
   font-family: var(--sans);
   font-size: 0.76rem;
   letter-spacing: 0.3px;
-  color: var(--text);
+  color: var(--meta);
   background: transparent;
-  border: 1px solid var(--card-border);
+  border: 1px solid color-mix(in srgb, var(--card-border) 68%, transparent);
   border-radius: 999px;
   padding: 4px 11px;
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 .chip:hover {
-  color: var(--ink);
-  border-color: var(--card-border-hi);
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--card-border-hi) 70%, transparent);
+  background: rgba(128, 128, 128, 0.08);
 }
 .chip.is-active {
-  color: #fff;
-  background: var(--accent);
+  color: var(--accent);
+  background: rgba(138, 180, 248, 0.12);
   border-color: var(--accent);
 }
 [data-theme="light"] .chip.is-active {
-  color: #fff;
+  color: var(--accent);
 }
 .tag-count {
   font-size: 0.72em;
@@ -261,7 +262,7 @@
   margin-left: 2px;
 }
 .chip.is-active .tag-count {
-  color: rgba(255, 255, 255, 0.75);
+  color: color-mix(in srgb, var(--accent) 70%, var(--meta));
 }
 /* 工具栏：篇数 + 排序 */
 .archive-toolbar {
@@ -374,14 +375,23 @@
   opacity: 0.4;
 }
 .feed-item__cat {
-  color: var(--accent);
+  color: var(--meta);
+}
+.feed-item__cat[data-category="生活"] {
+  color: var(--cat-life);
+}
+.feed-item__cat[data-category="随笔"] {
+  color: var(--cat-note);
+}
+.feed-item__cat[data-category="读后感"] {
+  color: var(--cat-read);
 }
 /* 归档页文章标签：与 .chip 同源的「描边胶囊」语言——中性描边 + --text 文字。
    不可点击（纯展示），故无 hover/active 态；替代原先的灰底填充，全站胶囊统一描边体系。 */
 .feed-item__tag {
   font-size: 0.72rem;
-  color: var(--text);
-  border: 1px solid var(--card-border);
+  color: var(--meta);
+  border: 1px solid color-mix(in srgb, var(--card-border) 68%, transparent);
   border-radius: 999px;
   padding: 2px 8px;
 }

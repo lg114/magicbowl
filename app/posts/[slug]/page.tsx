@@ -56,7 +56,9 @@ export default async function PostPage({
             <time className="card__date" dateTime={post.date}>
               {formatDate(post.date)}
             </time>
-            <span className="card__cat">{post.category}</span>
+            <span className="card__cat" data-category={post.category}>
+              {post.category}
+            </span>
           </div>
           <h1 className="post__title">{post.title}</h1>
           {headings.length > 0 && (

@@ -22,6 +22,9 @@
   --card-border: #2a2a2a;
   --card-border-hi: #6a6a6a;
   --accent: #8ab4f8;
+  --cat-life: #7ee0a8;
+  --cat-note: #f0c674;
+  --cat-read: #d7a7ff;
   /* 萤火虫光点：蓝色萤光 + 柔光晕 */
   --firefly: #4da6ff;
   --firefly-glow: rgba(77, 166, 255, 0.85);
@@ -55,6 +58,9 @@
   --card-border: #e6e6e6;
   --card-border-hi: #cfcfcf;
   --accent: #2f6fed;
+  --cat-life: #1f9e5a;
+  --cat-note: #b7791f;
+  --cat-read: #8b5cf6;
   /* 萤火虫光点：亮色背景下用深蓝，保证对比可见 */
   --firefly: #1f6feb;
   --firefly-glow: rgba(31, 111, 235, 0.7);
