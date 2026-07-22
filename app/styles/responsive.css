@@ -24,6 +24,9 @@
   .archive { padding: 88px 18px 84px; }
   .post { padding: 32px 26px; }
   .post__title { font-size: 1.6rem; }
+  .post-layout { display: block; max-width: 720px; }
+  .post-toc--desktop { display: none; }
+  .post-toc--mobile { display: block; }
   .nav { top: 14px; left: 14px; gap: 11px; padding: 7px 14px; }
   .nav__links { gap: 11px; }
 }
@@ -62,6 +65,9 @@
   .feed-item__title { font-size: 1.1rem; }
   .post { padding: 28px 20px; }
   .post__title { font-size: 1.45rem; }
+  .post__heading-anchor { display: none; }
+  .post-neighbors { grid-template-columns: 1fr; }
+  .post-neighbor--next { text-align: left; }
   .nav { gap: 9px; padding: 7px 12px; }
   .nav__brand { font-size: 13px; }
   .nav__links { gap: 9px; }

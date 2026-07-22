@@ -102,6 +102,18 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
   }, [visible, sort]);
 
   const hasFilter = Boolean(activeCat || activeTag || query.trim());
+  const activeFilters = [
+    query.trim() ? { key: "query", label: `搜索：${query.trim()}` } : null,
+    activeCat ? { key: "category", label: `分类：${activeCat}` } : null,
+    activeTag ? { key: "tag", label: `标签：${activeTag}` } : null,
+  ].filter((item): item is { key: string; label: string } => item !== null);
+
+  const clearFilter = (key: string) => {
+    if (key === "query") setQuery("");
+    if (key === "category") setActiveCat(null);
+    if (key === "tag") setActiveTag(null);
+  };
+
   const clearFilters = () => {
     setQuery("");
     setActiveCat(null);
@@ -196,6 +208,28 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
                   ))}
                 </div>
               </div>
+            </div>
+          )}
+
+          {activeFilters.length > 0 && (
+            <div className="active-filters" aria-label="当前筛选条件">
+              {activeFilters.map((filter) => (
+                <button
+                  key={filter.key}
+                  type="button"
+                  className="active-filter"
+                  onClick={() => clearFilter(filter.key)}
+                  aria-label={`清除${filter.label}`}
+                >
+                  <span>{filter.label}</span>
+                  <span className="active-filter__remove" aria-hidden="true">
+                    ×
+                  </span>
+                </button>
+              ))}
+              <button type="button" className="active-filters__clear" onClick={clearFilters}>
+                清除全部
+              </button>
             </div>
           )}
 

@@ -14,40 +14,37 @@ type Mode = { label: string; icon: "sun" | "moon" };
 export default function ThemeToggle() {
   const [mode, setMode] = useState<Mode | null>(null);
 
-  useEffect(() => {
-    const btn = document.getElementById("theme");
+  const syncTheme = () => {
     const root = document.documentElement;
+    const isLight = root.getAttribute("data-theme") === "light";
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", isLight ? "#f6f6f6" : "#000000");
+    setMode(isLight ? { label: "暗色", icon: "moon" } : { label: "亮色", icon: "sun" });
+  };
 
-    const sync = () => {
-      const isLight = root.getAttribute("data-theme") === "light";
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", isLight ? "#f6f6f6" : "#000000");
-      setMode(isLight ? { label: "暗色", icon: "moon" } : { label: "亮色", icon: "sun" });
-    };
-
-    const onClick = () => {
-      const next =
-        root.getAttribute("data-theme") === "light" ? "dark" : "light";
-      if (next === "light") root.setAttribute("data-theme", "light");
-      else root.removeAttribute("data-theme");
-      try {
-        localStorage.setItem("memorized-theme", next);
-      } catch {
-        /* ignore */
-      }
-      sync();
-    };
-
-    sync();
-    btn?.addEventListener("click", onClick);
-    return () => btn?.removeEventListener("click", onClick);
+  useEffect(() => {
+    syncTheme();
   }, []);
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    if (next === "light") root.setAttribute("data-theme", "light");
+    else root.removeAttribute("data-theme");
+    try {
+      localStorage.setItem("memorized-theme", next);
+    } catch {
+      /* ignore */
+    }
+    syncTheme();
+  };
 
   return (
     <button
       id="theme"
       className="toggle"
       type="button"
+      onClick={toggleTheme}
       suppressHydrationWarning
       aria-label="切换明暗主题"
     >

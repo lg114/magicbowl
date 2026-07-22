@@ -132,6 +132,62 @@
 .archive-search:focus {
   border-color: var(--accent);
 }
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: -4px 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--card-border);
+}
+.active-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  color: var(--ink);
+  background: rgba(128, 128, 128, 0.12);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 5px 10px 5px 12px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.active-filter span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.active-filter:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(138, 180, 248, 0.12);
+}
+.active-filter__remove {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--meta);
+}
+.active-filter:hover .active-filter__remove {
+  color: var(--accent);
+}
+.active-filters__clear {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--meta);
+  background: none;
+  border: none;
+  padding: 5px 2px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.active-filters__clear:hover {
+  color: var(--accent);
+}
 /* 侧栏统计头部：mono 小字 + meta 灰，底边分隔线与下方筛选组区分。
    内容形如「3 分类 · 8 标签」，只含维度总量（分类/标签数），不含篇数——
    篇数由主列工具栏承担（共 N 篇 / N 篇），避免重复。让 sticky 侧栏顶部有依托。 */
