@@ -151,14 +151,22 @@
   gap: 18px;
 }
 .featured-projects .project-card {
-  background: transparent;
-  border-color: color-mix(in srgb, var(--card-border) 72%, transparent);
+  background: color-mix(in srgb, var(--card-bg) 38%, transparent);
+  border-color: color-mix(in srgb, var(--card-border-hi) 54%, var(--card-border));
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 .featured-projects .project-card:hover {
-  background: rgba(128, 128, 128, 0.1);
+  background: color-mix(in srgb, var(--card-bg) 58%, transparent);
   border-color: var(--card-border-hi);
+}
+[data-theme="light"] .featured-projects .project-card {
+  background: rgba(255, 255, 255, 0.64);
+  border-color: #d8d8d8;
+}
+[data-theme="light"] .featured-projects .project-card:hover {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: #b8b8b8;
 }
 
 /* 窄屏：项目网格转单列、收紧容器内边距 */

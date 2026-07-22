@@ -1,7 +1,16 @@
 /* ============================================================
    MagicBowl — 文章详情页 /posts/[slug]（post）
-   玻璃底板 + 长文阅读排版（双主题）
+   书桌气质：氛围压低，正文成为唯一主角
    ============================================================ */
+
+/* ---- 文章页：降低全局背景动效存在感 ----
+   网格更淡（0.6 → 0.3），萤火虫几乎隐去（1 → 0.12）。
+   用 :has() 检测文章页，无需改 layout.tsx；
+   transition 让进出文章页时渐变而非跳变。 */
+body::before { transition: opacity 0.4s ease, background 0.45s ease; }
+body:has(.post-wrap)::before { opacity: 0.3; }
+.firefly-field { transition: opacity 0.4s ease; }
+body:has(.post-wrap) .firefly-field { opacity: 0.12; }
 
 .post-wrap {
   position: relative;
@@ -18,15 +27,21 @@
   justify-content: center;
   gap: 28px;
 }
+
+/* 正文容器：更像"纸面"——更实的背景、更淡的边框、更低模糊、更大内边距 */
 .post {
   width: 100%;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 44px 48px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(14, 14, 14, 0.94);
+  border: 1px solid color-mix(in srgb, var(--card-border) 55%, transparent);
+  border-radius: 11px;
+  padding: 56px 56px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
+[data-theme="light"] .post {
+  background: rgba(252, 250, 247, 0.96);
+}
+
 .post__back {
   display: inline-block;
   margin-bottom: 22px;
@@ -54,11 +69,13 @@
   line-height: 1.3;
   margin-bottom: 28px;
 }
-/* 正文排版：使用主题令牌，长文阅读仍落在暗/亮双主题里 */
+
+/* ---- 长文排版：舒展、呼吸感强 ----
+   中文长文里行高和段距比花哨装饰重要得多。 */
 .post__body {
   color: var(--text);
-  font-size: 1rem;
-  line-height: 1.9;
+  font-size: 1.06rem;
+  line-height: 2;
 }
 .post__body h2 {
   position: relative;
@@ -66,16 +83,18 @@
   font-size: 1.4rem;
   font-weight: 600;
   color: var(--ink);
-  margin: 34px 0 14px;
+  margin: 2.2em 0 0.6em;
 }
 .post__body h3 {
   position: relative;
   scroll-margin-top: 96px;
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1.12rem;
+  font-weight: 500;
   color: var(--ink);
-  margin: 26px 0 12px;
+  margin: 1.6em 0 0.5em;
 }
+
+/* 标题锚点：默认完全不可见，hover 淡淡浮现（opacity 0.5 而非 1） */
 .post__heading-anchor {
   position: absolute;
   right: calc(100% + 8px);
@@ -88,14 +107,15 @@
 .post__body h3:hover .post__heading-anchor,
 .post__heading-anchor:focus-visible {
   color: var(--accent);
-  opacity: 1;
+  opacity: 0.5;
 }
+
 .post__body p {
-  margin: 0 0 16px;
+  margin: 0 0 1.15em;
 }
 .post__body ul,
 .post__body ol {
-  margin: 0 0 16px;
+  margin: 0 0 1.15em;
   padding-left: 1.4em;
 }
 .post__body li {
@@ -106,32 +126,42 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* 引用块：旁注气质——细线 + 暖灰底 + 衬线体，蓝色留给链接 */
 .post__body blockquote {
-  margin: 22px 0;
-  padding: 12px 18px;
-  border-left: 3px solid var(--accent);
-  border-radius: 0 10px 10px 0;
-  background: rgba(138, 180, 248, 0.08);
+  margin: 1.5em 0;
+  padding: 10px 20px;
+  border-left: 2px solid var(--card-border-hi);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--card-border) 12%, transparent);
   color: var(--text);
+  font-family: var(--serif);
+  font-size: 0.98em;
 }
 .post__body blockquote p:last-child {
   margin-bottom: 0;
 }
+
+/* 行内代码：轻底色、文字不蓝、不像按钮 */
 .post__body code {
   font-family: var(--mono);
   font-size: 0.88em;
-  background: rgba(138, 180, 248, 0.12);
-  color: var(--accent);
+  background: color-mix(in srgb, var(--card-border) 30%, transparent);
+  color: var(--text);
   padding: 2px 6px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
+/* 代码块：安静、不像 IDE 面板——背景比正文稍深/稍浅，边框淡，圆角小 */
 .post__body pre {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 16px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid color-mix(in srgb, var(--card-border) 40%, transparent);
+  border-radius: 6px;
+  padding: 18px 20px;
   overflow: auto;
-  margin: 22px 0;
+  margin: 1.5em 0;
+}
+[data-theme="light"] .post__body pre {
+  background: rgba(0, 0, 0, 0.04);
 }
 .post__body pre code {
   background: none;
@@ -139,12 +169,13 @@
   padding: 0;
   border-radius: 0;
 }
+
 .post__body img {
   max-width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 .post__figure {
-  margin: 24px 0;
+  margin: 1.5em 0;
 }
 .post__figure img {
   display: block;
@@ -163,29 +194,30 @@
 .post__body hr {
   border: none;
   border-top: 1px solid var(--card-border);
-  margin: 28px 0;
+  margin: 2em 0;
 }
+
+/* ---- 目录：书签而非控件面板 ----
+   去掉强背景/模糊/圆角，只留一条左边线（桌面）或上下线（移动） */
 .post-toc {
-  background: color-mix(in srgb, var(--card-bg) 50%, transparent);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 16px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .post-toc--desktop {
   position: sticky;
   top: 88px;
+  border-left: 1px solid var(--card-border);
+  padding: 4px 0 4px 16px;
 }
 .post-toc--mobile {
   display: none;
   margin: 0 0 28px;
-  padding: 16px 0;
-  background: transparent;
+  padding: 14px 0;
   border-width: 1px 0;
-  border-radius: 0;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 .post-toc__title {
   margin: 0 0 12px;
@@ -209,7 +241,7 @@
   display: block;
   padding: 6px 0;
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   line-height: 1.45;
   color: var(--text);
   text-decoration: none;
@@ -218,12 +250,15 @@
 .post-toc a:hover {
   color: var(--accent);
 }
+
+/* ---- 上一篇/下一篇：翻页提示而非卡片 ----
+   上方细分割线，左右排布，hover 只标题变蓝 */
 .post-neighbors {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 14px;
-  margin-top: 40px;
-  padding-top: 24px;
+  margin-top: 48px;
+  padding-top: 28px;
   border-top: 1px solid var(--card-border);
 }
 .post-neighbor {
@@ -231,16 +266,13 @@
   flex-direction: column;
   gap: 5px;
   min-width: 0;
-  padding: 14px;
+  padding: 0;
   color: inherit;
   text-decoration: none;
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-.post-neighbor:hover {
-  border-color: var(--accent);
-  background: rgba(138, 180, 248, 0.08);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  transition: none;
 }
 .post-neighbor--next {
   text-align: right;
@@ -258,4 +290,8 @@
   font-family: var(--sans);
   font-size: 0.92rem;
   color: var(--ink);
+  transition: color 0.2s ease;
+}
+.post-neighbor:hover .post-neighbor__title {
+  color: var(--accent);
 }
