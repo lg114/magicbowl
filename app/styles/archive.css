@@ -58,7 +58,7 @@
 .archive-feed-wrap {
   background: color-mix(in srgb, var(--card-bg) 58%, transparent);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 20px 22px 24px;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -71,7 +71,7 @@
   align-self: flex-start;
   background: color-mix(in srgb, var(--card-bg) 42%, transparent);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 18px 16px 20px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -95,7 +95,7 @@
   color: var(--text);
   background: var(--bg);
   border: 1px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 9px 15px;
   cursor: pointer;
   white-space: nowrap;
@@ -121,7 +121,7 @@
   color: var(--ink);
   background: var(--bg);
   border: 1px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 9px 13px;
   outline: none;
   transition: border-color 0.2s ease;
@@ -327,7 +327,7 @@
   text-decoration: none;
   background: transparent;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   transition: background 0.2s ease;
 }
 .feed-item:last-child {
