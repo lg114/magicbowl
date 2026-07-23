@@ -33,12 +33,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
-        <meta name="theme-color" content="#000000" />
-        {/* LCP 优化：头像预加载（fetchpriority=high 确保 Lighthouse 不报缺优先级） */}
-        <link rel="preload" href={siteConfig.avatar} as="image" fetchPriority="high" />
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+        <head>
+          <meta name="theme-color" content="#000000" />
+          <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        </head>
       <body>
         {/* 全屏萤火虫夜空层：body 级背景，所有路由共享（首页/归档/详情）。
             蓝点固定于 z-index:1，内容层（main 等）均在 z-index:2 之上，
