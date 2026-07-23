@@ -25,23 +25,22 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: color-mix(in srgb, var(--card-bg) 74%, transparent);
-  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  border: 1px solid color-mix(in srgb, var(--card-border) 65%, #000);
   border-radius: 12px;
   padding: 22px 22px 20px;
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  transition: border-color 0.25s ease, background 0.25s ease;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .project-card:hover {
-  border-color: var(--card-border-hi);
-  background: color-mix(in srgb, var(--card-bg) 88%, transparent);
-}
-.project-card__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
+  border-color: color-mix(in srgb, var(--card-border-hi) 50%, #000);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.7),
+    0 14px 40px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 .project-card__name {
   font-family: var(--sans);
@@ -49,10 +48,13 @@
   font-weight: 600;
   line-height: 1.3;
   color: var(--ink);
-  transition: color 0.2s ease;
+  text-decoration: underline transparent;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color 0.2s ease;
 }
 .project-card:hover .project-card__name {
-  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 .project-card__desc {
   margin: 0;
@@ -151,22 +153,34 @@
   gap: 18px;
 }
 .featured-projects .project-card {
-  background: color-mix(in srgb, var(--card-bg) 38%, transparent);
-  border-color: color-mix(in srgb, var(--card-border-hi) 54%, var(--card-border));
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: var(--card-bg);
+  border-color: color-mix(in srgb, var(--card-border-hi) 35%, var(--card-border));
 }
 .featured-projects .project-card:hover {
-  background: color-mix(in srgb, var(--card-bg) 58%, transparent);
-  border-color: var(--card-border-hi);
+  background: var(--card-bg);
+  border-color: color-mix(in srgb, var(--card-border-hi) 50%, #000);
 }
 [data-theme="light"] .featured-projects .project-card {
-  background: rgba(255, 255, 255, 0.64);
+  background: var(--card-bg);
   border-color: #d8d8d8;
 }
 [data-theme="light"] .featured-projects .project-card:hover {
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--card-bg);
   border-color: #b8b8b8;
+}
+/* 暗色边框已派生加深；亮色下恢复全局 token 原值（白卡浅灰），避免过深 */
+[data-theme="light"] .project-card {
+  border-color: var(--card-border);
+}
+[data-theme="light"] .project-card:hover {
+  border-color: var(--card-border-hi);
+}
+/* 亮色下白卡黑影对比强，阴影收敛为轻量单层，避免过度发脏 */
+[data-theme="light"] .project-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+[data-theme="light"] .project-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 }
 
 /* 窄屏：项目网格转单列、收紧容器内边距 */

@@ -13,9 +13,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   const statusClass = STATUS_CLASS[project.status];
   return (
     <article className="project-card">
-      <div className="project-card__head">
-        <h3 className="project-card__name">{project.name}</h3>
-      </div>
+      <h3 className="project-card__name">{project.name}</h3>
       <p className="project-card__desc">{project.desc}</p>
       <div className="project-card__tech">
         {project.tech.map((t) => (
