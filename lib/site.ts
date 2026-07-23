@@ -42,7 +42,7 @@ export const siteConfig = {
     },
     {
       name: "bagger",
-      desc: "AI 编程对话收集器 · Claude Code 记录本地检索",
+      desc: "AI 编码历史收集器 · 自动同步 Claude Code 对话记录",
       tech: ["AI", "CLI", "本地检索"],
       status: "进行中",
       repo: "https://github.com/lg114/bagger",
