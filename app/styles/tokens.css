@@ -34,7 +34,7 @@
   --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
           "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  /* 衬线源：身份标签行(.welcome__roles) / 箴言引用(.wisdom__quote) 等强调元素用。
+  /* 衬线源：箴言引用(.wisdom__quote) 等强调元素用。
      此前 :root 未定义 --serif，导致这两处 var(--serif) 落回 --sans（系统无衬线），
      与「衬线 / 衬线+斜体」的注释意图不符；现补上使其真正衬线化。
      中文走系统衬线（macOS Songti SC / Windows SimSun），西文走 Georgia，尾接通用 serif。 */

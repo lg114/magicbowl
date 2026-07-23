@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { siteConfig } from "../../lib/site";
-import SocialLinks from "./SocialLinks";
 
 export default function Hero() {
   return (
@@ -24,17 +23,9 @@ export default function Hero() {
           你好，我是 <span className="welcome__name">Gc</span>{" "}
           <span className="welcome__wave">👋</span>
         </p>
-        <p className="welcome__roles">
-          我是一个{" "}
-          <span className="role-word">学习者</span>
-          {" · "}
-          <span className="role-word">设计者</span>
-          {" · "}
-          <span className="role-word">阅读者</span>
-          {" · "}
-          <span className="role-word">开发者</span>
+        <p className="welcome__tagline">
+          我想把 <span className="welcome__hl">AI</span> 融入生活。
         </p>
-        <SocialLinks />
       </div>
     </div>
   );

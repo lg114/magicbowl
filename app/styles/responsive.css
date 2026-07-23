@@ -15,7 +15,7 @@
   .hero { gap: 24px; }
   .avatar { width: 160px; height: 160px; }
   .welcome__hi { font-size: 2rem; }
-  .welcome__roles { font-size: 0.85rem; }
+  .welcome__tagline { font-size: 1.1rem; }
   .wisdom__quote { font-size: 1.15rem; }
   .wisdom__cite { font-size: 0.9rem; }
   .wisdom { padding: 16px 18px 26px; }
@@ -48,7 +48,7 @@
   .hero { gap: 20px; padding: 0 20px; }
   .avatar { width: 130px; height: 130px; }
   .welcome__hi { font-size: 1.6rem; }
-  .welcome__roles { font-size: 0.8rem; }
+  .welcome__tagline { font-size: 1rem; }
   .wisdom__quote { font-size: 0.98rem; }
   .wisdom__cite { font-size: 0.82rem; }
   .wisdom { padding: 14px 16px 22px; }

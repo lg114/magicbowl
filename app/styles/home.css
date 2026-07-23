@@ -139,44 +139,18 @@
   /* 避免 emoji 被加粗导致视觉偏重 */
   font-weight: 400;
 }
-/* 身份标签行：衬线（与箴言、正文统一），作为三级层级最弱的一层 */
-.welcome__roles {
-  margin: 16px 0 0;
-  font-family: var(--serif);
-  font-size: 0.95rem;
+/* 价值主张句：标题之下的「二当家」，用 --sans 承接「你好我是 Gc」的口吻，
+   比标题小一号、用 --text（比角色行实）；AI 一词提亮 accent 作锚点，
+   与 welcome__name 呼应，不单独加动效（随 .welcome 整体 fadeUp 入场） */
+.welcome__tagline {
+  margin: 14px 0 0;
+  font-family: var(--sans);
+  font-size: 1.25rem;
   font-weight: 500;
-  color: var(--meta);
+  color: var(--text);
   letter-spacing: 0.3px;
 }
-/* 身份词 hover 发亮：仅颜色过渡，无位移/旋转，落在眩晕安全区；
-   双主题下均提亮为 accent 蓝，并叠一层柔和蓝辉光，鼠标移开即淡回 */
-.welcome__roles .role-word {
-  transition: color 0.25s ease, text-shadow 0.25s ease;
-  cursor: default;
-}
-.welcome__roles .role-word:hover {
-  color: var(--accent);
-  text-shadow: 0 0 8px rgba(138, 180, 248, 0.45);
-}
-/* 社交图标行：位于身份行下方，水平居中；图标用 currentColor 跟随主题色，
-   hover 与身份词一致地提亮为 accent 蓝（仅颜色过渡，无位移/旋转，眩晕安全） */
-.social {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 14px;
-}
-.social__link {
-  display: inline-flex;
-  color: var(--text);
-  transition: color 0.25s ease;
-}
-.social__icon {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-.social__link:hover {
+.welcome__hl {
   color: var(--accent);
 }
 @keyframes fadeUp {
