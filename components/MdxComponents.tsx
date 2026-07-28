@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { resetSlugCounts, slugifyHeading } from "../../lib/mdx";
+import { resetSlugCounts, slugifyHeading } from "../lib/mdx";
 
 function textFromChildren(children: ReactNode): string {
   if (typeof children === "string" || typeof children === "number") {

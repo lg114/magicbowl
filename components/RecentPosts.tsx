@@ -1,9 +1,9 @@
-import { getAllPosts } from "../../lib/posts";
+import { getAllPosts } from "../lib/posts";
 import PostCard from "./PostCard";
 
 // 首页文章区（橱窗）：极简索引列表，只展示最近 4 篇，其余交给 /posts 归档页。
 // 本组件为 server component，直接读取文件系统生成静态 HTML。
-export default function PostCards() {
+export default function RecentPosts() {
   const all = getAllPosts();
   if (all.length === 0) return null;
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllPosts } from "../../lib/posts";
-import PostsArchive from "../components/PostsArchive";
+import PostsArchive from "../../components/PostsArchive";
 
 export const metadata: Metadata = {
   title: "文章",

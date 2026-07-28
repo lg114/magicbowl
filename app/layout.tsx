@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "./styles/globals.css";
+import "../styles/globals.css";
 import { siteConfig } from "../lib/site";
-import ThemeToggle from "./components/ThemeToggle";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import ThemeToggle from "../components/ThemeToggle";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

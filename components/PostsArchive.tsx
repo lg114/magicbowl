@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { formatDate, type PostMeta } from "../../lib/post-types";
+import { formatDate, type PostMeta } from "../types/post";
 
 // 单页渲染文章数上限：超过则出现「加载更多」做客户端分页。
 // 当前全站仅个位数文章，阈值门控使该逻辑静默；将来文章破 50 篇自动生效。

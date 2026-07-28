@@ -1,4 +1,4 @@
-import type { Project } from "../../lib/site";
+import type { Project } from "../lib/site";
 
 // 状态 → 徽章样式（仅颜色区分，无位移/旋转，落在眩晕安全区）
 const STATUS_CLASS: Record<Project["status"], string> = {

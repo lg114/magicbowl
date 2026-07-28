@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type PostMeta } from "../../lib/post-types";
+import { type PostMeta } from "../types/post";
 
 // 时间线条目：日期·分类 元信息行 + 衬线标题，沿一条静止细竖线排列。
 // 仅用于首页「最近文章」；详情页 meta 仍复用 .card__date / .card__cat。

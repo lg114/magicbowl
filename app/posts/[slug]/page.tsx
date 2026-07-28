@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { createMdxComponents } from "../../components/MdxComponents";
+import { createMdxComponents } from "../../../components/MdxComponents";
 import { getAllPosts, getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { extractTocHeadings } from "../../../lib/mdx";
-import { formatDate } from "../../../lib/post-types";
+import { formatDate } from "../../../types/post";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
 // 任何未预渲染的路径直接 404，阻断 URL 注入 ../ 等逃逸 content/posts 的路径穿越。

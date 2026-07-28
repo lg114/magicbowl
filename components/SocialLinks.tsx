@@ -1,4 +1,4 @@
-import { siteConfig } from "../../lib/site";
+import { siteConfig } from "../lib/site";
 
 type SocialKind = "github" | "x" | "email";
 type SocialVariant = "hero" | "footer";

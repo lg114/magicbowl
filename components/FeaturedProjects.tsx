@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { siteConfig } from "../../lib/site";
+import { siteConfig } from "../lib/site";
 import ProjectCard from "./ProjectCard";
 
 // 首页精选项目：文章卡片区下方的小块，展示 featured 项目并引流到 /projects。

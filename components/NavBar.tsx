@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { siteConfig } from "../../lib/site";
+import { siteConfig } from "../lib/site";
 
 // 左上角固定导航条：玻璃胶囊风格，与右上角 ThemeToggle 视觉统一；
 // 直接 map siteConfig.nav（导航唯一真相源），新增页面只改 lib/site.ts；

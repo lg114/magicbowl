@@ -1,4 +1,4 @@
-import { siteConfig } from "../../lib/site";
+import { siteConfig } from "../lib/site";
 import SocialLinks from "./SocialLinks";
 
 export default function Footer() {

@@ -24,9 +24,9 @@ function toISODate(d: unknown): string {
 
 // 纯类型与无副作用工具独立成模块（post-types.ts），供 client 组件引用，
 // 避免把 fs / path 等 Node API 一起打进浏览器包。
-import type { Post, PostMeta } from "./post-types";
-export type { Post, PostMeta } from "./post-types";
-export { formatDate } from "./post-types";
+import type { Post, PostMeta } from "../types/post";
+export type { Post, PostMeta } from "../types/post";
+export { formatDate } from "../types/post";
 
 export function getPostSlugs(): string[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
