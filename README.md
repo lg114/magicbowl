@@ -71,7 +71,6 @@ lib/
   site.ts                   # 站点配置（导航 = NavBar 唯一真相源、项目、社交）
   posts.ts                  # 博客文章读取与解析（含模块级缓存，一次解析）
   mdx.ts                    # 目录（TOC）提取 + 标题 slug 生成
-  taxonomy.ts               # 分类 / 标签聚合（从 posts 的一次解析结果派生）
 types/
   post.ts                   # 文章类型定义（Post / PostMeta / formatDate）
 content/

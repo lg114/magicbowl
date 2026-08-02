@@ -4,7 +4,7 @@
 //  - 静态资源（_next/static、图标等）：stale-while-revalidate，命中缓存即用并在后台更新
 //  - 非 GET / 跨域请求：直接走网络，不做处理
 // 版本：部署新版时改下方 APP_VERSION 即可让旧缓存整体失效（activate 期自动清理旧 cache）
-const APP_VERSION = "1.0.1";
+const APP_VERSION = "1.0.2";
 const CACHE = `magicbowl-${APP_VERSION}`;
 // 预缓存范围：
 //  - 三条可导航路由（首页/文章/项目），离线首屏即可打开

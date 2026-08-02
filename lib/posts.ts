@@ -22,7 +22,7 @@ function toISODate(d: unknown): string {
   return "";
 }
 
-// 纯类型与无副作用工具独立成模块（post-types.ts），供 client 组件引用，
+// 纯类型与无副作用工具独立成模块（types/post.ts），供 client 组件引用，
 // 避免把 fs / path 等 Node API 一起打进浏览器包。
 import type { Post, PostMeta } from "../types/post";
 export type { Post, PostMeta } from "../types/post";
@@ -55,7 +55,7 @@ export function getPostBySlug(slug: string): Post | null {
 }
 
 // 模块级缓存：整个进程内只解析一次全部文章（灰度/解析开销集中在构建期），
-// getCategories / getTags / PostCards / 归档页都共享这一份结果，避免重复读盘。
+// RecentPosts / 归档页 / sitemap 都共享这一份结果，避免重复读盘。
 // 注意：next dev 下改了 content/posts/*.md 需重启 dev server 才会刷新。
 let _allPostsCache: PostMeta[] | null = null;
 
