@@ -1,126 +1,111 @@
 # 🥣 MagicBowl
 
-一个正在生长的个人博客与作品集——用一碗装下代码、阅读、旅行与日常。
+一个正在生长的个人博客与作品集，用一碗装下代码、阅读、旅行与日常。
 
-> 纯静态优先的个人站点：Next.js App Router 渲染，文章由 Markdown 文件驱动，全部样式手写、无 UI 框架。
+MagicBowl 是一个以静态内容为主的个人站点：使用 Next.js App Router 渲染页面，文章由 Markdown 文件驱动，样式全部手写，不依赖 UI 框架。
+
+## 站点内容
+
+- 首页：个人介绍、随机箴言、最近文章和精选项目
+- 文章：支持分类、标签、关键词搜索、时间排序和按年份归档
+- 文章详情：自动生成目录与标题锚点，提供代码块、引用样式和上一篇/下一篇导航
+- 项目：独立的项目展示页，并可在首页展示精选项目
+- 主题：深色模式为默认主题，支持浅色模式，首屏切换无闪烁并记住用户偏好
+- 体验：萤火虫夜空背景、响应式布局、减少动效适配和离线缓存
+- SEO：基础 metadata、`sitemap.xml`、`robots.txt` 和 Web App Manifest
 
 ## 技术栈
 
-- **框架**: Next.js 16（App Router）+ React 19
-- **语言**: TypeScript
-- **内容**: Markdown 博客，`gray-matter` 解析 frontmatter，`next-mdx-remote` 服务端渲染
-- **样式**: 纯手写 CSS（设计令牌 + 萤火虫夜空背景 + 静态网格），无 CSS 框架
-- **字体**: 系统字体栈（无外部字体依赖）—— 正文/标题走系统无衬线（PingFang SC / 微软雅黑优先），日期/标签走等宽，箴言与文章引用走衬线强调（Songti SC / SimSun → Georgia）
-- **主题**: 深色为默认，浅色可选；首屏前注入主题脚本实现「切换无闪烁」，偏好持久化到 `localStorage`
-
-## 特性
-
-- **首页** — Hero（头像 + 欢迎语 + 社交图标）+ 随机箴言区（每次刷新轮换、带滚动提示）+ 最近文章时间线（9px 分类色点：生活青绿 / 随笔蓝 / 读后感暖黄）+ 精选项目
-- **博客系统** — 文件驱动的 Markdown 博客，支持「分类 / 标签」筛选（单选胶囊）、标题/摘要搜索、最新/最早排序、按年分组（年份吸顶）；单页超 50 篇出现「加载更多」
-- **文章详情页** — 书桌气质排版：目录书签（TOC 自动生成 + 标题锚点）、衬体引用旁注、安静的代码块、上一篇/下一篇翻页导航
-- **项目展示** — 首页精选项目引流 + 独立的 `/projects` 作品页
-- **深色 / 浅色主题** — 右上角切换，无闪烁、持久化
-- **萤火虫夜空背景** — 纯 CSS 蓝色光点闪烁 + 完全静态的网格底层，内容层浮于其上（`pointer-events: none`，不挡交互）
-- **全局页脚** — © 年份 + 站名 + 社交图标（GitHub / X / Email）
-- **SEO** — `metadata` 基础元信息 + `sitemap.ts`（覆盖全站路由：首页 / 文章 / 项目 + 全部文章 slug）+ `robots.ts` + `manifest.ts`
-- **离线 / 缓存** — `public/sw.js`（仅 https 且非 localhost 注册）：`/` `/posts` `/projects` + 关键静态资源预缓存，其余走 stale-while-revalidate
-
-## 目录结构
-
-无 `src/` 目录、无路径别名——`app/` 只放路由与 Next 特殊文件，共享代码全部在仓库根目录，一律相对路径 import。
-
-```
-app/                        # 仅路由与 Next 自动识别的特殊文件
-  layout.tsx                # 根布局：主题初始化脚本、萤火虫背景、NavBar、ThemeToggle、Footer
-  page.tsx                  # 首页：Hero + 箴言 + 最近文章 + 精选项目
-  not-found.tsx             # 404
-  posts/page.tsx            # 文章归档（分类/标签筛选 + 搜索 + 排序 + 按年分组）
-  posts/[slug]/page.tsx     # 文章详情（MDX 渲染 + 目录 + 翻页导航）
-  projects/page.tsx         # 项目展示页
-  favicon.ico / icon.png / apple-icon.tsx
-  manifest.ts               # Web App Manifest
-  robots.ts                 # robots.txt
-  sitemap.ts                # sitemap.xml
-components/                 # 共享 React 组件
-  NavBar.tsx                # 顶部导航（首页 / 文章 / 项目）
-  ThemeToggle.tsx           # 主题切换按钮
-  Footer.tsx                # 全局页脚
-  Hero.tsx                  # 首页 hero（头像 + 欢迎语 + 社交图标）
-  SocialLinks.tsx           # 社交图标链接组
-  Wisdom.tsx                # 首页随机箴言
-  RecentPosts.tsx           # 首页「最近文章」时间线
-  PostCard.tsx              # 单篇文章卡片
-  PostsArchive.tsx          # /posts 归档流（筛选 / 搜索 / 排序 / 加载更多）
-  FeaturedProjects.tsx      # 首页精选项目
-  ProjectCard.tsx           # 单个项目卡片
-  MdxComponents.tsx         # MDX 组件映射（标题锚点 id 等）
-styles/                     # 全局 CSS（globals.css 仅做 @import 聚合，顺序即层叠顺序）
-  globals.css               # 聚合入口（11 个模块）
-  tokens.css                # 设计令牌 / :root 双主题 / 滚动条 / reset
-  base.css                  # body · 静态网格背景层 · main · screen
-  chrome.css                # .toggle 主题按钮 · .nav 导航胶囊
-  home.css                  # hero 头像 · 萤火虫 · 欢迎语 · 箴言 · 最近文章时间线
-  archive.css               # /posts 归档流 · 搜索 · 筛选 · 按年分组
-  post.css                  # 文章详情 · 长文排版 · 目录 · 翻页导航
-  motion.css                # prefers-reduced-motion 降级
-  responsive.css            # 680 / 900 / 480 三档响应
-  notfound.css              # 404
-  projects.css              # 项目页 + 首页精选项目
-  footer.css                # 页脚
-lib/
-  site.ts                   # 站点配置（导航 = NavBar 唯一真相源、项目、社交）
-  posts.ts                  # 博客文章读取与解析（含模块级缓存，一次解析）
-  mdx.ts                    # 目录（TOC）提取 + 标题 slug 生成
-types/
-  post.ts                   # 文章类型定义（Post / PostMeta / formatDate）
-content/
-  posts/                    # 博客文章（Markdown，当前 5 篇）
-public/
-  avatar.png                # 头像
-  icon.svg                  # 站点图标
-  sw.js                     # Service Worker（仅 https 且非 localhost 时注册）
-  loading-preview.html      # 设计预览
-```
+| 类别 | 技术 |
+| --- | --- |
+| 框架 | Next.js 16（App Router） |
+| UI | React 19 + TypeScript |
+| 内容 | Markdown + `gray-matter` + `next-mdx-remote` |
+| 样式 | 原生 CSS（设计令牌、双主题、响应式、动效降级） |
+| 图片 | Next.js Image + `sharp` |
 
 ## 快速开始
 
+### 环境要求
+
+- Node.js `20.9` 或更高版本
+- npm
+
+### 安装与运行
+
 ```bash
-# 安装依赖
 npm install
-
-# 开发模式
 npm run dev
-
-# 生产构建
-npm run build
-
-# 启动
-npm start
 ```
 
-## 自定义
+开发服务器启动后，打开 [http://localhost:3000](http://localhost:3000)。
 
-站点的可配置项集中在 [lib/site.ts](lib/site.ts)：
+### 常用命令
 
-- `projects` — 项目展示（首页精选 + `/projects` 页都读取它）
-- `social` — 社交链接（`github` / `twitter` / `email`），用于页脚与首页 hero 图标
-- `nav` — 导航唯一真相源（NavBar 直接 `map(siteConfig.nav)`，新增页面只改这里；当前为「首页 / 文章 / 项目」）
+| 命令 | 用途 |
+| --- | --- |
+| `npm run dev` | 启动开发服务器 |
+| `npm run typecheck` | 执行 TypeScript 类型检查 |
+| `npm run build` | 创建生产构建并检查构建问题 |
+| `npm start` | 启动生产服务器（需先执行 `npm run build`） |
+| `ANALYZE=true npm run build` | 构建并启用 Bundle Analyzer |
 
-博客文章放在 `content/posts/` 目录，使用 Markdown + YAML frontmatter：
+## 项目结构
+
+```text
+app/                  # 路由和 Next.js 特殊文件
+  page.tsx             # 首页
+  posts/               # 文章归档与文章详情
+  projects/            # 项目展示页
+  layout.tsx           # 根布局、主题初始化、导航和页脚
+components/           # 可复用 React 组件
+content/posts/        # Markdown 博客文章
+lib/                  # 站点配置、文章读取、MDX/TOC 工具
+styles/               # 全局 CSS 与各页面样式模块
+types/                # TypeScript 类型定义
+public/               # 头像、图标、Service Worker 等静态资源
+```
+
+## 添加文章
+
+在 `content/posts/` 下新建一个 `.md` 文件，并填写 YAML frontmatter：
 
 ```markdown
 ---
 title: 文章标题
 date: 2026-07-10
-category: 分类
+category: 随笔
 tags: [标签1, 标签2]
-excerpt: 摘要
+excerpt: 文章摘要
 ---
 
 正文内容...
 ```
 
-`category` 当前枚举：**生活 / 随笔 / 读后感**（对应时间线色点：青绿 / 蓝 / 暖黄）。
+当前支持的分类为：`生活`、`随笔`、`读后感`。文章的 `slug` 默认取文件名，例如 `coffee-and-code.md` 会生成 `/posts/coffee-and-code`。
+
+## 自定义站点
+
+大部分站点级配置集中在 [`lib/site.ts`](lib/site.ts)：
+
+- `siteConfig.projects`：项目名称、简介、技术栈、状态、仓库和演示地址
+- `siteConfig.social`：GitHub、X 和 Email 链接
+- `siteConfig.nav`：顶部导航，新增页面时同步更新这里
+- `siteConfig.url`：部署后的规范站点地址，用于 metadata、canonical 和 sitemap
+
+头像和站点图标位于 `public/`。主题颜色、布局和动效位于 `styles/`，按功能拆分为多个 CSS 模块，并由 `styles/globals.css` 统一引入。
+
+## 部署
+
+这是一个标准的 Next.js 应用，可以部署到支持 Node.js 的平台。生产环境的基本流程是：
+
+```bash
+npm ci
+npm run build
+npm start
+```
+
+部署前请确认 `lib/site.ts` 中的 `siteConfig.url` 已替换为正式域名；否则 sitemap 和 SEO 元信息可能仍指向默认地址。
 
 ## 许可
 
