@@ -29,10 +29,11 @@
   --firefly: #4da6ff;
   --firefly-glow: rgba(77, 166, 255, 0.85);
   /* 字体系统：
-     正文 / 标题 / 卡片 → 无衬线 --sans（mac/iOS 走系统 UI 字体 + 苹方，Windows 走 Segoe UI / 微软雅黑，中文优先 PingFang SC）
-     代码 / 标签类（日期、标签等）→ 等宽 --mono */
+     正文 / 标题 / 卡片 / UI 控件 → 无衬线 --sans
+     中文优先苹方（PingFang SC），Mac/iOS 原生支持；Windows 回退微软雅黑；其他系统用通用无衬线
+     代码 / 代码块 → 等宽 --mono（仅用于代码场景，不用于 UI 标签） */
   --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+  --sans: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
           "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   /* 衬线源：箴言引用(.wisdom__quote) 等强调元素用。
      此前 :root 未定义 --serif，导致这两处 var(--serif) 落回 --sans（系统无衬线），

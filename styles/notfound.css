@@ -16,7 +16,7 @@
   max-width: 480px;
 }
 .notfound__code {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 4.5rem;
   font-weight: 700;
   line-height: 1;
@@ -37,8 +37,9 @@
 }
 .notfound__link {
   display: inline-block;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.82rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--accent);
   text-decoration: none;

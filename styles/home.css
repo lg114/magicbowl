@@ -230,13 +230,12 @@
   cursor: pointer;
   animation: cueBreath 3s ease-in-out infinite;
 }
-/* 滚动提示文字：等宽 --mono + 灰，与身份行同源；英文 SCROLL + 大写 + 宽字距，
-   正好是 mono 字体标签语感的最佳载体（中文「下滑」无 uppercase 概念、
-   letter-spacing 会让两字分家，已改用英文）；hover 提亮为 accent 蓝（仅颜色过渡） */
+/* 滚动提示文字：无衬线 + 灰，与导航/主题切换统一；英文 SCROLL + 大写 + 宽字距，
+   hover 提亮为 accent 蓝（仅颜色过渡） */
 .scroll-cue__label {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--meta);
@@ -410,12 +409,13 @@
   border-color: color-mix(in srgb, var(--cat-read) 42%, transparent);
 }
 
-/* 卡片区底部的「查看全部」入口，呼应身份行 / SCROLL 的 mono 标签语感 */
+/* 卡片区底部的「查看全部」入口，与导航/主题切换统一 */
 .cards__more {
   display: inline-block;
   margin-top: 30px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--text);
   text-decoration: none;

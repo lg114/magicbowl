@@ -27,9 +27,9 @@
 }
 .archive-page-header__eyebrow {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 2px;
   color: var(--meta);
   margin-bottom: 8px;
@@ -167,8 +167,9 @@
   background: rgba(138, 180, 248, 0.12);
 }
 .active-filter__remove {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.9rem;
+  font-weight: 600;
   line-height: 1;
   color: var(--meta);
 }
@@ -176,8 +177,9 @@
   color: var(--accent);
 }
 .active-filters__clear {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.72rem;
+  font-weight: 600;
   color: var(--meta);
   background: none;
   border: none;
@@ -411,7 +413,7 @@
   z-index: 3;
   margin: 0 0 6px;
   padding: 10px 0 8px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -436,8 +438,9 @@
   padding: 24px 0 8px;
 }
 .archive-loadmore {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.82rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--text);
   background: var(--bg);
