@@ -52,7 +52,7 @@ export const siteConfig = {
   social: {
     github: "https://github.com/lg114",
     email: "mailto:190970720@qq.com",
-    twitter: "https://x.com/gc20010801",
+    twitter: "https://x.com/imtherealgc",
   },
 };
 
