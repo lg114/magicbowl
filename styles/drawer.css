@@ -52,11 +52,16 @@
   height: 620px;
   user-select: none;
   -webkit-user-select: none;
+  /* 抽屉拉出时会向左下伸出视野（3D 投影所致），裁掉溢出部分，
+     不让它压到下方「最近文章」区块（与原 demo 的 body overflow:hidden 同义） */
+  overflow: hidden;
 }
 .ds-scene {
   position: absolute;
   inset: 0;
-  perspective: 2400px;
+  /* 透视比原 demo（2400px）更强：抽屉朝观察者滑出时会明显「变大」，
+     这是「被拉出来」而非「平面横移」的关键深度线索 */
+  perspective: 1600px;
   display: grid;
   place-items: center;
 }
@@ -67,7 +72,9 @@
   transform-style: preserve-3d;
 }
 .ds-cab,
-.ds-drawer {
+.ds-drawer,
+/* 文件夹容器：承载抽拉时的纸张惯性倾角（逐帧写入 transform，故无 transition） */
+.ds-folders {
   position: absolute;
   left: 0;
   top: 0;
@@ -313,11 +320,8 @@
   }
 }
 
-/* ---------- 动效降级：与全站 prefers-reduced-motion 约定一致 ---------- */
-@media (prefers-reduced-motion: reduce) {
-  .ds-folder,
-  .ds-panel,
-  .ds-hint {
-    transition: none;
-  }
-}
+/* ---------- 关于 prefers-reduced-motion ----------
+   本站其他区块（头像入场、箴言轮换、滚动条）仍在系统「减少动态效果」下降级，
+   但文件抽屉这一处刻意不降级：抽屉开合、镜头缓动、文件夹位移/过渡一律播放，
+   否则整个交互会被短路成「瞬间跳到终点」。仅鼠标视差在 JS 侧关闭
+   （见 components/DrawerShelf.tsx 的 REDUCE）。 */
