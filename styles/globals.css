@@ -3,7 +3,7 @@
    原单文件 globals.css 已按区块拆分为模块化文件，此处仅做 @import 聚合。
    类名与前缀隔离方式完全不变（非 CSS Modules 哈希）。
    导入顺序即层叠顺序：令牌 → 基础 → 固定UI → 首页 → 归档 → 文章 →
-   动效降级 → 响应式 → 404 → 项目 → 页脚。
+   响应式 → 404 → 项目 → 页脚。
    ============================================================ */
 
 @import "./tokens.css";
@@ -12,7 +12,6 @@
 @import "./home.css";
 @import "./archive.css";
 @import "./post.css";
-@import "./motion.css";
 @import "./responsive.css";
 @import "./notfound.css";
 @import "./projects.css";

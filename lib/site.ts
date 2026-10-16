@@ -16,7 +16,6 @@ export const siteConfig = {
   // 部署后的站点地址，用于 SEO / sitemap / canonical
   url: "https://www.magicbowl.tech",
   locale: "zh-CN",
-  avatar: "/avatar.png", // 头像路径，可替换为真实图片
   // 导航显示项：NavBar 直接 map 本数组（右上角纯文字导航，仅 Blog / Projects）。
   // 新增页面若要出现在导航，改这里；首页不在此列表，但始终进 sitemap（见 app/sitemap.ts）。
   nav: [

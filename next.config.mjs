@@ -66,15 +66,6 @@ const nextConfig = {
       // 不含 /_next/static —— Next 已自动加 immutable；
       // 不含 /sw.js —— Service Worker 必须能及时拉到新版，不能长缓存。
       {
-        source: "/avatar.png",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
         source: "/icon.svg",
         headers: [
           {

@@ -7,9 +7,8 @@
 @media (max-width: 680px) {
   :root { --grid-size: 92px; }
   .hero { gap: 24px; }
-  .avatar { width: 160px; height: 160px; }
-  .welcome__hi { font-size: 2rem; }
-  .welcome__tagline { font-size: 1.1rem; }
+  .welcome__hi { font-size: 2.4rem; }
+  .welcome__tagline { font-size: 1.2rem; }
   .archive { padding: 88px 18px 84px; }
   .post { padding: 36px 24px; }
   .post__title { font-size: 1.6rem; }
@@ -36,10 +35,9 @@
 
 /* ---------- 响应式：手机 ---------- */
 @media (max-width: 480px) {
-  .hero { gap: 20px; padding: 0 20px; }
-  .avatar { width: 130px; height: 130px; }
-  .welcome__hi { font-size: 1.6rem; }
-  .welcome__tagline { font-size: 1rem; }
+  .hero { padding: 48px 20px; }
+  .welcome__hi { font-size: 1.9rem; }
+  .welcome__tagline { font-size: 1.05rem; }
   .archive { padding: 76px 16px 72px; }
   .archive-list { padding: 0; }
   .archive-feed-wrap { padding: 16px 14px 18px; }

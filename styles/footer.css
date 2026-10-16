@@ -1,6 +1,6 @@
 /* ============================================================
    MagicBowl — 全局页脚（footer）
-   © 年份站名 + Email 图标（GitHub / X 已移至右上角导航栏）
+   © 年份 + 内容许可（CC BY-NC-SA 4.0）；社交链接已移至右上角导航栏
    ============================================================ */
 
 .footer {
@@ -13,10 +13,7 @@
   width: 100%;
   max-width: 920px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  text-align: center;
 }
 .footer__copy {
   font-family: var(--sans);
@@ -24,29 +21,14 @@
   color: var(--meta);
   letter-spacing: 0.01em;
 }
-.footer__social {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.footer__link {
-  display: inline-flex;
+/* 许可链接：低调融入正文，hover 提亮为 accent */
+.footer__license {
   color: var(--meta);
-  transition: color 0.25s ease;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--meta) 45%, transparent);
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
-.footer__icon {
-  width: 17px;
-  height: 17px;
-  fill: currentColor;
-}
-.footer__link:hover {
+.footer__license:hover {
   color: var(--accent);
-}
-
-/* 窄屏：页脚内部转纵向堆叠、居中 */
-@media (max-width: 680px) {
-  .footer__inner {
-    flex-direction: column;
-    gap: 12px;
-  }
+  border-color: var(--accent);
 }
