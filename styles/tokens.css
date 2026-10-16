@@ -38,11 +38,11 @@
      中文走系统衬线（macOS Songti SC / Windows SimSun），西文走 Georgia，尾接通用 serif。 */
   --serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", Georgia, "Times New Roman", serif;
   --card-bg: rgba(10, 10, 10, 0.88);
-  /* 滚动条令牌：低调半透明，idle 极淡、hover 显形 */
+  /* 滚动条令牌：中性灰、低对比，融入纯黑背景（用灰而非纯白，避免透出白/冷光感） */
   --scroll-track: transparent;
-  --scroll-thumb-idle: rgba(255, 255, 255, 0.12);
-  --scroll-thumb: rgba(255, 255, 255, 0.30);
-  --scroll-thumb-hover: rgba(255, 255, 255, 0.50);
+  --scroll-thumb-idle: rgba(120, 120, 120, 0.12);
+  --scroll-thumb: rgba(120, 120, 120, 0.26);
+  --scroll-thumb-hover: rgba(120, 120, 120, 0.40);
 }
 
 html {
