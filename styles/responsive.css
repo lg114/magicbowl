@@ -6,9 +6,9 @@
 /* ---------- 响应式：平板 / 窄屏 ---------- */
 @media (max-width: 680px) {
   :root { --grid-size: 92px; }
-  .hero { gap: 24px; }
-  .welcome__hi { font-size: 2.4rem; }
-  .welcome__tagline { font-size: 1.2rem; }
+  .intro { padding: 96px 18px 72px; }
+  .intro__hi { font-size: 1.4rem; }
+  .intro__tagline { font-size: 0.95rem; }
   .archive { padding: 88px 18px 84px; }
   .post { padding: 36px 24px; }
   .post__title { font-size: 1.6rem; }
@@ -19,6 +19,7 @@
   /* 窄屏：站内项文字换成图标，只留图形 */
   .nav__label { display: none; }
   .nav__glyph { display: inline-flex; }
+  .brand { top: 18px; left: 18px; padding: 6px; font-size: 24px; }
 }
 
 /* ---------- 响应式：归档页两栏 → 单栏（平板/手机） ---------- */
@@ -35,9 +36,9 @@
 
 /* ---------- 响应式：手机 ---------- */
 @media (max-width: 480px) {
-  .hero { padding: 48px 20px; }
-  .welcome__hi { font-size: 1.9rem; }
-  .welcome__tagline { font-size: 1.05rem; }
+  .intro { padding: 88px 16px 64px; }
+  .intro__hi { font-size: 1.3rem; }
+  .intro__tagline { font-size: 0.92rem; }
   .archive { padding: 76px 16px 72px; }
   .archive-list { padding: 0; }
   .archive-feed-wrap { padding: 16px 14px 18px; }

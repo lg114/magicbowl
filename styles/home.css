@@ -1,53 +1,49 @@
 /* ============================================================
-   MagicBowl — 首页首屏（home）
-   首屏自我介绍（头像已移除，纯文字承担主视觉）
+   MagicBowl — 首页（home）
+   自我介绍页：顶部对齐的常规页面排版
    ============================================================ */
 
-/* 首屏：文字居中于背景网格之上，占满整屏（.screen 为 100dvh） */
-.hero {
-  flex: 1 1 auto; /* 占满首屏剩余空间 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* 自我介绍：与归档页 / 项目页同构——居中容器 + 左对齐内容。
+   顶部 padding 让开固定导航（导航底缘约 77px），内容贴着页面上方起排。 */
+.intro {
   position: relative;
   z-index: 2;
-  padding: 64px 24px; /* 上下留白，兼顾极矮视口与顶部固定导航 */
+  padding: 104px 24px 88px;
 }
-/* 欢迎语：首屏唯一内容，居中；用 --sans（正文/标题字体） */
-.welcome {
-  text-align: center;
-  font-family: var(--sans);
+.intro__inner {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
   /* 极轻淡入上移：纯垂直 12px + opacity，属眩晕安全区 */
   opacity: 0;
-  animation: fadeUp 0.8s ease 0.35s both;
+  animation: fadeUp 0.7s ease 0.2s both;
 }
-.welcome__hi {
+.intro__hi {
   margin: 0;
-  font-size: 3.4rem;
-  font-weight: 700;
+  font-family: var(--sans);
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--ink);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
-.welcome__name {
+.intro__name {
   color: var(--accent);
 }
-.welcome__wave {
+.intro__wave {
   /* 避免 emoji 被加粗导致视觉偏重 */
   font-weight: 400;
 }
-/* 价值主张句：标题之下的「二当家」，用 --sans 承接自我介绍的口吻，
-   比标题小一号、用 --text（比角色行实）；AI 一词提亮 accent 作锚点，
-   与 welcome__name 呼应，不单独加动效（随 .welcome 整体 fadeUp 入场） */
-.welcome__tagline {
-  margin: 22px 0 0;
+/* 价值主张句：标题之下的一行说明，比标题小一号、用 --text；
+   AI 一词提亮 accent 作锚点，与 intro__name 呼应 */
+.intro__tagline {
+  margin: 12px 0 0;
   font-family: var(--sans);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--text);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
-.welcome__hl {
+.intro__hl {
   color: var(--accent);
 }
 @keyframes fadeUp {

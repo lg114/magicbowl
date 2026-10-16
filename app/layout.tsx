@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../styles/globals.css";
 import { siteConfig } from "../lib/site";
 import NavBar from "../components/NavBar";
+import Brand from "../components/Brand";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
       <body>
+        <Brand />
         <NavBar />
         {children}
         <Footer />

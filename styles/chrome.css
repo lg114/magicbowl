@@ -1,6 +1,6 @@
 /* ============================================================
    MagicBowl — 固定位 UI 装饰（chrome）
-   右上角导航：站内项文字（窄屏换图标）+ 社交项图标，无胶囊底
+   左上角站点标识（G/C 叠印）+ 右上角导航（站内项文字/窄屏图标 + 社交图标）
    ============================================================ */
 
 /* 右上角固定导航：站内项纯文字、社交项图标。
@@ -59,4 +59,31 @@
   width: 19px;
   height: 19px;
   fill: currentColor;
+}
+
+/* 左上角站点标识：大写 G / C 上下叠印，整块即「回到首页」链接。
+   top/left + padding 与右上角导航同一套取值，两处基线对齐。 */
+.brand {
+  position: fixed;
+  top: 28px;
+  left: 28px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  /* 几何无衬线 + 细字重，贴近标识本身的线条感（系统字体栈，跨平台就近取用） */
+  font-family: "Avenir Next", "Century Gothic", Futura, "Segoe UI", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 0.54; /* 行高小于字高 → G / C 上下叠印（该值经并排比对选定） */
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.brand__glyph {
+  display: block;
+}
+.brand:hover {
+  color: var(--accent);
 }

@@ -1,11 +1,9 @@
-import Hero from "../components/Hero";
+import Intro from "../components/Intro";
 
 export default function Home() {
   return (
     <main>
-      <section className="screen">
-        <Hero />
-      </section>
+      <Intro />
     </main>
   );
 }
