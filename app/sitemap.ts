@@ -5,12 +5,15 @@ import { getAllPosts } from "../lib/posts";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, "");
 
-  // 静态路由：直接来自 nav 唯一真相源（首页/文章/项目…新增页面只改 lib/site.ts）
-  const staticRoutes: MetadataRoute.Sitemap = siteConfig.nav.map((item) => ({
-    url: `${base}${item.href}`,
+  // 静态路由：首页始终收录 + nav 里的其余页面（nav 只控制导航显示，
+  // 首页不显示在导航里但必须进 sitemap）
+  const navHrefs = siteConfig.nav.map((item) => item.href);
+  const staticHrefs = ["/", ...navHrefs.filter((href) => href !== "/")];
+  const staticRoutes: MetadataRoute.Sitemap = staticHrefs.map((href) => ({
+    url: `${base}${href}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
-    priority: item.href === "/" ? 1 : 0.8,
+    priority: href === "/" ? 1 : 0.8,
   }));
 
   // 文章路由：每篇 slug 一个条目，lastModified 用文章日期（YYYY-MM-DD）

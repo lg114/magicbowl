@@ -55,7 +55,7 @@ export function getPostBySlug(slug: string): Post | null {
 }
 
 // 模块级缓存：整个进程内只解析一次全部文章（灰度/解析开销集中在构建期），
-// RecentPosts / 归档页 / sitemap 都共享这一份结果，避免重复读盘。
+// 归档页 / sitemap 都共享这一份结果，避免重复读盘。
 // 注意：next dev 下改了 content/posts/*.md 需重启 dev server 才会刷新。
 let _allPostsCache: PostMeta[] | null = null;
 

@@ -405,7 +405,7 @@
 }
 .archive-year__label {
   position: sticky;
-  /* 吸顶时让开左上角固定导航（top:20px + 高 38px ≈ 58px），并留呼吸余量 */
+  /* 吸顶时让开顶部固定导航（右上角纯文字，约 top 20px 起），并留呼吸余量 */
   top: 72px;
   z-index: 3;
   margin: 0 0 6px;

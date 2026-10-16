@@ -1,39 +1,32 @@
 /* ============================================================
    MagicBowl — 固定位 UI 装饰（chrome）
-   左上角导航胶囊：玻璃质感
+   右上角导航：站内项文字（窄屏换图标）+ 社交项图标，无胶囊底
    ============================================================ */
 
-/* 左上角导航条：玻璃胶囊，按当前路由高亮 */
+/* 右上角固定导航：站内项纯文字、社交项图标。
+   top/right + padding 共同决定与视口角落的距离（当前 ≈ 36px）；
+   gap 对所有项统一（文字 / 图标一视同仁），配合各项等量的水平 padding，
+   任意两项之间的视觉间距完全一致。 */
 .nav {
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 28px;
+  right: 28px;
   z-index: 100;
   display: flex;
   align-items: center;
-  box-sizing: border-box;
-  height: 38px;
-  gap: 12px;
-  padding: 0 15px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 26px;
+  padding: 8px;
 }
 .nav__link {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--sans);
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   color: var(--meta);
   text-decoration: none;
+  padding: 6px 2px; /* 与图标项等量的水平 padding，保证间距统一；垂直方向扩大点击区 */
   transition: color 0.25s ease;
 }
 .nav__link:hover {
@@ -41,4 +34,29 @@
 }
 .nav__link.is-active {
   color: var(--accent);
+}
+/* 站内项图标：宽屏隐藏，仅窄屏（≤680px，见 responsive.css）替代文字显示 */
+.nav__glyph {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+/* 社交图标：与文字项同一套配色与过渡 */
+.nav__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--meta);
+  padding: 6px 2px;
+  transition: color 0.25s ease;
+}
+.nav__icon:hover {
+  color: var(--ink);
+}
+.nav__icon svg,
+.nav__glyph svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
 }

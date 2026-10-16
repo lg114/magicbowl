@@ -1,6 +1,6 @@
 /* ============================================================
    MagicBowl — 项目部分（projects）
-   /projects 独立页 + 首页精选项目网格
+   /projects 独立页
    ============================================================ */
 
 /* 复用归档页容器节奏：内容层浮在网格之上 */
@@ -119,46 +119,10 @@
   color: var(--accent);
 }
 
-/* 首页精选项目：紧跟文章区之后，复用 .cards__inner / .cards__heading 节奏 */
-.featured-projects {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  padding: 0 24px 104px;
-}
-.featured-projects .cards__inner {
-  width: 100%;
-  max-width: 920px;
-}
-.featured-projects .cards__heading {
-  font-family: var(--sans);
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--ink);
-  text-align: left;
-  margin-bottom: 28px;
-}
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 18px;
-}
-.featured-projects .project-card {
-  background: var(--card-bg);
-  border-color: color-mix(in srgb, var(--card-border-hi) 35%, var(--card-border));
-}
-.featured-projects .project-card:hover {
-  background: var(--card-bg);
-  border-color: color-mix(in srgb, var(--card-border-hi) 50%, #000);
-}
-
 /* 窄屏：项目网格转单列、收紧容器内边距 */
 @media (max-width: 680px) {
   .projects { padding: 84px 18px 84px; }
-  .featured-projects { padding: 0 18px 84px; }
-  .projects-grid,
-  .featured-grid {
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 }

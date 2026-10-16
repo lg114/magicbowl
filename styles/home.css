@@ -1,6 +1,6 @@
 /* ============================================================
    MagicBowl — 首页首屏与文章卡片区（home）
-   hero 头像 / 欢迎语 / 文章时间线
+   hero 头像 / 欢迎语
    ============================================================ */
 
 /* 头像：居中于背景网格之上，从上往下淡入落下 + 持续弹跳 */
@@ -87,125 +87,12 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- 文章卡片区：首屏之下的第二屏 ---------- */
-.cards {
-  position: relative;
-  z-index: 2; /* 稳居背景网格之上 */
-  display: flex;
-  justify-content: center;
-  padding: 84px 24px 104px;
-}
+/* ---------- 内容容器：归档页 / 项目页共用（宽度与最大宽度） ---------- */
 .cards__inner {
   width: 100%;
   max-width: 920px;
 }
-.cards__heading {
-  font-family: var(--sans);
-  font-size: 1.8rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  color: var(--ink);
-  text-align: left;
-  margin-bottom: 28px;
-}
-/* 时间线竖栏：最近文章沿一条静止细竖线排列（日期·分类 元信息行 + 衬线标题）。
-   竖线 1px 低对比、圆点小且稀疏(仅 4 篇)，不构成密集网格 —— 眩晕安全；
-   hover 仅改颜色（标题/圆点转 accent、整行微弱灰填充），无位移/缩放/旋转。 */
-.post-timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-}
-/* 单一静止竖线，低对比，左移对齐圆点中心 */
-.post-timeline::before {
-  content: "";
-  position: absolute;
-  left: 5px;
-  top: 12px;
-  bottom: 12px;
-  width: 1px;
-  background: var(--card-border);
-}
-.post-timeline__item {
-  position: relative;
-  padding-left: 30px;
-}
-/* 节点圆点：小、低对比，2px 背景环切断竖线避免 moiré；稀疏(仅 4 个)。
-   同时承担「时间线锚点 + 分类标识」双职责：默认灰（未分类兜底），
-   命中分类枚举时按色板着色——生活(青绿) / 随笔(accent 蓝) / 读后感(暖黄)，
-   与 projects 页 status 徽章同色系，全站「色彩 = 语义」保持一致。 */
-.post-timeline__item::before {
-  content: "";
-  position: absolute;
-  left: 1px;
-  top: 10px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--card-border-hi);
-  border: 2px solid var(--bg);
-  transition: transform 0.2s ease;
-}
-.post-timeline__item[data-category="生活"]::before {
-  background: #7ee0a8;
-}
-.post-timeline__item[data-category="随笔"]::before {
-  background: var(--cat-note);
-}
-.post-timeline__item[data-category="读后感"]::before {
-  background: var(--cat-read);
-}
-/* hover 整行时节点放大 1.3 倍（9px→11.7px）：纯缩放、落在眩晕安全区，
-   与标题下划线同时响应，强化「这一行 = 这个分类的一篇文章」整体感。 */
-.post-timeline__item:hover::before {
-  transform: scale(1.3);
-}
-.post-timeline__row {
-  display: block;
-  padding: 11px 14px;
-  border-radius: 10px;
-  color: inherit;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-.post-timeline__row:hover {
-  background: rgba(128, 128, 128, 0.1);
-}
-/* 标题 hover 不改色、改下划线：accent 只出现在装饰线上，
-   避免与节点分类色撞色（若该行恰是「随笔」，两处蓝色不会同时跳） */
-.post-timeline__row:hover .post-timeline__title {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1.5px;
-}
-/* 元信息行：日期(mono 灰) + 分类(mono 中性文字，无 pill 以求极简)。
-   分类色已由节点圆点承担（::before 按 data-category 着色），文字退为 --text，
-   meta 行保持「一条灰信息」，accent 蓝只留给 hover 下划线这一处交互焦点。 */
-.post-timeline__meta {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 4px;
-}
-.post-timeline__cat {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.5px;
-  color: var(--text);
-  white-space: nowrap;
-}
-.post-timeline__title {
-  display: block;
-  font-family: var(--sans);
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.5;
-  transition: color 0.2s ease;
-}
-/* 日期用等宽 --mono，呼应身份行 / SCROLL 标签的标签语义 */
+/* 详情页 meta 日期：等宽 --mono */
 .card__date {
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -235,20 +122,4 @@
 .card__cat[data-category="读后感"] {
   color: var(--cat-read);
   border-color: color-mix(in srgb, var(--cat-read) 42%, transparent);
-}
-
-/* 卡片区底部的「查看全部」入口，与导航统一 */
-.cards__more {
-  display: inline-block;
-  margin-top: 30px;
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-.cards__more:hover {
-  color: var(--accent);
 }

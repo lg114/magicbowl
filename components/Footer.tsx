@@ -9,7 +9,7 @@ export default function Footer() {
         <p className="footer__copy">
           © {year} {siteConfig.name}
         </p>
-        <SocialLinks variant="footer" includeEmail />
+        <SocialLinks />
       </div>
     </footer>
   );
