@@ -5,7 +5,7 @@
 
 /* ---------- 响应式：平板 / 窄屏 ---------- */
 @media (max-width: 680px) {
-  :root { --grid-size: 44px; }
+  :root { --grid-size: 92px; }
   .hero { gap: 24px; }
   .avatar { width: 160px; height: 160px; }
   .welcome__hi { font-size: 2rem; }
