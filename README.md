@@ -81,14 +81,14 @@ app/                    # 路由与 Next.js 特殊文件
   projects/page.tsx      # 项目展示页
   sitemap.ts robots.ts   # SEO
   manifest.ts            # Web App Manifest
-  apple-icon.tsx         # iOS 图标
+  apple-icon.png         # iOS 图标
   not-found.tsx          # 404
 components/             # 可复用 React 组件
 content/posts/          # Markdown 文章
 lib/                    # 站点配置、文章读取、MDX / TOC 工具
 styles/                 # 全局 CSS 与各页面样式（globals.css 聚合）
 types/                  # TypeScript 类型定义
-public/                 # 头像、图标、Service Worker
+public/                 # 站点图标、Service Worker
 ```
 
 类型与无副作用的工具放在 `types/`，客户端组件只从这里取类型，避免把 `fs` 等 Node API 打进浏览器包。
@@ -128,7 +128,7 @@ excerpt: 文章摘要
 - `siteConfig.nav`：顶部导航，新增页面时同步更新这里
 - `siteConfig.url`：规范站点地址，用于 metadata、canonical 和 sitemap
 
-头像和站点图标位于 `public/`。主题颜色、布局和动效位于 `styles/`，按功能拆分为多个 CSS 模块，由 `styles/globals.css` 统一引入（导入顺序即层叠顺序）。
+站点图标位于 `app/`：`favicon.ico` 与 `icon.png` 是浏览器标签页图标，`apple-icon.png` 是 iOS 主屏图标（`manifest.ts` 复用 `icon.png` 作为 PWA 安装图标）。主题颜色、布局和动效位于 `styles/`，按功能拆分为多个 CSS 模块，由 `styles/globals.css` 统一引入（导入顺序即层叠顺序）。
 
 ## 开发注意事项
 

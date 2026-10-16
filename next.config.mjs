@@ -65,15 +65,8 @@ const nextConfig = {
       // 静态资源长缓存：仅 public/ 下的图片与图标。
       // 不含 /_next/static —— Next 已自动加 immutable；
       // 不含 /sw.js —— Service Worker 必须能及时拉到新版，不能长缓存。
-      {
-        source: "/icon.svg",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
+      // 注：/icon.png 与 /apple-icon.png 未加 immutable —— manifest 里是以无哈希的
+      // 稳定路径引用它们的，长缓存会导致换图标后老客户端一年都拿不到新的。
       {
         source: "/favicon.ico",
         headers: [
