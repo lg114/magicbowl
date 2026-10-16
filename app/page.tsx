@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import Wisdom from "../components/Wisdom";
+import ScrollCue from "../components/ScrollCue";
 import RecentPosts from "../components/RecentPosts";
 import FeaturedProjects from "../components/FeaturedProjects";
 
@@ -9,7 +9,7 @@ export default function Home() {
       <main>
         <section className="screen">
           <Hero />
-          <Wisdom />
+          <ScrollCue />
         </section>
         <RecentPosts />
         <FeaturedProjects />

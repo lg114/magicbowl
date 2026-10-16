@@ -1,11 +1,11 @@
 /* ============================================================
    MagicBowl — 首页首屏与文章卡片区（home）
-   hero 头像 / 欢迎语 / 箴言 / 文章时间线
+   hero 头像 / 欢迎语 / 滚动入口 / 文章时间线
    ============================================================ */
 
 /* 头像：居中于背景网格之上，从上往下淡入落下 + 持续弹跳 */
 .hero {
-  flex: 1 1 auto; /* 占满首屏剩余空间，把箴言 + 箭头自然压到同一屏底部 */
+  flex: 1 1 auto; /* 占满首屏剩余空间，把滚动箭头自然压到同一屏底部 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,108 +87,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- 箴言区：与 hero 共屏、钉在同一屏底部的引用区块（轮换展示 + 引用样式） ---------- */
-.wisdom {
-  position: relative;
-  z-index: 2; /* 内容层显式提权，稳定在背景网格之上 */
-  flex-shrink: 0; /* 不参与首屏填充，固定占底部一席，与 hero 同屏显示 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 24px 34px; /* 同一屏内留白收窄，避免把内容顶出屏幕 */
-  text-align: center;
-  /* 与上方 welcome 同源的入屏淡入上移（纯垂直 12px + opacity，眩晕安全区）；
-     箭头作为子元素随之入场，自身再叠加 cueBreath 呼吸 */
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.5s both;
-}
-/* 引用样式：衬线 + 斜体 + 大引号。视觉定位是「彩蛋」而非第二标题——
-   字号与色阶均弱于 welcome，鼠标点上去才换一句，静时退为背景一隅 */
-.wisdom__quote {
-  margin: 0;
-  max-width: 640px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 1.6;
-  color: var(--text);
-  cursor: pointer;
-  position: relative;
-  padding: 0 1.4rem;
-}
-/* 引号紧贴引文文字两端（加在文字 span 上，而非 blockquote，
-   否则 ::after 会落到 cite 署名之后导致错位；随居中一起走，永不偏位） */
-.wisdom__text::before,
-.wisdom__text::after {
-  color: var(--meta);
-  opacity: 0.6;
-  font-size: 1.2em;
-  line-height: 0;
-  vertical-align: -0.12em;
-}
-.wisdom__text::before {
-  content: "\201C";
-  margin-right: 0.06em;
-}
-.wisdom__text::after {
-  content: "\201D";
-  margin-left: 0.04em;
-}
-/* 署名：引用下方独立一行，弱化、偏灰，与引文主体区分 */
-.wisdom__cite {
-  display: block;
-  margin-top: 0.9rem;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  color: var(--meta);
-  letter-spacing: 0.3px;
-}
-/* 滚动提示箭头：位于箴言下方，纯垂直小幅浮动（眩晕安全区），点击平滑滚到页底 */
-.scroll-cue {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  margin: 26px auto 0;
-  padding: 8px 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  animation: cueBreath 3s ease-in-out infinite;
-}
-/* 滚动提示文字：无衬线 + 灰，与导航统一；英文 SCROLL + 大写 + 宽字距，
-   hover 提亮为 accent 蓝（仅颜色过渡） */
-.scroll-cue__label {
-  font-family: var(--sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--meta);
-  transition: color 0.25s ease;
-}
-.scroll-cue:hover .scroll-cue__label {
-  color: var(--accent);
-}
-.scroll-cue__arrow {
-  display: block;
-  width: 13px;
-  height: 13px;
-  border-right: 2px solid var(--meta);
-  border-bottom: 2px solid var(--meta);
-  transform: rotate(45deg);
-}
-/* 箭头明暗呼吸：仅 opacity 在 1↔0.4 缓慢起伏，无位移/旋转，
-   对眩晕/光敏感最友好；静态时 opacity:1 完全可见 */
-@keyframes cueBreath {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.4; }
-}
-
-/* ---------- 文章卡片区：首屏之下的第二屏，箭头滚动至此 ---------- */
+/* ---------- 文章卡片区：首屏之下的第二屏 ---------- */
 .cards {
   position: relative;
   z-index: 2; /* 稳居背景网格之上 */

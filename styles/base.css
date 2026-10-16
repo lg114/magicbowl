@@ -40,7 +40,7 @@ main {
   z-index: 2;
   flex: 1 0 auto; /* 占满剩余高度，把 footer 压到视口底部（sticky footer） */
 }
-/* 首屏：hero + 箴言收进同一屏（100dvh），保持「不滚动也能看全」；
+/* 首屏：hero + 滚动入口收进同一屏（100dvh），保持「不滚动也能看全」；
    卡片区在其下方作为第二屏，箭头滚动至此 */
 .screen {
   min-height: 100vh;
