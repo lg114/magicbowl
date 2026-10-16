@@ -3,17 +3,22 @@
    自我介绍页：顶部对齐的常规页面排版
    ============================================================ */
 
-/* 自我介绍：与归档页 / 项目页同构——居中容器 + 左对齐内容。
-   顶部 padding 让开固定导航（导航底缘约 77px），内容贴着页面上方起排。 */
+/* 自我介绍：整列宽的正文列（与归档页 / 项目页同构），块内文字左对齐。
+   区域撑满一屏高度（100dvh），内容贴着上方的 padding 起排、不垂直居中；
+   顶部 160px 让开固定导航（导航底缘约 77px）并留出从容的起始距离。 */
 .intro {
   position: relative;
   z-index: 2;
-  padding: 104px 24px 88px;
+  min-height: 100vh;
+  min-height: 100dvh; /* 移动端更贴近真实可视高度，规避 URL 栏导致的留白跳动 */
+  padding: 160px 64px 96px;
 }
 .intro__inner {
   width: 100%;
-  max-width: 920px;
+  /* 正文列宽 760px：宽屏下文字离页面边缘更远，同时保持约 65–75 字符/行的可读行长 */
+  max-width: 760px;
   margin: 0 auto;
+  text-align: left;
   /* 极轻淡入上移：纯垂直 12px + opacity，属眩晕安全区 */
   opacity: 0;
   animation: fadeUp 0.7s ease 0.2s both;
@@ -21,30 +26,46 @@
 .intro__hi {
   margin: 0;
   font-family: var(--sans);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   color: var(--ink);
   letter-spacing: 0.3px;
-}
-.intro__name {
-  color: var(--accent);
 }
 .intro__wave {
   /* 避免 emoji 被加粗导致视觉偏重 */
   font-weight: 400;
 }
-/* 价值主张句：标题之下的一行说明，比标题小一号、用 --text；
-   AI 一词提亮 accent 作锚点，与 intro__name 呼应 */
+/* 价值主张句（lead）：标题之下的一行说明，比标题小一号、用 --text。
+   正文不使用 accent 强调——accent 语义收敛为「交互 / 链接 / hover」专用。 */
 .intro__tagline {
-  margin: 12px 0 0;
+  margin: 14px 0 0;
   font-family: var(--sans);
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: var(--text);
   letter-spacing: 0.2px;
 }
-.intro__hl {
-  color: var(--accent);
+/* 正文段落：比 lead 再小一号，行高沿用 body 的 1.78，保证长段落可读 */
+.intro__text {
+  margin: 22px 0 0;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+/* 正文内联链接：白色高亮 + 半粗，在灰正文里真正跳出来（正文不上 accent 蓝）。
+   纯白 #fff 是亮度的天花板——再要更突出只能靠字重 / 下划线，不能再靠颜色。 */
+.intro__link {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.intro__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(12px); }
