@@ -10,7 +10,6 @@
   .avatar { width: 160px; height: 160px; }
   .welcome__hi { font-size: 2rem; }
   .welcome__tagline { font-size: 1.1rem; }
-  .scroll-cue-section { padding: 16px 18px 26px; }
   .cards { padding: 64px 18px 84px; }
   .cards__heading { margin-bottom: 28px; font-size: 1.5rem; }
   .archive { padding: 88px 18px 84px; }
@@ -41,7 +40,6 @@
   .avatar { width: 130px; height: 130px; }
   .welcome__hi { font-size: 1.6rem; }
   .welcome__tagline { font-size: 1rem; }
-  .scroll-cue-section { padding: 14px 16px 22px; }
   .cards { padding: 52px 16px 72px; }
   .cards__heading { margin-bottom: 24px; font-size: 1.3rem; }
   /* 窄屏：时间线略收窄左缩进与标题字号，竖栏与稀疏圆点保持不变 */
