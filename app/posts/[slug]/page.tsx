@@ -28,7 +28,7 @@ export async function generateMetadata({
 }
 
 // 文章详情页：玻璃面板承载 markdown 正文（next-mdx-remote/rsc 渲染），
-// 顶部带返回归档页的链接。背景沿用全局萤火虫 + 网格。
+// 顶部带返回归档页的链接。背景沿用全局网格。
 export default async function PostPage({
   params,
 }: {

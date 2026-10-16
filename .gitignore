@@ -9,5 +9,6 @@ out
 
 # assistant workspace data (not part of the site)
 .workbuddy/
+.workbuddy-ai
 # TypeScript incremental build cache
 *.tsbuildinfo

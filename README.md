@@ -34,7 +34,7 @@
 **外观**
 
 - 深色为默认主题，支持浅色切换；首屏无闪烁，偏好记在 `localStorage`
-- 萤火虫夜空背景、响应式布局、`prefers-reduced-motion` 动效降级
+- 响应式布局、`prefers-reduced-motion` 动效降级
 
 **工程**
 
@@ -75,7 +75,7 @@ npm run dev
 
 ```text
 app/                    # 路由与 Next.js 特殊文件
-  layout.tsx             # 根布局：主题初始化、导航、页脚、萤火虫背景
+  layout.tsx             # 根布局：主题初始化、导航、页脚
   page.tsx               # 首页
   posts/                 # /posts 归档 与 /posts/[slug] 详情
   projects/page.tsx      # 项目展示页

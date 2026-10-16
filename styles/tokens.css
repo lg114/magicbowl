@@ -25,9 +25,6 @@
   --cat-life: #7ee0a8;
   --cat-note: #f0c674;
   --cat-read: #d7a7ff;
-  /* 萤火虫光点：蓝色萤光 + 柔光晕 */
-  --firefly: #4da6ff;
-  --firefly-glow: rgba(77, 166, 255, 0.85);
   /* 字体系统：
      正文 / 标题 / 卡片 / UI 控件 → 无衬线 --sans
      中文优先苹方（PingFang SC），Mac/iOS 原生支持；Windows 回退微软雅黑；其他系统用通用无衬线
@@ -62,9 +59,6 @@
   --cat-life: #1f9e5a;
   --cat-note: #b7791f;
   --cat-read: #8b5cf6;
-  /* 萤火虫光点：亮色背景下用深蓝，保证对比可见 */
-  --firefly: #1f6feb;
-  --firefly-glow: rgba(31, 111, 235, 0.7);
   --card-bg: rgba(255, 255, 255, 0.92);
   --scroll-track: transparent;
   --scroll-thumb-idle: rgba(0, 0, 0, 0.10);

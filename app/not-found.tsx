@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // 全局 404：访问不存在的路由（如拼错的文章链接）时由 Next 渲染。
-// 沿用全局萤火虫背景，居中展示中文提示 + 返回首页入口。
+// 沿用全局网格背景，居中展示中文提示 + 返回首页入口。
 export default function NotFound() {
   return (
     <main className="notfound">
