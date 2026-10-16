@@ -15,8 +15,8 @@ export default function Intro() {
           to work in daily life.
         </p>
         <p className="intro__text">
-          I enjoy thinking of original ideas and finding ways to bring them to life. I’m
-          passionate about turning my thoughts into reality. You can see some of my work{" "}
+          I enjoy coming up with original ideas and finding ways to bring them to life. You
+          can find some of my work{" "}
           <Link className="intro__link" href="/projects">
             here
           </Link>{" "}
@@ -33,7 +33,13 @@ export default function Intro() {
         </p>
         <p className="intro__text">
           Apart from programming, I also love games, sports, movies, and music. I enjoy
-          sharing my life and figuring out how to live in a way that feels true to myself.
+          sharing my life, and figuring out how to live in a way that feels true to myself.
+        </p>
+        <p className="intro__text">
+          I read a lot too, mostly literary fiction — Hesse, Mo Yan, books that leave more
+          questions than answers. I don’t read for takeaways. I read because a good one
+          quietly rearranges how I see things, and it’s still the clearest mirror I’ve found
+          for thinking about my own life.
         </p>
       </div>
     </section>
