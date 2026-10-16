@@ -255,9 +255,6 @@
   background: rgba(138, 180, 248, 0.12);
   border-color: var(--accent);
 }
-[data-theme="light"] .chip.is-active {
-  color: var(--accent);
-}
 .tag-count {
   font-size: 0.72em;
   color: var(--meta);

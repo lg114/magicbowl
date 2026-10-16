@@ -36,9 +36,6 @@ body:has(.post-wrap)::before { opacity: 0.3; }
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
-[data-theme="light"] .post {
-  background: rgba(252, 250, 247, 0.96);
-}
 
 .post__back {
   display: inline-block;
@@ -158,9 +155,6 @@ body:has(.post-wrap)::before { opacity: 0.3; }
   padding: 18px 20px;
   overflow: auto;
   margin: 1.5em 0;
-}
-[data-theme="light"] .post__body pre {
-  background: rgba(0, 0, 0, 0.04);
 }
 .post__body pre code {
   background: none;

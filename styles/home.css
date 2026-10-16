@@ -13,7 +13,7 @@
   gap: 30px;
   position: relative;
   z-index: 2;
-  padding-top: 64px; /* 给右上角固定主题按钮留出安全空间，避免头像被压角 */
+  padding-top: 64px; /* 给顶部固定导航留出安全空间，避免头像被压角 */
 }
 /* 外层：一次性落下入场（forwards 保持终态），只管入场，不参与弹跳 */
 .avatar-drop {
@@ -30,7 +30,7 @@
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  /* 去掉 box-shadow：暗色下融进背景看不见，亮色下会变成一圈深色光晕（像裹了一层），故移除，保持干净圆形 */
+  /* 去掉 box-shadow：暗色下融进背景看不见，故移除，保持干净圆形 */
   /* 原地轻弹（无限循环），只作用于内层 img，与外层入场互不干扰；节奏放慢到 2.8s */
   animation: avatarBounce 2.8s ease infinite;
 }
@@ -159,7 +159,7 @@
   cursor: pointer;
   animation: cueBreath 3s ease-in-out infinite;
 }
-/* 滚动提示文字：无衬线 + 灰，与导航/主题切换统一；英文 SCROLL + 大写 + 宽字距，
+/* 滚动提示文字：无衬线 + 灰，与导航统一；英文 SCROLL + 大写 + 宽字距，
    hover 提亮为 accent 蓝（仅颜色过渡） */
 .scroll-cue__label {
   font-family: var(--sans);
@@ -338,7 +338,7 @@
   border-color: color-mix(in srgb, var(--cat-read) 42%, transparent);
 }
 
-/* 卡片区底部的「查看全部」入口，与导航/主题切换统一 */
+/* 卡片区底部的「查看全部」入口，与导航统一 */
 .cards__more {
   display: inline-block;
   margin-top: 30px;

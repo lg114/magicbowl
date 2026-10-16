@@ -71,7 +71,7 @@
 .project-card__tech .chip {
   cursor: default;
 }
-/* 状态徽章：仅颜色区分，无位移/旋转，眩晕安全；双主题下均保证可读对比 */
+/* 状态徽章：仅颜色区分，无位移/旋转，眩晕安全；保证可读对比 */
 .status {
   font-family: var(--mono);
   font-size: 0.66rem;
@@ -92,14 +92,6 @@
 }
 .status--archived {
   color: var(--meta);
-}
-[data-theme="light"] .status--active {
-  color: #1f9e5a;
-  border-color: rgba(31, 158, 90, 0.35);
-}
-[data-theme="light"] .status--wip {
-  color: #b7791f;
-  border-color: rgba(183, 121, 31, 0.35);
 }
 .project-card__foot {
   display: flex;
@@ -159,28 +151,6 @@
 .featured-projects .project-card:hover {
   background: var(--card-bg);
   border-color: color-mix(in srgb, var(--card-border-hi) 50%, #000);
-}
-[data-theme="light"] .featured-projects .project-card {
-  background: var(--card-bg);
-  border-color: #d8d8d8;
-}
-[data-theme="light"] .featured-projects .project-card:hover {
-  background: var(--card-bg);
-  border-color: #b8b8b8;
-}
-/* 暗色边框已派生加深；亮色下恢复全局 token 原值（白卡浅灰），避免过深 */
-[data-theme="light"] .project-card {
-  border-color: var(--card-border);
-}
-[data-theme="light"] .project-card:hover {
-  border-color: var(--card-border-hi);
-}
-/* 亮色下白卡黑影对比强，阴影收敛为轻量单层，避免过度发脏 */
-[data-theme="light"] .project-card {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-}
-[data-theme="light"] .project-card:hover {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 }
 
 /* 窄屏：项目网格转单列、收紧容器内边距 */
