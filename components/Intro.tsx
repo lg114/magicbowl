@@ -16,9 +16,9 @@ export default function Intro() {
         </p>
         <p className="intro__text">
           I enjoy coming up with original ideas and finding ways to bring them to life. You
-          can find some of my work{" "}
+          can find some of my work in{" "}
           <Link className="intro__link" href="/projects">
-            here
+            projects
           </Link>{" "}
           or on{" "}
           <a
@@ -30,6 +30,13 @@ export default function Intro() {
             GitHub
           </a>
           .
+        </p>
+        <p className="intro__text">
+          I also leave my own thoughts on{" "}
+          <Link className="intro__link" href="/posts">
+            the blog
+          </Link>{" "}
+          — some of my views on things.
         </p>
         <p className="intro__text">
           Apart from programming, I also love games, sports, movies, and music. I enjoy
