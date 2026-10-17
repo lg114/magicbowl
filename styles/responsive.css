@@ -20,7 +20,8 @@
   /* 窄屏：站内项文字换成图标，只留图形 */
   .nav__label { display: none; }
   .nav__glyph { display: inline-flex; }
-  .brand { top: 18px; left: 18px; padding: 6px; font-size: 24px; }
+  .brand { top: 18px; left: 18px; padding: 6px; }
+  .brand__mark { height: 38px; }
 }
 
 /* ---------- 响应式：归档页两栏 → 单栏（平板/手机） ---------- */

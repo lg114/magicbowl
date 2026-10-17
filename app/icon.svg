@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 360" role="img" aria-label="Gc monogram">
+  <style>
+    /* 深色标签栏用白线，浅色标签栏自动转深色 —— 无需底版也能两边可见 */
+    path { stroke: #111111; }
+    @media (prefers-color-scheme: dark) {
+      path { stroke: #ffffff; }
+    }
+  </style>
+  <path
+    d="M197,28 C130,22 25,70 25,155 C25,195 80,240 125,240 C175,240 220,210 220,170 C220,150 200,135 172,135 C120,135 80,180 70,230 C66,300 110,345 212,331"
+    fill="none"
+    stroke-width="8"
+    stroke-linecap="butt"
+    stroke-linejoin="round"
+  />
+</svg>

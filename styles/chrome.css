@@ -61,7 +61,7 @@
   fill: currentColor;
 }
 
-/* 左上角站点标识：大写 G / C 上下叠印，整块即「回到首页」链接。
+/* 左上角站点标识：G/C 单笔画 monogram，整块即「回到首页」链接。
    top/left + padding 与右上角导航同一套取值，两处基线对齐。 */
 .brand {
   position: fixed;
@@ -69,21 +69,34 @@
   left: 28px;
   z-index: 100;
   display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 8px;
-  /* 几何无衬线 + 细字重，贴近标识本身的线条感（系统字体栈，跨平台就近取用） */
-  font-family: "Avenir Next", "Century Gothic", Futura, "Segoe UI", system-ui, sans-serif;
-  font-weight: 300;
-  font-size: 28px;
-  line-height: 0.54; /* 行高小于字高 → G / C 上下叠印（该值经并排比对选定） */
   color: var(--ink);
   text-decoration: none;
   transition: color 0.25s ease;
 }
-.brand__glyph {
+.brand__mark {
   display: block;
+  height: 44px;
+  width: auto;
+}
+/* 描线自绘：pathLength=1 让 dasharray/dashoffset 直接用归一化长度，
+   笔画从起点一路画到终点。stroke 用 currentColor，hover 时整条线转 accent。 */
+.brand__mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 8; /* 原生是 5；此处按 44px 的展示尺寸补粗，否则只有 0.6px 看不见 */
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: brandDraw 2.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes brandDraw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
 }
 .brand:hover {
   color: var(--accent);
 }
+/* 注：描线自绘属于「显隐」而非位移/旋转，不构成眩晕诱因，故不加 reduced-motion 兜底
+   （与之前"注水"的判断一致：加兜底反而让这类用户完全看不到效果）。 */
