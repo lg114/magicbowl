@@ -48,6 +48,20 @@ export default function Intro() {
           quietly rearranges how I see things, and it’s still the clearest mirror I’ve found
           for thinking about my own life.
         </p>
+        <p className="intro__text">
+          If something here resonates,{" "}
+          <a
+            className="intro__link"
+            href={siteConfig.social.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            X
+          </a>{" "}
+          is the fastest way to reach me. You can also email me at{" "}
+          {/* 配置里存的是 mailto: URL，这里只作纯文本展示，不做成链接 */}
+          {siteConfig.social.email.replace(/^mailto:/, "")}.
+        </p>
       </div>
     </section>
   );
