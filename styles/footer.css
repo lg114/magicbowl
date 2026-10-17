@@ -1,12 +1,13 @@
 /* ============================================================
-   MagicBowl — 全局页脚（footer）
-   © 年份 + 内容许可（CC BY-NC-SA 4.0）；社交链接已移至右上角导航栏
+   MagicBowl — 内容许可行（license）
+   已不再是「页脚带」：去掉顶部分隔线与 sticky 定位，直接跟在正文之后。
+   © 年份 + 内容许可（CC BY-NC-SA 4.0）；社交链接在右上角导航栏
    ============================================================ */
 
 .footer {
   position: relative;
   z-index: 2;
-  padding: 26px 24px 38px;
+  padding: 0 24px 40px;
 }
 .footer__inner {
   width: 100%;

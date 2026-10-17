@@ -10,7 +10,8 @@ body {
   line-height: 1.78;
   font-size: 16px;
   min-height: 100vh;
-  /* 纵向 flex：配合 main 的 flex:1，把 footer 钉在视口底（内容短时也不悬空） */
+  /* 纵向 flex 仅用于让内容自上而下排列；不再把页脚钉到视口底——
+     许可行现在紧跟正文，属于页面内容的一部分 */
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
@@ -41,9 +42,9 @@ body::before {
   transition: background 0.45s ease;
 }
 
-/* 内容层位于网格之上 */
+/* 内容层位于网格之上。不设 flex-grow：许可行要紧跟在正文之后，
+   而不是被推到视口底部（原先的 sticky footer 行为已按需求移除）。 */
 main {
   position: relative;
   z-index: 2;
-  flex: 1 0 auto; /* 占满剩余高度，把 footer 压到视口底部（sticky footer） */
 }
