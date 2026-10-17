@@ -35,17 +35,9 @@
   /* 避免 emoji 被加粗导致视觉偏重 */
   font-weight: 400;
 }
-/* 价值主张句（lead）：标题之下的一行说明，比标题小一号、用 --text。
-   正文不使用 accent 强调——accent 语义收敛为「交互 / 链接 / hover」专用。 */
-.intro__tagline {
-  margin: 14px 0 0;
-  font-family: var(--sans);
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--text);
-  letter-spacing: 0.2px;
-}
-/* 正文段落：比 lead 再小一号，行高沿用 body 的 1.78，保证长段落可读 */
+/* 正文段落：所有自我介绍段落统一字号（此前首段曾用 1.3rem 作 lead，
+   与其余段落 1.05rem 并列时看起来像"有的字大有的字小"，已统一）。
+   行高沿用 body 的 1.78，保证长段落可读。 */
 .intro__text {
   margin: 22px 0 0;
   font-family: var(--sans);

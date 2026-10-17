@@ -10,7 +10,7 @@ export default function Intro() {
         <p className="intro__hi">
           Hi, I’m Gc <span className="intro__wave">👋</span>
         </p>
-        <p className="intro__tagline">
+        <p className="intro__text">
           I am a practical open sourcerer. Still learning AI, and figuring out how to put it
           to work in daily life.
         </p>

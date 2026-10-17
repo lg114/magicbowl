@@ -8,7 +8,6 @@
   :root { --grid-size: 92px; }
   .intro { padding: 124px 32px 72px; }
   .intro__hi { font-size: 1.7rem; }
-  .intro__tagline { font-size: 1.1rem; }
   .intro__text { font-size: 1rem; }
   .archive { padding: 88px 18px 84px; }
   .post { padding: 36px 24px; }
@@ -40,7 +39,6 @@
 @media (max-width: 480px) {
   .intro { padding: 104px 24px 64px; }
   .intro__hi { font-size: 1.5rem; }
-  .intro__tagline { font-size: 1rem; }
   .intro__text { font-size: 0.95rem; }
   .archive { padding: 76px 16px 72px; }
   .archive-list { padding: 0; }
