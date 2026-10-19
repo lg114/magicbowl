@@ -48,7 +48,7 @@
 | --- | --- |
 | 框架 | Next.js 16（App Router） |
 | UI | React 19 + TypeScript |
-| 内容 | Markdown + `gray-matter` + `next-mdx-remote` |
+| 内容 | Markdown + `gray-matter` + `marked`（构建时预编译为 HTML） |
 | 样式 | 原生 CSS（设计令牌、双主题、响应式、动效降级） |
 | 图片 | Next.js Image + `sharp` |
 
@@ -85,7 +85,7 @@ app/                    # 路由与 Next.js 特殊文件
   not-found.tsx          # 404
 components/             # 可复用 React 组件
 content/posts/          # Markdown 文章（源文件）
-lib/                    # 站点配置、文章数据（构建时生成）、MDX / TOC 工具
+lib/                    # 站点配置、文章数据（构建时生成）
 scripts/                # 构建脚本（generate-posts.mjs）
 styles/                 # 全局 CSS 与各页面样式（globals.css 聚合）
 types/                  # TypeScript 类型定义

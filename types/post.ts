@@ -14,6 +14,8 @@ export interface PostMeta {
 
 export interface Post extends PostMeta {
   content: string;
+  /** 构建时预编译的 HTML（含 MdxComponents 变换），详情页直接渲染 */
+  html: string;
 }
 
 const EN_MONTHS = [

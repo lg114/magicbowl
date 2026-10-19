@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { createMdxComponents } from "../../../components/MdxComponents";
 import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { formatMonthDay } from "../../../types/post";
 
@@ -27,8 +25,7 @@ export async function generateMetadata({
 }
 
 // 文章详情页：单栏阅读布局（居中、无面板）。
-// 头部 = 大号标题 + 日期/阅读时长；正文由 next-mdx-remote 渲染。
-// 章节导航不再用侧边目录，改为标题旁的 # 锚点（见 MdxComponents）。
+// 头部 = 大号标题 + 日期/阅读时长；正文由构建时预编译的 HTML 直接渲染。
 export default async function PostPage({
   params,
 }: {
@@ -37,8 +34,6 @@ export default async function PostPage({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
-
-  const mdxComponents = createMdxComponents();
 
   return (
     <main className="post-wrap">
@@ -54,9 +49,10 @@ export default async function PostPage({
           </p>
         </header>
 
-        <div className="post__body">
-          <MDXRemote source={post.content} components={mdxComponents} />
-        </div>
+        <div
+          className="post__body"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
 
         <Link href="/posts" className="post__back">
           ← Back
