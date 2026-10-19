@@ -12,3 +12,6 @@ out
 .workbuddy-ai
 # TypeScript incremental build cache
 *.tsbuildinfo
+
+# Generated posts data (built from content/posts/*.md)
+lib/posts-data.json

@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "generate-posts": "tsx scripts/generate-posts-data.ts",
+    "dev": "npm run generate-posts && next dev",
+    "build": "npm run generate-posts && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
@@ -21,6 +22,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "sharp": "^0.35.2",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   }
 }
