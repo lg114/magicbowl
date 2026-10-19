@@ -86,7 +86,7 @@ app/                    # 路由与 Next.js 特殊文件
 components/             # 可复用 React 组件
 content/posts/          # Markdown 文章（源文件）
 lib/                    # 站点配置、文章数据（构建时生成）、MDX / TOC 工具
-scripts/                # 构建脚本（generate-posts-data.ts）
+scripts/                # 构建脚本（generate-posts.mjs）
 styles/                 # 全局 CSS 与各页面样式（globals.css 聚合）
 types/                  # TypeScript 类型定义
 public/                 # 站点图标、Service Worker
@@ -135,7 +135,7 @@ excerpt: 文章摘要
 
 - **改了 Markdown 要重启 dev server**：`lib/posts.ts` 对文章列表做了模块级缓存，进程内只解析一次，`next dev` 下热更新不会重新读盘。
 - **新增文章需要重新构建**：详情页设了 `dynamicParams = false`，只在构建期生成已知 slug，顺带阻断路径穿越。
-- **文章数据在构建时生成**：`npm run build` 会先执行 `scripts/generate-posts-data.ts`，把 `content/posts/*.md` 解析为 `lib/posts-data.json` 并内联到 bundle。Cloudflare Workers 等无文件系统环境依赖此机制。
+- **文章数据在构建时生成**：`npm run build` 会先执行 `scripts/generate-posts.mjs`，把 `content/posts/*.md` 解析为 `lib/posts-data.json` 并内联到 bundle。Cloudflare Workers 等无文件系统环境依赖此机制。
 - **更新 Service Worker 要改版本号**：改 `public/sw.js` 里的 `APP_VERSION`，旧缓存才会整体失效。
 - **新增页面记得同步导航**：顶部导航直接 `map` `siteConfig.nav` 数组。
 - **更换域名要改 `siteConfig.url`**：否则 sitemap 和 canonical 仍指向旧地址。

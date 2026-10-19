@@ -1,13 +1,11 @@
-// 构建时运行：读取 content/posts/*.md，生成 lib/posts-data.json。
-// Cloudflare Workers 运行时无法访问文件系统，所以把文章数据内联到 bundle 里。
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
-const OUTPUT = path.join(process.cwd(), "lib", "posts-data.json");
+const OUT_FILE = path.join(process.cwd(), "lib", "posts-data.json");
 
-function toISODate(d: unknown): string {
+function toISODate(d) {
   if (typeof d === "string") {
     const parsed = new Date(d);
     if (Number.isNaN(parsed.getTime())) return d;
@@ -22,7 +20,7 @@ function toISODate(d: unknown): string {
   return "";
 }
 
-function estimateReadingTime(md: string): number {
+function estimateReadingTime(md) {
   const text = md
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/`[^`]*`/g, " ")
@@ -34,10 +32,13 @@ function estimateReadingTime(md: string): number {
 }
 
 const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
+
 const posts = files.map((file) => {
   const slug = file.replace(/\.md$/, "");
   const fullPath = path.join(POSTS_DIR, file);
-  const { data, content } = matter(fs.readFileSync(fullPath, "utf8"));
+  const raw = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(raw);
+
   return {
     slug,
     title: data.title ?? slug,
@@ -50,5 +51,7 @@ const posts = files.map((file) => {
   };
 });
 
-fs.writeFileSync(OUTPUT, JSON.stringify(posts, null, 2), "utf8");
-console.log(`Generated ${OUTPUT} with ${posts.length} posts`);
+posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+
+fs.writeFileSync(OUT_FILE, JSON.stringify(posts, null, 2));
+console.log(`✅ Generated ${posts.length} posts → ${OUT_FILE}`);
