@@ -2,7 +2,7 @@ export interface Project {
   name: string;
   desc: string;
   tech: string[];
-  status: "活跃" | "进行中" | "归档";
+  status: "active" | "working on" | "archived";
   repo?: string;
   demo?: string;
   featured?: boolean;
@@ -28,25 +28,25 @@ export const siteConfig = {
   projects: [
     {
       name: "RagMate",
-      desc: "企业级 RAG 知识管理系统 · 混合检索",
-      tech: ["Python", "RAG", "向量检索"],
-      status: "活跃",
+      desc: "Enterprise RAG knowledge management system with hybrid retrieval",
+      tech: ["Python", "RAG", "Vector Search"],
+      status: "active",
       repo: "https://github.com/lg114/RagMate",
       featured: true,
     },
     {
       name: "MagicBowl",
-      desc: "你正在看的这个站点 · Next.js + TypeScript",
+      desc: "This site — built with Next.js + TypeScript",
       tech: ["Next.js", "TypeScript", "React", "MDX"],
-      status: "活跃",
+      status: "active",
       repo: "https://github.com/lg114/magicbowl",
       featured: true,
     },
     {
       name: "bagger",
-      desc: "AI 编码历史收集器 · 自动同步 Claude Code 对话记录",
-      tech: ["AI", "CLI", "本地检索"],
-      status: "进行中",
+      desc: "AI coding history collector — auto-syncs Claude Code conversations",
+      tech: ["AI", "CLI", "Local Search"],
+      status: "working on",
       repo: "https://github.com/lg114/bagger",
       featured: true,
     },

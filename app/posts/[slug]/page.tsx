@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createMdxComponents } from "../../../components/MdxComponents";
-import { getAllPosts, getPostBySlug, getPostSlugs } from "../../../lib/posts";
+import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { formatMonthDay } from "../../../types/post";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
@@ -38,19 +38,11 @@ export default async function PostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const posts = getAllPosts();
-  const index = posts.findIndex((item) => item.slug === post.slug);
-  const newerPost = index > 0 ? posts[index - 1] : null;
-  const olderPost = index >= 0 && index < posts.length - 1 ? posts[index + 1] : null;
   const mdxComponents = createMdxComponents();
 
   return (
     <main className="post-wrap">
       <article className="post">
-        <Link href="/posts" className="post__back">
-          ← 返回文章
-        </Link>
-
         <header>
           <h1 className="post__title">{post.title}</h1>
           <p className="post__meta">
@@ -66,24 +58,9 @@ export default async function PostPage({
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
 
-        {(olderPost || newerPost) && (
-          <nav className="post-neighbors" aria-label="相邻文章">
-            {olderPost ? (
-              <Link className="post-neighbor" href={`/posts/${olderPost.slug}`}>
-                <span className="post-neighbor__label">上一篇</span>
-                <span className="post-neighbor__title">{olderPost.title}</span>
-              </Link>
-            ) : (
-              <span />
-            )}
-            {newerPost && (
-              <Link className="post-neighbor post-neighbor--next" href={`/posts/${newerPost.slug}`}>
-                <span className="post-neighbor__label">下一篇</span>
-                <span className="post-neighbor__title">{newerPost.title}</span>
-              </Link>
-            )}
-          </nav>
-        )}
+        <Link href="/posts" className="post__back">
+          ← Back
+        </Link>
       </article>
     </main>
   );

@@ -17,12 +17,13 @@
   margin: 0 auto;
 }
 
-/* 返回链接：低调存在，hover 才提亮 */
+/* 底部返回链接：读完文章后回到归档，低调收尾 */
 .post__back {
   display: inline-block;
-  margin-bottom: 40px;
+  margin-top: 72px;
   font-family: var(--sans);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 500;
   color: var(--meta);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -192,49 +193,3 @@
   margin: 2.4em 0;
 }
 
-/* ---- 上一篇/下一篇：翻页提示而非卡片 ---- */
-.post-neighbors {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 14px;
-  margin-top: 72px;
-  padding-top: 28px;
-  border-top: 1px solid var(--card-border);
-}
-.post-neighbor {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-width: 0;
-  padding: 0;
-  color: inherit;
-  text-decoration: none;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-}
-.post-neighbor--next {
-  text-align: right;
-}
-.post-neighbor__label {
-  font-family: var(--sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  color: var(--meta);
-  transition: color 0.2s ease;
-}
-/* 默认灰、hover 变白——与 Blog 列表同一套语言，不用 accent 蓝 */
-.post-neighbor__title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: var(--sans);
-  font-size: 0.92rem;
-  color: var(--meta);
-  transition: color 0.2s ease;
-}
-.post-neighbor:hover .post-neighbor__label,
-.post-neighbor:hover .post-neighbor__title {
-  color: var(--ink);
-}

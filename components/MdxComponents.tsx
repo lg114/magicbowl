@@ -66,12 +66,7 @@ export function createMdxComponents() {
       <code {...props}>{children}</code>
     ),
     img: ({ alt = "", ...props }: ComponentPropsWithoutRef<"img">) => (
-      <figure className="post__figure">
-        {/* 文章配图走原生懒加载：长文多图时首屏不抢带宽（不换成 next/image——
-            Markdown 图片尺寸未知，填不满 width/height 契约，原生 img 更稳） */}
-        <img alt={alt} loading="lazy" decoding="async" {...props} />
-        {alt && <figcaption>{alt}</figcaption>}
-      </figure>
+      <img alt={alt} loading="lazy" decoding="async" {...props} />
     ),
   };
 }
