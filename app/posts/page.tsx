@@ -3,7 +3,7 @@ import { getAllPosts } from "../../lib/posts";
 import PostsArchive from "../../components/PostsArchive";
 
 export const metadata: Metadata = {
-  title: "文章",
+  title: "Blog",
 };
 
 // 归档页：列出全部文章。标题、工具区、排序、侧边栏筛选都在 PostsArchive 内统一渲染。

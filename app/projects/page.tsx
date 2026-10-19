@@ -3,7 +3,7 @@ import { siteConfig } from "../../lib/site";
 import ProjectCard from "../../components/ProjectCard";
 
 export const metadata: Metadata = {
-  title: "项目",
+  title: "Projects",
 };
 
 // 项目页：复用归档页的 eyebrow + 标题风格，下方玻璃卡片网格展示全部项目。
