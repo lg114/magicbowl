@@ -23,29 +23,12 @@
   .brand__mark { height: 38px; }
 }
 
-/* ---------- 响应式：归档页两栏 → 单栏（平板/手机） ---------- */
-@media (max-width: 900px) {
-  .archive-layout { flex-direction: column; gap: 18px; }
-  /* 小屏隐藏右栏，改用主列里的「标签 ▾」展开面板 */
-  .archive-aside { display: none; }
-  /* 搜索占满整行，标签触发按钮换行到下方并撑满 */
-  .archive-filter-bar { flex-wrap: wrap; }
-  .archive-search { flex: 1 1 100%; }
-  .filter-bar__toggle { display: inline-flex; flex: 1 1 100%; justify-content: center; }
-  .archive-filter-panel--mobile { display: block; }
-}
-
 /* ---------- 响应式：手机 ---------- */
 @media (max-width: 480px) {
   .intro { padding: 104px 24px 64px; }
   .intro__hi { font-size: 1.5rem; }
   .intro__text { font-size: 0.95rem; }
-  .archive { padding: 76px 16px 72px; }
-  .archive-list { padding: 0; }
-  .archive-feed-wrap { padding: 16px 14px 18px; }
   .archive-page-header__title { font-size: 1.9rem; }
-  .feed-item { padding: 14px 12px; }
-  .feed-item__title { font-size: 1.1rem; }
   .post { padding: 24px 20px; }
   .post__title { font-size: 1.45rem; }
   .post__heading-anchor { display: none; }

@@ -35,6 +35,19 @@ export function getPostSlugs(): string[] {
     .filter((file) => file.endsWith(".md"));
 }
 
+// 估算阅读时长：中文按 400 字/分、西文按 220 词/分，最少 1 分钟。
+// 先剔除代码块与行内代码——代码不计入阅读字数，否则技术文章会被高估。
+function estimateReadingTime(md: string): number {
+  const text = md
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`[^`]*`/g, " ")
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/[#>*_~|]/g, " ");
+  const cjk = (text.match(/[\u3400-\u9fff]/g) ?? []).length;
+  const latin = (text.replace(/[\u3400-\u9fff]/g, " ").match(/[A-Za-z0-9'’]+/g) ?? []).length;
+  return Math.max(1, Math.round(cjk / 400 + latin / 220));
+}
+
 export function getPostBySlug(slug: string): Post | null {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = path.join(POSTS_DIR, `${realSlug}.md`);
@@ -50,6 +63,7 @@ export function getPostBySlug(slug: string): Post | null {
     category: data.category ?? "未分类",
     tags: Array.isArray(data.tags) ? data.tags : [],
     excerpt: data.excerpt ?? "",
+    readingTime: estimateReadingTime(content),
     content,
   };
 }

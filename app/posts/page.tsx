@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Blog",
 };
 
-// 归档页：列出全部文章。标题、工具区、排序、侧边栏筛选都在 PostsArchive 内统一渲染。
+// 归档页：极简时间线。按年份分组的渲染逻辑在 PostsArchive 内。
 export default function PostsPage() {
   const posts = getAllPosts();
   return (
-    <main className="archive">
-      <div className="cards__inner">
+    <main className="blog">
+      <div className="blog__inner">
         <PostsArchive posts={posts} />
       </div>
     </main>
