@@ -84,8 +84,9 @@ app/                    # 路由与 Next.js 特殊文件
   apple-icon.png         # iOS 图标
   not-found.tsx          # 404
 components/             # 可复用 React 组件
-content/posts/          # Markdown 文章
-lib/                    # 站点配置、文章读取、MDX / TOC 工具
+content/posts/          # Markdown 文章（源文件）
+lib/                    # 站点配置、文章数据（构建时生成）、MDX / TOC 工具
+scripts/                # 构建脚本（generate-posts-data.ts）
 styles/                 # 全局 CSS 与各页面样式（globals.css 聚合）
 types/                  # TypeScript 类型定义
 public/                 # 站点图标、Service Worker
@@ -133,7 +134,8 @@ excerpt: 文章摘要
 ## 开发注意事项
 
 - **改了 Markdown 要重启 dev server**：`lib/posts.ts` 对文章列表做了模块级缓存，进程内只解析一次，`next dev` 下热更新不会重新读盘。
-- **新增文章需要重新构建**：详情页设了 `dynamicParams = false`，只在构建期生成已知 slug，顺带阻断了路径穿越。
+- **新增文章需要重新构建**：详情页设了 `dynamicParams = false`，只在构建期生成已知 slug，顺带阻断路径穿越。
+- **文章数据在构建时生成**：`npm run build` 会先执行 `scripts/generate-posts-data.ts`，把 `content/posts/*.md` 解析为 `lib/posts-data.json` 并内联到 bundle。Cloudflare Workers 等无文件系统环境依赖此机制。
 - **更新 Service Worker 要改版本号**：改 `public/sw.js` 里的 `APP_VERSION`，旧缓存才会整体失效。
 - **新增页面记得同步导航**：顶部导航直接 `map` `siteConfig.nav` 数组。
 - **更换域名要改 `siteConfig.url`**：否则 sitemap 和 canonical 仍指向旧地址。
@@ -147,6 +149,8 @@ npm ci
 npm run build
 npm start
 ```
+
+**Cloudflare Workers**：本站部署在 Cloudflare Workers（通过 OpenNext 适配器）。由于 Workers 运行时没有文件系统，构建脚本会在 `npm run build` 时自动将 Markdown 文章解析为 JSON 并内联到 bundle，确保运行时不依赖 `fs`。
 
 ## 许可
 
