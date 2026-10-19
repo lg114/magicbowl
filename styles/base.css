@@ -38,22 +38,7 @@ body {
   border: 0;
 }
 
-/* 背景网格单独成层，完全静态：曾有的「呼吸」动效因 1px 细线稀释亮度而肉眼不可见，
-   已于 2026-07-21 移除（gc 偏好静态背景） */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
-  background-position: center;
-  opacity: 0.6;
-  z-index: 0;
-  pointer-events: none;
-  transition: background 0.45s ease;
-}
+/* 背景网格已移到 .intro::before（见 home.css）——只首页有，其他页面保持纯黑。 */
 
 /* 内容层位于网格之上。不设 flex-grow：许可行要紧跟在正文之后，
    而不是被推到视口底部（原先的 sticky footer 行为已按需求移除）。 */

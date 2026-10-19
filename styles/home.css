@@ -13,6 +13,24 @@
   min-height: 100dvh; /* 移动端更贴近真实可视高度，规避 URL 栏导致的留白跳动 */
   padding: var(--page-top) 64px 96px;
 }
+
+/* 背景网格：只有首页有（首页是门面，网格是它的底纹），其他页面保持纯黑。
+   用 fixed 铺满视口；z-index:-1 让它在 .intro 自己的层叠上下文里垫底，
+   不会盖住文字。完全静态——曾有的「呼吸」动效因 1px 细线稀释亮度而肉眼不可见，
+   已于 2026-07-21 移除（gc 偏好静态背景）。 */
+.intro::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: center;
+  opacity: 0.6;
+  pointer-events: none;
+}
 .intro__inner {
   width: 100%;
   /* 正文列宽 760px：宽屏下文字离页面边缘更远，同时保持约 65–75 字符/行的可读行长 */

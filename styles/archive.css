@@ -54,19 +54,30 @@
   margin-top: 96px;
 }
 /* 背景水印：巨大的年份数字，只做视觉分隔与时间线暗示。
+   用「渐变淡出」而不是一块纯色灰——数字自上而下溶进黑色，产生纵深。
+   渐变靠 background-clip: text 裁进字形，所以 color 必须是 transparent。
+   （本站已依赖 color-mix()，而 background-clip: text 支持范围更广，无需 @supports 兜底。）
    不参与交互（pointer-events / user-select 都关掉）。 */
 .ygroup__watermark {
   position: absolute;
-  top: -0.14em;
+  top: -0.17em;
   left: -0.05em;
   z-index: 0;
   font-family: var(--sans);
   font-size: 128px;
   font-weight: 700;
-  line-height: 0.86;
+  /* 取 1.2 是留余量：background-clip: text 的背景只画在盒子里，
+     line-height 过小会让字形溢出盒子、导致数字边缘被切。1.2 保证完整包住字形。 */
+  line-height: 1.2;
   letter-spacing: -0.03em;
-  color: var(--ink);
-  opacity: 0.1;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(242, 242, 242, 0.2),
+    rgba(242, 242, 242, 0.015)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   pointer-events: none;
   user-select: none;
 }

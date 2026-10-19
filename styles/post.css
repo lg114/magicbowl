@@ -3,17 +3,14 @@
    书桌气质：氛围压低，正文成为唯一主角
    ============================================================ */
 
-/* ---- 文章页：降低全局背景存在感 ----
-   网格更淡（0.6 → 0.3），正文成为唯一主角。
-   用 :has() 检测文章页，无需改 layout.tsx；
-   transition 让进出文章页时渐变而非跳变。 */
-body::before { transition: opacity 0.4s ease, background 0.45s ease; }
-body:has(.post-wrap)::before { opacity: 0.3; }
+/* ---- 文章页背景 ----
+   网格已改为只在首页渲染（见 home.css 的 .intro::before），
+   文章页是纯黑，因此原先「压低网格存在感」的 body::before / :has() 规则已移除。 */
 
 .post-wrap {
   position: relative;
   z-index: 2;
-  padding: 104px 24px 100px;
+  padding: var(--page-top) 24px 100px;
 }
 .post-layout {
   width: 100%;
