@@ -14,7 +14,7 @@ export default function Footer() {
           >
             CC BY-NC-SA 4.0
           </a>{" "}
-          2025–Present ©{siteConfig.name}
+          {siteConfig.startYear}–Present ©{siteConfig.name}
         </p>
       </div>
     </footer>

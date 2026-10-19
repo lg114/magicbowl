@@ -1,14 +1,15 @@
 /* ============================================================
-   MagicBowl — 固定位 UI 装饰（chrome）
-   左上角站点标识（G/C 叠印）+ 右上角导航（站内项文字/窄屏图标 + 社交图标）
+   MagicBowl — 顶部 UI（chrome）
+   左上角站点标识（G/C monogram）+ 右上角导航（站内项文字/窄屏图标 + 社交图标）
+   两者都是 absolute 而非 fixed：随页面滚走，不悬浮遮挡正文。
    ============================================================ */
 
-/* 右上角固定导航：站内项纯文字、社交项图标。
-   top/right + padding 共同决定与视口角落的距离（当前 ≈ 36px）；
+/* 右上角导航：站内项纯文字、社交项图标。
+   top/right + padding 共同决定与页面顶端的距离（当前 ≈ 36px）；
    gap 对所有项统一（文字 / 图标一视同仁），配合各项等量的水平 padding，
    任意两项之间的视觉间距完全一致。 */
 .nav {
-  position: fixed;
+  position: absolute;
   top: 28px;
   right: 28px;
   z-index: 100;
@@ -63,7 +64,7 @@
 /* 左上角站点标识：G/C 单笔画 monogram，整块即「回到首页」链接。
    top/left + padding 与右上角导航同一套取值，两处基线对齐。 */
 .brand {
-  position: fixed;
+  position: absolute;
   top: 28px;
   left: 28px;
   z-index: 100;

@@ -115,6 +115,7 @@
   margin-left: 14px;
   font-family: var(--sans);
   font-size: 0.82rem;
+  font-weight: 500;
   color: var(--meta);
   letter-spacing: 0.01em;
   white-space: nowrap; /* 「Jul 23 · 1 min」作为整体，不拆行 */
@@ -128,6 +129,16 @@
 .ygroup__sep {
   margin: 0 0.55em;
   opacity: 0.6;
+}
+/* 空年份的占位：一个破折号，暗示「这一年还没有文章」 */
+.ygroup__empty {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--meta);
 }
 
 /* ---------- 胶囊标签（共用：ProjectCard 也用 .chip） ---------- */

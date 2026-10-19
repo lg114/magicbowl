@@ -9,11 +9,8 @@
   .intro { padding: var(--page-top) 32px 72px; }
   .intro__hi { font-size: 1.7rem; }
   .intro__text { font-size: 1rem; }
-  .post { padding: 36px 24px; }
-  .post__title { font-size: 1.6rem; }
-  .post-layout { display: block; max-width: 720px; }
-  .post-toc--desktop { display: none; }
-  .post-toc--mobile { display: block; }
+  .post__title { font-size: 2rem; }
+  .post__body { font-size: 1rem; }
   .nav { top: 18px; right: 18px; gap: 20px; padding: 6px; }
   /* 窄屏：站内项文字换成图标，只留图形 */
   .nav__label { display: none; }
@@ -29,8 +26,8 @@
   .intro__hi { font-size: 1.5rem; }
   .intro__text { font-size: 0.95rem; }
   .archive-page-header__title { font-size: 1.9rem; }
-  .post { padding: 24px 20px; }
-  .post__title { font-size: 1.45rem; }
+  .post__title { font-size: 1.7rem; }
+  .post__body { font-size: 0.95rem; }
   .post__heading-anchor { display: none; }
   .post-neighbors { grid-template-columns: 1fr; }
   .post-neighbor--next { text-align: left; }

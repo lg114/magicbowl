@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createMdxComponents } from "../../../components/MdxComponents";
 import { getAllPosts, getPostBySlug, getPostSlugs } from "../../../lib/posts";
-import { extractTocHeadings } from "../../../lib/mdx";
-import { formatDate } from "../../../types/post";
+import { formatMonthDay } from "../../../types/post";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
 // 任何未预渲染的路径直接 404，阻断 URL 注入 ../ 等逃逸 content/posts 的路径穿越。
@@ -27,8 +26,9 @@ export async function generateMetadata({
   return { title: post.title, description: post.excerpt };
 }
 
-// 文章详情页：玻璃面板承载 markdown 正文（next-mdx-remote/rsc 渲染），
-// 顶部带返回归档页的链接。背景沿用全局网格。
+// 文章详情页：单栏阅读布局（居中、无面板）。
+// 头部 = 大号标题 + 日期/阅读时长；正文由 next-mdx-remote 渲染。
+// 章节导航不再用侧边目录，改为标题旁的 # 锚点（见 MdxComponents）。
 export default async function PostPage({
   params,
 }: {
@@ -42,72 +42,49 @@ export default async function PostPage({
   const index = posts.findIndex((item) => item.slug === post.slug);
   const newerPost = index > 0 ? posts[index - 1] : null;
   const olderPost = index >= 0 && index < posts.length - 1 ? posts[index + 1] : null;
-  const headings = extractTocHeadings(post.content);
   const mdxComponents = createMdxComponents();
 
   return (
     <main className="post-wrap">
-      <div className="post-layout">
-        <article className="post">
-          <Link href="/posts" className="post__back">
-            ← 返回文章
-          </Link>
-          <div className="post__meta">
-            <time className="card__date" dateTime={post.date}>
-              {formatDate(post.date)}
-            </time>
-            <span className="card__cat" data-category={post.category}>
-              {post.category}
-            </span>
-          </div>
+      <article className="post">
+        <Link href="/posts" className="post__back">
+          ← 返回文章
+        </Link>
+
+        <header>
           <h1 className="post__title">{post.title}</h1>
-          {headings.length > 0 && (
-            <nav className="post-toc post-toc--mobile" aria-label="文章目录">
-              <p className="post-toc__title">目录</p>
-              <ol>
-                {headings.map((heading) => (
-                  <li key={heading.id} className={`post-toc__item post-toc__item--h${heading.level}`}>
-                    <a href={`#${heading.id}`}>{heading.text}</a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
-          )}
-          <div className="post__body">
-            <MDXRemote source={post.content} components={mdxComponents} />
-          </div>
-          {(olderPost || newerPost) && (
-            <nav className="post-neighbors" aria-label="相邻文章">
-              {olderPost ? (
-                <Link className="post-neighbor" href={`/posts/${olderPost.slug}`}>
-                  <span className="post-neighbor__label">上一篇</span>
-                  <span className="post-neighbor__title">{olderPost.title}</span>
-                </Link>
-              ) : (
-                <span />
-              )}
-              {newerPost && (
-                <Link className="post-neighbor post-neighbor--next" href={`/posts/${newerPost.slug}`}>
-                  <span className="post-neighbor__label">下一篇</span>
-                  <span className="post-neighbor__title">{newerPost.title}</span>
-                </Link>
-              )}
-            </nav>
-          )}
-        </article>
-        {headings.length > 0 && (
-          <aside className="post-toc post-toc--desktop" aria-label="文章目录">
-            <p className="post-toc__title">目录</p>
-            <ol>
-              {headings.map((heading) => (
-                <li key={heading.id} className={`post-toc__item post-toc__item--h${heading.level}`}>
-                  <a href={`#${heading.id}`}>{heading.text}</a>
-                </li>
-              ))}
-            </ol>
-          </aside>
+          <p className="post__meta">
+            <time dateTime={post.date}>{formatMonthDay(post.date)}</time>
+            <span className="post__meta-sep" aria-hidden="true">
+              ·
+            </span>
+            <span>{post.readingTime} min</span>
+          </p>
+        </header>
+
+        <div className="post__body">
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </div>
+
+        {(olderPost || newerPost) && (
+          <nav className="post-neighbors" aria-label="相邻文章">
+            {olderPost ? (
+              <Link className="post-neighbor" href={`/posts/${olderPost.slug}`}>
+                <span className="post-neighbor__label">上一篇</span>
+                <span className="post-neighbor__title">{olderPost.title}</span>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {newerPost && (
+              <Link className="post-neighbor post-neighbor--next" href={`/posts/${newerPost.slug}`}>
+                <span className="post-neighbor__label">下一篇</span>
+                <span className="post-neighbor__title">{newerPost.title}</span>
+              </Link>
+            )}
+          </nav>
         )}
-      </div>
+      </article>
     </main>
   );
 }

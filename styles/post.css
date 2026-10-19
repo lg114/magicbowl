@@ -1,96 +1,100 @@
 /* ============================================================
-   MagicBowl — 文章详情页 /posts/[slug]（post）
-   书桌气质：氛围压低，正文成为唯一主角
+   MagicBowl — 文章详情页 /posts/[slug]
+   单栏阅读：居中、无面板、无侧边目录，正文是唯一主角
    ============================================================ */
-
-/* ---- 文章页背景 ----
-   网格已改为只在首页渲染（见 home.css 的 .intro::before），
-   文章页是纯黑，因此原先「压低网格存在感」的 body::before / :has() 规则已移除。 */
 
 .post-wrap {
   position: relative;
   z-index: 2;
-  padding: var(--page-top) 24px 100px;
-}
-.post-layout {
-  width: 100%;
-  max-width: 1020px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 720px) 220px;
-  align-items: start;
-  justify-content: center;
-  gap: 28px;
+  padding: var(--page-top) 24px 120px;
 }
 
-/* 正文容器：更像"纸面"——更实的背景、更淡的边框、更低模糊、更大内边距 */
+/* 阅读栏：720px 是中文长文的舒适行长（约 35–40 字/行）。
+   不加背景与边框——纯黑上直接排字，留白就是容器。 */
 .post {
   width: 100%;
-  background: rgba(14, 14, 14, 0.94);
-  border: 1px solid color-mix(in srgb, var(--card-border) 55%, transparent);
-  border-radius: 11px;
-  padding: 56px 56px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  max-width: 720px;
+  margin: 0 auto;
 }
 
+/* 返回链接：低调存在，hover 才提亮 */
 .post__back {
   display: inline-block;
-  margin-bottom: 22px;
+  margin-bottom: 40px;
   font-family: var(--sans);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 0.8rem;
   color: var(--meta);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 .post__back:hover {
-  color: var(--accent);
-}
-.post__meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.post__title {
-  font-family: var(--sans);
-  font-size: 2rem;
-  font-weight: 700;
   color: var(--ink);
-  line-height: 1.3;
-  margin-bottom: 28px;
 }
 
-/* ---- 长文排版：舒展、呼吸感强 ----
-   中文长文里行高和段距比花哨装饰重要得多。 */
+/* 标题：整页视觉权重最高 */
+.post__title {
+  font-family: var(--sans);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* 元信息：日期 + 阅读时长，紧跟标题下方，颜色压到最轻 */
+.post__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55em;
+  margin: 18px 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--meta);
+}
+.post__meta-sep {
+  opacity: 0.6;
+}
+
+/* ---- 正文排版 ----
+   行高取 1.75 而不是 1.5：汉字没有西文的升降部缓冲，1.5 在中文长文里偏挤，
+   1.7–1.8 才是中文的舒适区。段距 1.5em 与之配合，保证"留白充足"。 */
 .post__body {
+  margin-top: 52px;
   color: var(--text);
   font-size: 1.06rem;
-  line-height: 2;
+  line-height: 1.75;
 }
+.post__body p {
+  margin: 0 0 1.5em;
+}
+
+/* 章节标题：靠字号 + 字重 + 大间距分隔，不靠装饰线 */
 .post__body h2 {
   position: relative;
   scroll-margin-top: 96px;
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
   color: var(--ink);
-  margin: 2.2em 0 0.6em;
+  margin: 2.6em 0 0.7em;
 }
 .post__body h3 {
   position: relative;
   scroll-margin-top: 96px;
-  font-size: 1.12rem;
-  font-weight: 500;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
   color: var(--ink);
-  margin: 1.6em 0 0.5em;
+  margin: 1.9em 0 0.5em;
 }
 
-/* 标题锚点：默认完全不可见，hover 淡淡浮现（opacity 0.5 而非 1） */
+/* 标题锚点：默认不可见，hover / 键盘聚焦时浮现在标题左侧 */
 .post__heading-anchor {
   position: absolute;
-  right: calc(100% + 8px);
+  right: calc(100% + 10px);
+  font-weight: 400;
   color: var(--meta);
   text-decoration: none;
   opacity: 0;
@@ -99,16 +103,17 @@
 .post__body h2:hover .post__heading-anchor,
 .post__body h3:hover .post__heading-anchor,
 .post__heading-anchor:focus-visible {
-  color: var(--accent);
-  opacity: 0.5;
+  opacity: 0.45;
+}
+.post__heading-anchor:hover {
+  color: var(--ink);
+  opacity: 1;
 }
 
-.post__body p {
-  margin: 0 0 1.15em;
-}
+/* ---- 正文内的其余元素 ---- */
 .post__body ul,
 .post__body ol {
-  margin: 0 0 1.15em;
+  margin: 0 0 1.5em;
   padding-left: 1.4em;
 }
 .post__body li {
@@ -122,7 +127,7 @@
 
 /* 引用块：旁注气质——细线 + 暖灰底 + 衬线体，蓝色留给链接 */
 .post__body blockquote {
-  margin: 1.5em 0;
+  margin: 1.8em 0;
   padding: 10px 20px;
   border-left: 2px solid var(--card-border-hi);
   border-radius: 0;
@@ -144,14 +149,14 @@
   padding: 2px 6px;
   border-radius: 4px;
 }
-/* 代码块：安静、不像 IDE 面板——背景比正文稍深/稍浅，边框淡，圆角小 */
+/* 代码块：安静、不像 IDE 面板 */
 .post__body pre {
   background: rgba(0, 0, 0, 0.22);
   border: 1px solid color-mix(in srgb, var(--card-border) 40%, transparent);
   border-radius: 6px;
   padding: 18px 20px;
   overflow: auto;
-  margin: 1.5em 0;
+  margin: 1.8em 0;
 }
 .post__body pre code {
   background: none;
@@ -165,7 +170,7 @@
   border-radius: 8px;
 }
 .post__figure {
-  margin: 1.5em 0;
+  margin: 1.8em 0;
 }
 .post__figure img {
   display: block;
@@ -184,71 +189,15 @@
 .post__body hr {
   border: none;
   border-top: 1px solid var(--card-border);
-  margin: 2em 0;
+  margin: 2.4em 0;
 }
 
-/* ---- 目录：书签而非控件面板 ----
-   去掉强背景/模糊/圆角，只留一条左边线（桌面）或上下线（移动） */
-.post-toc {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-.post-toc--desktop {
-  position: sticky;
-  top: 88px;
-  border-left: 1px solid var(--card-border);
-  padding: 4px 0 4px 16px;
-}
-.post-toc--mobile {
-  display: none;
-  margin: 0 0 28px;
-  padding: 14px 0;
-  border-width: 1px 0;
-}
-.post-toc__title {
-  margin: 0 0 12px;
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: var(--meta);
-}
-.post-toc ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.post-toc__item {
-  margin: 0;
-}
-.post-toc__item--h3 {
-  padding-left: 14px;
-}
-.post-toc a {
-  display: block;
-  padding: 6px 0;
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  line-height: 1.45;
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.post-toc a:hover {
-  color: var(--accent);
-}
-
-/* ---- 上一篇/下一篇：翻页提示而非卡片 ----
-   上方细分割线，左右排布，hover 只标题变蓝 */
+/* ---- 上一篇/下一篇：翻页提示而非卡片 ---- */
 .post-neighbors {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 14px;
-  margin-top: 48px;
+  margin-top: 72px;
   padding-top: 28px;
   border-top: 1px solid var(--card-border);
 }
@@ -263,7 +212,6 @@
   border: none;
   border-radius: 0;
   background: transparent;
-  transition: none;
 }
 .post-neighbor--next {
   text-align: right;
@@ -274,16 +222,19 @@
   font-weight: 600;
   letter-spacing: 0.8px;
   color: var(--meta);
+  transition: color 0.2s ease;
 }
+/* 默认灰、hover 变白——与 Blog 列表同一套语言，不用 accent 蓝 */
 .post-neighbor__title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: var(--sans);
   font-size: 0.92rem;
-  color: var(--ink);
+  color: var(--meta);
   transition: color 0.2s ease;
 }
+.post-neighbor:hover .post-neighbor__label,
 .post-neighbor:hover .post-neighbor__title {
-  color: var(--accent);
+  color: var(--ink);
 }
