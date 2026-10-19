@@ -14,21 +14,20 @@
   padding: var(--page-top) 64px 96px;
 }
 
-/* 背景网格：只有首页有（首页是门面，网格是它的底纹），其他页面保持纯黑。
-   用 fixed 铺满视口；z-index:-1 让它在 .intro 自己的层叠上下文里垫底，
-   不会盖住文字。完全静态——曾有的「呼吸」动效因 1px 细线稀释亮度而肉眼不可见，
-   已于 2026-07-21 移除（gc 偏好静态背景）。 */
+/* 背景点阵网格：只有首页有。每个交叉点一个 1px 圆点，12px 密集排列。
+   边缘消融进纯黑，换页无割裂感。 */
 .intro::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
+    radial-gradient(circle, var(--line) 1px, transparent 1px);
+  background-size: 12px 12px;
   background-position: center;
-  opacity: 0.6;
+  -webkit-mask-image: radial-gradient(ellipse 50% 45% at center, black 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse 50% 45% at center, black 0%, transparent 70%);
+  opacity: 0.8;
   pointer-events: none;
 }
 .intro__inner {
