@@ -52,7 +52,7 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
           {/* 年份在视觉上由水印承担，这里只保留语义（屏幕阅读器可读） */}
           <h2 className="sr-only">{year}</h2>
 
-          {list.length > 0 ? (
+          {list.length > 0 && (
             <ul className="ygroup__list">
               {list.map((post) => (
                 <li className="ygroup__item" key={post.slug}>
@@ -69,11 +69,6 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
                 </li>
               ))}
             </ul>
-          ) : (
-            // 这一年还没有文章：留一个极简占位，让时间线保持连续
-            <p className="ygroup__empty" aria-hidden="true">
-              —
-            </p>
           )}
         </section>
       ))}

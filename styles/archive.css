@@ -48,10 +48,10 @@
 .ygroup {
   position: relative;
   /* 预留水印占位：水印是绝对定位的，不撑开盒子，靠这段 padding 给时间线留出呼吸区 */
-  padding-top: 84px;
+  padding-top: 52px;
 }
 .ygroup + .ygroup {
-  margin-top: 96px;
+  margin-top: 56px;
 }
 /* 背景水印：巨大的年份数字，只做视觉分隔与时间线暗示。
    用「渐变淡出」而不是一块纯色灰——数字自上而下溶进黑色，产生纵深。
@@ -182,10 +182,10 @@
     margin-bottom: 44px;
   }
   .ygroup + .ygroup {
-    margin-top: 72px;
+    margin-top: 44px;
   }
   .ygroup {
-    padding-top: 60px;
+    padding-top: 40px;
   }
   .ygroup__watermark {
     font-size: 88px;
