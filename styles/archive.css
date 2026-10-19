@@ -31,7 +31,7 @@
 .blog {
   position: relative;
   z-index: 2;
-  padding: 104px 24px 100px;
+  padding: var(--page-top) 24px 100px;
 }
 /* 760px：与首页 intro 同一列宽，两页的行长观感一致 */
 .blog__inner {
@@ -89,26 +89,30 @@
   display: block;
   text-decoration: none;
 }
-/* 主文字：近白（--ink）。纯黑底上"深灰/近黑"会不可见，故用近白替代 */
+/* 主文字：默认用站点最暗的中灰（--meta），hover 才提亮到白。
+   整行都压在中灰上，让列表保持安静，hover 的提亮才有意义。 */
 .ygroup__title {
   font-family: var(--sans);
   font-size: 1.18rem;
   font-weight: 500;
   line-height: 1.4;
-  color: var(--ink);
+  color: var(--meta);
   transition: color 0.2s ease;
 }
-.ygroup__link:hover .ygroup__title {
-  color: var(--accent);
-}
-/* 次要信息：中灰（--meta），小一号，紧跟标题右侧 */
+/* 次要信息：默认中灰（--meta），hover 与标题一起提亮 */
 .ygroup__meta {
   margin-left: 14px;
   font-family: var(--sans);
   font-size: 0.82rem;
   color: var(--meta);
   letter-spacing: 0.01em;
-  white-space: nowrap; /* 「Jul 23 · 1 min read」作为整体，不拆行 */
+  white-space: nowrap; /* 「Jul 23 · 1 min」作为整体，不拆行 */
+  transition: color 0.2s ease;
+}
+/* hover：整行一起变白，不加下划线、不用 accent 蓝 */
+.ygroup__link:hover .ygroup__title,
+.ygroup__link:hover .ygroup__meta {
+  color: var(--ink);
 }
 .ygroup__sep {
   margin: 0 0.55em;
@@ -150,7 +154,7 @@
 /* ---------- 响应式 ---------- */
 @media (max-width: 680px) {
   .blog {
-    padding: 96px 20px 80px;
+    padding: var(--page-top) 20px 80px;
   }
   .blog .archive-page-header {
     margin-bottom: 44px;

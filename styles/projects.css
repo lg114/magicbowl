@@ -7,7 +7,7 @@
 .projects {
   position: relative;
   z-index: 2;
-  padding: 104px 24px 100px;
+  padding: var(--page-top) 24px 100px;
 }
 .projects .cards__inner {
   margin: 0 auto;

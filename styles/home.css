@@ -11,7 +11,7 @@
   z-index: 2;
   min-height: 100vh;
   min-height: 100dvh; /* 移动端更贴近真实可视高度，规避 URL 栏导致的留白跳动 */
-  padding: 160px 64px 96px;
+  padding: var(--page-top) 64px 96px;
 }
 .intro__inner {
   width: 100%;

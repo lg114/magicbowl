@@ -19,6 +19,9 @@
   --meta: #6b6b6b;
   --line: #2e2e2e;
   --grid-size: 120px;
+  /* 页面内容距顶部的统一距离（含让开固定导航）。三页（首页 / Blog / Projects）
+     都从这里取，避免各页各写一个值导致换页时内容上下跳。 */
+  --page-top: 128px;
   --card-border: #2a2a2a;
   --card-border-hi: #6a6a6a;
   --accent: #8ab4f8;

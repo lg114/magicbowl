@@ -5,11 +5,10 @@
 
 /* ---------- 响应式：平板 / 窄屏 ---------- */
 @media (max-width: 680px) {
-  :root { --grid-size: 92px; }
-  .intro { padding: 124px 32px 72px; }
+  :root { --grid-size: 92px; --page-top: 104px; }
+  .intro { padding: var(--page-top) 32px 72px; }
   .intro__hi { font-size: 1.7rem; }
   .intro__text { font-size: 1rem; }
-  .archive { padding: 88px 18px 84px; }
   .post { padding: 36px 24px; }
   .post__title { font-size: 1.6rem; }
   .post-layout { display: block; max-width: 720px; }
@@ -25,7 +24,8 @@
 
 /* ---------- 响应式：手机 ---------- */
 @media (max-width: 480px) {
-  .intro { padding: 104px 24px 64px; }
+  :root { --page-top: 88px; }
+  .intro { padding: var(--page-top) 24px 64px; }
   .intro__hi { font-size: 1.5rem; }
   .intro__text { font-size: 0.95rem; }
   .archive-page-header__title { font-size: 1.9rem; }
