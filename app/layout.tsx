@@ -31,6 +31,9 @@ export default function RootLayout({
   return (
     <html lang="zh" data-scroll-behavior="smooth">
         <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
           <meta name="theme-color" content="#000000" />
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
