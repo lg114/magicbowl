@@ -32,9 +32,8 @@
 .nav__link:hover {
   color: var(--ink);
 }
-.nav__link.is-active {
-  color: var(--accent);
-}
+/* 当前页不做颜色区分：导航只用「hover 变白」表达可交互，
+   避免页面切换时出现一块常驻的强调色。 */
 /* 站内项图标：宽屏隐藏，仅窄屏（≤680px，见 responsive.css）替代文字显示 */
 .nav__glyph {
   display: none;

@@ -82,21 +82,15 @@
 .ygroup__item + .ygroup__item {
   margin-top: 34px;
 }
-/* 一行布局：标题在左，日期 + 阅读时长右对齐挂在标题右侧。
-   flex-wrap 让它在窄屏自动折行——不依赖断点（无头浏览器有 500px 窗口下限，
-   靠断点调试窄屏并不可靠；折行是内容驱动的，任何宽度都成立）。 */
+/* 内联流：标题 + 紧跟其后的日期/时长，像一句话那样自然排下去。
+   不用 flex —— flex 会把元信息推到行尾，而这里要的是「贴着标题」；
+   inline 布局天然满足：放不下时整段元信息折到下一行，不会拆开。 */
 .ygroup__link {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 6px 28px;
+  display: block;
   text-decoration: none;
 }
 /* 主文字：近白（--ink）。纯黑底上"深灰/近黑"会不可见，故用近白替代 */
 .ygroup__title {
-  flex: 1 1 auto;
-  min-width: 0;
   font-family: var(--sans);
   font-size: 1.18rem;
   font-weight: 500;
@@ -107,16 +101,14 @@
 .ygroup__link:hover .ygroup__title {
   color: var(--accent);
 }
-/* 次要信息：中灰（--meta） */
+/* 次要信息：中灰（--meta），小一号，紧跟标题右侧 */
 .ygroup__meta {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: baseline;
-  white-space: nowrap;
+  margin-left: 14px;
   font-family: var(--sans);
   font-size: 0.82rem;
   color: var(--meta);
   letter-spacing: 0.01em;
+  white-space: nowrap; /* 「Jul 23 · 1 min read」作为整体，不拆行 */
 }
 .ygroup__sep {
   margin: 0 0.55em;

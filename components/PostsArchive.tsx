@@ -54,7 +54,7 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
                     <span className="ygroup__sep" aria-hidden="true">
                       ·
                     </span>
-                    <span>{post.readingTime} min read</span>
+                    <span>{post.readingTime} min</span>
                   </span>
                 </Link>
               </li>

@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "../lib/site";
 
 // 右上角固定导航：站内项为文字（窄屏下换成图标）、社交外链为图标，无胶囊底。
-// 站内项 map siteConfig.nav（导航显示项的唯一来源），按当前路由高亮；
-// 社交项取自 siteConfig.social。
+// 站内项 map siteConfig.nav（导航显示项的唯一来源）；
+// 当前页不做颜色区分，只有 hover 变白；点击当前页不重复跳转。
 function SocialIcon({ kind }: { kind: "github" | "x" }) {
   if (kind === "github") {
     return (
@@ -46,8 +46,8 @@ function renderNavGlyph(href: string) {
 
 export default function NavBar() {
   const pathname = usePathname();
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  // 只按「完全等于当前路径」判断：文章页 /posts/xxx 下，Blog 项不算当前页
+  const isCurrent = (href: string) => pathname === href;
 
   const socialLinks = [
     { kind: "github" as const, label: "GitHub", href: siteConfig.social.github },
@@ -57,15 +57,19 @@ export default function NavBar() {
   return (
     <nav className="nav" aria-label="Main navigation">
       {siteConfig.nav.map((l) => {
-        const active = isActive(l.href);
+        const current = isCurrent(l.href);
         const glyph = renderNavGlyph(l.href);
         return (
           <Link
             key={l.href}
             href={l.href}
-            className={"nav__link" + (active ? " is-active" : "")}
-            aria-current={active ? "page" : undefined}
+            className="nav__link"
+            aria-current={current ? "page" : undefined}
             aria-label={l.label}
+            // 已经在这一页时不再重复跳转（否则会多推一条历史记录）
+            onClick={(e) => {
+              if (current) e.preventDefault();
+            }}
           >
             <span className="nav__label">{l.label}</span>
             {glyph && <span className="nav__glyph">{glyph}</span>}
