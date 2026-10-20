@@ -1,4 +1,4 @@
-import type { Project } from "../lib/site";
+import type { Project } from "../types/project";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (

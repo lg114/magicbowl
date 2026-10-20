@@ -33,8 +33,7 @@
 
 **外观**
 
-- 深色为默认主题，支持浅色切换；首屏无闪烁，偏好记在 `localStorage`
-- 响应式布局、`prefers-reduced-motion` 动效降级
+- 深色主题；响应式布局、`prefers-reduced-motion` 动效降级
 
 **工程**
 
@@ -49,7 +48,7 @@
 | 框架 | Next.js 16（App Router） |
 | UI | React 19 + TypeScript |
 | 内容 | Markdown + `gray-matter` + `marked`（构建时预编译为 HTML） |
-| 样式 | 原生 CSS（设计令牌、双主题、响应式、动效降级） |
+| 样式 | 原生 CSS（设计令牌、响应式、动效降级） |
 | 图片 | Next.js Image + `sharp` |
 
 ## 快速开始
