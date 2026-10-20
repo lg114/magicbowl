@@ -4,6 +4,17 @@ import ProjectCard from "../../components/ProjectCard";
 
 export const metadata: Metadata = {
   title: "Projects",
+  description: "MagicBowl 的项目作品集。",
+  openGraph: {
+    title: "Projects - MagicBowl",
+    description: "MagicBowl 的项目作品集。",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects - MagicBowl",
+    description: "MagicBowl 的项目作品集。",
+  },
 };
 
 // 项目页：居中标题 + 极简文字列表
