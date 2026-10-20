@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate-posts": "node scripts/generate-posts.mjs",
+    "generate-posts": "tsx scripts/generate-posts.ts",
     "dev": "npm run generate-posts && next dev",
     "build": "npm run generate-posts && next build",
     "start": "next start",

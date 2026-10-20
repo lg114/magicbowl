@@ -6,7 +6,28 @@ import { marked } from "marked";
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const OUT_FILE = path.join(process.cwd(), "lib", "posts-data.json");
 
-function toISODate(d) {
+interface PostFrontmatter {
+  title?: string;
+  date?: string | Date;
+  category?: string;
+  tags?: string[];
+  excerpt?: string;
+}
+
+interface PostData {
+  slug: string;
+  title: string;
+  date: string;
+  category: string;
+  tags: string[];
+  excerpt: string;
+  readingTime: number;
+  content: string;
+  html: string;
+}
+
+function toISODate(d: string | Date | undefined): string {
+  if (!d) return "";
   if (typeof d === "string") {
     const parsed = new Date(d);
     if (Number.isNaN(parsed.getTime())) return d;
@@ -21,7 +42,7 @@ function toISODate(d) {
   return "";
 }
 
-function estimateReadingTime(md) {
+function estimateReadingTime(md: string): number {
   const text = md
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/`[^`]*`/g, " ")
@@ -32,8 +53,7 @@ function estimateReadingTime(md) {
   return Math.max(1, Math.round(cjk / 400 + latin / 220));
 }
 
-// 标题 slug：与 lib/mdx.ts 的 slugifyHeading 逻辑一致
-function slugifyHeading(text) {
+function slugifyHeading(text: string): string {
   return text
     .toLowerCase()
     .replace(/[^\w\s\u4e00-\u9fff-]/g, "")
@@ -42,43 +62,36 @@ function slugifyHeading(text) {
     .replace(/^-|-$/g, "");
 }
 
-// 复制 MdxComponents 的行为：h2/h3 加锚点、外链加 target/rel、blockquote/pre 加 class
-function applyMdxTransforms(html) {
-  // h2/h3: 提取文本作为 id，插入锚点链接
-  html = html.replace(/<(h[23])>(.*?)<\/\1>/gi, (_, tag, inner) => {
+function applyMdxTransforms(html: string): string {
+  html = html.replace(/<(h[23])>(.*?)<\/\1>/gi, (_, tag: string, inner: string) => {
     const text = inner.replace(/<[^>]+>/g, "");
     const id = slugifyHeading(text);
     return `<${tag} id="${id}"><a class="post__heading-anchor" href="#${id}" aria-label="复制本节链接">#</a>${inner}</${tag}>`;
   });
 
-  // 外链：加 target="_blank" rel="noopener noreferrer"
-  html = html.replace(/<a\s+href="(https?:\/\/[^"]+)"/gi, '<a href="$1" target="_blank" rel="noopener noreferrer"');
+  html = html.replace(
+    /<a\s+href="(https?:\/\/[^"]+)"/gi,
+    '<a href="$1" target="_blank" rel="noopener noreferrer"',
+  );
 
-  // blockquote: 加 class
   html = html.replace(/<blockquote>/gi, '<blockquote class="post__quote">');
-
-  // pre: 加 class
   html = html.replace(/<pre>/gi, '<pre class="post__codeblock">');
-
-  // img: 加 loading/decoding
   html = html.replace(/<img\s/gi, '<img loading="lazy" decoding="async" ');
 
   return html;
 }
 
-// 配置 marked：不包裹外层 <p>（保持与 MDXRemote 一致的输出）
 marked.setOptions({ gfm: true, breaks: false });
 
 const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
 
-const posts = files.map((file) => {
+const posts: PostData[] = files.map((file): PostData => {
   const slug = file.replace(/\.md$/, "");
   const fullPath = path.join(POSTS_DIR, file);
   const raw = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(raw);
+  const { data, content } = matter(raw) as { data: PostFrontmatter; content: string };
 
-  // 构建时编译 Markdown → HTML，并应用 MdxComponents 的变换
-  const rawHtml = marked.parse(content);
+  const rawHtml = marked.parse(content) as string;
   const html = applyMdxTransforms(rawHtml);
 
   return {
