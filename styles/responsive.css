@@ -29,8 +29,6 @@
   .post__title { font-size: 1.7rem; }
   .post__body { font-size: 0.95rem; }
   .post__heading-anchor { display: none; }
-  .post-neighbors { grid-template-columns: 1fr; }
-  .post-neighbor--next { text-align: left; }
   .nav { gap: 16px; }
   .nav__link { font-size: 13px; }
   .nav__icon svg,
