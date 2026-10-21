@@ -51,6 +51,7 @@ export default function RootLayout({
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+          <link rel="alternate" type="application/rss+xml" title="MagicBowl RSS" href="/feed.xml" />
           <meta name="theme-color" content="#000000" />
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
