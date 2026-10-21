@@ -29,7 +29,7 @@ export const siteConfig = {
     {
       name: "MagicBowl",
       desc: "This site — built with Next.js + TypeScript",
-      tech: ["Next.js", "TypeScript", "React", "MDX"],
+      tech: ["Next.js", "TypeScript", "React", "Markdown"],
       status: "active",
       repo: "https://github.com/lg114/magicbowl",
       featured: true,

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { siteConfig } from "../../../lib/site";
 import { formatMonthDay } from "../../../types/post";
+import PostBody from "../../../components/PostBody";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
 // 任何未预渲染的路径直接 404，阻断 URL 注入 ../ 等逃逸 content/posts 的路径穿越。
@@ -73,10 +74,7 @@ export default async function PostPage({
           </p>
         </header>
 
-        <div
-          className="post__body"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+        <PostBody html={post.html} />
 
         <Link href="/posts" className="post__back">
           ← Back

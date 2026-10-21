@@ -76,7 +76,6 @@ function applyMdxTransforms(html: string): string {
 
   html = html.replace(/<blockquote>/gi, '<blockquote class="post__quote">');
   html = html.replace(/<pre>/gi, '<pre class="post__codeblock">');
-  html = html.replace(/<img\s/gi, '<img loading="lazy" decoding="async" ');
 
   return html;
 }
