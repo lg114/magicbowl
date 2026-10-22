@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import { siteConfig } from "../lib/site";
 import NavBar from "../components/NavBar";
 import Brand from "../components/Brand";
 import Footer from "../components/Footer";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -48,14 +51,11 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" data-scroll-behavior="smooth">
         <head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
           <link rel="alternate" type="application/rss+xml" title="MagicBowl RSS" href="/feed.xml" />
           <meta name="theme-color" content="#000000" />
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
-      <body>
+      <body className={inter.className}>
         <Brand />
         <NavBar />
         {children}

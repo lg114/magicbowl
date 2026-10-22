@@ -77,7 +77,25 @@ function applyMdxTransforms(html: string): string {
   html = html.replace(/<blockquote>/gi, '<blockquote class="post__quote">');
   html = html.replace(/<pre>/gi, '<pre class="post__codeblock">');
 
+  html = optimizeImages(html);
+
   return html;
+}
+
+function optimizeImages(html: string): string {
+  return html.replace(
+    /<img\s([^>]*)src="([^"]+)"([^>]*)>/gi,
+    (_match, before: string, src: string, after: string) => {
+      let optimizedSrc = src;
+      if (!src.startsWith("/_next/image") && !src.endsWith(".svg")) {
+        optimizedSrc = `/_next/image?url=${encodeURIComponent(src)}&w=1280&q=75`;
+      }
+      let attrs = `${before}src="${optimizedSrc}"${after}`;
+      if (!/\bloading=/.test(attrs)) attrs = `loading="lazy" ${attrs}`;
+      if (!/\bdecoding=/.test(attrs)) attrs = `decoding="async" ${attrs}`;
+      return `<img ${attrs}>`;
+    },
+  );
 }
 
 marked.setOptions({ gfm: true, breaks: false });

@@ -59,10 +59,26 @@ export default async function PostPage({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const postUrl = `${siteConfig.url}/posts/${slug}`;
 
   return (
     <main className="post-wrap">
       <article className="post">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: post.title,
+              datePublished: post.date,
+              author: { "@type": "Person", name: siteConfig.author },
+              description: post.excerpt,
+              url: postUrl,
+              image: `${siteConfig.url}/images/og-image.png`,
+            }),
+          }}
+        />
         <header>
           <h1 className="post__title">{post.title}</h1>
           <p className="post__meta">
