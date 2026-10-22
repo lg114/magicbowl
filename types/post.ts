@@ -16,6 +16,8 @@ export interface Post extends PostMeta {
   content: string;
   /** 构建时预编译的 HTML（含 MdxComponents 变换），详情页直接渲染 */
   html: string;
+  /** 文章标题结构（h2/h3），用于生成目录 */
+  headings: { id: string; text: string; level: number }[];
 }
 
 const EN_MONTHS = [

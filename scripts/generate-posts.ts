@@ -24,6 +24,7 @@ interface PostData {
   readingTime: number;
   content: string;
   html: string;
+  headings: { id: string; text: string; level: number }[];
 }
 
 function toISODate(d: string | Date | undefined): string {
@@ -82,6 +83,19 @@ function applyMdxTransforms(html: string): string {
   return html;
 }
 
+function extractHeadings(html: string): { id: string; text: string; level: number }[] {
+  const headings: { id: string; text: string; level: number }[] = [];
+  const regex = /<(h[23])\s+id="([^"]+)"[^>]*>(.*?)<\/\1>/gi;
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    const level = Number(match[1].charAt(1));
+    const id = match[2];
+    const text = match[3].replace(/<[^>]+>/g, "").replace(/^#/, "").trim();
+    if (text) headings.push({ id, text, level });
+  }
+  return headings;
+}
+
 function optimizeImages(html: string): string {
   return html.replace(
     /<img\s([^>]*)src="([^"]+)"([^>]*)>/gi,
@@ -110,6 +124,7 @@ const posts: PostData[] = files.map((file): PostData => {
 
   const rawHtml = marked.parse(content) as string;
   const html = applyMdxTransforms(rawHtml);
+  const headings = extractHeadings(html);
 
   return {
     slug,
@@ -121,6 +136,7 @@ const posts: PostData[] = files.map((file): PostData => {
     readingTime: estimateReadingTime(content),
     content,
     html,
+    headings,
   };
 });
 

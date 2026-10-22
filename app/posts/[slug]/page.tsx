@@ -5,6 +5,7 @@ import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { siteConfig } from "../../../lib/site";
 import { formatMonthDay } from "../../../types/post";
 import PostBody from "../../../components/PostBody";
+import TableOfContents from "../../../components/TableOfContents";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
 // 任何未预渲染的路径直接 404，阻断 URL 注入 ../ 等逃逸 content/posts 的路径穿越。
@@ -62,40 +63,43 @@ export default async function PostPage({
   const postUrl = `${siteConfig.url}/posts/${slug}`;
 
   return (
-    <main className="post-wrap">
-      <article className="post">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: post.title,
-              datePublished: post.date,
-              author: { "@type": "Person", name: siteConfig.author },
-              description: post.excerpt,
-              url: postUrl,
-              image: `${siteConfig.url}/images/og-image.png`,
-            }),
-          }}
-        />
-        <header>
-          <h1 className="post__title">{post.title}</h1>
-          <p className="post__meta">
-            <time dateTime={post.date}>{formatMonthDay(post.date)}</time>
-            <span className="post__meta-sep" aria-hidden="true">
-              ·
-            </span>
-            <span>{post.readingTime} min</span>
-          </p>
-        </header>
+    <>
+      <TableOfContents headings={post.headings} />
+      <main className="post-wrap">
+        <article className="post">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: post.title,
+                datePublished: post.date,
+                author: { "@type": "Person", name: siteConfig.author },
+                description: post.excerpt,
+                url: postUrl,
+                image: `${siteConfig.url}/images/og-image.png`,
+              }),
+            }}
+          />
+          <header>
+            <h1 className="post__title">{post.title}</h1>
+            <p className="post__meta">
+              <time dateTime={post.date}>{formatMonthDay(post.date)}</time>
+              <span className="post__meta-sep" aria-hidden="true">
+                ·
+              </span>
+              <span>{post.readingTime} min</span>
+            </p>
+          </header>
 
-        <PostBody html={post.html} />
+          <PostBody html={post.html} />
 
-        <Link href="/posts" className="post__back">
-          ← Back
-        </Link>
-      </article>
-    </main>
+          <Link href="/posts" className="post__back">
+            ← Back
+          </Link>
+        </article>
+      </main>
+    </>
   );
 }

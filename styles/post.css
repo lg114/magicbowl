@@ -193,3 +193,57 @@
   margin: 2.4em 0;
 }
 
+/* ---- 目录 (TOC) ---- */
+.toc {
+  position: fixed;
+  top: 100px;
+  left: 28px;
+  z-index: 50;
+  max-width: 200px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  /* Firefox：细滚动条 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb-idle) transparent;
+}
+.toc::-webkit-scrollbar {
+  width: 4px;
+}
+.toc::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-idle);
+  border-radius: 9999px;
+}
+.toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc__item {
+  margin: 0;
+}
+.toc__item--level-3 {
+  padding-left: 12px;
+}
+.toc__link {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--meta);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-left: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.toc__link:hover {
+  color: var(--ink);
+  border-left-color: var(--card-border-hi);
+}
+/* 宽屏才显示目录：窄屏左侧没空间 */
+@media (max-width: 1200px) {
+  .toc {
+    display: none;
+  }
+}
+
