@@ -42,6 +42,14 @@ export const siteConfig = {
       repo: "https://github.com/lg114/bagger",
       featured: true,
     },
+    {
+      name: "dsh-md-live",
+      desc: "Native Markdown editor & preview tab for DSH Web right sidebar",
+      tech: ["React", "TypeScript", "DSH Plugin", "KaTeX"],
+      status: "active",
+      repo: "https://github.com/lg114/dsh-md-live",
+      featured: true,
+    },
   ] satisfies Project[],
   social: {
     github: "https://github.com/lg114",
