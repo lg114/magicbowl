@@ -9,9 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 首页不显示在导航里但必须进 sitemap）
   const navHrefs = siteConfig.nav.map((item) => item.href);
   const staticHrefs = ["/", ...navHrefs.filter((href) => href !== "/")];
+  // 静态页不写 lastModified：避免每次构建都显得刚改过；文章页保留文章日期。
   const staticRoutes: MetadataRoute.Sitemap = staticHrefs.map((href) => ({
     url: `${base}${href}`,
-    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: href === "/" ? 1 : 0.8,
   }));
