@@ -12,9 +12,18 @@ try {
   // 包未安装：跳过 bundle 分析，正常构建
 }
 
+// LAN dev origins come from the environment so no machine-specific IP is
+// committed: set ALLOWED_DEV_ORIGINS to a comma-separated list. Locally this
+// lives in .env.local, which is gitignored.
+const allowedDevOrigins = process.env.ALLOWED_DEV_ORIGINS
+  ? process.env.ALLOWED_DEV_ORIGINS.split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean)
+  : [];
+
 const nextConfig = {
   // Allow LAN access to dev resources (HMR websocket etc.)
-  allowedDevOrigins: ["192.168.1.14"],
+  allowedDevOrigins,
   // App Router: packages using Node built-ins must be external
   serverExternalPackages: ["gray-matter"],
   // Image optimization
@@ -54,6 +63,7 @@ const nextConfig = {
           // CSP：站点纯静态；'unsafe-inline' 用于内联主题脚本 +
           // Next.js App Router 的 RSC/hydration 内联脚本（去掉会白屏）。
           // Google Fonts：Inter 字体 CSS 来自 fonts.googleapis.com，字体文件来自 fonts.gstatic.com。
+          // img-src 仅本站 + data:：如需外链图片，须同步放宽 img-src，不要只改图片地址。
           {
             key: "Content-Security-Policy",
             value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'`,
