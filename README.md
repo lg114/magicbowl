@@ -23,8 +23,8 @@
 
 **内容**
 
-- Markdown 文章，支持分类、标签、关键词搜索、时间排序与按年份归档
-- 归档页内置「加载更多」阈值分页，文章变多后自动生效
+- Markdown 文章，frontmatter 支持分类、标签；文章按时间倒序、按年份归档展示
+- 归档页目前不提供关键词搜索、分类/标签筛选与分页，全部文章一次列出
 
 **阅读**
 
@@ -85,7 +85,7 @@ app/                    # 路由与 Next.js 特殊文件
 components/             # 可复用 React 组件
 content/posts/          # Markdown 文章（源文件）
 lib/                    # 站点配置、文章数据（构建时生成）
-scripts/                # 构建脚本（generate-posts.mjs）
+scripts/                # 构建脚本（generate-posts.ts）
 styles/                 # 全局 CSS 与各页面样式（globals.css 聚合）
 types/                  # TypeScript 类型定义
 public/                 # 站点图标、Service Worker
@@ -132,9 +132,9 @@ excerpt: 文章摘要
 
 ## 开发注意事项
 
-- **改了 Markdown 要重启 dev server**：`lib/posts.ts` 对文章列表做了模块级缓存，进程内只解析一次，`next dev` 下热更新不会重新读盘。
+- **改了 Markdown 要重启 dev server**：文章数据由 `scripts/generate-posts.ts` 在 `npm run dev` / `npm run build` 开始时生成 `lib/posts-data.json`，`lib/posts.ts` 直接 import 该文件；`next dev` 运行中改 Markdown 不会重新生成。
 - **新增文章需要重新构建**：详情页设了 `dynamicParams = false`，只在构建期生成已知 slug，顺带阻断路径穿越。
-- **文章数据在构建时生成**：`npm run build` 会先执行 `scripts/generate-posts.mjs`，把 `content/posts/*.md` 解析为 `lib/posts-data.json` 并内联到 bundle。Cloudflare Workers 等无文件系统环境依赖此机制。
+- **文章数据在构建时生成**：`npm run build` 会先执行 `scripts/generate-posts.ts`（通过 `tsx`），把 `content/posts/*.md` 解析、预编译为 HTML 后写入 `lib/posts-data.json`，`lib/posts.ts` 直接 import 该文件，因此运行时不依赖 `fs` 读盘。Cloudflare Workers 等无文件系统环境依赖此机制。
 - **更新 Service Worker 要改版本号**：改 `public/sw.js` 里的 `APP_VERSION`，旧缓存才会整体失效。
 - **新增页面记得同步导航**：顶部导航直接 `map` `siteConfig.nav` 数组。
 - **更换域名要改 `siteConfig.url`**：否则 sitemap 和 canonical 仍指向旧地址。
