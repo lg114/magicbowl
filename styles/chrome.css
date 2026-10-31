@@ -22,18 +22,20 @@
   display: inline-flex;
   align-items: center;
   font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 400;
   letter-spacing: 0;
-  color: var(--meta);
+  color: var(--text);
+  opacity: 0.6;
   text-decoration: none;
   padding: 6px 2px;
-  transition: color 0.25s ease;
+  transition: opacity 0.2s ease;
 }
 .nav__link:hover {
-  color: var(--ink);
+  opacity: 1;
 }
-/* 当前页不做颜色区分：导航只用「hover 变白」表达可交互，
+/* 当前页不做颜色区分：导航借 antfu.me 的透明度做法——平时是正文色打六折，
+   只用「hover 变实（opacity 0.6 → 1）」表达可交互，不换颜色，
    避免页面切换时出现一块常驻的强调色。 */
 /* 站内项图标：宽屏隐藏，仅窄屏（≤680px，见 responsive.css）替代文字显示 */
 .nav__glyph {
@@ -46,12 +48,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--meta);
+  color: var(--text);
+  opacity: 0.6;
   padding: 6px 2px;
-  transition: color 0.25s ease;
+  transition: opacity 0.2s ease;
 }
 .nav__icon:hover {
-  color: var(--ink);
+  opacity: 1;
 }
 .nav__icon svg,
 .nav__glyph svg {
