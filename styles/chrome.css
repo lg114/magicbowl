@@ -23,11 +23,11 @@
   align-items: center;
   font-family: var(--sans);
   font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
   color: var(--meta);
   text-decoration: none;
-  padding: 6px 2px; /* 与图标项等量的水平 padding，保证间距统一；垂直方向扩大点击区 */
+  padding: 6px 2px;
   transition: color 0.25s ease;
 }
 .nav__link:hover {
