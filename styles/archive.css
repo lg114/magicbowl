@@ -1,6 +1,6 @@
 /* ============================================================
    MagicBowl — Blog 归档页（极简时间线）
-   按年份分组，每组背后压一个巨大的半透明年份数字作水印；
+   按年份分组（只生成有文章的年份），每组背后压一个巨大的描边年份数字作水印；
    每篇只显示「标题 + 日期 + 阅读时长」，无搜索/筛选/排序。
    ============================================================ */
 
@@ -45,39 +45,41 @@
 /* ---------- 年份分组 ---------- */
 .ygroup {
   position: relative;
-  /* 预留水印占位：水印是绝对定位的，不撑开盒子，靠这段 padding 给时间线留出呼吸区 */
-  padding-top: 52px;
+  /* 预留水印占位：水印是绝对定位的，不撑开盒子，靠这段 padding 让列表第一行
+     正好落在年份字形高度的五分之四处——上五分之四完整露出，
+     只有最下面五分之一压在第一行文章背后 */
+  padding-top: 72px;
 }
 .ygroup + .ygroup {
-  margin-top: 56px;
+  margin-top: 84px;
 }
-/* 背景水印：巨大的年份数字，只做视觉分隔与时间线暗示。
-   用「渐变淡出」而不是一块纯色灰——数字自上而下溶进黑色，产生纵深。
-   渐变靠 background-clip: text 裁进字形，所以 color 必须是 transparent。
-   （本站已依赖 color-mix()，而 background-clip: text 支持范围更广，无需 @supports 兜底。）
+/* 背景水印：巨大的描边年份数字，只做视觉分隔与时间线暗示。
+   用 SVG 的 <text> 描边而不是 CSS text-stroke：text-stroke 内外各画一半，
+   在粗体数字的转弯交接处会挤出星状疙瘩；SVG 描边加圆头连接是一条干净轮廓。
+   描边 #aaa、浓度 0.12（学 antfu.me/posts 的幽灵感），文章压上来也互不干扰。
    不参与交互（pointer-events / user-select 都关掉）。 */
 .ygroup__watermark {
   position: absolute;
-  top: -0.17em;
-  left: -0.05em;
+  top: -30px;
+  left: -12px;
   z-index: 0;
+  width: 330px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  overflow: visible;
+}
+.ygroup__watermark text {
   font-family: var(--sans);
   font-size: 128px;
   font-weight: 700;
-  /* 取 1.2 是留余量：background-clip: text 的背景只画在盒子里，
-     line-height 过小会让字形溢出盒子、导致数字边缘被切。1.2 保证完整包住字形。 */
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(237, 237, 237, 0.38),
-    rgba(237, 237, 237, 0.03)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  pointer-events: none;
-  user-select: none;
+  letter-spacing: -4px;
+  fill: transparent;
+  stroke: #aaaaaa;
+  stroke-opacity: 0.12;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  paint-order: stroke;
 }
 
 /* ---------- 文章列表 ---------- */
@@ -97,32 +99,32 @@
 .ygroup__link {
   display: block;
   text-decoration: none;
+  /* 整行同一套透明度机制（与导航一致）：正文色平时打六折，hover 只变实、不换色 */
+  color: var(--text);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
 }
-/* 主文字：默认用站点最暗的中灰（--meta），hover 才提亮到白。
-   整行都压在中灰上，让列表保持安静，hover 的提亮才有意义。 */
+.ygroup__link:hover {
+  opacity: 1;
+}
+/* 主文字：颜色继承整行的正文色，浓淡由 .ygroup__link 的 opacity 统一控制 */
 .ygroup__title {
   font-family: var(--sans);
   font-size: 1.18rem;
   font-weight: 500;
   line-height: 1.4;
-  color: var(--meta);
-  transition: color 0.2s ease;
+  color: inherit;
 }
-/* 次要信息：默认中灰（--meta），hover 与标题一起提亮 */
+/* 次要信息：颜色与标题一致，再自降一档透明度拉开层级 */
 .ygroup__meta {
   margin-left: 14px;
   font-family: var(--sans);
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--meta);
+  color: inherit;
+  opacity: 0.55;
   letter-spacing: 0.01em;
   white-space: nowrap; /* 「Jul 23 · 1 min」作为整体，不拆行 */
-  transition: color 0.2s ease;
-}
-/* hover：整行一起变白，不加下划线、不用 accent 蓝 */
-.ygroup__link:hover .ygroup__title,
-.ygroup__link:hover .ygroup__meta {
-  color: var(--ink);
 }
 .ygroup__sep {
   margin: 0 0.55em;
@@ -138,13 +140,15 @@
     margin-bottom: 44px;
   }
   .ygroup + .ygroup {
-    margin-top: 44px;
+    margin-top: 64px;
   }
   .ygroup {
-    padding-top: 40px;
+    padding-top: 48px;
   }
   .ygroup__watermark {
-    font-size: 88px;
+    top: -20px;
+    left: -8px;
+    width: 220px;
   }
   .ygroup__item + .ygroup__item {
     margin-top: 28px;
@@ -154,8 +158,13 @@
   }
 }
 @media (max-width: 480px) {
+  .ygroup {
+    padding-top: 36px;
+  }
   .ygroup__watermark {
-    font-size: 68px;
+    top: -16px;
+    left: -6px;
+    width: 170px;
   }
   .ygroup__title {
     font-size: 1rem;
