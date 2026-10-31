@@ -1,0 +1,100 @@
+/* ============================================================
+   MagicBowl — Demo 页（实验原型合集）
+   布局与 Projects 页同构：居中标题 + 网格卡片
+   ============================================================ */
+
+.demo {
+  position: relative;
+  z-index: 2;
+  padding: var(--page-top) 24px 100px;
+}
+.demo .cards__inner {
+  margin: 0 auto;
+}
+.demo .archive-page-header {
+  margin-bottom: 64px;
+}
+
+/* 顶部水印 */
+.demo__watermark {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  font-family: var(--sans);
+  font-size: 128px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(242, 242, 242, 0.35),
+    rgba(242, 242, 242, 0.03)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* 演示列表：三列网格 */
+.demo-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 16px;
+  padding-top: 40px;
+  justify-content: center;
+}
+
+/* 单个演示卡片 */
+.demo-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 14px 14px;
+  border-radius: 6px;
+  background: transparent;
+  opacity: 0.6;
+  transition: background 0.2s ease-out, opacity 0.2s ease-out;
+}
+.demo-item:hover {
+  background: rgba(136, 136, 136, 0.067);
+  opacity: 1;
+}
+.demo-item__name {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0;
+}
+.demo-item__desc {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--meta);
+}
+
+/* 窄屏 */
+@media (max-width: 680px) {
+  .demo { padding: var(--page-top) 20px 80px; }
+  .demo .archive-page-header { margin-bottom: 44px; }
+  .demo-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .demo__watermark {
+    font-size: 56px;
+    top: -40px;
+  }
+}

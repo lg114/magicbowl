@@ -17,6 +17,13 @@
   letter-spacing: -0.01em;
   margin: 0;
 }
+.archive-page-header__desc {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--meta);
+  margin: 6px 0 0;
+}
 
 /* ---------- 页面容器 ---------- */
 .blog {

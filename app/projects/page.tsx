@@ -28,6 +28,7 @@ export default function ProjectsPage() {
       <div className="cards__inner">
         <header className="archive-page-header archive-page-header--center">
           <h1 className="archive-page-header__title">Projects</h1>
+          <p className="archive-page-header__desc">Things I've built and am working on.</p>
           <a
             className="projects__github"
             href={siteConfig.social.github}
@@ -41,9 +42,6 @@ export default function ProjectsPage() {
           </a>
         </header>
         <div className="projects-list">
-          <span className="projects__watermark" aria-hidden="true">
-            Working on
-          </span>
           {projects.map((p) => (
             <ProjectCard key={p.name} project={p} />
           ))}
