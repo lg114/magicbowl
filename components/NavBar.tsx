@@ -41,6 +41,17 @@ function renderNavGlyph(href: string) {
       </svg>
     );
   }
+  if (href === "/demo") {
+    // Demo → 浏览器窗口
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="6" cy="6.5" r="1.2" fill="currentColor" />
+        <circle cx="9" cy="6.5" r="1.2" fill="currentColor" />
+      </svg>
+    );
+  }
   return null;
 }
 
