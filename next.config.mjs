@@ -53,10 +53,10 @@ const nextConfig = {
           },
           // CSP：站点纯静态；'unsafe-inline' 用于内联主题脚本 +
           // Next.js App Router 的 RSC/hydration 内联脚本（去掉会白屏）。
-          // Google Fonts：Inter 字体 CSS 来自 fonts.googleapis.com，字体文件来自 fonts.gstatic.com。
+          // next/font/google 构建时已自托管字体，无需放行 Google Fonts 域名。
           {
             key: "Content-Security-Policy",
-            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'`,
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'`,
           },
         ],
       },

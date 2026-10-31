@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+    images: [{ url: "/api/og", width: 1200, height: 630, alt: siteConfig.name }],
   },
   // Twitter Card：X / Twitter 分享预览
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/images/og-image.png"],
+    images: ["/api/og"],
   },
   appleWebApp: {
     capable: true,
@@ -49,16 +49,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" data-scroll-behavior="smooth">
+    <html lang="zh-CN">
         <head>
           <link rel="alternate" type="application/rss+xml" title="MagicBowl RSS" href="/feed.xml" />
           <meta name="theme-color" content="#000000" />
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
       <body className={inter.className}>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Brand />
         <NavBar />
-        {children}
+        <div id="main-content">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

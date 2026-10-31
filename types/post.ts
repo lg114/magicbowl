@@ -1,5 +1,5 @@
 // 纯类型与无副作用工具，独立成模块避免把 fs 等 Node API 打进浏览器包。
-// 客户端组件（PostsArchive）只从这里取类型与 formatDate。
+// 客户端组件（PostsArchive）只从这里取类型与 formatMonthDay。
 
 export interface PostMeta {
   slug: string;
@@ -13,7 +13,6 @@ export interface PostMeta {
 }
 
 export interface Post extends PostMeta {
-  content: string;
   /** 构建时预编译的 HTML（含 MdxComponents 变换），详情页直接渲染 */
   html: string;
   /** 文章标题结构（h2/h3），用于生成目录 */

@@ -38,14 +38,14 @@ export async function generateMetadata({
       publishedTime: post.date,
       authors: [siteConfig.author],
       tags: post.tags,
-      images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: post.title }],
+      images: [{ url: `/api/og?slug=${slug}`, width: 1200, height: 630, alt: post.title }],
     },
     // Twitter Card
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: ["/images/og-image.png"],
+      images: [`/api/og?slug=${slug}`],
     },
   };
 }
@@ -78,8 +78,8 @@ export default async function PostPage({
                 author: { "@type": "Person", name: siteConfig.author },
                 description: post.excerpt,
                 url: postUrl,
-                image: `${siteConfig.url}/images/og-image.png`,
-              }),
+                image: `${siteConfig.url}/api/og?slug=${slug}`,
+              }).replace(/</g, "\\u003c"),
             }}
           />
           <header>

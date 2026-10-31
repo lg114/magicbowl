@@ -80,6 +80,12 @@
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@media (prefers-reduced-motion: reduce) {
+  .intro__inner {
+    animation: none;
+    opacity: 1;
+  }
+}
 
 /* ---------- 内容容器：归档页 / 项目页共用（宽度与最大宽度） ---------- */
 .cards__inner {

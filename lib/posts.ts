@@ -2,7 +2,6 @@ import postsData from "./posts-data.json";
 import type { Post, PostMeta } from "../types/post";
 
 export type { Post, PostMeta } from "../types/post";
-export { formatDate } from "../types/post";
 
 export function getPostSlugs(): string[] {
   return postsData.map((p) => p.slug + ".md");
@@ -16,5 +15,5 @@ export function getPostBySlug(slug: string): Post | null {
 }
 
 export function getAllPosts(): PostMeta[] {
-  return postsData.map(({ content, ...meta }) => meta);
+  return postsData.map(({ html, headings, ...meta }) => meta);
 }

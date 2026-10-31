@@ -98,5 +98,9 @@
 .brand:hover {
   color: var(--accent);
 }
-/* 注：描线自绘属于「显隐」而非位移/旋转，不构成眩晕诱因，故不加 reduced-motion 兜底
-   （与之前"注水"的判断一致：加兜底反而让这类用户完全看不到效果）。 */
+@media (prefers-reduced-motion: reduce) {
+  .brand__mark path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

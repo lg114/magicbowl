@@ -9,11 +9,13 @@ export const metadata: Metadata = {
     title: "Blog - MagicBowl",
     description: "所有文章归档，按时间线浏览。",
     type: "website",
+    images: [{ url: "/api/og?title=Blog", width: 1200, height: 630, alt: "Blog - MagicBowl" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Blog - MagicBowl",
     description: "所有文章归档，按时间线浏览。",
+    images: ["/api/og?title=Blog"],
   },
 };
 

@@ -22,7 +22,6 @@ interface PostData {
   tags: string[];
   excerpt: string;
   readingTime: number;
-  content: string;
   html: string;
   headings: { id: string; text: string; level: number }[];
 }
@@ -61,6 +60,14 @@ function slugifyHeading(text: string): string {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function sanitizeHtml(html: string): string {
+  return html
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+    .replace(/\son\w+\s*=\s*"[^"]*"/gi, "")
+    .replace(/\son\w+\s*=\s*'[^']*'/gi, "")
+    .replace(/javascript\s*:/gi, "");
 }
 
 function applyMdxTransforms(html: string): string {
@@ -123,7 +130,7 @@ const posts: PostData[] = files.map((file): PostData => {
   const { data, content } = matter(raw) as { data: PostFrontmatter; content: string };
 
   const rawHtml = marked.parse(content) as string;
-  const html = applyMdxTransforms(rawHtml);
+  const html = sanitizeHtml(applyMdxTransforms(rawHtml));
   const headings = extractHeadings(html);
 
   return {
@@ -134,7 +141,6 @@ const posts: PostData[] = files.map((file): PostData => {
     tags: Array.isArray(data.tags) ? data.tags : [],
     excerpt: data.excerpt ?? "",
     readingTime: estimateReadingTime(content),
-    content,
     html,
     headings,
   };
