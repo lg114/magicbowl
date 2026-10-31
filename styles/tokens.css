@@ -13,10 +13,11 @@
 
 /* ---------- 设计令牌 ---------- */
 :root {
-  --bg: #000000;
-  --ink: #f2f2f2;
-  --text: #c9c9c9;
-  --meta: #6b6b6b;
+  --bg: #050505;
+  --ink: #ededed;
+  --text: #b5b5b5;
+  --deep: #d6d6d6;
+  --meta: #777777;
   --line: #2e2e2e;
   --grid-size: 120px;
   /* 页面内容距顶部的统一距离（含让开固定导航）。三页（首页 / Blog / Projects）
@@ -31,9 +32,10 @@
   /* 字体系统：
      正文 / 标题 / 卡片 / UI 控件 → 无衬线 --sans
      中文优先苹方（PingFang SC），Mac/iOS 原生支持；Windows 回退微软雅黑；其他系统用通用无衬线
+     西文不写字面名 "Inter"：由 next/font 以 --font-inter 变量注入（见 app/layout.tsx），--sans 首位取该变量
      代码 / 代码块 → 等宽 --mono（仅用于代码场景，不用于 UI 标签） */
   --mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --sans: "Inter", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --sans: var(--font-inter), "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
           "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   /* 衬线源：文章引用块(.post__body blockquote) 等强调元素用。
      中文走系统衬线（macOS Songti SC / Windows SimSun），西文走 Georgia，尾接通用 serif。 */

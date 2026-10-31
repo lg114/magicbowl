@@ -40,13 +40,14 @@
   opacity: 0;
   animation: fadeUp 0.7s ease 0.2s both;
 }
+/* 开场标题不再大字展示：收成正文字号的深灰粗体首行，靠排版而不是字号立住 */
 .intro__hi {
   margin: 0;
   font-family: var(--sans);
-  font-size: 2rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--ink);
-  letter-spacing: 0.3px;
+  color: var(--deep);
+  letter-spacing: 0;
 }
 .intro__wave {
   /* 避免 emoji 被加粗导致视觉偏重 */
@@ -61,13 +62,13 @@
   font-size: 1.05rem;
   font-weight: 400;
   color: var(--text);
-  letter-spacing: 0.2px;
+  letter-spacing: 0;
 }
 /* 正文内联链接：白色高亮 + 半粗，在灰正文里真正跳出来（正文不上 accent 蓝）。
    纯白 #fff 是亮度的天花板——再要更突出只能靠字重 / 下划线，不能再靠颜色。 */
 .intro__link {
-  color: #ffffff;
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;
 }
