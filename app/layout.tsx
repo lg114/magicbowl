@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import Brand from "../components/Brand";
 import Footer from "../components/Footer";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -56,7 +56,7 @@ export default function RootLayout({
           <meta name="theme-color" content="#000000" />
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${inter.variable}`}>
         <a href="#main-content" className="skip-link">跳转到正文</a>
         <Brand />
         <NavBar />

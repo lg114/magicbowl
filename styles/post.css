@@ -35,10 +35,10 @@
 /* 标题：整页视觉权重最高 */
 .post__title {
   font-family: var(--sans);
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
 }
@@ -71,14 +71,21 @@
   margin: 0 0 1.5em;
 }
 
+/* 强调：灰阶梯中间档（--deep）+ 600，不靠近白或彩色 */
+.post__body strong,
+.post__body b {
+  color: var(--deep);
+  font-weight: 600;
+}
+
 /* 章节标题：靠字号 + 字重 + 大间距分隔，不靠装饰线 */
 .post__body h2 {
   position: relative;
   scroll-margin-top: 96px;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
-  color: var(--ink);
+  color: var(--deep);
   margin: 2.6em 0 0.7em;
 }
 .post__body h3 {
@@ -87,7 +94,7 @@
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--ink);
+  color: var(--deep);
   margin: 1.9em 0 0.5em;
 }
 
@@ -120,10 +127,17 @@
 .post__body li {
   margin: 6px 0;
 }
+/* 正文链接：灰阶梯最深一档（--ink）+ 500 字重，默认无下划线，hover 才浮现一条淡下划线；
+   accent 蓝只留给 Brand hover 这类小面积点缀，不再用于正文链接 */
 .post__body a {
-  color: var(--accent);
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+}
+.post__body a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-decoration-color: rgba(237, 237, 237, 0.35);
 }
 
 /* 引用块：旁注气质——细线 + 暖灰底 + 衬线体，蓝色留给链接 */

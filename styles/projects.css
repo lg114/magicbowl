@@ -65,8 +65,8 @@
   letter-spacing: -0.03em;
   background-image: linear-gradient(
     to bottom,
-    rgba(242, 242, 242, 0.35),
-    rgba(242, 242, 242, 0.03)
+    rgba(237, 237, 237, 0.35),
+    rgba(237, 237, 237, 0.03)
   );
   -webkit-background-clip: text;
   background-clip: text;
