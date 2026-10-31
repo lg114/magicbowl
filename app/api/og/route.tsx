@@ -10,10 +10,37 @@ const BG = "#000000";
 const INK = "#f2f2f2";
 const META = "#6b6b6b";
 
+const FONT_PATHS = {
+  inter400: "/fonts/inter-400.ttf",
+  inter700: "/fonts/inter-700.ttf",
+  notoSC400: "/fonts/noto-sc-400.ttf",
+  notoSC700: "/fonts/noto-sc-700.ttf",
+};
+
+let fonts: { name: string; data: ArrayBuffer; weight: 400 | 700; style: "normal" }[] | null = null;
+
+async function loadFonts(origin: string) {
+  if (fonts) return;
+  const [i400, i700, n400, n700] = await Promise.all([
+    fetch(`${origin}${FONT_PATHS.inter400}`).then((r) => r.arrayBuffer()),
+    fetch(`${origin}${FONT_PATHS.inter700}`).then((r) => r.arrayBuffer()),
+    fetch(`${origin}${FONT_PATHS.notoSC400}`).then((r) => r.arrayBuffer()),
+    fetch(`${origin}${FONT_PATHS.notoSC700}`).then((r) => r.arrayBuffer()),
+  ]);
+  fonts = [
+    { name: "Inter", data: i400, weight: 400, style: "normal" },
+    { name: "Inter", data: i700, weight: 700, style: "normal" },
+    { name: "Noto Sans SC", data: n400, weight: 400, style: "normal" },
+    { name: "Noto Sans SC", data: n700, weight: 700, style: "normal" },
+  ];
+}
+
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const slug = searchParams.get("slug");
-  const overrideTitle = searchParams.get("title");
+  const url = new URL(req.url);
+  await loadFonts(url.origin);
+
+  const slug = url.searchParams.get("slug");
+  const overrideTitle = url.searchParams.get("title");
 
   let title = overrideTitle || siteConfig.title;
   let subtitle = siteConfig.description;
@@ -39,7 +66,7 @@ export async function GET(req: NextRequest) {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px 72px",
-          fontFamily: "Inter, PingFang SC, sans-serif",
+          fontFamily: '"Inter", "Noto Sans SC", sans-serif',
         }}
       >
         <div
@@ -126,6 +153,7 @@ export async function GET(req: NextRequest) {
     {
       width: 1200,
       height: 630,
+      fonts: fonts!,
     },
   );
 }

@@ -56,7 +56,7 @@ export default function RootLayout({
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
       <body className={inter.className}>
-        <a href="#main-content" className="skip-link">Skip to content</a>
+        <a href="#main-content" className="skip-link">跳转到正文</a>
         <Brand />
         <NavBar />
         <div id="main-content">

@@ -45,7 +45,7 @@ export async function GET() {
     <link>${siteConfig.url}</link>
     <atom:link href="${siteConfig.url}/feed.xml" rel="self" type="application/rss+xml"/>
     <language>${siteConfig.locale}</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${posts.length ? toRfc822(posts[0].date) : new Date().toUTCString()}</lastBuildDate>
 ${items}
   </channel>
 </rss>`;

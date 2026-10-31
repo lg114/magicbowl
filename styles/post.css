@@ -170,23 +170,6 @@
   max-width: 100%;
   border-radius: 8px;
 }
-.post__figure {
-  margin: 1.8em 0;
-}
-.post__figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--card-border);
-}
-.post__figure figcaption {
-  margin-top: 9px;
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  line-height: 1.6;
-  color: var(--meta);
-  text-align: center;
-}
 .post__body hr {
   border: none;
   border-top: 1px solid var(--card-border);

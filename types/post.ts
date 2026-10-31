@@ -32,12 +32,6 @@ function splitISO(date: string): [number, number, number] | null {
   return [parts[0], parts[1], parts[2]];
 }
 
-export function formatDate(date: string): string {
-  const p = splitISO(date);
-  if (!p) return date;
-  return `${p[0]}年${p[1]}月${p[2]}日`;
-}
-
 // 归档页按年份分组，组内不再需要年份 → 只输出英文「Jul 23」
 export function formatMonthDay(date: string): string {
   const p = splitISO(date);

@@ -8,15 +8,6 @@
 .archive-page-header {
   margin-bottom: 30px;
 }
-.archive-page-header__eyebrow {
-  display: block;
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: var(--meta);
-  margin-bottom: 8px;
-}
 .archive-page-header__title {
   font-family: var(--sans);
   font-size: 2.4rem;
@@ -129,48 +120,6 @@
 .ygroup__sep {
   margin: 0 0.55em;
   opacity: 0.6;
-}
-/* 空年份的占位：一个破折号，暗示「这一年还没有文章」 */
-.ygroup__empty {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  line-height: 1.4;
-  color: var(--meta);
-}
-
-/* ---------- 胶囊标签（共用：ProjectCard 也用 .chip） ---------- */
-.chip {
-  font-family: var(--sans);
-  font-size: 0.76rem;
-  letter-spacing: 0.3px;
-  color: var(--meta);
-  background: transparent;
-  border: 1px solid color-mix(in srgb, var(--card-border) 68%, transparent);
-  border-radius: 999px;
-  padding: 4px 11px;
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-.chip:hover {
-  color: var(--text);
-  border-color: color-mix(in srgb, var(--card-border-hi) 70%, transparent);
-  background: rgba(128, 128, 128, 0.08);
-}
-.chip.is-active {
-  color: var(--accent);
-  background: rgba(138, 180, 248, 0.12);
-  border-color: var(--accent);
-}
-.tag-count {
-  font-size: 0.72em;
-  color: var(--meta);
-  margin-left: 2px;
-}
-.chip.is-active .tag-count {
-  color: color-mix(in srgb, var(--accent) 70%, var(--meta));
 }
 
 /* ---------- 响应式 ---------- */

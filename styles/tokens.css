@@ -53,6 +53,14 @@ html {
   scrollbar-color: var(--scroll-thumb) transparent;
 }
 
+/* 键盘焦点：统一可见的焦点环，覆盖所有链接、按钮与可交互元素。
+   纯键盘导航时（Tab / Shift+Tab）才显示，鼠标点击不触发。 */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
 /* ---------- 滚动条：融入页面（Webkit） ---------- */
 ::-webkit-scrollbar {
   width: 8px;
@@ -75,6 +83,9 @@ html:hover::-webkit-scrollbar-thumb {
   background: var(--scroll-thumb-hover);
 }
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   ::-webkit-scrollbar-thumb {
     transition: none;
   }
