@@ -5,6 +5,7 @@ import ProjectCard from "../../components/ProjectCard";
 export const metadata: Metadata = {
   title: "Projects",
   description: "MagicBowl 的项目作品集。",
+  alternates: { canonical: `${siteConfig.url}/projects` },
   openGraph: {
     title: "Projects - MagicBowl",
     description: "MagicBowl 的项目作品集。",

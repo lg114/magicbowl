@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { siteConfig } from "../../../lib/site";
 import { formatMonthDay } from "../../../types/post";
-import PostBody from "../../../components/PostBody";
 import TableOfContents from "../../../components/TableOfContents";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
@@ -29,6 +28,7 @@ export async function generateMetadata({
     title: post.title,
     description: post.excerpt,
     authors: [{ name: siteConfig.author, url: siteConfig.social.github }],
+    alternates: { canonical: postUrl },
     // Open Graph：文章类型，社交平台展示完整预览
     openGraph: {
       type: "article",
@@ -38,6 +38,7 @@ export async function generateMetadata({
       publishedTime: post.date,
       authors: [siteConfig.author],
       tags: post.tags,
+      section: post.category,
       images: [{ url: `/api/og?slug=${slug}`, width: 1200, height: 630, alt: post.title }],
     },
     // Twitter Card
@@ -93,7 +94,10 @@ export default async function PostPage({
             </p>
           </header>
 
-          <PostBody html={post.html} />
+          <div
+            className="post__body"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
 
           <Link href="/posts" className="post__back">
             ← Back

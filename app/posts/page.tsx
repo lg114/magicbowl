@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { getAllPosts } from "../../lib/posts";
+import { siteConfig } from "../../lib/site";
 import PostsArchive from "../../components/PostsArchive";
 
 export const metadata: Metadata = {
   title: "Blog",
   description: "所有文章归档，按时间线浏览。",
+  alternates: { canonical: `${siteConfig.url}/posts` },
   openGraph: {
     title: "Blog - MagicBowl",
     description: "所有文章归档，按时间线浏览。",

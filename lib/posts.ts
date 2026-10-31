@@ -17,3 +17,7 @@ export function getPostBySlug(slug: string): Post | null {
 export function getAllPosts(): PostMeta[] {
   return postsData.map(({ html, headings, ...meta }) => meta);
 }
+
+export function getAllPostsFull(): Post[] {
+  return postsData as Post[];
+}

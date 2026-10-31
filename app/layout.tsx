@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   authors: [{ name: siteConfig.author }],
+  alternates: { canonical: siteConfig.url },
   // Open Graph：社交分享预览（微信、Telegram、Discord 等）
   openGraph: {
     type: "website",
