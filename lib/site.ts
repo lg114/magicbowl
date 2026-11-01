@@ -21,7 +21,7 @@ export const siteConfig = {
   projects: [
     {
       name: "RagMate",
-      desc: "Enterprise RAG knowledge management system with hybrid retrieval",
+      desc: "Self-hosted RAG system with hybrid retrieval, reranking and cited Q&A",
       tech: ["Python", "RAG", "Vector Search"],
       status: "active",
       repo: "https://github.com/lg114/RagMate",
