@@ -1,147 +1,171 @@
+<div align="center">
+
 # MagicBowl
 
-一个正在生长的个人博客与作品集，用一碗装下代码、阅读、旅行与日常。
+**A growing personal blog and portfolio — code, reading, travel, and everyday life, kept in one bowl.**
 
-静态优先的个人站点：Next.js App Router 渲染页面，文章由 Markdown 驱动，样式全部手写，不依赖任何 UI 框架。
+[Live Site](https://www.magicbowl.tech) · [RSS Feed](https://www.magicbowl.tech/feed.xml) · [简体中文](README_zh.md)
 
-- 站点 · <https://www.magicbowl.tech>
-- 许可 · MIT
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 目录
+</div>
 
-- [特性](#特性)
-- [技术栈](#技术栈)
-- [快速开始](#快速开始)
-- [项目结构](#项目结构)
-- [写文章](#写文章)
-- [自定义站点](#自定义站点)
-- [开发注意事项](#开发注意事项)
-- [部署](#部署)
-- [许可](#许可)
+## About
 
-## 特性
+MagicBowl is a static-first personal site. Pages are rendered with the Next.js App Router, posts are driven by Markdown, and every style is hand-written CSS — no UI framework, no backend, no database.
 
-**内容**
-
-- Markdown 文章，frontmatter 支持分类、标签；文章按时间倒序、按年份归档展示
-- 归档页目前不提供关键词搜索、分类/标签筛选与分页，全部文章一次列出
-
-**阅读**
-
-- 文章详情自动生成目录与标题锚点（桌面侧栏 / 移动内置）
-- 代码块、引用、图片的排版样式，以及上一篇 / 下一篇导航
-
-**外观**
-
-- 深色主题；响应式布局、`prefers-reduced-motion` 动效降级
-
-**工程**
-
-- 全量静态预渲染，无后端、无数据库
-- SEO：`metadata`、`sitemap.xml`、`robots.txt`、Web App Manifest
-- Service Worker 离线缓存；CSP、HSTS 等安全响应头
-
-## 技术栈
-
-| 类别 | 技术 |
+| | |
 | --- | --- |
-| 框架 | Next.js 16（App Router） |
+| **Live site** | <https://www.magicbowl.tech> |
+| **Content language** | Posts are written in Chinese (zh-CN) |
+| **Pages** | Home, Blog archive, post pages, Projects, Demo (experiments) |
+| **License** | [MIT](LICENSE) |
+
+**English** | [简体中文](README_zh.md)
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [Project Structure](#project-structure)
+- [Writing Posts](#writing-posts)
+- [Configuration](#configuration)
+- [Development Notes](#development-notes)
+- [Deployment](#deployment)
+- [License](#license)
+
+## Features
+
+**Content**
+
+- Markdown posts with frontmatter (category, tags); the archive lists all posts newest-first, grouped by year — years without posts are not rendered
+- RSS feed at [`/feed.xml`](https://www.magicbowl.tech/feed.xml) with the full post list
+- No search, filtering, or pagination on the archive page by design: everything is on one page
+
+**Reading**
+
+- Auto-generated table of contents and heading anchors on post pages (sidebar on desktop, inline on mobile)
+- Styled code blocks, blockquotes, and images; previous / next post navigation
+
+**Presentation**
+
+- Dark-only theme; responsive layout; `prefers-reduced-motion` support
+
+**Engineering**
+
+- Fully static prerendering — no backend, no database
+- SEO: metadata, `sitemap.xml`, `robots.txt`, Web App Manifest
+- Service Worker offline caching; security headers including CSP and HSTS
+
+## Tech Stack
+
+| Area | Technology |
+| --- | --- |
+| Framework | Next.js 16 (App Router) |
 | UI | React 19 + TypeScript |
-| 内容 | Markdown + `gray-matter` + `marked`（构建时预编译为 HTML） |
-| 样式 | 原生 CSS（设计令牌、响应式、动效降级） |
-| 图片 | Next.js Image + `sharp` |
+| Content | Markdown + `gray-matter` + `marked` (precompiled to HTML at build time) |
+| Styling | Hand-written CSS (design tokens, responsive rules, motion reduction) |
+| Images | Next.js Image + `sharp` |
 
-## 快速开始
+## Quick Start
 
-环境要求：Node.js `20.9` 或更高版本、npm。
+Requirements: Node.js `20.9` or later, and npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-开发服务器启动后，打开 <http://localhost:3000>。
+Then open <http://localhost:3000>.
 
-| 命令 | 用途 |
+| Command | Purpose |
 | --- | --- |
-| `npm run dev` | 启动开发服务器 |
-| `npm run typecheck` | 执行 TypeScript 类型检查 |
-| `npm run build` | 创建生产构建并检查构建问题 |
-| `npm start` | 启动生产服务器（需先执行 `npm run build`） |
-| `ANALYZE=true npm run build` | 构建并启用 Bundle Analyzer |
+| `npm run dev` | Start the dev server (regenerates post data first) |
+| `npm run generate-posts` | Regenerate `lib/posts-data.json` from `content/posts/` |
+| `npm run typecheck` | Run the TypeScript type check |
+| `npm run build` | Create a production build |
+| `npm start` | Start the production server (run `npm run build` first) |
+| `ANALYZE=true npm run build` | Build with the Bundle Analyzer enabled |
 
-## 项目结构
+## Project Structure
 
 ```text
-app/                    # 路由与 Next.js 特殊文件
-  layout.tsx             # 根布局：主题初始化、导航、页脚
-  page.tsx               # 首页
-  posts/                 # /posts 归档 与 /posts/[slug] 详情
-  projects/page.tsx      # 项目展示页
-  sitemap.ts robots.ts   # SEO
-  manifest.ts            # Web App Manifest
-  apple-icon.png         # iOS 图标
-  not-found.tsx          # 404
-components/             # 可复用 React 组件
-content/posts/          # Markdown 文章（源文件）
-lib/                    # 站点配置、文章数据（构建时生成）
-scripts/                # 构建脚本（generate-posts.ts）
-styles/                 # 全局 CSS 与各页面样式（globals.css 聚合）
-types/                  # TypeScript 类型定义
-public/                 # 站点图标、Service Worker
+app/                    # Routes and Next.js special files
+  layout.tsx            # Root layout: fonts, navigation, footer
+  page.tsx              # Home
+  posts/                # /posts archive and /posts/[slug] post pages
+  projects/             # /projects page
+  demo/                 # /demo experiments page
+  feed.xml/             # RSS feed route
+  sitemap.ts robots.ts  # SEO
+  manifest.ts           # Web App Manifest
+  apple-icon.png        # iOS icon
+  not-found.tsx         # 404 page
+components/             # Reusable React components
+content/posts/          # Markdown posts (source files)
+lib/                    # Site config and post data (generated at build time)
+scripts/                # Build scripts (generate-posts.ts)
+styles/                 # Global and per-page CSS (aggregated by globals.css)
+types/                  # TypeScript type definitions
+public/                 # Site icons, Service Worker
 ```
 
-类型与无副作用的工具放在 `types/`，客户端组件只从这里取类型，避免把 `fs` 等 Node API 打进浏览器包。
+Types and side-effect-free helpers live in `types/`; client components import types only from there, which keeps Node APIs such as `fs` out of the browser bundle.
 
-## 写文章
+## Writing Posts
 
-在 `content/posts/` 下新建 `.md` 文件，填写 YAML frontmatter：
+Create a `.md` file under `content/posts/` with YAML frontmatter:
 
 ```markdown
 ---
-title: 文章标题
+title: Post title
 date: 2026-07-10
-category: 随笔
-tags: [标签1, 标签2]
-excerpt: 文章摘要
+category: Essay
+tags: [tag1, tag2]
+excerpt: A short summary of the post
 ---
 
-正文内容...
+Post body...
 ```
 
-| 字段 | 必填 | 说明 |
+| Field | Required | Notes |
 | --- | --- | --- |
-| `title` | 是 | 文章标题，同时用于页面 `title` |
-| `date` | 是 | 发布日，写 `YYYY-MM-DD`；内部会统一归一化，避免时区导致的脏日期 |
-| `category` | 是 | `生活` / `随笔` / `读后感` 之一，决定卡片配色 |
-| `tags` | 否 | 标签数组，用于归档页筛选 |
-| `excerpt` | 否 | 摘要，用于列表展示与 SEO `description` |
+| `title` | Yes | Post title; also used as the page `title` |
+| `date` | Yes | Publish date as `YYYY-MM-DD`; normalized internally to avoid timezone-related date drift |
+| `category` | Yes | One of `生活` / `随笔` / `读后感`; controls the card accent color |
+| `tags` | No | Tag array (metadata; the archive page offers no tag filtering) |
+| `excerpt` | No | Summary used in listings and as the SEO `description` |
 
-文章的 `slug` 取文件名，例如 `coffee-and-code.md` → `/posts/coffee-and-code`。
+The `slug` comes from the file name: `coffee-and-code.md` → `/posts/coffee-and-code`.
 
-## 自定义站点
+## Configuration
 
-大部分站点级配置集中在 [`lib/site.ts`](lib/site.ts)：
+Most site-level configuration lives in [`lib/site.ts`](lib/site.ts):
 
-- `siteConfig.projects`：项目名称、简介、技术栈、状态、仓库和演示地址
-- `siteConfig.social`：GitHub、X 和 Email 链接
-- `siteConfig.nav`：顶部导航，新增页面时同步更新这里
-- `siteConfig.url`：规范站点地址，用于 metadata、canonical 和 sitemap
+- `siteConfig` basics: `name`, `title`, `description`, `author`, `url` (canonical site URL used for metadata, canonical links, and the sitemap), `locale`, `startYear`
+- `siteConfig.nav`: top navigation entries (Blog / Projects / Demo) — update this when adding a page
+- `siteConfig.projects`: project entries (`name`, `desc`, `tech`, `status`, `repo`, `featured`)
+- `siteConfig.social`: GitHub, X, and email links
 
-站点图标位于 `app/`：`favicon.ico` 与 `icon.png` 是浏览器标签页图标，`apple-icon.png` 是 iOS 主屏图标（`manifest.ts` 复用 `icon.png` 作为 PWA 安装图标）。主题颜色、布局和动效位于 `styles/`，按功能拆分为多个 CSS 模块，由 `styles/globals.css` 统一引入（导入顺序即层叠顺序）。
+Site icons live in `app/`: `favicon.ico` and `icon.png` are the browser tab icons, `apple-icon.png` is the iOS home-screen icon, and `manifest.ts` reuses `icon.png` as the PWA install icon. Theme colors, layout, and motion live in `styles/`, split into per-area CSS modules imported by `styles/globals.css` — import order is cascade order.
 
-## 开发注意事项
+## Development Notes
 
-- **改了 Markdown 要重启 dev server**：文章数据由 `scripts/generate-posts.ts` 在 `npm run dev` / `npm run build` 开始时生成 `lib/posts-data.json`，`lib/posts.ts` 直接 import 该文件；`next dev` 运行中改 Markdown 不会重新生成。
-- **新增文章需要重新构建**：详情页设了 `dynamicParams = false`，只在构建期生成已知 slug，顺带阻断路径穿越。
-- **文章数据在构建时生成**：`npm run build` 会先执行 `scripts/generate-posts.ts`（通过 `tsx`），把 `content/posts/*.md` 解析、预编译为 HTML 后写入 `lib/posts-data.json`，`lib/posts.ts` 直接 import 该文件，因此运行时不依赖 `fs` 读盘。Cloudflare Workers 等无文件系统环境依赖此机制。
-- **更新 Service Worker 要改版本号**：改 `public/sw.js` 里的 `APP_VERSION`，旧缓存才会整体失效。
-- **新增页面记得同步导航**：顶部导航直接 `map` `siteConfig.nav` 数组。
-- **更换域名要改 `siteConfig.url`**：否则 sitemap 和 canonical 仍指向旧地址。
+- **Restart the dev server after editing Markdown.** Post data is generated by `scripts/generate-posts.ts` when `npm run dev` / `npm run build` starts, writing `lib/posts-data.json`, which `lib/posts.ts` imports directly. Editing Markdown while `next dev` is running does not regenerate it.
+- **New posts require a rebuild.** Post pages set `dynamicParams = false`, so only slugs known at build time are generated — this also blocks path traversal.
+- **Post data is generated at build time.** `npm run build` first runs `scripts/generate-posts.ts` (via `tsx`), which parses `content/posts/*.md` and precompiles the posts to HTML in `lib/posts-data.json`. The runtime never reads Markdown from disk — this is what makes filesystem-less environments such as Cloudflare Workers work.
+- **Bump the Service Worker version when it changes.** Update `APP_VERSION` in `public/sw.js`, or old caches will not be invalidated.
+- **Keep the navigation in sync.** The top navigation maps over the `siteConfig.nav` array; add new pages there.
+- **Update `siteConfig.url` when the domain changes**, or the sitemap and canonical URLs will keep pointing at the old address.
+- **LAN development:** `allowedDevOrigins` in `next.config.mjs` is read from the `ALLOWED_DEV_ORIGINS` environment variable (comma-separated); set it in `.env.local` when developing from another device on your LAN.
 
-## 部署
+## Deployment
 
-这是标准的 Next.js 应用，可部署到任意支持 Node.js 的平台：
+This is a standard Next.js application and can be deployed to any platform that supports Node.js:
 
 ```bash
 npm ci
@@ -149,8 +173,8 @@ npm run build
 npm start
 ```
 
-**Cloudflare Workers**：本站部署在 Cloudflare Workers（通过 OpenNext 适配器）。由于 Workers 运行时没有文件系统，构建脚本会在 `npm run build` 时自动将 Markdown 文章解析为 JSON 并内联到 bundle，确保运行时不依赖 `fs`。
+**Cloudflare Workers**: the live site runs on Cloudflare Workers (via the OpenNext adapter). Because the Workers runtime has no filesystem, the build script inlines the Markdown posts as JSON into the bundle (see above), so the runtime never depends on `fs`.
 
-## 许可
+## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](LICENSE)
