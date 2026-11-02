@@ -8,7 +8,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <h3 className="project-item__name">{project.name}</h3>
+      <h2 className="project-item__name">{project.name}</h2>
       <p className="project-item__desc">{project.desc}</p>
     </a>
   );

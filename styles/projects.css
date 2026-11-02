@@ -104,6 +104,8 @@
   color: var(--ink);
   margin: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .project-item__desc {
   margin: 0;
@@ -111,6 +113,14 @@
   font-size: 0.82rem;
   line-height: 1.5;
   color: var(--meta);
+}
+
+/* 中宽：三栏最小 840px + 间距，900px 以下改两栏，避免横向溢出 */
+/* （900 档补上 responsive.css 注释里说的三档：900 / 680 / 480） */
+@media (max-width: 900px) {
+  .projects-list {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
 }
 
 /* 窄屏 */

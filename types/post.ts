@@ -19,10 +19,11 @@ export interface Post extends PostMeta {
   headings: { id: string; text: string; level: number }[];
 }
 
-const EN_MONTHS = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-];
+const MONTH_DAY_FORMAT = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  timeZone: "UTC",
+});
 
 // 直接拆 ISO 字符串（YYYY-MM-DD），不走 Date 解析：
 // new Date("2026-07-23") 是 UTC 零点，在西半球时区会被读成前一天。
@@ -33,8 +34,10 @@ function splitISO(date: string): [number, number, number] | null {
 }
 
 // 归档页按年份分组，组内不再需要年份 → 只输出英文「Jul 23」
+// 用 Intl 格式化、时区固定 UTC：与原来拆 ISO 字符串的意图一致，
+// 不走本地时区，避免西半球时区把日期读成前一天。
 export function formatMonthDay(date: string): string {
   const p = splitISO(date);
   if (!p) return date;
-  return `${EN_MONTHS[p[1] - 1] ?? p[1]} ${p[2]}`;
+  return MONTH_DAY_FORMAT.format(new Date(Date.UTC(p[0], p[1] - 1, p[2])));
 }

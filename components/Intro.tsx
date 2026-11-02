@@ -7,9 +7,9 @@ export default function Intro() {
   return (
     <section className="intro">
       <div className="intro__inner">
-        <p className="intro__hi">
-          Hi, I’m Gc <span className="intro__wave">👋</span>
-        </p>
+        <h1 className="intro__hi">
+          Hi, I’m Gc <span className="intro__wave" aria-hidden="true">👋</span>
+        </h1>
         <p className="intro__text">
           I am a practical open sourcerer. Still learning AI, and figuring out how to put it
           to work in daily life.

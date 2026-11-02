@@ -15,6 +15,9 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
+  /* 双击缩放已无必要：去掉点按延迟；点按高亮用浅灰，与选区同调 */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(237, 237, 237, 0.12);
 }
 
 /* 文本选中态：浏览器默认的蓝与本站单色调冲突，改成中性浅灰。
@@ -52,7 +55,7 @@ body {
   text-decoration: none;
   border-radius: 0 0 6px 6px;
 }
-.skip-link:focus {
+.skip-link:focus-visible {
   top: 0;
 }
 
