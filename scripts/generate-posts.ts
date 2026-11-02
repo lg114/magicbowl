@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { marked } from "marked";
+import { createHighlighter } from "shiki";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const OUT_FILE = path.join(process.cwd(), "lib", "posts-data.json");
@@ -119,34 +120,129 @@ function optimizeImages(html: string): string {
   );
 }
 
-marked.setOptions({ gfm: true, breaks: false });
+// ---- 代码高亮（构建期 Shiki，零客户端 JS） ----
+// 主题 github-dark：标准配色。Shiki 输出的 pre 自带深色背景，
+// 这里去掉背景色声明，让代码块继续用正站安静的 pre 底色与边框，
+// 只保留 token 颜色。未知语言时保留原样，不让整站构建失败。
 
-const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
+const HIGHLIGHT_LANGS = [
+  "typescript",
+  "javascript",
+  "tsx",
+  "jsx",
+  "json",
+  "jsonc",
+  "bash",
+  "shell",
+  "shellscript",
+  "python",
+  "go",
+  "rust",
+  "sql",
+  "css",
+  "html",
+  "xml",
+  "yaml",
+  "toml",
+  "markdown",
+  "diff",
+  "dockerfile",
+  "plaintext",
+  "text",
+  "c",
+  "cpp",
+  "java",
+  "kotlin",
+  "swift",
+  "lua",
+];
 
-const posts: PostData[] = files.map((file): PostData => {
-  const slug = file.replace(/\.md$/, "");
-  const fullPath = path.join(POSTS_DIR, file);
-  const raw = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(raw) as { data: PostFrontmatter; content: string };
+type HighlighterInstance = Awaited<ReturnType<typeof createHighlighter>>;
 
-  const rawHtml = marked.parse(content) as string;
-  const html = sanitizeHtml(applyMdxTransforms(rawHtml));
-  const headings = extractHeadings(html);
+function decodeHtmlEntities(s: string): string {
+  return s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
 
-  return {
-    slug,
-    title: data.title ?? slug,
-    date: toISODate(data.date),
-    category: data.category ?? "未分类",
-    tags: Array.isArray(data.tags) ? data.tags : [],
-    excerpt: data.excerpt ?? "",
-    readingTime: estimateReadingTime(content),
-    html,
-    headings,
-  };
+function styleHighlight(highlighted: string, lang: string): string {
+  return highlighted
+    .replace('<pre class="shiki github-dark"', '<pre class="shiki github-dark post__codeblock"')
+    .replace(/<pre /, `<pre data-language="${lang}" `)
+    .replace(/style="background-color:[^;"]+;?/, 'style="');
+}
+
+async function highlightCodeBlocks(html: string, highlighter: HighlighterInstance): Promise<string> {
+  const pattern = /<pre><code(?: class="language-([\w+-]+)")?>([\s\S]*?)<\/code><\/pre>/gi;
+  let result = "";
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(html)) !== null) {
+    const [whole, langAttr, escaped] = match;
+    const lang = (langAttr ?? "plaintext").toLowerCase();
+    result += html.slice(lastIndex, match.index);
+    try {
+      const code = decodeHtmlEntities(escaped);
+      const highlighted = await highlighter.codeToHtml(code, { lang, theme: "github-dark" });
+      result += styleHighlight(highlighted, lang);
+    } catch {
+      result += whole;
+    }
+    lastIndex = match.index + whole.length;
+  }
+  result += html.slice(lastIndex);
+  return result;
+}
+
+async function main(): Promise<void> {
+  marked.setOptions({ gfm: true, breaks: false });
+
+  let highlighter: HighlighterInstance | null = null;
+  try {
+    highlighter = await createHighlighter({ themes: ["github-dark"], langs: HIGHLIGHT_LANGS });
+  } catch (error) {
+    console.warn("Shiki highlighter failed to load, code blocks will render unhighlighted:", error);
+  }
+
+  const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
+
+  const posts: PostData[] = [];
+  for (const file of files) {
+    const slug = file.replace(/\.md$/, "");
+    const fullPath = path.join(POSTS_DIR, file);
+    const raw = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(raw) as { data: PostFrontmatter; content: string };
+
+    const rawHtml = marked.parse(content) as string;
+    const highlightedHtml = highlighter ? await highlightCodeBlocks(rawHtml, highlighter) : rawHtml;
+    const html = sanitizeHtml(applyMdxTransforms(highlightedHtml));
+    const headings = extractHeadings(html);
+
+    posts.push({
+      slug,
+      title: data.title ?? slug,
+      date: toISODate(data.date),
+      category: data.category ?? "未分类",
+      tags: Array.isArray(data.tags) ? data.tags : [],
+      excerpt: data.excerpt ?? "",
+      readingTime: estimateReadingTime(content),
+      html,
+      headings,
+    });
+  }
+
+  posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+
+  fs.writeFileSync(OUT_FILE, JSON.stringify(posts, null, 2));
+  console.log(`✅ Generated ${posts.length} posts → ${OUT_FILE}`);
+
+  if (highlighter) highlighter.dispose();
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
 });
-
-posts.sort((a, b) => (a.date < b.date ? 1 : -1));
-
-fs.writeFileSync(OUT_FILE, JSON.stringify(posts, null, 2));
-console.log(`✅ Generated ${posts.length} posts → ${OUT_FILE}`);
