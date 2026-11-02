@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { marked } from "marked";
 import { createHighlighter } from "shiki";
+import sharp from "sharp";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const OUT_FILE = path.join(process.cwd(), "lib", "posts-data.json");
@@ -71,7 +72,7 @@ function sanitizeHtml(html: string): string {
     .replace(/javascript\s*:/gi, "");
 }
 
-function applyMdxTransforms(html: string): string {
+async function applyMdxTransforms(html: string): Promise<string> {
   html = html.replace(/<(h[23])>(.*?)<\/\1>/gi, (_, tag: string, inner: string) => {
     const text = inner.replace(/<[^>]+>/g, "");
     const id = slugifyHeading(text);
@@ -86,7 +87,7 @@ function applyMdxTransforms(html: string): string {
   html = html.replace(/<blockquote>/gi, '<blockquote class="post__quote">');
   html = html.replace(/<pre>/gi, '<pre class="post__codeblock">');
 
-  html = optimizeImages(html);
+  html = await optimizeImages(html);
 
   return html;
 }
@@ -104,20 +105,45 @@ function extractHeadings(html: string): { id: string; text: string; level: numbe
   return headings;
 }
 
-function optimizeImages(html: string): string {
-  return html.replace(
-    /<img\s([^>]*)src="([^"]+)"([^>]*)>/gi,
-    (_match, before: string, src: string, after: string) => {
-      let optimizedSrc = src;
-      if (!src.startsWith("/_next/image") && !src.endsWith(".svg")) {
-        optimizedSrc = `/_next/image?url=${encodeURIComponent(src)}&w=1280&q=75`;
-      }
-      let attrs = `${before}src="${optimizedSrc}"${after}`;
-      if (!/\bloading=/.test(attrs)) attrs = `loading="lazy" ${attrs}`;
-      if (!/\bdecoding=/.test(attrs)) attrs = `decoding="async" ${attrs}`;
-      return `<img ${attrs}>`;
-    },
-  );
+// 站内本地图片才探尺寸：public/ 下读得到的文件加 width/height，
+// 让浏览器在图片加载前预留位置（防 CLS）。远端图片与 SVG 不动；
+// 探不到时不让构建失败，只留警告，图片按原来方式输出。
+async function probeLocalImageSize(src: string): Promise<{ width: number; height: number } | null> {
+  if (!src.startsWith("/") || src.startsWith("/_next/image") || src.endsWith(".svg")) return null;
+  try {
+    const file = path.join(process.cwd(), "public", src);
+    const meta = await sharp(file).metadata();
+    if (meta.width && meta.height) return { width: meta.width, height: meta.height };
+  } catch (error) {
+    console.warn(`Image size probe failed for ${src}:`, error);
+  }
+  return null;
+}
+
+async function optimizeImages(html: string): Promise<string> {
+  const pattern = /<img\s([^>]*)src="([^"]+)"([^>]*)>/gi;
+  let result = "";
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(html)) !== null) {
+    const [whole, before, src, after] = match;
+    result += html.slice(lastIndex, match.index);
+    let optimizedSrc = src;
+    if (!src.startsWith("/_next/image") && !src.endsWith(".svg")) {
+      optimizedSrc = `/_next/image?url=${encodeURIComponent(src)}&w=1280&q=75`;
+    }
+    let attrs = `${before}src="${optimizedSrc}"${after}`;
+    if (!/\bloading=/.test(attrs)) attrs = `loading="lazy" ${attrs}`;
+    if (!/\bdecoding=/.test(attrs)) attrs = `decoding="async" ${attrs}`;
+    if (!/\bwidth=/.test(attrs) && !/\bheight=/.test(attrs)) {
+      const size = await probeLocalImageSize(src);
+      if (size) attrs = `width="${size.width}" height="${size.height}" ${attrs}`;
+    }
+    result += `<img ${attrs}>`;
+    lastIndex = match.index + whole.length;
+  }
+  result += html.slice(lastIndex);
+  return result;
 }
 
 // ---- 代码高亮（构建期 Shiki，零客户端 JS） ----
@@ -218,7 +244,7 @@ async function main(): Promise<void> {
 
     const rawHtml = marked.parse(content) as string;
     const highlightedHtml = highlighter ? await highlightCodeBlocks(rawHtml, highlighter) : rawHtml;
-    const html = sanitizeHtml(applyMdxTransforms(highlightedHtml));
+    const html = sanitizeHtml(await applyMdxTransforms(highlightedHtml));
     const headings = extractHeadings(html);
 
     posts.push({

@@ -53,7 +53,7 @@ export default function RootLayout({
     <html lang="zh-CN">
         <head>
           <link rel="alternate" type="application/rss+xml" title="MagicBowl RSS" href="/feed.xml" />
-          <meta name="theme-color" content="#000000" />
+          <meta name="theme-color" content="#050505" />
           <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
         </head>
       <body className={`${inter.className} ${inter.variable}`}>
