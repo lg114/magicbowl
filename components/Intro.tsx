@@ -32,18 +32,25 @@ export default function Intro() {
           .
         </p>
         <p className="intro__text">
-          I also leave my own thoughts on{" "}
+          I also work on UI design, creating interfaces that feel intuitive and polished. See the{" "}
+          <Link className="intro__link" href="/demo">
+            demo
+          </Link>
+          .
+        </p>
+        <p className="intro__text">
+          I write on{" "}
           <Link className="intro__link" href="/posts">
             the blog
-          </Link>{" "}
-          — some of my views on things.
+          </Link>
+          , sharing my views on things.
         </p>
         <p className="intro__text">
-          Apart from programming, I also love games, sports, movies, and music. I enjoy
-          sharing my life, and figuring out how to live in a way that feels true to myself.
+          Apart from programming, I love games, sports, movies, and music. I enjoy sharing
+          my life, and figuring out how to live in a way that feels true to myself.
         </p>
         <p className="intro__text">
-          I read a lot too, mostly literary fiction — Hesse, Mo Yan, books that leave more
+          I read a lot too, mostly literary fiction. Hesse, Mo Yan, books that leave more
           questions than answers. I don’t read for takeaways. I read because a good one
           quietly rearranges how I see things, and it’s still the clearest mirror I’ve found
           for thinking about my own life.
@@ -59,8 +66,10 @@ export default function Intro() {
             X
           </a>{" "}
           is the fastest way to reach me. You can also email me at{" "}
-          {/* 配置里存的是 mailto: URL，这里只作纯文本展示，不做成链接 */}
-          {siteConfig.social.email.replace(/^mailto:/, "")}.
+          <a className="intro__link" href={siteConfig.social.email}>
+            {siteConfig.social.email.replace(/^mailto:/, "")}
+          </a>
+          .
         </p>
       </div>
     </section>
