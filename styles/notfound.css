@@ -21,7 +21,7 @@
   font-weight: 700;
   line-height: 1;
   margin: 0 0 8px;
-  color: var(--accent);
+  color: var(--text);
 }
 .notfound__title {
   font-family: var(--sans);
@@ -41,7 +41,7 @@
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: var(--accent);
+  color: var(--text);
   text-decoration: none;
   padding: 10px 18px;
   border: 1px solid var(--card-border);
@@ -50,6 +50,6 @@
   transition: color 0.25s ease, border-color 0.25s ease;
 }
 .notfound__link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--text);
+  border-color: var(--text);
 }

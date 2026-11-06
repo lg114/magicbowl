@@ -5,7 +5,7 @@ import { siteConfig } from "../../../lib/site";
 
 export const runtime = "edge";
 
-const BRAND_COLOR = "#8ab4f8";
+const BRAND_COLOR = "#b5b5b5";
 const BG = "#000000";
 const INK = "#f2f2f2";
 const META = "#6b6b6b";

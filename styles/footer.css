@@ -29,6 +29,6 @@
   transition: color 0.25s ease, border-color 0.25s ease;
 }
 .footer__license:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--text);
+  border-color: var(--text);
 }

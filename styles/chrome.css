@@ -99,7 +99,7 @@
   to   { stroke-dashoffset: 0; }
 }
 .brand:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 @media (prefers-reduced-motion: reduce) {
   .brand__mark path {

@@ -58,7 +58,7 @@ html {
 /* 键盘焦点：统一可见的焦点环，覆盖所有链接、按钮与可交互元素。
    纯键盘导航时（Tab / Shift+Tab）才显示，鼠标点击不触发。 */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--text);
   outline-offset: 2px;
   border-radius: 3px;
 }
