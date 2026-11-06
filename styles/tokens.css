@@ -49,6 +49,8 @@
 }
 
 html {
+  /* 仅深色主题：告诉浏览器原生控件与滚动条走深色，避免浅色闪烁 */
+  color-scheme: dark;
   scroll-behavior: smooth;
   /* Firefox：细滚动条 */
   scrollbar-width: thin;

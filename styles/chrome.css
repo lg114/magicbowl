@@ -10,8 +10,8 @@
    任意两项之间的视觉间距完全一致。 */
 .nav {
   position: absolute;
-  top: 28px;
-  right: 28px;
+  top: max(28px, env(safe-area-inset-top));
+  right: max(28px, env(safe-area-inset-right));
   z-index: 100;
   display: flex;
   align-items: center;
@@ -68,8 +68,8 @@
    top/left + padding 与右上角导航同一套取值，两处基线对齐。 */
 .brand {
   position: absolute;
-  top: 28px;
-  left: 28px;
+  top: max(28px, env(safe-area-inset-top));
+  left: max(28px, env(safe-area-inset-left));
   z-index: 100;
   display: flex;
   align-items: center;

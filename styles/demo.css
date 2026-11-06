@@ -85,6 +85,13 @@
   color: var(--meta);
 }
 
+/* 中宽：三栏最小 840px + 间距，900px 以下改两栏，避免横向溢出 */
+@media (max-width: 900px) {
+  .demo-list {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+}
+
 /* 窄屏 */
 @media (max-width: 680px) {
   .demo { padding: var(--page-top) 20px 80px; }

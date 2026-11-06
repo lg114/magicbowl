@@ -5,6 +5,8 @@ import { getPostBySlug, getPostSlugs } from "../../../lib/posts";
 import { siteConfig } from "../../../lib/site";
 import { formatMonthDay } from "../../../types/post";
 import TableOfContents from "../../../components/TableOfContents";
+import ReadingProgress from "../../../components/ReadingProgress";
+import CodeBlockTools from "../../../components/CodeBlockTools";
 
 // 仅允许构建期已知的 slug：generateStaticParams 已枚举全部合法文章，
 // 任何未预渲染的路径直接 404，阻断 URL 注入 ../ 等逃逸 content/posts 的路径穿越。
@@ -66,6 +68,8 @@ export default async function PostPage({
   return (
     <>
       <TableOfContents headings={post.headings} />
+      <ReadingProgress />
+      <CodeBlockTools />
       <main className="post-wrap">
         <article className="post">
           <script

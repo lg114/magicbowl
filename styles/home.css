@@ -48,6 +48,7 @@
   font-weight: 600;
   color: var(--deep);
   letter-spacing: 0;
+  text-wrap: balance;
 }
 .intro__wave {
   /* 避免 emoji 被加粗导致视觉偏重 */

@@ -37,7 +37,7 @@ export default function DemoPage() {
         <div className="demo-list">
           {demos.map((d) => (
             <div key={d.name} className="demo-item">
-              <h3 className="demo-item__name">{d.name}</h3>
+              <h2 className="demo-item__name">{d.name}</h2>
               <p className="demo-item__desc">{d.desc}</p>
             </div>
           ))}

@@ -42,6 +42,7 @@
   letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
+  text-wrap: balance;
 }
 
 /* 元信息：日期 + 阅读时长，紧跟标题下方——与导航同一套透明度做法：
@@ -97,6 +98,7 @@
   line-height: 1.35;
   color: var(--deep);
   margin: 2.6em 0 0.7em;
+  text-wrap: balance;
 }
 .post__body h3 {
   position: relative;
@@ -106,6 +108,7 @@
   line-height: 1.4;
   color: var(--deep);
   margin: 1.9em 0 0.5em;
+  text-wrap: balance;
 }
 
 /* 标题锚点：默认不可见，hover / 键盘聚焦时浮现在标题左侧 */
@@ -190,6 +193,7 @@
 
 .post__body img {
   max-width: 100%;
+  height: auto;
   border-radius: 8px;
 }
 /* 分隔线：借 antfu 的签名做法——居中 50px 短线，而不是整行横线 */
@@ -254,3 +258,78 @@
   }
 }
 
+
+/* ---- 阅读进度条：2px 发丝线，JS 在无滚动条时藏起它 ---- */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 2px;
+  width: 0;
+  background: var(--deep);
+}
+
+/* ---- 目录隐形化：平时极淡，hover / 键盘聚焦时显形；当前章节描边标记 ---- */
+.toc {
+  opacity: 0.22;
+  transition: opacity 0.25s ease;
+}
+.toc:hover,
+.toc:focus-within {
+  opacity: 1;
+}
+.toc__link.is-active {
+  color: var(--ink);
+  border-left-color: var(--deep);
+}
+
+/* ---- 代码块工具条：语言名 + 复制按钮，hover / 聚焦时出现 ---- */
+.codeblock {
+  position: relative;
+  margin: 1.8em 0;
+}
+.codeblock pre {
+  margin: 0;
+}
+.codeblock__bar {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.codeblock:hover .codeblock__bar,
+.codeblock:focus-within .codeblock__bar {
+  opacity: 1;
+}
+.codeblock__lang {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--meta);
+}
+.codeblock__copy {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--meta);
+  background: none;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+.codeblock__copy:hover {
+  color: var(--ink);
+  border-color: var(--card-border-hi);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc,
+  .codeblock__bar {
+    transition: none;
+  }
+}
