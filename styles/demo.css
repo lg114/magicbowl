@@ -64,6 +64,8 @@
   background: transparent;
   opacity: 0.6;
   transition: background 0.2s ease-out, opacity 0.2s ease-out;
+  text-decoration: none;
+  cursor: pointer;
 }
 .demo-item:hover {
   background: rgba(136, 136, 136, 0.067);

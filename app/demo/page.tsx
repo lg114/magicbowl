@@ -21,8 +21,9 @@ export const metadata: Metadata = {
 
 const demos = [
   {
-    name: "Coming soon",
-    desc: "实验性原型会陆续出现在这里。",
+    name: "RagMate",
+    desc: "RAG Q&A over your own documents, with cited answers.",
+    href: "/demo/ragmate",
   },
 ];
 
@@ -36,10 +37,17 @@ export default function DemoPage() {
         </header>
         <div className="demo-list">
           {demos.map((d) => (
-            <div key={d.name} className="demo-item">
-              <h2 className="demo-item__name">{d.name}</h2>
-              <p className="demo-item__desc">{d.desc}</p>
-            </div>
+            d.href ? (
+              <a key={d.name} className="demo-item" href={d.href}>
+                <h2 className="demo-item__name">{d.name}</h2>
+                <p className="demo-item__desc">{d.desc}</p>
+              </a>
+            ) : (
+              <div key={d.name} className="demo-item">
+                <h2 className="demo-item__name">{d.name}</h2>
+                <p className="demo-item__desc">{d.desc}</p>
+              </div>
+            )
           ))}
         </div>
       </div>
