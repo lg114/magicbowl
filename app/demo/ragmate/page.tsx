@@ -40,6 +40,23 @@ export default function RagMatePage() {
         </section>
 
         <section className="case-study__section">
+          <h2 className="case-study__section-title">Demo</h2>
+          <figure className="case-study__screenshot">
+            <video
+              controls
+              muted
+              playsInline
+              preload="metadata"
+              poster="/demo/ragmate/card-poster.webp"
+            >
+              <source src="/demo/ragmate/card.webm" type="video/webm" />
+              <source src="/demo/ragmate/card.mp4" type="video/mp4" />
+            </video>
+            <figcaption>A question, the cited answer, then the retrieval details.</figcaption>
+          </figure>
+        </section>
+
+        <section className="case-study__section">
           <h2 className="case-study__section-title">Key Features</h2>
           <ul className="case-study__features">
             <li>

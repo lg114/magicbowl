@@ -136,12 +136,14 @@
 .case-study__screenshot {
   margin: 0;
 }
-.case-study__screenshot img {
+.case-study__screenshot img,
+.case-study__screenshot video {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 8px;
   border: 1px solid var(--line);
+  background: var(--bg-sunken);
 }
 .case-study__screenshot figcaption {
   margin: 8px 0 0;

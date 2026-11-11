@@ -25,10 +25,9 @@ const demos = [
     name: "RagMate",
     desc: "RAG Q&A over your own documents, with cited answers.",
     href: "/demo/ragmate",
-    media: {
-      mp4: "/demo/ragmate/card.mp4",
-      webm: "/demo/ragmate/card.webm",
-      poster: "/demo/ragmate/card-poster.webp",
+    image: {
+      src: "/demo/ragmate/card-poster.webp",
+      alt: "RagMate answer listing the four NIST SP 800-218 practice groups, with citation bubbles and a highlighted source card for page 13.",
     },
   },
 ];
@@ -48,7 +47,7 @@ export default function DemoPage() {
               name={d.name}
               desc={d.desc}
               href={d.href}
-              media={d.media}
+              image={d.image}
             />
           ))}
         </div>
