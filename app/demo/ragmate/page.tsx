@@ -86,15 +86,33 @@ export default function RagMatePage() {
         <section className="case-study__section">
           <h2 className="case-study__section-title">Screenshots</h2>
           <div className="case-study__screenshots">
-            <div className="case-study__screenshot-placeholder">
-              <p>Chat interface with citation bubbles</p>
-            </div>
-            <div className="case-study__screenshot-placeholder">
-              <p>Document management panel</p>
-            </div>
-            <div className="case-study__screenshot-placeholder">
-              <p>Retrieval details (debug view)</p>
-            </div>
+            <figure className="case-study__screenshot">
+              <img
+                src="/demo/ragmate/chat.webp"
+                alt="RagMate chat answer listing the four NIST SP 800-218 SSDF practice groups, with numbered citation bubbles and source cards that name the PDF and page."
+                width={1440}
+                height={1005}
+              />
+              <figcaption>Chat interface with citation bubbles</figcaption>
+            </figure>
+            <figure className="case-study__screenshot">
+              <img
+                src="/demo/ragmate/documents.webp"
+                alt="RagMate document panel listing three ingested NIST PDFs, each marked ingested with its chunk count."
+                width={1440}
+                height={424}
+              />
+              <figcaption>Document management panel</figcaption>
+            </figure>
+            <figure className="case-study__screenshot">
+              <img
+                src="/demo/ragmate/retrieval.webp"
+                alt="RagMate retrieval details expanded, showing candidate chunks with reranker scores, the score threshold, and how many candidates were filtered out."
+                width={1440}
+                height={2054}
+              />
+              <figcaption>Retrieval details (debug view)</figcaption>
+            </figure>
           </div>
         </section>
 
