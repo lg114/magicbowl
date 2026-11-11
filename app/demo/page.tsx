@@ -27,7 +27,7 @@ const demos = [
     href: "/demo/ragmate",
     image: {
       src: "/demo/ragmate/card-poster.webp",
-      alt: "RagMate answer listing the four principles of explainable AI from NIST IR 8312, with numbered citation bubbles and a highlighted source card for page 4.",
+      alt: "RagMate answer listing the four principles of explainable AI from NIST IR 8312, with two citation bubbles and source cards for pages 5 and 28.",
     },
   },
 ];
