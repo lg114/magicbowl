@@ -27,7 +27,7 @@ const demos = [
     href: "/demo/ragmate",
     image: {
       src: "/demo/ragmate/card-poster.webp",
-      alt: "RagMate answer listing the four NIST SP 800-218 practice groups, with citation bubbles and a highlighted source card for page 13.",
+      alt: "RagMate answer listing the four principles of explainable AI from NIST IR 8312, with numbered citation bubbles and a highlighted source card for page 4.",
     },
   },
 ];

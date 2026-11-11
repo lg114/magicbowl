@@ -16,7 +16,7 @@ export default function DemoCard({ name, desc, href, image }: DemoCardProps) {
     <>
       {image ? (
         <span className="demo-item__media">
-          <img src={image.src} alt={image.alt} width={860} height={516} />
+          <img src={image.src} alt={image.alt} width={840} height={504} />
         </span>
       ) : null}
       <h2 className="demo-item__name">{name}</h2>
