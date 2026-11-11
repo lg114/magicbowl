@@ -127,23 +127,30 @@
   border-radius: 4px;
 }
 
-/* 截图占位 */
+/* 截图 */
 .case-study__screenshots {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 28px;
 }
-.case-study__screenshot-placeholder {
-  aspect-ratio: 16 / 9;
-  background: var(--bg-sunken);
-  border: 1px dashed var(--line-strong);
+.case-study__screenshot {
+  margin: 0;
+}
+.case-study__screenshot img,
+.case-study__screenshot video {
+  width: 100%;
+  height: auto;
+  display: block;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--meta);
+  border: 1px solid var(--line);
+  background: var(--bg-sunken);
+}
+.case-study__screenshot figcaption {
+  margin: 8px 0 0;
   font-family: var(--sans);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--meta);
 }
 
 /* GitHub 链接 */

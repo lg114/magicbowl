@@ -33,25 +33,43 @@ export default function RagMatePage() {
           <h2 className="case-study__section-title">Overview</h2>
           <p>
             RagMate is a document-grounded question answering system built on RAG (Retrieval-Augmented Generation).
-            Upload your PDFs, ask questions in natural language, and get answers with inline citations
-            pointing to the exact source and page number.
+            Upload documents — PDF, DOCX, TXT, Markdown, PPTX, XLSX, CSV, HTML, and similar files —
+            ask questions in natural language, and get answers with inline citations to the source file
+            and, when the format has pages, the page number.
           </p>
+        </section>
+
+        <section className="case-study__section">
+          <h2 className="case-study__section-title">Demo</h2>
+          <figure className="case-study__screenshot">
+            <video
+              controls
+              muted
+              playsInline
+              preload="metadata"
+              poster="/demo/ragmate/card-poster.webp"
+            >
+              <source src="/demo/ragmate/card.webm" type="video/webm" />
+              <source src="/demo/ragmate/card.mp4" type="video/mp4" />
+            </video>
+            <figcaption>A question, the cited answer, then the retrieval details.</figcaption>
+          </figure>
         </section>
 
         <section className="case-study__section">
           <h2 className="case-study__section-title">Key Features</h2>
           <ul className="case-study__features">
             <li>
-              <strong>Citation tracing</strong> — Every answer includes inline citations with source filename and page number. Click to jump to the source card.
+              <strong>Citation tracing</strong> — Cited answers include the source filename and, when the file has pages, the page number. Click a citation to jump to its source card.
             </li>
             <li>
               <strong>Retrieval visualization</strong> — Expand the retrieval details panel to see candidate chunks, scores, and filtering thresholds.
             </li>
             <li>
-              <strong>Multi-document support</strong> — Upload multiple PDFs; the system chunks, embeds, and indexes them for cross-document search.
+              <strong>Multi-document support</strong> — Upload more than one file. They are chunked, embedded, and searched together.
             </li>
             <li>
-              <strong>Grounding control</strong> — Answers are marked as confident, hedged, or refused based on retrieval evidence.
+              <strong>Grounding control</strong> — When retrieval evidence is thin, the answer is flagged as low-confidence, or refused when nothing relevant was found.
             </li>
             <li>
               <strong>Session history</strong> — Conversations are persisted and can be resumed or deleted.
@@ -67,16 +85,16 @@ export default function RagMatePage() {
               <ul>
                 <li>Vanilla HTML/CSS/JS — no build step, no dependencies</li>
                 <li>SSE streaming for real-time token delivery</li>
-                <li>Dark/light mode via <code>prefers-color-scheme</code></li>
-                <li>Bilingual UI (zh/en) with localStorage persistence</li>
+                <li>Dark theme</li>
+                <li>Chinese and English UI strings, chosen from the browser language</li>
               </ul>
             </div>
             <div className="case-study__stack-col">
               <h3>Backend</h3>
               <ul>
                 <li>Python / FastAPI</li>
-                <li>pgvector for dense retrieval (cosine similarity)</li>
-                <li>TitlePath chunking for structured PDF parsing</li>
+                <li>Hybrid retrieval: pgvector HNSW dense search plus BM25, RRF fusion, cross-encoder rerank, and a dynamic relevance threshold</li>
+                <li>Title-path chunking for Markdown; PDFs keep page numbers</li>
                 <li>OpenAI-compatible chat completions</li>
               </ul>
             </div>
@@ -86,15 +104,33 @@ export default function RagMatePage() {
         <section className="case-study__section">
           <h2 className="case-study__section-title">Screenshots</h2>
           <div className="case-study__screenshots">
-            <div className="case-study__screenshot-placeholder">
-              <p>Chat interface with citation bubbles</p>
-            </div>
-            <div className="case-study__screenshot-placeholder">
-              <p>Document management panel</p>
-            </div>
-            <div className="case-study__screenshot-placeholder">
-              <p>Retrieval details (debug view)</p>
-            </div>
+            <figure className="case-study__screenshot">
+              <img
+                src="/demo/ragmate/chat.webp"
+                alt="RagMate chat answer listing the four NIST SP 800-218 SSDF practice groups, with numbered citation bubbles and source cards that name the PDF and page."
+                width={1440}
+                height={1005}
+              />
+              <figcaption>Chat interface with citation bubbles</figcaption>
+            </figure>
+            <figure className="case-study__screenshot">
+              <img
+                src="/demo/ragmate/documents.webp"
+                alt="RagMate document panel listing three ingested NIST PDFs, each marked ingested with its chunk count."
+                width={1440}
+                height={424}
+              />
+              <figcaption>Document management panel</figcaption>
+            </figure>
+            <figure className="case-study__screenshot">
+              <img
+                src="/demo/ragmate/retrieval.webp"
+                alt="RagMate retrieval details expanded, showing candidate chunks with reranker scores, the score threshold, and how many candidates were filtered out."
+                width={1440}
+                height={2054}
+              />
+              <figcaption>Retrieval details (debug view)</figcaption>
+            </figure>
           </div>
         </section>
 

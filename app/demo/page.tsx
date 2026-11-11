@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import DemoCard from "../../components/DemoCard";
 import { siteConfig } from "../../lib/site";
 
 export const metadata: Metadata = {
@@ -24,6 +25,10 @@ const demos = [
     name: "RagMate",
     desc: "RAG Q&A over your own documents, with cited answers.",
     href: "/demo/ragmate",
+    image: {
+      src: "/demo/ragmate/card-poster.webp",
+      alt: "RagMate answer listing the four principles of explainable AI from NIST IR 8312, with two citation bubbles and source cards for pages 5 and 28.",
+    },
   },
 ];
 
@@ -37,17 +42,13 @@ export default function DemoPage() {
         </header>
         <div className="demo-list">
           {demos.map((d) => (
-            d.href ? (
-              <a key={d.name} className="demo-item" href={d.href}>
-                <h2 className="demo-item__name">{d.name}</h2>
-                <p className="demo-item__desc">{d.desc}</p>
-              </a>
-            ) : (
-              <div key={d.name} className="demo-item">
-                <h2 className="demo-item__name">{d.name}</h2>
-                <p className="demo-item__desc">{d.desc}</p>
-              </div>
-            )
+            <DemoCard
+              key={d.name}
+              name={d.name}
+              desc={d.desc}
+              href={d.href}
+              image={d.image}
+            />
           ))}
         </div>
       </div>
