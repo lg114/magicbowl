@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [{ url: "/api/og?title=RagMate", width: 1200, height: 630, alt: "RagMate" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "RagMate - Case Study",
+    description: "RAG Q&A over your own documents, with cited answers.",
+    images: ["/api/og?title=RagMate"],
+  },
 };
 
 export default function RagMatePage() {
