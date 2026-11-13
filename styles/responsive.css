@@ -25,6 +25,8 @@
   .intro { padding: var(--page-top) 24px 64px; }
   .intro__hi { font-size: 1.5rem; }
   .intro__text { font-size: 0.95rem; }
+  /* 共用归档标题收到 1.9rem（Projects / Demo）。Blog 标题在 archive.css
+     用更具体的选择器固定为 2.75rem，不受这条影响。 */
   .archive-page-header__title { font-size: 1.9rem; }
   .post__title { font-size: 1.7rem; }
   .post__body { font-size: 0.95rem; }

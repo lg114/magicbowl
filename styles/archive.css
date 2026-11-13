@@ -42,6 +42,20 @@
 .blog .archive-page-header {
   margin-bottom: 64px;
 }
+/* Blog 归档标题单独改成衬线、约 44px。Projects / Demo 继续用上面的
+   无衬线 .archive-page-header__title，不要改那条共用规则。
+   Georgia、Times 排在 --serif 前面：全局 --serif 把宋体放在最前，
+   Windows 的 SimSun 自带拉丁字形，单词 "Blog" 会落到宋体上。
+   不改 --serif 本身，文章正文里的中文强调（em）仍优先 Songti / SimSun。
+   字重用 400：Georgia 与 Songti 通常没有真正的 600，600 会被合成加粗。
+   选择器比 responsive.css 里的 .archive-page-header__title 更具体，
+   ≤480px 也不会被收成 1.9rem。根字号 16px 时 2.75rem 就是 44px，手机同样。 */
+.blog .archive-page-header__title {
+  font-family: Georgia, "Times New Roman", var(--serif);
+  font-size: 2.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
 
 /* ---------- 年份分组 ---------- */
 .ygroup {
