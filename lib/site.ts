@@ -26,6 +26,8 @@ export const siteConfig = {
       status: "active",
       repo: "https://github.com/lg114/RagMate",
       featured: true,
+      // 案例页。slug 需与 lib/case-studies.ts 一致。
+      slug: "ragmate",
     },
     {
       name: "MagicBowl",

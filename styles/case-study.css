@@ -142,7 +142,8 @@
   height: auto;
   display: block;
   border-radius: 8px;
-  border: 1px solid var(--line);
+  /* 深色界面截图和页面同色，用更亮的描边把画面从背景里托出来。 */
+  border: 1px solid var(--shot-frame);
   background: var(--bg-sunken);
 }
 .case-study__screenshot figcaption {

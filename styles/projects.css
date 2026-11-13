@@ -42,7 +42,7 @@
   opacity: 0.85;
 }
 
-/* 项目列表：两列网格，固定宽度 */
+/* 项目列表：三列文字行。窄屏见文末。 */
 .projects-list {
   position: relative;
   display: grid;
@@ -78,7 +78,8 @@
   overflow: hidden;
 }
 
-/* 单个项目卡片 */
+/* 单个项目：名字 + 一句说明。静止时全亮（原先 0.6 会把整行洗淡），
+   hover 只加一层淡底。 */
 .project-item {
   position: relative;
   z-index: 1;
@@ -88,13 +89,12 @@
   padding: 8px 14px 14px;
   border-radius: 6px;
   background: transparent;
-  opacity: 0.6;
+  opacity: 1;
   text-decoration: none;
-  transition: background 0.2s ease-out, opacity 0.2s ease-out;
+  transition: background 0.2s ease-out;
 }
 .project-item:hover {
   background: rgba(136, 136, 136, 0.067);
-  opacity: 1;
 }
 .project-item__name {
   font-family: var(--sans);
