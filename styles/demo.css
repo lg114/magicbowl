@@ -100,7 +100,7 @@
   border-radius: 4px;
   overflow: hidden;
   background: var(--bg-sunken);
-  border: 1px solid var(--shot-frame);
+  border: 1px solid var(--line);
 }
 .demo-item__media img {
   width: 100%;

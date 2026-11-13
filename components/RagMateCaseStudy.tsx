@@ -40,7 +40,6 @@ export default function RagMateCaseStudy({
               muted
               playsInline
               preload="metadata"
-              poster="/demo/ragmate/card-poster.webp"
             >
               <source src="/demo/ragmate/card.webm" type="video/webm" />
               <source src="/demo/ragmate/card.mp4" type="video/mp4" />
