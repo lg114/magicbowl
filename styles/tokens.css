@@ -18,6 +18,13 @@
   --text: #b5b5b5;
   --deep: #d6d6d6;
   --meta: #777777;
+  /* case-study.css 用这两个名字。未定义时正文颜色被丢掉、
+     截图和行内 code 的底也消失，只剩继承或透明。 */
+  --ink-soft: var(--text);
+  /* 比页面黑略抬起的凹面，垫在截图和代码块下，避免和 --bg 糊成一块。 */
+  --bg-sunken: #141414;
+  /* 深色产品截图贴在近黑页面上时，--line 几乎看不见。 */
+  --shot-frame: #9a9a9a;
   --line: #2e2e2e;
   --grid-size: 120px;
   /* 页面内容距顶部的统一距离（含让开固定导航）。三页（首页 / Blog / Projects）

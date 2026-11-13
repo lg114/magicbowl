@@ -26,6 +26,14 @@ export const siteConfig = {
       status: "active",
       repo: "https://github.com/lg114/RagMate",
       featured: true,
+      // 案例页与 public/demo/ragmate/ 的真实截图。slug 需与 lib/case-studies.ts 一致。
+      slug: "ragmate",
+      image: {
+        src: "/demo/ragmate/card-poster.webp",
+        alt: "RagMate answer listing the four principles of explainable AI from NIST IR 8312, with two citation bubbles and source cards for pages 5 and 28.",
+        width: 840,
+        height: 504,
+      },
     },
     {
       name: "MagicBowl",
