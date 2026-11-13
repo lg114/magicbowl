@@ -4,10 +4,7 @@ import type { Project } from "../types/project";
 export default function ProjectCard({ project }: { project: Project }) {
   const body = (
     <>
-      <span className="project-item__head">
-        <h2 className="project-item__name">{project.name}</h2>
-        <span className="project-item__status">{project.status}</span>
-      </span>
+      <h2 className="project-item__name">{project.name}</h2>
       <p className="project-item__desc">{project.desc}</p>
     </>
   );
