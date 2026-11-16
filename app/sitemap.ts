@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { caseStudies } from "../lib/case-studies";
+import { caseStudies, caseStudyPath } from "../lib/case-studies";
 import { siteConfig } from "../lib/site";
 import { getAllPosts } from "../lib/posts";
 
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
-    url: `${base}/projects/${study.slug}`,
+    url: `${base}${caseStudyPath(study)}`,
     changeFrequency: "monthly",
     priority: 0.6,
   }));

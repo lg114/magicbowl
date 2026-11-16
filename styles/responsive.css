@@ -5,7 +5,7 @@
 
 /* ---------- 响应式：平板 / 窄屏 ---------- */
 @media (max-width: 680px) {
-  :root { --grid-size: 92px; --page-top: 104px; }
+  :root { --page-top: 104px; }
   .intro { padding: var(--page-top) 32px 72px; }
   .intro__hi { font-size: 1.7rem; }
   .intro__text { font-size: 1rem; }

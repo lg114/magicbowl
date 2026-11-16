@@ -22,36 +22,25 @@ export const siteConfig = {
     {
       name: "RagMate",
       desc: "Self-hosted RAG system with hybrid retrieval, reranking and cited Q&A",
-      tech: ["Python", "RAG", "Vector Search"],
-      status: "active",
       repo: "https://github.com/lg114/RagMate",
-      featured: true,
-      // 案例页。slug 需与 lib/case-studies.ts 一致。
+      // 关联 lib/case-studies.ts 的案例条目（案例页自己用它反查仓库地址）。
+      // 卡片仍然外链 repo，不跳案例页。
       slug: "ragmate",
     },
     {
       name: "MagicBowl",
       desc: "This site — built with Next.js + TypeScript",
-      tech: ["Next.js", "TypeScript", "React", "Markdown"],
-      status: "active",
       repo: "https://github.com/lg114/magicbowl",
-      featured: true,
     },
     {
       name: "bagger",
       desc: "AI coding history collector — auto-syncs Claude Code conversations",
-      tech: ["AI", "CLI", "Local Search"],
-      status: "working on",
       repo: "https://github.com/lg114/bagger",
-      featured: true,
     },
     {
       name: "dsh-md-live",
       desc: "Native Markdown editor & preview tab for DSH Web right sidebar",
-      tech: ["React", "TypeScript", "DSH Plugin", "KaTeX"],
-      status: "active",
       repo: "https://github.com/lg114/dsh-md-live",
-      featured: true,
     },
   ] satisfies Project[],
   // Demo 合集列表，与 projects 一样在此集中维护，页面只做渲染。

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ragmateCaseStudy } from "../lib/case-studies";
 import { siteConfig } from "../lib/site";
 
-// RagMate 案例正文。/demo/ragmate 与 /projects/ragmate 共用，只是返回链接不同。
+// RagMate 案例正文。唯一入口 /demo/ragmate；/projects/ragmate 只是跳回来的旧链接。
+// 全页英文，标在 main 上一次性覆盖，免得读屏沿用 <html lang="zh-CN"> 的中文音库。
 export default function RagMateCaseStudy({
   backHref,
   backLabel,
@@ -13,7 +14,7 @@ export default function RagMateCaseStudy({
   const repo = siteConfig.projects.find((project) => project.slug === ragmateCaseStudy.slug)?.repo;
 
   return (
-    <main className="case-study">
+    <main className="case-study" lang="en">
       <div className="cards__inner">
         <Link href={backHref} className="case-study__back">{`← ${backLabel}`}</Link>
 
@@ -40,6 +41,7 @@ export default function RagMateCaseStudy({
               muted
               playsInline
               preload="metadata"
+              poster="/demo/ragmate/card-poster.webp"
             >
               <source src="/demo/ragmate/card.webm" type="video/webm" />
               <source src="/demo/ragmate/card.mp4" type="video/mp4" />

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Project } from "../types/project";
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -8,14 +7,6 @@ export default function ProjectCard({ project }: { project: Project }) {
       <p className="project-item__desc">{project.desc}</p>
     </>
   );
-
-  if (project.slug) {
-    return (
-      <Link className="project-item" href={`/projects/${project.slug}`}>
-        {body}
-      </Link>
-    );
-  }
 
   if (project.repo) {
     return (

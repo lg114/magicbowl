@@ -98,8 +98,8 @@ app/                    # 路由与 Next.js 特殊文件
   layout.tsx            # 根布局：字体、导航、页脚
   page.tsx              # 首页
   posts/                # /posts 归档 与 /posts/[slug] 详情
-  projects/             # /projects 项目页
-  demo/                 # /demo 实验页
+  projects/             # /projects 项目页（卡片外链仓库；/projects/ragmate 是旧链接跳转）
+  demo/                 # /demo 列表与 /demo/ragmate 案例页
   feed.xml/             # RSS 订阅路由
   sitemap.ts robots.ts  # SEO
   manifest.ts           # Web App Manifest

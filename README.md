@@ -98,8 +98,9 @@ app/                    # Routes and Next.js special files
   layout.tsx            # Root layout: fonts, navigation, footer
   page.tsx              # Home
   posts/                # /posts archive and /posts/[slug] post pages
-  projects/             # /projects page
-  demo/                 # /demo experiments page
+  projects/             # /projects page — cards link out to repos
+                        # (/projects/ragmate is a legacy redirect)
+  demo/                 # /demo list and /demo/ragmate case study
   feed.xml/             # RSS feed route
   sitemap.ts robots.ts  # SEO
   manifest.ts           # Web App Manifest

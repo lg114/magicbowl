@@ -13,16 +13,17 @@ export const caseStudies = [ragmateCaseStudy];
 
 export type CaseStudy = (typeof caseStudies)[number];
 
-export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return caseStudies.find((study) => study.slug === slug);
+// 案例页的唯一路径。canonical 和 sitemap 都从这里取，避免两处各拼一次再走岔。
+export function caseStudyPath(study: CaseStudy): string {
+  return `/demo/${study.slug}`;
 }
 
-export function caseStudyMetadata(study: CaseStudy, pathname: string, siteUrl: string): Metadata {
+export function caseStudyMetadata(study: CaseStudy, siteUrl: string): Metadata {
   const title = `${study.title} - Case Study`;
   return {
     title,
     description: study.description,
-    alternates: { canonical: `${siteUrl}${pathname}` },
+    alternates: { canonical: `${siteUrl}${caseStudyPath(study)}` },
     openGraph: {
       title,
       description: study.summary,
