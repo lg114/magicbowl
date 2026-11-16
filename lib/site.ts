@@ -8,10 +8,10 @@ export const siteConfig = {
   // 部署后的站点地址，用于 SEO / sitemap / canonical
   url: "https://www.magicbowl.tech",
   locale: "zh-CN",
-  // 站点起始年份：Blog 的时间线从这里逐年排到今年（没有文章的年份也保留），
-  // 页脚的「2020–Present」也取自这里，避免两处各写一个年份。
+  // 页脚「2020–Present」的起始年份，只此一处消费。Blog 时间线不用它：
+  // buildTimeline 只列有文章的年份（见 components/PostsArchive.tsx）。
   startYear: 2020,
-  // 导航显示项：NavBar 直接 map 本数组（右上角纯文字导航，仅 Blog / Projects）。
+  // 导航显示项：NavBar 直接 map 本数组，渲染成右上角的纯文字链接（社交图标另走 social）。
   // 新增页面若要出现在导航，改这里；首页不在此列表，但始终进 sitemap（见 app/sitemap.ts）。
   nav: [
     { href: "/posts", label: "Blog" },

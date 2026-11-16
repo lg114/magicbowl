@@ -142,7 +142,7 @@
   margin: 6px 0;
 }
 /* 正文链接：借 antfu 的下边框做法——与正文同色同字重，靠一条常驻的极淡
-   下边框表示可点，hover 时下边框加深到正文色；accent 蓝仍只留给 Brand hover */
+   下边框表示可点，hover 时边框提亮到与文字同色的 --text */
 .post__body a {
   color: var(--text);
   font-weight: inherit;

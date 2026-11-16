@@ -27,19 +27,28 @@ export default function CodeBlockTools() {
       button.type = "button";
       button.className = "codeblock__copy";
       button.textContent = "Copy";
-      button.setAttribute("aria-label", "复制代码");
+      // 不设 aria-label：可见文案即无障碍名，中文 label 会盖住它，状态切换就播报不出来。
+      const status = document.createElement("span");
+      status.className = "sr-only";
+      status.setAttribute("role", "status");
+      let resetTimer: number | undefined;
       button.addEventListener("click", async () => {
+        window.clearTimeout(resetTimer);
+        let ok = true;
         try {
           await navigator.clipboard.writeText(pre.innerText);
-          button.textContent = "Copied";
-          setTimeout(() => {
-            button.textContent = "Copy";
-          }, 1500);
         } catch {
-          button.textContent = "Copy";
+          ok = false;
         }
+        button.textContent = ok ? "Copied" : "Copy";
+        status.textContent = ok ? "Copied" : "Copy failed";
+        resetTimer = window.setTimeout(() => {
+          button.textContent = "Copy";
+          status.textContent = "";
+        }, 1500);
       });
       bar.appendChild(button);
+      bar.appendChild(status);
       wrapper.appendChild(bar);
     }
   }, []);

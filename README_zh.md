@@ -136,8 +136,8 @@ excerpt: 文章摘要
 | --- | --- | --- |
 | `title` | 是 | 文章标题，同时用于页面 `title` |
 | `date` | 是 | 发布日，写 `YYYY-MM-DD`；内部会统一归一化，避免时区导致的脏日期 |
-| `category` | 是 | `生活` / `随笔` / `读后感` 之一，决定卡片配色 |
-| `tags` | 否 | 标签数组（元数据，归档页不提供标签筛选） |
+| `category` | 是 | `生活` / `随笔` / `读后感` 之一；纯元数据，进 RSS 的 `<category>` 与 JSON-LD 的 `section`，页面不渲染 |
+| `tags` | 否 | 标签数组；纯元数据（JSON-LD），归档页不提供标签筛选 |
 | `excerpt` | 否 | 摘要，用于列表展示与 SEO `description` |
 
 文章的 `slug` 取文件名，例如 `coffee-and-code.md` → `/posts/coffee-and-code`。

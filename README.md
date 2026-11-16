@@ -137,8 +137,8 @@ Post body...
 | --- | --- | --- |
 | `title` | Yes | Post title; also used as the page `title` |
 | `date` | Yes | Publish date as `YYYY-MM-DD`; normalized internally to avoid timezone-related date drift |
-| `category` | Yes | One of `生活` / `随笔` / `读后感`; controls the card accent color |
-| `tags` | No | Tag array (metadata; the archive page offers no tag filtering) |
+| `category` | Yes | One of `生活` / `随笔` / `读后感`; metadata only — feeds the RSS `<category>` and the JSON-LD `section`, and is not rendered on any page |
+| `tags` | No | Tag array; metadata only (JSON-LD), and the archive page offers no tag filtering |
 | `excerpt` | No | Summary used in listings and as the SEO `description` |
 
 The `slug` comes from the file name: `coffee-and-code.md` → `/posts/coffee-and-code`.

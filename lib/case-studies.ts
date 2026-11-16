@@ -20,6 +20,8 @@ export function caseStudyPath(study: CaseStudy): string {
 
 export function caseStudyMetadata(study: CaseStudy, siteUrl: string): Metadata {
   const title = `${study.title} - Case Study`;
+  // 标题要进查询串，含空格或 & 时不编码会把参数截断。
+  const ogImage = `/api/og?title=${encodeURIComponent(study.title)}`;
   return {
     title,
     description: study.description,
@@ -28,13 +30,13 @@ export function caseStudyMetadata(study: CaseStudy, siteUrl: string): Metadata {
       title,
       description: study.summary,
       type: "website",
-      images: [{ url: `/api/og?title=${study.title}`, width: 1200, height: 630, alt: study.title }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: study.title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: study.summary,
-      images: [`/api/og?title=${study.title}`],
+      images: [ogImage],
     },
   };
 }

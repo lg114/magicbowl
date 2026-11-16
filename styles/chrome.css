@@ -84,7 +84,7 @@
   width: auto;
 }
 /* 描线自绘：pathLength=1 让 dasharray/dashoffset 直接用归一化长度，
-   笔画从起点一路画到终点。stroke 用 currentColor，hover 时整条线转 accent。 */
+   笔画从起点一路画到终点。stroke 用 currentColor，跟随 .brand 的 color 变化。 */
 .brand__mark path {
   fill: none;
   stroke: currentColor;

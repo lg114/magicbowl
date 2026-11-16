@@ -26,6 +26,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
   const postUrl = `${siteConfig.url}/posts/${slug}`;
+  const ogImage = `/api/og?slug=${encodeURIComponent(slug)}`;
   return {
     title: post.title,
     description: post.excerpt,
@@ -41,14 +42,14 @@ export async function generateMetadata({
       authors: [siteConfig.author],
       tags: post.tags,
       section: post.category,
-      images: [{ url: `/api/og?slug=${slug}`, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
     },
     // Twitter Card
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [`/api/og?slug=${slug}`],
+      images: [ogImage],
     },
   };
 }
@@ -64,6 +65,7 @@ export default async function PostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
   const postUrl = `${siteConfig.url}/posts/${slug}`;
+  const ogImage = `/api/og?slug=${encodeURIComponent(slug)}`;
 
   return (
     <>
@@ -83,7 +85,7 @@ export default async function PostPage({
                 author: { "@type": "Person", name: siteConfig.author },
                 description: post.excerpt,
                 url: postUrl,
-                image: `${siteConfig.url}/api/og?slug=${slug}`,
+                image: `${siteConfig.url}${ogImage}`,
               }).replace(/</g, "\\u003c"),
             }}
           />
