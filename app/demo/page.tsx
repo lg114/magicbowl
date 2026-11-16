@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import DemoCard from "../../components/DemoCard";
 import { siteConfig } from "../../lib/site";
 
 export const metadata: Metadata = {
@@ -32,10 +33,7 @@ export default function DemoPage() {
         </header>
         <div className="demo-list" lang="en">
           {demos.map((d) => (
-            <Link key={d.name} className="demo-item" href={d.href}>
-              <h2 className="demo-item__name">{d.name}</h2>
-              <p className="demo-item__desc">{d.desc}</p>
-            </Link>
+            <DemoCard key={d.name} name={d.name} desc={d.desc} href={d.href} />
           ))}
         </div>
       </div>

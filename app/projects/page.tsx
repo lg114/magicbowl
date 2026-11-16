@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-// 项目页：居中标题 + 极简文字列表
+// 项目页：居中标题 + 文字列表。有案例页的条目进站内页，其余去仓库。
 export default function ProjectsPage() {
   const projects = siteConfig.projects;
   return (
