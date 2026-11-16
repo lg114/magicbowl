@@ -52,6 +52,15 @@ export const siteConfig = {
       featured: true,
     },
   ] satisfies Project[],
+  // Demo 合集列表，与 projects 一样在此集中维护，页面只做渲染。
+  // href 是站内路径，页面须用 <Link> 而非原生 <a>，否则点击会整页刷新。
+  demos: [
+    {
+      name: "RagMate",
+      desc: "RAG Q&A over your own documents, with cited answers.",
+      href: "/demo/ragmate",
+    },
+  ],
   social: {
     github: "https://github.com/lg114",
     email: "mailto:charlesgan2001@qq.com",

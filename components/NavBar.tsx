@@ -66,7 +66,8 @@ export default function NavBar() {
   ];
 
   return (
-    <nav className="nav" aria-label="Main navigation">
+    // 导航文字与 aria-label 全是英文，标注出来免得读屏按 html 的 zh-CN 去念
+    <nav className="nav" lang="en" aria-label="Main navigation">
       {siteConfig.nav.map((l) => {
         const current = isCurrent(l.href);
         const glyph = renderNavGlyph(l.href);

@@ -26,7 +26,7 @@ export default function ProjectsPage() {
   return (
     <main className="projects">
       <div className="cards__inner">
-        <header className="archive-page-header archive-page-header--center">
+        <header className="archive-page-header archive-page-header--center" lang="en">
           <h1 className="archive-page-header__title">Projects</h1>
           <p className="archive-page-header__desc">Things I've built and am working on.</p>
           <a

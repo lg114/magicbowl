@@ -5,7 +5,8 @@ import { siteConfig } from "../lib/site";
 // 正文列居中、块内文字左对齐（样式见 styles/home.css 的 .intro）。
 export default function Intro() {
   return (
-    <section className="intro">
+    // 正文是英文，不标 en 的话读屏会沿用 <html lang="zh-CN"> 的中文音库
+    <section className="intro" lang="en">
       <div className="intro__inner">
         <h1 className="intro__hi">
           Hi, I’m Gc <span className="intro__wave" aria-hidden="true">👋</span>

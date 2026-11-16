@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "../../lib/site";
 
 export const metadata: Metadata = {
@@ -19,35 +20,22 @@ export const metadata: Metadata = {
   },
 };
 
-const demos = [
-  {
-    name: "RagMate",
-    desc: "RAG Q&A over your own documents, with cited answers.",
-    href: "/demo/ragmate",
-  },
-];
+const demos = siteConfig.demos;
 
 export default function DemoPage() {
   return (
     <main className="demo">
       <div className="cards__inner">
-        <header className="archive-page-header archive-page-header--center">
+        <header className="archive-page-header archive-page-header--center" lang="en">
           <h1 className="archive-page-header__title">Demo</h1>
           <p className="archive-page-header__desc">Experiments and interactive prototypes.</p>
         </header>
-        <div className="demo-list">
+        <div className="demo-list" lang="en">
           {demos.map((d) => (
-            d.href ? (
-              <a key={d.name} className="demo-item" href={d.href}>
-                <h2 className="demo-item__name">{d.name}</h2>
-                <p className="demo-item__desc">{d.desc}</p>
-              </a>
-            ) : (
-              <div key={d.name} className="demo-item">
-                <h2 className="demo-item__name">{d.name}</h2>
-                <p className="demo-item__desc">{d.desc}</p>
-              </div>
-            )
+            <Link key={d.name} className="demo-item" href={d.href}>
+              <h2 className="demo-item__name">{d.name}</h2>
+              <p className="demo-item__desc">{d.desc}</p>
+            </Link>
           ))}
         </div>
       </div>

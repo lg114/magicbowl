@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 export default function RagMatePage() {
   return (
-    <main className="case-study">
+    // 整页英文内容，标在 main 上一次性覆盖，免得逐节重复
+    <main className="case-study" lang="en">
       <div className="cards__inner">
         <Link href="/demo" className="case-study__back">
           ← Demo

@@ -3,7 +3,7 @@ import { formatMonthDay, type PostMeta } from "../types/post";
 
 // 归档页：按年份分组的极简时间线（只生成有文章的年份）。
 // - 每组背后压一个巨大的描边年份数字作水印（SVG 描边，纯装饰，aria-hidden）
-// - 每篇只显示 标题 + 日期 + 阅读时长，信息密度刻意压到最低
+// - 每篇显示 标题 + 日期 + 阅读时长 + 摘要（摘要取 frontmatter 的 excerpt）
 // 无搜索 / 筛选 / 排序 / 分页，因此不需要 "use client"，整页在服务端渲染。
 
 interface YearGroup {
@@ -33,7 +33,7 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
   return (
     <>
       <header className="archive-page-header">
-        <h1 className="archive-page-header__title">Blog</h1>
+        <h1 className="archive-page-header__title" lang="en">Blog</h1>
       </header>
 
       {groups.map(({ year, posts: list }) => (
@@ -66,6 +66,7 @@ export default function PostsArchive({ posts }: { posts: PostMeta[] }) {
                       </span>
                       <span>{post.readingTime} min</span>
                     </span>
+                    <span className="ygroup__excerpt">{post.excerpt}</span>
                   </Link>
                 </li>
               ))}

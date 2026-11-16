@@ -25,10 +25,6 @@
   --page-top: 128px;
   --card-border: #2a2a2a;
   --card-border-hi: #6a6a6a;
-  --accent: #8ab4f8;
-  --cat-life: #7ee0a8;
-  --cat-note: #f0c674;
-  --cat-read: #d7a7ff;
   /* 字体系统：
      正文 / 标题 / 卡片 / UI 控件 → 无衬线 --sans
      中文优先苹方（PingFang SC），Mac/iOS 原生支持；Windows 回退微软雅黑；其他系统用通用无衬线

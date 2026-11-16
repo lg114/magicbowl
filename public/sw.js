@@ -4,10 +4,10 @@
 //  - 静态资源（_next/static、图标等）：stale-while-revalidate，命中缓存即用并在后台更新
 //  - 非 GET / 跨域请求：直接走网络，不做处理
 // 版本：部署新版时改下方 APP_VERSION 即可让旧缓存整体失效（activate 期自动清理旧 cache）
-const APP_VERSION = "1.0.4";
+const APP_VERSION = "1.0.5";
 const CACHE = `magicbowl-${APP_VERSION}`;
 // 预缓存范围：
-//  - 三条可导航路由（首页/文章/项目），离线首屏即可打开
+//  - 全部可导航路由，离线首屏即可打开（漏一条则该路由离线会静默回退成首页）
 //  - 稳定静态资源（路径固定、构建后不变）：站点标识类资源
 //  - 注：哈希的 /_next/static/*（JS/CSS）路径每次构建都变，不写死；
 //    由下方 stale-while-revalidate 在首次在线访问后自动缓存，离线同样可用。
@@ -15,6 +15,8 @@ const PRECACHE = [
   "/",
   "/posts",
   "/projects",
+  "/demo",
+  "/demo/ragmate",
   "/icon.png",
   "/favicon.ico",
   "/manifest.webmanifest",
